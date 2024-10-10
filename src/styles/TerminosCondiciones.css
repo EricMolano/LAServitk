@@ -1,0 +1,56 @@
+/* Estilos para la página de Términos y Condiciones */
+
+body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+.terms-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4; /* Gris claro */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar la caja */
+  }
+  
+  .terms-container h1 {
+    font-size: 28px;
+    color: #333; /* Gris oscuro para el texto principal */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .terms-container h2 {
+    font-size: 22px;
+    color: #c8102e; /* Rojo para subtítulos */
+    margin-top: 20px;
+  }
+  
+  .terms-container p {
+    font-size: 16px;
+    color: #333; /* Gris oscuro para el texto */
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .terms-container address {
+    font-style: normal;
+    color: #333; /* Gris oscuro */
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .terms-container a {
+    color: #007bff; /* Azul celeste para enlaces */
+    text-decoration: none;
+  }
+  
+  .terms-container a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+  }
+  
+  /* Estilo para el nombre del taller en negrita */
+  .terms-container .taller-name {
+    font-weight: bold;
+  }
+  

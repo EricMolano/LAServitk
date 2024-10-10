@@ -1,0 +1,358 @@
+/* Estilos generales para el contenedor del dashboard */
+.dashboard-container {
+    display: flex;
+    transition: margin-left 0.3s ease;
+    margin-left: 0; /* Ajustar según sea necesario */
+}
+
+/* Estilos para la barra lateral */
+.sidebar {
+    width: 250px;
+    background-color: #b45a5a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+    padding: 20px 10px;
+}
+
+/* Oculta el contenido de la barra lateral cuando está colapsada */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: block; /* Mostrar los elementos de la lista por defecto */
+}
+
+.sidebar.collapsed ul {
+    display: none; /* Ocultar los elementos de la lista cuando está colapsada */
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #ec5757;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 20px);
+    text-align: left;
+    color: white;
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background-color: #e45d5d;
+}
+
+/* Estilos para el botón de alternar la barra lateral */
+.toggle-btn {
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Estilos para la sección principal */
+.main-content {
+    flex: 1;
+    background-color: #F5F5F5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: margin-left 0.3s ease;
+}
+
+/* Estilos para la barra de navegación superior */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e45d5d;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* Estilos para el menú de usuario en la barra de navegación */
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #b45a5a;
+    color: rgb(180, 61, 61);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.user-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-dropdown ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #b45a5a;
+}
+
+.user-dropdown ul li:last-child {
+    border-bottom: none;
+}
+
+/* Estilos para el contenido de las secciones */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilos para las secciones individuales */
+.profile-content, .vehicles-content, .services-content {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la sección de vehículos */
+.vehicles-content {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la sección */
+.section-title {
+    font-size: 24px;
+    color: #c43838; /* Color rojo principal */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Botón para agregar vehículo */
+.add-vehicle-button {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
+    background-color: #D32F2F;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover para el botón */
+.add-vehicle-button:hover {
+    background-color: #b45a5a;
+}
+
+/* Estilos para la tabla de vehículos */
+.vehicles-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.vehicles-table th, .vehicles-table td {
+    padding: 12px;
+    border: 1px solid #CFD8DC; /* Borde gris claro */
+    text-align: left;
+}
+
+.vehicles-table th {
+    background-color: #F5F5F5; /* Fondo gris claro para encabezados */
+    color: #424242; /* Gris oscuro */
+    font-weight: bold;
+}
+
+.vehicles-table tr:nth-child(even) {
+    background-color: #F9F9F9; /* Color alternativo para filas */
+}
+
+.vehicles-table tr:hover {
+    background-color: #E1F5FE; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para la sección de servicios */
+.services-content {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.services-content .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #b45a5a; /* Color del título */
+}
+
+/* Estilos para la tabla de servicios */
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.services-table th,
+.services-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.services-table th {
+    background-color: #b45a5a; /* Color del encabezado */
+    color: white;
+}
+
+.services-table tr {
+    transition: background-color 0.3s ease;
+}
+
+.services-table tr:hover {
+    background-color: #F5F5F5; /* Color de fondo en hover */
+}
+
+/* Estilos para el mensaje de error */
+.error-message {
+    color: #b45a5a; /* Color rojo para errores */
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Estilos para el contenedor de la tabla de bienvenida */
+.welcome-table-container {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la tabla de bienvenida */
+.welcome-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.welcome-table th,
+.welcome-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.welcome-table th {
+    background-color: #b45a5a; /* Color del encabezado */
+    color: white;
+}
+
+/* Estilos para el botón de editar perfil */
+.profile-button {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    background-color: #b45a5a; /* Rojo */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Espacio superior */
+    display: block; /* Centrar el botón */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-button:hover {
+    background-color: #b45a5a; /* Rojo más oscuro en hover */
+}
+
+/* Estilos para la sección de información de usuarios */
+.user-info-content {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.user-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-info-table th,
+.user-info-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info-table th {
+    background-color: #b45a5a; /* Color del encabezado */
+    color: white;
+}
+
+.user-info-table tr:nth-child(even) {
+    background-color: #F9F9F9; /* Color alternativo para filas */
+}
+
+.user-info-table tr:hover {
+    background-color: #E1F5FE; /* Color de fondo al pasar el mouse */
+}
+
+.user-info-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #b45a5a; /* Color del título */
+    margin-bottom: 15px;
+    text-align: center;
+}

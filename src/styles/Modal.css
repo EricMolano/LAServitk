@@ -1,0 +1,69 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Un fondo ligeramente oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegurar que el modal esté por encima de otros elementos */
+}
+
+.modal-content {
+    background: #ffe5e5; /* Un rojo muy suave */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    text-align: center;
+    max-width: 450px;  /* Ancho máximo del modal */
+    width: 100%;  /* Para hacer que ocupe todo el ancho hasta un máximo */
+    height: auto;  /* Ajuste automático de altura */
+    transition: all 0.3s ease-in-out; /* Transiciones suaves */
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #c0392b; /* Un tono rojo más fuerte */
+    font-size: 1.8rem; /* Un tamaño mayor para el título */
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: #555; /* Color de texto más oscuro para contraste */
+    font-size: 1.1rem; /* Tamaño ligeramente mayor para mejor legibilidad */
+    line-height: 1.5; /* Más espacio entre líneas */
+}
+
+.modal-content button {
+    padding: 12px 25px;
+    background-color: #e74c3c; /* Un rojo más vivo */
+    color: white;
+    border: none;
+    border-radius: 50px; /* Botón con bordes más redondeados */
+    cursor: pointer;
+    font-size: 1rem; /* Tamaño de texto en el botón */
+    transition: background-color 0.3s ease-in-out; /* Transición suave para el hover */
+}
+
+.modal-content button:hover {
+    background-color: #ff6f61; /* Rojo más claro en el hover */
+}
+
+.modal-content button:focus {
+    outline: none; /* Quitar el contorno de enfoque predeterminado */
+}
+
+.modal-overlay {
+    animation: fadeIn 0.3s ease; /* Animación suave al aparecer */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

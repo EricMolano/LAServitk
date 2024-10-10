@@ -1,0 +1,575 @@
+require('dotenv').config(); // Asegúrate de que esto está en la parte superior
+const express = require('express');
+const mysql = require('mysql2');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+
+const app = express();
+const port = process.env.PORT || 2071;
+
+// Configuración de la base de datos
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'laservitk',
+  port: 3306
+});
+
+db.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to database',hola("nora@example.com").then((e)=>{
+    console.log(e)
+  }));
+
+
+
+});
+
+async function hola(email) {
+  const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+  return(results)
+}
+// Middleware
+app.use(cors({
+  origin: 'http://localhost:3000', // Cambia esto al origen de tu frontend si es diferente
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+app.use(bodyParser.json());
+app.use(express.json());
+
+// Verifica la clave secreta
+console.log('JWT_SECRET:', process.env.JWT_SECRET); // Asegúrate de que esta línea muestra la clave secreta
+app.get("/hola",(req, res)=>{
+  console.log("agus me ignora")
+})
+// Ruta de registro de usuario
+app.post('/api/register', async (req, res) => {
+  console.log("Hola mundo",req)
+  try {
+    const { email, password, name, surname, address, phone } = req.body;
+
+    if (!email || !password || !name || !surname) {
+      return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+    const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+    if (rows.length > 0) {
+      return res.status(400).json({ message: 'El correo ya está registrado' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [result] = await db.promise().query(
+      'INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [email, hashedPassword, name, surname, address, phone, 2] // Suponiendo que rol_id = 2 es para cliente
+    );
+
+    return res.status(201).json({ message: 'Usuario registrado exitosamente', userId: result.insertId });
+  } catch (error) {
+    console.error("Error en el registro2:", error);
+    return res.status(500).json({ message: 'Error en el registro3', error: error.message });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+
+    if (results.length === 0) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
+
+    const user = results[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
+
+    const token = jwt.sign({ id: user.id, role: user.rol_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return res.status(200).json({ success: true, token, user });
+  } catch (error) {
+    console.error('Error en el inicio de sesión:', error);
+    return res.status(500).json({ message: 'Error en el inicio de sesión', error: error.message });
+  }
+});
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.status(401).json({ message: 'Token no proporcionado' });
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Token inválido' });
+    req.user = user;
+    next();
+  });
+};
+
+
+app.get('/api/user/data', authenticateToken, (req, res) => {
+  const sql = 'SELECT * FROM users WHERE id = ?';
+  console.log('Requesting user data for ID:', req.user.id);
+  
+  db.query(sql, [req.user.id], (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ message: 'Error al obtener datos del usuario', error: err.message });
+    }
+    if (results.length === 0) {
+      console.warn('User not found for ID:', req.user.id);
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const user = results[0];
+    res.status(200).json(user);
+  });
+});
+
+
+// Ruta para actualizar el perfil del usuario autenticado
+app.put('/api/user/update-profile', authenticateToken, (req, res) => {
+  const { name, surname, address, phone } = req.body;
+  const userId = req.user.id; // Obtener el ID del usuario desde el token JWT
+
+  // Log para ver qué datos está recibiendo el servidor
+  console.log('Datos recibidos para actualizar:', { name, surname, address, phone });
+
+  // Validar que los datos estén completos
+  if (!name || !surname || !address || !phone) {
+      return res.status(400).json({ message: 'Faltan datos para actualizar el perfil' });
+  }
+
+  // Consulta SQL para actualizar el perfil del usuario
+  const sql = 'UPDATE users SET name = ?, surname = ?, address = ?, phone = ? WHERE id = ?';
+  db.query(sql, [name, surname, address, phone, userId], (err, results) => {
+      if (err) {
+          console.error('Error al actualizar el perfil:', err);
+          return res.status(500).json({ message: 'Error al actualizar el perfil' });
+      }
+
+      // Verificar si el usuario fue encontrado y actualizado
+      if (results.affectedRows === 0) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      // Responder con éxito
+      res.status(200).json({ message: 'Perfil actualizado exitosamente' });
+  });
+});
+
+
+// Ruta para actualizar datos del empleado
+app.put('/api/user/update-profileE', authenticateToken, (req, res) => {
+  const { name, surname, address, phone } = req.body;
+  const sql = 'UPDATE usuario SET nombre = ?, apellido = ?, direccion = ?, telefono = ? WHERE id = ?';
+  db.query(sql, [name, surname, address, phone, req.user.id], (err, result) => {
+    if (err) return res.status(500).json({ message: 'Error al actualizar perfil' });
+    res.status(200).json({ message: 'Perfil actualizado exitosamente' });
+  });
+});
+
+app.put('/api/user/update-profileA', authenticateToken, (req, res) => {
+  const { name, surname, address, phone } = req.body;
+  const sql = 'UPDATE users SET name = ?, surname = ?, address = ?, phone = ? WHERE id = ?';
+  db.query(sql, [name, surname, address, phone, req.user.id], (err, result) => {
+    if (err) return res.status(500).json({ message: 'Error al actualizar perfil' });
+    res.status(200).json({ message: 'Perfil actualizado exitosamente' });
+  });
+});
+
+
+app.get('/api/admin-vehicles', authenticateToken, (req, res) => {
+  // El endpoint no verifica el rol, solo la autenticación
+  db.query('SELECT * FROM vehiculo', (err, results) => {
+    if (err) {
+      console.error('Error al obtener los vehículos:', err);
+      return res.status(500).json({ message: 'Error al obtener los vehículos', error: err.message });
+    }
+    res.status(200).json(results);
+  });
+});
+
+
+// Obtener vehículos del usuario autenticado
+app.get('/api/vehicles', authenticateToken, (req, res) => {
+  const userId = req.user.id; // Obtener el ID del usuario desde el token
+  
+  // Consulta para obtener todos los vehículos del usuario
+  const query = 'SELECT * FROM vehiculo WHERE id = ?';
+  db.query(query, [userId], (err, results) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(results); // Devuelve la lista de vehículos
+  });
+});
+
+// Ruta para agregar un vehículo
+app.post('/api/vehicles', authenticateToken, (req, res) => {
+  const { marca, modelo, año, color, placa } = req.body;
+  const id = req.user.id; // Usa el ID del usuario autenticado
+
+  if (!marca || !modelo || !año || !placa) {
+    return res.status(400).json({ message: 'Marca, modelo, año y placa son obligatorios.' });
+  }
+
+  const query = 'INSERT INTO vehiculo (marca, modelo, año, color, placa, id) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(query, [marca, modelo, año, color, placa, id], (err, result) => {
+    if (err) {
+      console.error('Error adding vehicle:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.status(201).json({ idvehiculo: result.insertId, marca, modelo, año, color, placa, id });
+  });
+});
+
+// Ruta para actualizar un vehículo
+app.put('/api/vehicles/:id', authenticateToken, (req, res) => {
+  const { marca, modelo, año, color, placa } = req.body;
+  const query = 'UPDATE vehiculo SET marca = ?, modelo = ?, año = ?, color = ?, placa = ? WHERE idvehiculo = ? AND id = ?';
+  db.query(query, [marca, modelo, año, color, placa, req.params.id, req.user.id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(200).json({ message: 'Vehicle updated successfully' });
+  });
+});
+
+app.get('/api/inventory', authenticateToken, (req, res) => {
+  const query = 'SELECT * FROM producto'; // Asegúrate de que la tabla se llama 'producto'
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+
+app.get('/api/inventory/:id', authenticateToken, (req, res) => {
+  const query = 'SELECT * FROM producto WHERE id = ?'; // Asegúrate de que la columna es 'id'
+  db.query(query, [req.params.id], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (results.length > 0) {
+      res.json(results[0]);
+    } else {
+      res.status(404).json({ message: 'Inventory not found' }); // Mensaje en inglés
+    }
+  });
+});
+
+app.post('/api/inventory', authenticateToken, (req, res) => {
+  const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
+
+  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra || !msrp) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  const query = 'INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra, msrp) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra, msrp], (err, result) => {
+    if (err) {
+      console.error('Error adding inventory:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.status(201).json({ id: result.insertId, nombre, descripcion, cantidad_en_stock, precio_compra, msrp });
+  });
+});
+
+
+app.put('/api/inventory/:id', authenticateToken, (req, res) => {
+  const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
+  
+  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra || !msrp) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  const query = 'UPDATE producto SET nombre = ?, descripcion = ?, cantidad_en_stock = ?, precio_compra = ?, msrp = ? WHERE id = ?';
+  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra, msrp, req.params.id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(200).json({ message: 'Product updated successfully' });
+  });
+});
+
+
+// Endpoint para obtener usuarios
+app.get('/api/users', authenticateToken, (req, res) => {
+  const sql = 'SELECT id, name, email, address, phone, rol_id FROM users';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error en la consulta a la base de datos:', err);
+      return res.status(500).json({ message: 'Error al obtener usuarios', error: err.message });
+    }
+    res.status(200).json(results);
+  });
+});
+// En tu archivo de rutas del backend (por ejemplo, app.js o routes.js)
+app.get('/api/users/:id', authenticateToken, (req, res) => {
+  const userId = req.params.id;
+  const sql = 'SELECT id, email, name, surname, address, phone FROM users WHERE id = ?';
+  db.query(sql, [userId], (err, results) => {
+      if (err) {
+          console.error('Database query error:', err);
+          return res.status(500).json({ message: 'Error al obtener el usuario', error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+      res.status(200).json(results[0]);
+  });
+});
+
+// Ruta para actualizar el perfil del usuario autenticado
+app.put('/api/edit-profile-user/:id', authenticateToken, (req, res) => {
+  const userId = req.params.id;
+  const { email, name, surname, address, phone } = req.body;
+
+
+  // Consulta SQL para actualizar el perfil
+  const sql = 'UPDATE users SET email = ?, name = ?, surname = ?, address = ?, phone = ? WHERE id = ?';
+
+  // Si algunos campos no están definidos, se les asigna el valor actual del usuario
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener datos del usuario:', err);
+      return res.status(500).json({ message: 'Error al obtener datos del usuario', error: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const currentUser = results[0];
+
+    // Asignar valores actuales si no se proporcionan
+    const updatedEmail = email || currentUser.email;
+    const updatedName = name || currentUser.name;
+    const updatedSurname = surname || currentUser.surname;
+    const updatedAddress = address || currentUser.address;
+    const updatedPhone = phone || currentUser.phone;
+
+    db.query(sql, [updatedEmail, updatedName, updatedSurname, updatedAddress, updatedPhone, userId], (err, results) => {
+      if (err) {
+        console.error('Error al actualizar el perfil:', err);
+        return res.status(500).json({ message: 'Error al actualizar el perfil', error: err.message });
+      }
+
+      // Verificación si se actualizó algún registro
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      // Respuesta exitosa
+      res.status(200).json({ message: 'Perfil actualizado exitosamente' });
+    });
+  });
+});
+
+
+
+// En tu archivo de rutas del backend (por ejemplo, app.js o routes.js)
+app.get('/api/users/:id', authenticateToken, (req, res) => {
+  const userId = req.params.id;
+  const sql = 'SELECT id, email, name, surname, address, phone FROM users WHERE id = ?';
+  db.query(sql, [userId], (err, results) => {
+      if (err) {
+          console.error('Database query error:', err);
+          return res.status(500).json({ message: 'Error al obtener el usuario', error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+      res.status(200).json(results[0]);
+  });
+});
+
+// Ruta para actualizar un vehículo del usuario autenticado
+app.put('/api/update-vehicle-user/:idvehiculo', authenticateToken, (req, res) => {
+  const vehiculoId = req.params.idvehiculo;
+  const { marca, modelo, año, color, placa } = req.body;
+
+  // Consulta SQL para actualizar el vehículo
+  const sql = 'UPDATE vehiculo SET marca = ?, modelo = ?, año = ?, color = ?, placa = ? WHERE idvehiculo = ?';
+
+  // Si algunos campos no están definidos, se les asigna el valor actual del vehículo
+  db.query('SELECT * FROM vehiculo WHERE idvehiculo = ?', [vehiculoId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener datos del vehículo:', err);
+      return res.status(500).json({ message: 'Error al obtener datos del vehículo', error: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Vehículo no encontrado' });
+    }
+
+    const currentVehicle = results[0];
+
+    // Asignar valores actuales si no se proporcionan
+    const updatedMarca = marca || currentVehicle.marca;
+    const updatedModelo = modelo || currentVehicle.modelo;
+    const updatedAño = año || currentVehicle.año;
+    const updatedColor = color || currentVehicle.color;
+    const updatedPlaca = placa || currentVehicle.placa;
+
+    // Ejecutar la consulta de actualización
+    db.query(sql, [updatedMarca, updatedModelo, updatedAño, updatedColor, updatedPlaca, vehiculoId], (err, results) => {
+      if (err) {
+        console.error('Error al actualizar el vehículo:', err);
+        return res.status(500).json({ message: 'Error al actualizar el vehículo', error: err.message });
+      }
+
+      // Verificación si se actualizó algún registro
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ message: 'Vehículo no encontrado' });
+      }
+
+      // Respuesta exitosa
+      res.status(200).json({ message: 'Vehículo actualizado exitosamente' });
+    });
+  });
+});
+
+
+
+
+app.post('/api/servicios', (req, res) => {
+  const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
+
+  // Verificar que todos los campos requeridos están presentes
+  if (!nombre_empleado || !nombre_cliente || !placa_vehiculo || !nombre_servicio || !costo) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  }
+
+  // Obtener el ID del empleado
+  db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_empleado])
+    .then(([empleado]) => {
+      if (empleado.length === 0) {
+        return res.status(404).json({ message: 'Empleado no encontrado' });
+      }
+      const idempleado = empleado[0].id;
+
+      // Obtener el ID del cliente
+      return db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_cliente])
+        .then(([cliente]) => {
+          if (cliente.length === 0) {
+            return res.status(404).json({ message: 'Cliente no encontrado' });
+          }
+          const idcliente = cliente[0].id;
+
+          // Verificar si la placa del vehículo existe en la tabla vehiculo
+          return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo])
+            .then(([vehiculo]) => {
+              if (vehiculo.length === 0) {
+                return res.status(404).json({ message: 'El vehículo con esa placa no está registrado' });
+              }
+
+              // Insertar el servicio en la tabla registro_servicio
+              return db.promise().query(
+                'INSERT INTO registro_servicio (idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo) VALUES (?, ?, ?, ?, ?, ?)',
+                [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo]
+              );
+            });
+        });
+    })
+    .then(([result]) => {
+      // Responder con éxito
+      res.status(201).json({ message: 'Servicio registrado exitosamente', servicioId: result.insertId });
+    })
+    .catch(error => {
+      console.error("Error al registrar el servicio:", error);
+      res.status(500).json({ message: 'Error al registrar el servicio', error: error.message });
+    });
+});
+
+// Ruta para actualizar un servicio
+app.put('/api/servicios/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
+
+  if (!nombre_empleado || !nombre_cliente || !placa_vehiculo || !nombre_servicio || !costo) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  }
+
+  // Obtener el ID del empleado
+  db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_empleado])
+    .then(([empleado]) => {
+      if (empleado.length === 0) {
+        return res.status(404).json({ message: 'Empleado no encontrado' });
+      }
+      const idempleado = empleado[0].id;
+
+      // Obtener el ID del cliente
+      return db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_cliente])
+        .then(([cliente]) => {
+          if (cliente.length === 0) {
+            return res.status(404).json({ message: 'Cliente no encontrado' });
+          }
+          const idcliente = cliente[0].id;
+
+          // Verificar si la placa del vehículo existe en la tabla vehiculo
+          return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo])
+            .then(([vehiculo]) => {
+              if (vehiculo.length === 0) {
+                return res.status(404).json({ message: 'El vehículo con esa placa no está registrado' });
+              }
+
+              // Actualizar el servicio en la tabla registro_servicio
+              return db.promise().query(
+                'UPDATE registro_servicio SET idempleado = ?, idcliente = ?, placa_vehiculo = ?, nombre_servicio = ?, descripcion = ?, costo = ? WHERE idregistro = ?',
+                [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo, id]
+              );
+            });
+        });
+    })
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: 'Servicio no encontrado' });
+      }
+
+      // Responder con éxito
+      res.status(200).json({ message: 'Servicio actualizado exitosamente' });
+    })
+    .catch(error => {
+      console.error("Error al actualizar el servicio:", error);
+      res.status(500).json({ message: 'Error al actualizar el servicio', error: error.message });
+    });
+});
+
+// Ruta para obtener los servicios del cliente autenticado
+// Ruta para obtener los servicios del cliente autenticado
+app.get('/api/servicios', authenticateToken, (req, res) => {
+  const idCliente = req.user.id;
+  console.log("id", idCliente); // Asegúrate de que req.user tiene el ID del cliente
+  console.log("rol id admin " , req.user.role)
+  
+  let rolIdCliente = req.user.role;
+  let query = `
+      SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
+      FROM registro_servicio rs
+      JOIN users e ON rs.idempleado = e.id
+      JOIN users c ON rs.idcliente = c.id
+    `;
+  
+  // Si el rol es distinto a cliente, eliminamos el filtro por cliente
+  if (rolIdCliente === 2) {
+    query = `
+    SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
+    FROM registro_servicio rs
+    JOIN users e ON rs.idempleado = e.id
+    JOIN users c ON rs.idcliente = c.id
+    WHERE rs.idcliente = ?
+  `;
+  }
+
+  // Ejecutar la consulta
+  db.query(query, [idCliente], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results); // Devuelve la lista de servicios
+  });
+});
+
+
+
+// Inicia el servidor
+app.listen(2071, () => {
+  console.log(`Server running on port 2071`);
+});

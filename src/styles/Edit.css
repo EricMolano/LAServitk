@@ -1,0 +1,653 @@
+/* Contenedor principal del formulario */
+.edit-profile-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 120px; /* Ajustado para que no se superponga con la cabecera */
+    width: 90%;
+    max-width: 600px;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para el formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre los campos */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-group label {
+    color: #424242; /* Gris oscuro */
+    font-weight: 600;
+  }
+  
+  .form-group input {
+    width: 100%;
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid #CFD8DC; /* Gris claro */
+    border-radius: 8px;
+    background-color: #F8F9FA; /* Fondo claro */
+    font-size: 16px;
+    color: #424242; /* Gris oscuro */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #B0BEC5; /* Gris oscuro */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Botón de enviar */
+  .submit-button {
+    width: 100%;
+    max-width: 200px;
+    height: 45px;
+    background-color: #D32F2F; /* Rojo */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: auto;
+  }
+  
+  .submit-button:hover {
+    background-color: #C62828; /* Rojo más oscuro en hover */
+  }
+  
+  /* Estilos para el mensaje de error */
+  .error-message {
+    color: #D32F2F; /* Rojo */
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Contenedor principal del formulario */
+  .add-inventory {
+    margin: auto;
+    margin-top: 49px; /* Evita que el contenido quede debajo del header */
+    width: 90%;
+    max-width: 600px;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Estilo del título */
+  .add-inventory h2 {
+    text-align: center;
+    color: #D32F2F; /* Color rojo principal */
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  /* Estilos para el formulario */
+  .add-inventory form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los campos */
+  }
+  
+  /* Estilos para las etiquetas */
+  .add-inventory label {
+    color: #424242; /* Gris oscuro */
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  /* Estilos para los inputs y textarea */
+  .add-inventory input,
+  .add-inventory textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CFD8DC; /* Gris claro */
+    border-radius: 8px;
+    background-color: #F8F9FA; /* Fondo claro */
+    font-size: 16px;
+    color: #424242; /* Gris oscuro */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo específico para el textarea */
+  .add-inventory textarea {
+    resize: none; /* Evita redimensionar el textarea */
+    height: 100px; /* Altura predeterminada */
+  }
+  
+  /* Efecto de foco en los inputs y textarea */
+  .add-inventory input:focus,
+  .add-inventory textarea:focus {
+    border-color: #B0BEC5; /* Gris oscuro */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    outline: none;
+  }
+  
+  /* Botón de enviar */
+  .add-inventory button {
+    width: 100%;
+    padding: 12px;
+    background-color: #D32F2F; /* Rojo */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover para el botón */
+  .add-inventory button:hover {
+    background-color: #C62828; /* Rojo más oscuro */
+  }
+  
+  /* Media Queries para pantallas más pequeñas */
+  @media (max-width: 600px) {
+    .add-inventory {
+        padding: 15px;
+        margin-top: 120px; /* Ajuste adicional para pantallas pequeñas */
+    }
+  
+    .add-inventory h2 {
+        font-size: 20px;
+    }
+  
+    .add-inventory input,
+    .add-inventory textarea {
+        font-size: 14px;
+    }
+  
+    .add-inventory button {
+        font-size: 14px;
+    }
+  }
+  /* Contenedor principal del formulario */
+.add-vehicle-container {
+  margin: auto;
+  margin-top: 100px; /* Evita que el contenido quede debajo del header */
+  width: 90%;
+  max-width: 600px;
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Estilo del título */
+.add-vehicle-container h1 {
+  text-align: center;
+  color: #D32F2F; /* Color rojo */
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Estilos para el formulario */
+.add-vehicle-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre los campos */
+}
+
+/* Estilos para cada grupo de formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para las etiquetas */
+.add-vehicle-container label {
+  color: #424242; /* Gris oscuro */
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Estilos para los inputs */
+.add-vehicle-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #CFD8DC; /* Gris claro */
+  border-radius: 8px;
+  background-color: #F8F9FA; /* Fondo claro */
+  font-size: 16px;
+  color: #424242; /* Gris oscuro */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Efecto de foco en los inputs */
+.add-vehicle-container input:focus {
+  border-color: #B0BEC5; /* Gris oscuro */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #D32F2F; /* Color rojo */
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px; /* Ajuste para mantener el espacio del error */
+}
+
+/* Botón de enviar */
+.add-vehicle-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #D32F2F; /* Rojo */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover para el botón */
+.add-vehicle-container button:hover {
+  background-color: #C62828; /* Rojo más oscuro */
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .add-vehicle-container {
+      padding: 15px;
+      margin-top: 120px; /* Ajuste adicional para pantallas pequeñas */
+  }
+
+  .add-vehicle-container h1 {
+      font-size: 20px;
+  }
+
+  .add-vehicle-container input {
+      font-size: 14px;
+  }
+
+  .add-vehicle-container button {
+      font-size: 14px;
+  }
+}
+/* Contenedor principal del formulario de edición de perfil */
+.edit-profile-container {
+  margin: auto;
+  margin-top: 80px;
+  width: 90%;
+  max-width: 600px;
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Título del formulario */
+.edit-profile-container h1 {
+  text-align: center;
+  color: #e51e1e;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Estilo de las etiquetas y campos de formulario */
+.edit-profile-container label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #424242;
+  font-weight: 500;
+}
+
+/* Estilos para los campos de texto */
+.edit-profile-container input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #424242;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Efecto en el foco de los campos */
+.edit-profile-container input[type="text"]:focus {
+  border-color: #f66464;
+  outline: none;
+}
+
+/* Estilo del botón de actualización */
+.edit-profile-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e51e1e;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+/* Hover del botón */
+.edit-profile-container button:hover {
+  background-color: #c01515;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #e53935;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 600px) {
+  .edit-profile-container {
+      padding: 20px;
+      margin-top: 100px;
+  }
+
+  .edit-profile-container h1 {
+      font-size: 24px;
+  }
+
+  .edit-profile-container input {
+      font-size: 14px;
+  }
+
+  .edit-profile-container button {
+      font-size: 14px;
+  }
+}
+.edit-profile-user-content {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-user-content h2 {
+  color: #ff0000; /* Color principal: rojo */
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #ff0000; /* Color principal: rojo */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #cc0000; /* Oscurece un poco el rojo en hover */
+}
+
+.formulario-servicio {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-servicio h2 {
+  margin-bottom: 20px;
+  color: #D32F2F; /* Color del título */
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.btn {
+  background-color: #D32F2F; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  text-align: center;
+  display: block;
+  margin: 20px auto;
+}
+
+.btn:hover {
+  background-color: #C62828; /* Rojo oscuro */
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Contenedor principal del formulario */
+.edit-inventory {
+  margin: auto;
+  margin-top: 100px; /* Evita que el contenido quede debajo del header */
+  width: 90%;
+  max-width: 600px;
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Estilo del título */
+.edit-inventory h2 {
+  text-align: center;
+  color: #D32F2F; /* Color rojo principal */
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Estilos para el formulario */
+.edit-inventory form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre los campos */
+}
+
+/* Estilos para las etiquetas */
+.edit-inventory label {
+  color: #424242; /* Gris oscuro */
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Estilos para los inputs y textarea */
+.edit-inventory input,
+.edit-inventory textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #CFD8DC; /* Gris claro */
+  border-radius: 8px;
+  background-color: #F8F9FA; /* Fondo claro */
+  font-size: 16px;
+  color: #424242; /* Gris oscuro */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Estilo específico para el textarea */
+.edit-inventory textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+  height: 100px; /* Altura predeterminada */
+}
+
+/* Efecto de foco en los inputs y textarea */
+.edit-inventory input:focus,
+.edit-inventory textarea:focus {
+  border-color: #B0BEC5; /* Gris oscuro */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+/* Botón de enviar */
+.edit-inventory button {
+  width: 100%;
+  padding: 12px;
+  background-color: #D32F2F; /* Rojo */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover para el botón */
+.edit-inventory button:hover {
+  background-color: #C62828; /* Rojo más oscuro */
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+  color: #D32F2F; /* Rojo */
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px; /* Ajuste para mantener el espacio del error */
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .edit-inventory {
+      padding: 15px;
+      margin-top: 120px; /* Ajuste adicional para pantallas pequeñas */
+  }
+
+  .edit-inventory h2 {
+      font-size: 20px;
+  }
+
+  .edit-inventory input,
+  .edit-inventory textarea {
+      font-size: 14px;
+  }
+
+  .edit-inventory button {
+      font-size: 14px;
+  }
+}
+
+/* Título del formulario */
+h2 {
+  font-size: 24px;
+  color: #D32F2F; /* Color del título */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilos para los campos del formulario */
+
+
+
+/* Campos de entrada */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #CFD8DC; /* Borde gris claro */
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Botón de actualización */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #D32F2F; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #C62828; /* Color más oscuro en hover */
+}
+
+/* Estilos para mensajes de error */
+.error-message {
+  color: #D32F2F; /* Color rojo para errores */
+  text-align: center;
+  margin-top: 10px;
+}

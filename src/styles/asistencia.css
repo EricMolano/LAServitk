@@ -1,0 +1,62 @@
+/* Contenedor principal */
+.asistencia-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+/* Estilo de la tabla */
+.asistencia-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.asistencia-table th, .asistencia-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.asistencia-table th {
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+}
+
+.asistencia-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los botones en la tabla */
+.entry-btn, .exit-btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.entry-btn {
+    background-color: #dc3545; /* Color rojo para entrada */
+}
+
+.entry-btn:hover {
+    background-color: #c82333;
+}
+
+.exit-btn {
+    background-color: #dc3545; /* Color rojo para salida */
+}
+
+.exit-btn:hover {
+    background-color: #c82333;
+}
+
+/* Contenedor de los botones al final */
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}

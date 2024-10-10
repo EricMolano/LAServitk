@@ -1,0 +1,105 @@
+-- UPDATE users SET rol_id = 3 WHERE email = 'admin@admin.com';
+-- UPDATE users SET rol_id = 1 WHERE email = 'empleado@empleado.com';
+
+-- drop database laservitk
+CREATE DATABASE IF NOT EXISTS laservitk;
+USE laservitk;
+
+-- Crear la tabla rol
+CREATE TABLE IF NOT EXISTS rol (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insertar roles en la tabla rol
+INSERT INTO rol (nombre) VALUES ('Empleado');
+INSERT INTO rol (nombre) VALUES ('Cliente');
+INSERT INTO rol (nombre) VALUES ('Administrador');
+
+-- Crear la tabla users
+CREATE TABLE IF NOT EXISTS users (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  surname VARCHAR(100) NOT NULL,
+  address VARCHAR(255),
+  phone VARCHAR(15),
+  rol_id INT NOT NULL DEFAULT 2, -- Valor por defecto para rol_id (Cliente)
+  PRIMARY KEY (id),
+  UNIQUE (email),
+  KEY rol_id (rol_id),
+  CONSTRAINT fk_rol FOREIGN KEY (rol_id) REFERENCES rol (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+/*INSERT INTO users (email, password, name, surname, address, phone, rol_id) 
+VALUES (
+    'admin@sena',                -- Correo electrónico del usuario
+    '$2b$10$ZzvoLpCRJfwRDuXxZOFeIeGgvVolZCp8wDU3o1tSP14XJqm3v42U6',                  -- Contraseña del usuario, debe estar hasheada (ej. con bcrypt)
+    'Carlos',                             -- Nombre del usuario
+    'Castañeda',                              -- Apellido del usuario
+    '123 Admin',                 -- Dirección del usuario
+    '123-456-7890',                     -- Teléfono del usuario
+    3                                 -- ID del rol 
+);*/ 
+-- crear usuario desde aqui
+
+
+CREATE TABLE IF NOT EXISTS vehiculo (
+  idvehiculo INT NOT NULL AUTO_INCREMENT,
+  marca VARCHAR(50) NOT NULL,
+  modelo VARCHAR(50) NOT NULL,
+  año INT NOT NULL,
+  color VARCHAR(30),
+  placa VARCHAR(20) NOT NULL,
+  id INT NOT NULL,
+  PRIMARY KEY (idvehiculo),
+  UNIQUE (placa),
+  KEY id (id),
+  CONSTRAINT vehiculo_ibfk_1 FOREIGN KEY (id) REFERENCES users (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear la tabla producto
+CREATE TABLE IF NOT EXISTS producto (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(100) NOT NULL,
+  descripcion text,
+  cantidad_en_stock int(11) NOT NULL,
+  precio_compra decimal(10,2) NOT NULL,
+  msrp decimal(10,2) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS registro_servicio (
+  idregistro INT NOT NULL AUTO_INCREMENT,
+  idempleado INT NOT NULL,  -- ID del empleado referenciado de la tabla users
+  idcliente INT NOT NULL,   -- ID del cliente referenciado de la tabla users
+  placa_vehiculo VARCHAR(20) NOT NULL,   -- Placa del vehículo
+  nombre_servicio VARCHAR(100) NOT NULL, -- Nombre del servicio (Ej: Cambio de aceite)
+  descripcion TEXT, -- Descripción del servicio
+  fecha_servicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha en que se realiza el servicio
+  costo DECIMAL(10,2) NOT NULL, -- Costo del servicio
+  PRIMARY KEY (idregistro),
+  FOREIGN KEY (idempleado) REFERENCES users(id) ON DELETE CASCADE, -- Empleado referenciado de users
+  FOREIGN KEY (idcliente) REFERENCES users(id) ON DELETE CASCADE, -- Cliente referenciado de users
+  FOREIGN KEY (placa_vehiculo) REFERENCES vehiculo(placa) ON DELETE CASCADE -- Relacionar por placa de vehículo
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*
+ SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
+    FROM registro_servicio rs
+    JOIN users e ON rs.idempleado = e.id
+    JOIN users c ON rs.idcliente = c.id
+    
+    ;
+SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
+      FROM registro_servicio rs
+      JOIN users e ON rs.idempleado = e.id
+      JOIN users c ON rs.idcliente = c.id
+      */
+      
+	
+      

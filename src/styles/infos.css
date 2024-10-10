@@ -1,0 +1,187 @@
+.historial-cliente-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f9f9f9; /* Fondo más suave */
+}
+
+.sidebar {
+    background-color: #D32F2F;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    margin-right: 10px; /* Espacio entre la barra lateral y el contenido */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    margin: 20px 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #B71C1C;
+}
+
+.add-service-btn {
+    background-color: #B71C1C;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+}
+
+.add-service-btn:hover {
+    background-color: #A52727;
+}
+
+.historial-cliente-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.historial-header {
+    background-color: #D32F2F;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    margin-bottom: 20px;
+}
+
+.vehicle-photo {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    height: auto;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.service-details, .secondary-vehicle-history {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.service-details h3, .secondary-vehicle-history h2 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.informacion-personal {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff; /* Fondo blanco para resaltar */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.foto-perfil img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #000;
+    border-radius: 50%; /* Imagen de perfil circular */
+    margin-bottom: 20px;
+}
+
+.informacion-basica h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.informacion-basica p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.informacion-personal-detalles {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.informacion-personal-detalles h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.informacion-personal-detalles p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.informacion-vehiculos {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.informacion-vehiculos h1 {
+    margin-bottom: 30px;
+}
+
+.vehiculo-principal, .vehiculo-secundario {
+    margin-bottom: 30px;
+}
+
+.foto-vehiculo img {
+    width: 200px;
+    height: 150px;
+    border: 2px solid #000;
+    border-radius: 10px; /* Bordes redondeados para las imágenes */
+    margin-bottom: 20px;
+}
+
+.detalles-vehiculo {
+    text-align: left;
+    display: inline-block;
+    background-color: #f9f9f9; /* Fondo suave para resaltar detalles */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.detalles-vehiculo p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}

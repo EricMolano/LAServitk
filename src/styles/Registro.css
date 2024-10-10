@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.header-bar {
+  width: 100%;
+  background-color: #D32F2F; /* Rojo */
+  padding: 15px 0;
+  text-align: center;
+  position: fixed; /* Fija el header en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+/* Estilo del encabezado personalizado */
+.custom-header {
+  background-color: #D32F2F; /* Fondo rojo */
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+}
+
+.custom-header h1 {
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  color: #ffffff; /* Texto blanco para mayor contraste */
+  font-size: 28px; /* Tamaño de fuente adecuado */
+  font-weight: 600; /* Peso de fuente moderado */
+  margin: 0;
+  letter-spacing: 1px; /* Espaciado entre letras */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25); /* Sombra en el texto */
+  -webkit-font-smoothing: antialiased; /* Suaviza el renderizado de la fuente */
+  -moz-osx-font-smoothing: grayscale; /* Suaviza el renderizado en Mac */
+}
+
+
+/* Estilo del texto en el header */
+.header-bar h1 {
+  color: #000000; /* Negro */
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 100px; /* Ajuste para evitar que el contenido quede debajo del header */
+  width: 90%;
+  max-width: 600px;
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Texto principal */
+.text {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+/* Subrayado del texto */
+.underline {
+  width: 61px;
+  height: 6px;
+  background: #FF0000;
+  border-radius: 9px;
+}
+
+/* Contenedor de inputs */
+.inputs {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilo de input */
+/* Estilo de input */
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  max-width: 480px;
+  height: 50px;
+  background: #F8F9FA; /* Color más claro y suave */
+  border-radius: 12px; /* Bordes más redondeados */
+  border: 1px solid #CFD8DC; /* Gris más claro para el borde */
+  padding: 0 15px; /* Ajuste de padding para mejorar el espacio */
+  box-sizing: border-box;
+  transition: all 0.3s ease; /* Transición suave para los cambios de estado */
+}
+
+/* Imagen dentro del input */
+.input img {
+  margin-right: 10px;
+  width: 20px;
+}
+
+/* Estilo del texto en el input */
+.input input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #424242; /* Gris oscuro */
+  font-size: 16px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Efecto de sombreado cuando se selecciona un recuadro (input) */
+.input input:focus {
+  background: #E0E0E0; /* Fondo más oscuro al hacer foco */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  border-color: #B0BEC5; /* Color gris oscuro en el borde */
+  outline: none;
+}
+
+/* Efecto de sombreado para el contenedor completo cuando se selecciona */
+.input:focus-within {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Sombra más prominente y uniforme */
+  border-color: #B0BEC5; /* Color gris oscuro en el borde */
+  outline: none;
+}
+
+
+/* Texto de "Olvidé mi contraseña" */
+.forgot-password {
+  margin-top: 20px;
+  color: #757575;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Estilo del enlace dentro de "Olvidé mi contraseña" */
+.forgot-password span {
+  color: #FF0000;
+  cursor: pointer;
+}
+
+/* Contenedor de botones */
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 40px auto;
+}
+
+/* Estilo del botón de enviar */
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 220px;
+  height: 45px;
+  color: #FFFFFF;
+  background: #D32F2F;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #066ba5;
+  box-sizing: border-box;
+}
+
+/* Estilo para elementos con clase "gray" */
+.gray {
+  background: #F8F9FA;
+  color: #424242;
+}
+
+/* Nuevo contenedor para los términos y condiciones */
+/* Nuevo contenedor para los términos y condiciones */
+.terms-container {
+  margin-top: 8px; /* Margen superior */
+  font-size: 10px; /* Tamaño de la fuente pequeño */
+  color: #757575; /* Color gris */
+  background-color: #f0f0f0; /* Fondo gris claro */
+  padding: 2px 4px; /* Padding reducido para hacer el cuadro más pequeño */
+  border-radius: 4px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde gris claro */
+  max-width: 200px; /* Ancho máximo */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Centra el texto */
+  box-sizing: content-box; /* Asegura que el padding no aumente el tamaño total del cuadro */
+  height: auto; /* Ajusta la altura al contenido */
+  line-height: 1.2; /* Ajusta la altura de línea para hacer el cuadro más compacto */
+}
+
+/* Estilo del label dentro del contenedor de términos y condiciones */
+.terms-container label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px; /* Espacio mínimo entre el checkbox y el texto */
+}
+
+/* Estilo del checkbox dentro del contenedor de términos y condiciones */
+.terms-container input[type="checkbox"] {
+  accent-color: #FF0000; /* Color rojo para el checkbox */
+  transform: scale(0.6); /* Tamaño del checkbox reducido */
+  margin: 0; /* Elimina el margen del checkbox */
+}
+
+/* Estilo del enlace dentro del contenedor de términos y condiciones */
+.terms-container a {
+  color: #FF0000; /* Color rojo */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 600; /* Peso ligero */
+  font-size: 10px; /* Tamaño de fuente pequeño */
+}
+
+/* Efecto hover para el enlace */
+.terms-container a:hover {
+  text-decoration: underline; /* Subrayado en hover */
+}
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .container {
+      padding: 15px;
+      margin-top: 100px; /* Ajuste para evitar que el contenido quede debajo del header */
+  }
+
+  .text {
+      font-size: 1.5rem;
+  }
+
+  .input {
+      max-width: 100%;
+  }
+
+  .submit {
+      font-size: 14px;
+      height: 45px;
+      max-width: 100%;
+  }
+
+  .submit-container {
+      gap: 10px;
+  }
+
+  .header-bar h1 {
+      font-size: 20px;
+  }
+}

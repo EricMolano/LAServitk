@@ -1,0 +1,535 @@
+.dashboard-container {
+    display: flex;
+    /*height: 100vh;*/
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #D32F2F; /* Color actualizado */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: width 0.3s ease;
+    border-radius: 10px; /* Redondea los bordes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra ligera para profundidad */
+    margin-right: 10px; /* Espacio entre la barra lateral y el contenido principal */
+}
+
+.sidebar.collapsed {
+    width: 80px;
+    padding: 20px 10px;
+    border-radius: 10px; /* Asegura que el borde redondeado se mantenga cuando esté colapsada */
+}
+
+.toggle-btn {
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed h2 {
+    opacity: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin: 0; /* Asegura que no haya márgenes adicionales */
+}
+
+.sidebar ul li {
+    margin: 10px 0; /* Ajusta el margen entre los elementos de la lista */
+    padding: 10px;
+    background-color: #E57373; /* Color de fondo de los elementos de la lista */
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Ajusta el ancho para tener en cuenta el padding de la barra lateral */
+    text-align: left;
+    padding-left: 15px;
+    color: white;
+    transition: padding-left 0.3s ease;
+}
+
+
+.sidebar ul li:hover {
+    background-color: #C62828; /* Color al pasar el ratón */
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    height: 60px;
+    background-color: #b45a5a; /* Color actualizado */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+    border-radius: 10px; /* Redondea los bordes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra ligera para profundidad */
+    margin-bottom: 10px; /* Espacio entre la barra de navegación y el contenido principal */
+}
+
+.navbar h1 {
+    margin: 0;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    color: #D32F2F; /* Color del texto del menú desplegable */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.user-dropdown ul {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.user-dropdown ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.user-dropdown ul li:hover {
+    background-color: #FCE4EC; /* Color de fondo al pasar el ratón */
+}
+
+.dashboard-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 22%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #D32F2F; /* Color del título de la tarjeta */
+}
+
+.card p {
+    font-size: 24px;
+    margin: 0;
+    color: #D32F2F; /* Color del valor en la tarjeta */
+}
+
+.card span {
+    color: rgb(38, 192, 212);
+}
+
+.charts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sales-chart, .traffic-source-chart {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 48%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.asistencia-content {
+    padding: 20px;
+}
+
+.asistencia-table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.asistencia-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.asistencia-table th, .asistencia-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.asistencia-table th {
+    background-color: #f4f4f4;
+}
+
+.confirm-btn {
+    background-color: #D32F2F; /* Color del botón */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.confirm-btn:hover {
+    background-color: #C62828; /* Color del botón al pasar el ratón */
+}
+
+.clientes-table-container {
+    background-color: white;
+    padding: 10px; /* Padding reducido */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 700px; /* Ancho máximo reducido */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+.clientes-table {
+    width: 100%; /* Asegura que la tabla use el ancho completo del contenedor */
+    border-collapse: collapse;
+}
+
+.clientes-table th, .clientes-table td {
+    padding: 10px; /* Padding reducido */
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.clientes-table th {
+    background-color: #f4f4f4;
+}
+
+.edit-btn, .delete-btn {
+    margin-right: 15px; /* Separación entre botones */
+    padding: 8px 15px; /* Padding reducido */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente reducido */
+    transition: background-color 0.3s;
+}
+
+.edit-btn {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: rgb(38, 192, 212);
+}
+
+.delete-btn {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+/* Estilo general para todos los títulos de las secciones */
+.section-title {
+    font-size: 28px; /* Tamaño de fuente grande */
+    font-weight: bold; /* Fuente en negrita */
+    color: #333; /* Color del texto */
+    background-color: #f4f4f4; /* Color de fondo suave */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    text-align: center; /* Centra el texto */
+    border-left: 6px solid #4CAF50; /* Línea vertical verde a la izquierda */
+}
+
+/* Ajustes específicos para el contenedor de los títulos de clientes */
+.informacion-clientes-content .section-title {
+    border-left: 6px solid #2196F3; /* Línea vertical azul para la sección de clientes */
+}
+
+/* Ajustes específicos para el contenedor de asistencia */
+.asistencia-content .section-title {
+    border-left: 6px solid #FFC107; /* Línea vertical amarilla para la sección de asistencia */
+}
+
+/* Estilo específico para la tabla de inventario */
+.inventario-table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 700px; /* Ajusta el ancho máximo */
+    margin: auto; /* Centra la tabla horizontalmente */
+}
+
+.inventario-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventario-table th, .inventario-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+
+
+.edit-btn, .delete-btn {
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: rgb(38, 192, 212);; /* Verde */
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: rgb(38, 192, 212);;
+}
+
+.delete-btn {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+.inventario-content {
+    padding: 20px;
+}
+
+.inventario-content .add-btn-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el botón de agregar producto */
+.add-btn {
+    background-color: #2196F3; /* Azul */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 7%;
+}
+.add-item-btn{
+    background-color: #2196F3; /* Azul */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 7%;
+}
+.add-btn:hover {
+    background-color: #1976D2;
+}
+
+/* Estilo para el formulario de agregar producto */
+.add-item-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.add-item-form h3 {
+    margin-top: 0;
+}
+
+.add-item-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.add-item-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-item-form button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.add-item-form button:hover {
+    background-color: rgb(38, 192, 212);;
+}
+
+.add-item-form button.cancel {
+    background-color: #f44336; /* Rojo */
+}
+
+.add-item-form button.cancel:hover {
+    background-color: #e53935;
+}
+/* Ajuste para asegurar visibilidad y posicionamiento del botón */
+.add-item-btn, .add-btn {
+    display: inline-block; /* Asegura que sea un botón visible en línea */
+    background-color: #2196F3; /* Azul */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 7%; /* Ajusta el margen si es necesario */
+    position: relative; /* Asegura que no quede fuera del flujo normal de los elementos */
+    z-index: 1; /* Asegura que esté sobre otros elementos */
+}
+
+.add-item-btn:hover, .add-btn:hover {
+    background-color: #1976D2; /* Cambia el color al pasar el ratón */
+}
+
+/* Si el botón está dentro de un contenedor con padding/margin, ajusta el margen */
+.add-item-btn-container, .add-btn-container {
+    text-align: center; /* Centra el botón si es necesario */
+    margin-bottom: 20px;
+}
+
+/* Asegura que el botón no esté oculto o solapado */
+.add-btn {
+    visibility: visible; /* Asegura que sea visible */
+    opacity: 1; /* Asegura que no esté oculto por transparencia */
+    display: block; /* Lo convierte en bloque si inline-block no es suficiente */
+}
+/* Estilo específico para el botón de editar perfil */
+.edit-btn {
+    background-color: #D32F2F; /* Rojo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 0; /* Asegura que no haya margen adicional */
+}
+
+.edit-btn:hover {
+    background-color: #C62828; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilo específico para el botón de eliminar perfil */
+.delete-btn {
+    background-color: #f44336; /* Rojo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 0; /* Asegura que no haya margen adicional */
+}
+
+.delete-btn:hover {
+    background-color: #e53935; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para la sección de información de usuarios */
+.user-info-content {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.user-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-info-table th,
+.user-info-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info-table th {
+    background-color: #D32F2F; /* Color del encabezado */
+    color: white;
+}
+
+.user-info-table tr:nth-child(even) {
+    background-color: #F9F9F9; /* Color alternativo para filas */
+}
+
+.user-info-table tr:hover {
+    background-color: #E1F5FE; /* Color de fondo al pasar el mouse */
+}
+
+.user-info-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #D32F2F; /* Color del título */
+    margin-bottom: 15px;
+    text-align: center;
+}
