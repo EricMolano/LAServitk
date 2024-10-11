@@ -1,6 +1,3 @@
--- UPDATE users SET rol_id = 3 WHERE email = 'admin@admin.com';
--- UPDATE users SET rol_id = 1 WHERE email = 'empleado@empleado.com';
-
 -- drop database laservitk
 CREATE DATABASE IF NOT EXISTS laservitk;
 USE laservitk;
@@ -33,20 +30,7 @@ CREATE TABLE IF NOT EXISTS users (
   CONSTRAINT fk_rol FOREIGN KEY (rol_id) REFERENCES rol (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
-/*INSERT INTO users (email, password, name, surname, address, phone, rol_id) 
-VALUES (
-    'admin@sena',                -- Correo electrónico del usuario
-    '$2b$10$ZzvoLpCRJfwRDuXxZOFeIeGgvVolZCp8wDU3o1tSP14XJqm3v42U6',                  -- Contraseña del usuario, debe estar hasheada (ej. con bcrypt)
-    'Carlos',                             -- Nombre del usuario
-    'Castañeda',                              -- Apellido del usuario
-    '123 Admin',                 -- Dirección del usuario
-    '123-456-7890',                     -- Teléfono del usuario
-    3                                 -- ID del rol 
-);*/ 
--- crear usuario desde aqui
-
-
+-- crear la tabla vehiculo
 CREATE TABLE IF NOT EXISTS vehiculo (
   idvehiculo INT NOT NULL AUTO_INCREMENT,
   marca VARCHAR(50) NOT NULL,
@@ -72,7 +56,7 @@ CREATE TABLE IF NOT EXISTS producto (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+-- crear la tabla servicios
 CREATE TABLE IF NOT EXISTS registro_servicio (
   idregistro INT NOT NULL AUTO_INCREMENT,
   idempleado INT NOT NULL,  -- ID del empleado referenciado de la tabla users
@@ -88,6 +72,37 @@ CREATE TABLE IF NOT EXISTS registro_servicio (
   FOREIGN KEY (placa_vehiculo) REFERENCES vehiculo(placa) ON DELETE CASCADE -- Relacionar por placa de vehículo
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Insertar Administrador
+INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUES
+('CarlosAdmin@gmail.com', '$2a$10$iAc4N9NRQiCFhdLVMNtZIudDGaGen4tRtbInNE9zxwDv2f8gfnoKS', 'Carlos', 'Castañeda', 'Calle 13 sur 42', '3164748034', 3);
+
+-- Insertar Empleados
+INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUES
+('KevinEmpleado@gmail.com', '$2a$10$Tv/HrpystnuFgo9zuDQkTefkmwJ08M6Bc5tcwHYqefxasGl/bi5wi', 'Kevin', 'Paredes', 'Calle 22 bis a sur 54', '3195557618', 1),
+('MichelEmpleado@gmail.com', '$2a$10$lluJuPsD.ozZfa8x2U3A4e3wgN3c8pD32ROJh88YmviqixjVZkFty', 'Michel', 'Ballen', 'Avenida #45', '3107645089', 1),
+('EricEmpleado@gmail.com', '$2a$10$IGl7uX9lgKHcQzPz2gKFN.HJhFun6DUVFNev9sxghwF92pbZpFeuS', 'Eric', 'Molano', 'Transversal 12', '3125546488', 1);
+
+
+-- Insertar productos iniciales
+INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra, msrp)
+VALUES 
+('Neumáticos', 'Neumáticos de alta calidad', 50, 100.00, 120.00),
+('LED', 'Luces LED automotrices', 30, 20.00, 25.00),
+('Anticongelante', 'Líquido anticongelante para motor', 40, 15.00, 18.00),
+('Kit de Herramientas', 'Kit de herramientas para el automóvil', 25, 50.00, 60.00),
+('Aceite', 'Aceite para cambio de motor', 60, 30.00, 35.00),
+('Filtro', 'Filtros de aire para automóviles', 80, 10.00, 12.00),
+('Pastillas', 'Pastillas de freno de alta calidad', 45, 25.00, 30.00),
+('Motor', 'Partes de motor automotriz', 10, 500.00, 600.00),
+('Pinturas', 'Pinturas para carrocerías', 20, 70.00, 85.00);
+
+
+
+
+
+-- CONSULTAS EJEMPLO
+
 /*
  SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
     FROM registro_servicio rs
@@ -101,5 +116,18 @@ SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
       JOIN users c ON rs.idcliente = c.id
       */
       
-	
+
+/*INSERT INTO users (email, password, name, surname, address, phone, rol_id) 
+VALUES (
+    'admin@sena',                -- Correo electrónico del usuario
+    '$2b$10$ZzvoLpCRJfwRDuXxZOFeIeGgvVolZCp8wDU3o1tSP14XJqm3v42U6',                  -- Contraseña del usuario, debe estar hasheada (ej. con bcrypt)
+    'Carlos',                             -- Nombre del usuario
+    'Castañeda',                              -- Apellido del usuario
+    '123 Admin',                 -- Dirección del usuario
+    '123-456-7890',                     -- Teléfono del usuario
+    3                                 -- ID del rol 
+);*/ 
+-- crear usuario desde aqui
       
+-- UPDATE users SET rol_id = 3 WHERE email = 'admin@admin.com';
+-- UPDATE users SET rol_id = 1 WHERE email = 'empleado@empleado.com';

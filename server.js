@@ -14,14 +14,14 @@ const port = process.env.PORT || 2071;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: '1234',
   database: 'laservitk',
   port: 3306
 });
 
 db.connect((err) => {
   if (err) throw err;
-  console.log('Connected to database',hola("nora@example.com").then((e)=>{
+  console.log('Connected to database',hola("sena@example.com").then((e)=>{
     console.log(e)
   }));
 
@@ -46,7 +46,11 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET); // Asegúrate de que esta l�
 app.get("/hola",(req, res)=>{
   console.log("agus me ignora")
 })
-// Ruta de registro de usuario
+
+
+// ===============================================================
+// Componente Registro
+// ===============================================================
 app.post('/api/register', async (req, res) => {
   console.log("Hola mundo",req)
   try {
@@ -75,6 +79,10 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+
+// ===============================================================
+// Componente Login
+// ===============================================================
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -113,6 +121,9 @@ const authenticateToken = (req, res, next) => {
 };
 
 
+// ===============================================================
+// Componente Octener usuarios
+// ===============================================================
 app.get('/api/user/data', authenticateToken, (req, res) => {
   const sql = 'SELECT * FROM users WHERE id = ?';
   console.log('Requesting user data for ID:', req.user.id);
@@ -133,7 +144,9 @@ app.get('/api/user/data', authenticateToken, (req, res) => {
 });
 
 
-// Ruta para actualizar el perfil del usuario autenticado
+// ===============================================================
+// Componente Actualizar perfil
+// ===============================================================
 app.put('/api/user/update-profile', authenticateToken, (req, res) => {
   const { name, surname, address, phone } = req.body;
   const userId = req.user.id; // Obtener el ID del usuario desde el token JWT
@@ -165,7 +178,10 @@ app.put('/api/user/update-profile', authenticateToken, (req, res) => {
 });
 
 
-// Ruta para actualizar datos del empleado
+
+// ===============================================================
+// Componente Actualizar perfil empleado
+// ===============================================================
 app.put('/api/user/update-profileE', authenticateToken, (req, res) => {
   const { name, surname, address, phone } = req.body;
   const sql = 'UPDATE usuario SET nombre = ?, apellido = ?, direccion = ?, telefono = ? WHERE id = ?';
@@ -175,6 +191,10 @@ app.put('/api/user/update-profileE', authenticateToken, (req, res) => {
   });
 });
 
+
+// ===============================================================
+// Componente Actualizar perfil Admin
+// ===============================================================
 app.put('/api/user/update-profileA', authenticateToken, (req, res) => {
   const { name, surname, address, phone } = req.body;
   const sql = 'UPDATE users SET name = ?, surname = ?, address = ?, phone = ? WHERE id = ?';
@@ -185,6 +205,9 @@ app.put('/api/user/update-profileA', authenticateToken, (req, res) => {
 });
 
 
+// ===============================================================
+// Componente Obtener los vehiculos
+// ===============================================================
 app.get('/api/admin-vehicles', authenticateToken, (req, res) => {
   // El endpoint no verifica el rol, solo la autenticación
   db.query('SELECT * FROM vehiculo', (err, results) => {
@@ -197,7 +220,10 @@ app.get('/api/admin-vehicles', authenticateToken, (req, res) => {
 });
 
 
-// Obtener vehículos del usuario autenticado
+
+// ===============================================================
+// Componente Obtener los vehiculos por id
+// ===============================================================
 app.get('/api/vehicles', authenticateToken, (req, res) => {
   const userId = req.user.id; // Obtener el ID del usuario desde el token
   
@@ -209,7 +235,10 @@ app.get('/api/vehicles', authenticateToken, (req, res) => {
   });
 });
 
-// Ruta para agregar un vehículo
+
+// ===============================================================
+// Componente Agregar vehiculos
+// ===============================================================
 app.post('/api/vehicles', authenticateToken, (req, res) => {
   const { marca, modelo, año, color, placa } = req.body;
   const id = req.user.id; // Usa el ID del usuario autenticado
@@ -228,7 +257,10 @@ app.post('/api/vehicles', authenticateToken, (req, res) => {
   });
 });
 
-// Ruta para actualizar un vehículo
+
+// ===============================================================
+// Componente Actualizar vehiculos
+// ===============================================================
 app.put('/api/vehicles/:id', authenticateToken, (req, res) => {
   const { marca, modelo, año, color, placa } = req.body;
   const query = 'UPDATE vehiculo SET marca = ?, modelo = ?, año = ?, color = ?, placa = ? WHERE idvehiculo = ? AND id = ?';
@@ -238,6 +270,10 @@ app.put('/api/vehicles/:id', authenticateToken, (req, res) => {
   });
 });
 
+
+// ===============================================================
+// Componente Obtener inventario
+// ===============================================================
 app.get('/api/inventory', authenticateToken, (req, res) => {
   const query = 'SELECT * FROM producto'; // Asegúrate de que la tabla se llama 'producto'
   db.query(query, (err, results) => {
@@ -246,6 +282,10 @@ app.get('/api/inventory', authenticateToken, (req, res) => {
   });
 });
 
+
+// ===============================================================
+// Componente Obtener producto por id
+// ===============================================================
 app.get('/api/inventory/:id', authenticateToken, (req, res) => {
   const query = 'SELECT * FROM producto WHERE id = ?'; // Asegúrate de que la columna es 'id'
   db.query(query, [req.params.id], (err, results) => {
@@ -253,11 +293,15 @@ app.get('/api/inventory/:id', authenticateToken, (req, res) => {
     if (results.length > 0) {
       res.json(results[0]);
     } else {
-      res.status(404).json({ message: 'Inventory not found' }); // Mensaje en inglés
+      res.status(404).json({ message: 'Inventory not found' }); 
     }
   });
 });
 
+
+// ===============================================================
+// Componente Agregar el inventario
+// ===============================================================
 app.post('/api/inventory', authenticateToken, (req, res) => {
   const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
 
@@ -276,6 +320,9 @@ app.post('/api/inventory', authenticateToken, (req, res) => {
 });
 
 
+// ===============================================================
+// Componente Actualizar el inventario
+// ===============================================================
 app.put('/api/inventory/:id', authenticateToken, (req, res) => {
   const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
   
@@ -291,7 +338,10 @@ app.put('/api/inventory/:id', authenticateToken, (req, res) => {
 });
 
 
-// Endpoint para obtener usuarios
+
+// ===============================================================
+// Componente Obtener usuarios
+// ===============================================================
 app.get('/api/users', authenticateToken, (req, res) => {
   const sql = 'SELECT id, name, email, address, phone, rol_id FROM users';
   db.query(sql, (err, results) => {
@@ -302,7 +352,8 @@ app.get('/api/users', authenticateToken, (req, res) => {
     res.status(200).json(results);
   });
 });
-// En tu archivo de rutas del backend (por ejemplo, app.js o routes.js)
+
+
 app.get('/api/users/:id', authenticateToken, (req, res) => {
   const userId = req.params.id;
   const sql = 'SELECT id, email, name, surname, address, phone FROM users WHERE id = ?';
@@ -318,7 +369,10 @@ app.get('/api/users/:id', authenticateToken, (req, res) => {
   });
 });
 
-// Ruta para actualizar el perfil del usuario autenticado
+
+// ===============================================================
+// Componente Actualizar los usuarios
+// ===============================================================
 app.put('/api/edit-profile-user/:id', authenticateToken, (req, res) => {
   const userId = req.params.id;
   const { email, name, surname, address, phone } = req.body;
@@ -364,9 +418,6 @@ app.put('/api/edit-profile-user/:id', authenticateToken, (req, res) => {
   });
 });
 
-
-
-// En tu archivo de rutas del backend (por ejemplo, app.js o routes.js)
 app.get('/api/users/:id', authenticateToken, (req, res) => {
   const userId = req.params.id;
   const sql = 'SELECT id, email, name, surname, address, phone FROM users WHERE id = ?';
@@ -382,7 +433,10 @@ app.get('/api/users/:id', authenticateToken, (req, res) => {
   });
 });
 
-// Ruta para actualizar un vehículo del usuario autenticado
+
+// ===============================================================
+// Componente Actualizar el vehiculos por id
+// ===============================================================
 app.put('/api/update-vehicle-user/:idvehiculo', authenticateToken, (req, res) => {
   const vehiculoId = req.params.idvehiculo;
   const { marca, modelo, año, color, placa } = req.body;
@@ -429,8 +483,9 @@ app.put('/api/update-vehicle-user/:idvehiculo', authenticateToken, (req, res) =>
 });
 
 
-
-
+// ===============================================================
+// Componente Obtener servicios
+// ===============================================================
 app.post('/api/servicios', (req, res) => {
   const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
 
@@ -480,7 +535,10 @@ app.post('/api/servicios', (req, res) => {
     });
 });
 
-// Ruta para actualizar un servicio
+
+// ===============================================================
+// Componente Actualizar el servicio
+// ===============================================================
 app.put('/api/servicios/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
@@ -534,8 +592,10 @@ app.put('/api/servicios/:id', authenticateToken, (req, res) => {
     });
 });
 
-// Ruta para obtener los servicios del cliente autenticado
-// Ruta para obtener los servicios del cliente autenticado
+
+// ===============================================================
+// Componente Obtener el servicio por id
+// ===============================================================
 app.get('/api/servicios', authenticateToken, (req, res) => {
   const idCliente = req.user.id;
   console.log("id", idCliente); // Asegúrate de que req.user tiene el ID del cliente

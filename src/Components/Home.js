@@ -17,6 +17,7 @@ import imgPort5 from '../Components/Assets/cambioaceite.png';
 import imgPort9 from '../Components/Assets/filtro.jpg';
 import imgPort10 from '../Components/Assets/pastillas.jpg';
 import imgPort11 from '../Components/Assets/automotriz.jpg';
+import imgPort20 from '../Components/Assets/pintura.png';
 
 // Imágenes para los servicios
 import imgReparacion from '../Components/Assets/reparacionmotores.jpg';
@@ -163,7 +164,11 @@ function Home() {
             </div>
             <div className="portfolio-card">
               <img src={imgPort11} alt="Automotriz" className="portfolio-image" />
-              <h3>Automotriz</h3>
+              <h3>Motor</h3>
+            </div>
+            <div className="portfolio-card">
+              <img src={imgPort20} alt="pintura" className="portfolio-image" />
+              <h3>Pinturas</h3>
             </div>
           </div>
         </section>

@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:2071/api';
 
+
+// ===============================================================
+// Componente Registro
+// ===============================================================
 export const register = (userData) => {
     console.log("Ingreso a el metodo de registro", userData);
     
@@ -16,6 +20,10 @@ export const register = (userData) => {
         });
 };
 
+
+// ===============================================================
+// Componente Login
+// ===============================================================
 export const login = (email, password) => {
     return axios.post(`${API_URL}/login`, { email, password })
         .then(response => {
@@ -32,6 +40,10 @@ export const login = (email, password) => {
         });
 };
 
+
+// ===============================================================
+// Componente Actualizar perfil
+// ===============================================================
 export const updateProfile = (userData) => {
     return axios.put(`${API_URL}/update-profile`, userData, {
         headers: {
@@ -45,6 +57,9 @@ export const updateProfile = (userData) => {
     });
 };
 
+// ===============================================================
+// Componente Actualizar perfil empleado
+// ===============================================================
 export const updateProfileE = (userData) => {
     return axios.put(`${API_URL}/update-profileE`, userData, {
         headers: {
@@ -58,6 +73,9 @@ export const updateProfileE = (userData) => {
     });
 };
 
+// ===============================================================
+// Componente Actualizar perfil admin
+// ===============================================================
 export const updateProfileA = (userData) => {
     return axios.put(`${API_URL}/update-profileA`, userData, {
         headers: {
@@ -71,9 +89,9 @@ export const updateProfileA = (userData) => {
     });
 };
 
-
-
-// Función para agregar un nuevo vehículo
+// ===============================================================
+// Componente Agregar vehiculo
+// ===============================================================
 export const addVehicle = (vehicleData) => {
     return axios.post(`${API_URL}/vehicles`, vehicleData, {
         headers: {
@@ -87,7 +105,9 @@ export const addVehicle = (vehicleData) => {
     });
 };
 
-// Función para actualizar un vehículo existente
+// ===============================================================
+// Componente Actualizar vehiculo
+// ===============================================================
 export const updateVehicle = (id, vehicleData) => {
     return axios.put(`${API_URL}/vehicles/${id}`, vehicleData, {
         headers: {
@@ -101,7 +121,9 @@ export const updateVehicle = (id, vehicleData) => {
     });
 };
 
-// Funciones para inventario
+// ===============================================================
+// Componente Obtener inventario
+// ===============================================================
 export const getInventoryById = (id) => {
     return axios.get(`${API_URL}/inventory/${id}`, {
         headers: {
@@ -115,6 +137,9 @@ export const getInventoryById = (id) => {
     });
 };
 
+// ===============================================================
+// Componente Agregar en inventario
+// ===============================================================
 export const addInventory = (inventoryData) => {
     return axios.post(`${API_URL}/inventory`, inventoryData, {
         headers: {
@@ -128,6 +153,10 @@ export const addInventory = (inventoryData) => {
     });
 };
 
+
+// ===============================================================
+// Componente Actualizar en inventario
+// ===============================================================
 export const updateInventory = (id, inventoryData) => {
     return axios.put(`${API_URL}/inventory/${id}`, inventoryData, {
         headers: {
@@ -141,6 +170,10 @@ export const updateInventory = (id, inventoryData) => {
     });
 };
 
+
+// ===============================================================
+// Componente Obtener Usuarios
+// ===============================================================
 export const getUsers = () => {
     return axios.get(`${API_URL}/users`, {
         headers: {
@@ -154,7 +187,9 @@ export const getUsers = () => {
     });
 };
 
-// Obtener un usuario específico por ID
+// ===============================================================
+// Componente Obtener Usuarios por id
+// ===============================================================
 export const getUserById = (id) => {
     return axios.get(`${API_URL}/users/${id}`, {
         headers: {
@@ -168,7 +203,9 @@ export const getUserById = (id) => {
     });
 };
 
-// Obtener todos los vehículos
+// ===============================================================
+// Componente Obtener los vehiculos
+// ===============================================================
 export const getAdminVehicles = () => {
     return axios.get(`${API_URL}/admin-vehicles`, {
         headers: {
@@ -182,7 +219,9 @@ export const getAdminVehicles = () => {
     });
 };
 
-// Función para obtener todos los vehículos del usuario autenticado
+// ===============================================================
+// Componente Obtener los vehiculos por id
+// ===============================================================
 export const getVehicles = () => {
     return axios.get(`${API_URL}/vehicles`, {
         headers: {
@@ -196,7 +235,9 @@ export const getVehicles = () => {
     });
 };
 
-
+// ===============================================================
+// Componente Actualizar usuario
+// ===============================================================
 export const updateUser = (id, userData) => {
     return axios.put(`${API_URL}/edit-profile-user/${id}`, userData, {
       headers: {
@@ -210,6 +251,9 @@ export const updateUser = (id, userData) => {
     });
   };
 
+// ===============================================================
+// Componente Actualizar vehiculo
+// ===============================================================
   export const updateVehicleUser = (idvehiculo, vehicleData) => {
     return axios.put(`${API_URL}/update-vehicle-user/${idvehiculo}`, vehicleData, {
       headers: {
@@ -223,7 +267,9 @@ export const updateUser = (id, userData) => {
     });
 };
 
-// Función para obtener los servicios
+// ===============================================================
+// Componente Obtener servicios
+// ===============================================================
 export const getServices = () => {
     return axios.get(`${API_URL}/api/servicios`, {
       headers: {
@@ -236,7 +282,11 @@ export const getServices = () => {
       throw new Error(error.response?.data?.message || 'Error al obtener los servicios');
     });
   };
+
   
+// ===============================================================
+// Componente Agregar servicios
+// ===============================================================
 export const insertService = (serviceData) => {
     return axios.post(`${API_URL}/api/servicios`, serviceData, {
       headers: {
@@ -250,6 +300,10 @@ export const insertService = (serviceData) => {
     });
   };
   
+
+// ===============================================================
+// Componente Actualizar servicios
+// ===============================================================
 export const updateService = (id, serviceData) => {
     return axios.put(`${API_URL}/servicios/${id}`, serviceData, {
       headers: {
@@ -264,6 +318,9 @@ export const updateService = (id, serviceData) => {
   };
   
 
+// ===============================================================
+// Componente Cargo de servicios
+// ===============================================================
   export const setLoadingServices = () => {
     return axios.get(`${API_URL}/servicios`, {
         headers: {
