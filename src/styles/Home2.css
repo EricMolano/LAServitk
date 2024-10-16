@@ -27,20 +27,20 @@
     font-weight: bolder;
 }
 /* Header */
-
 header {
     width: 100% !important;
     height: 600px !important;
-    background: #bc4e9c ;
+    background: #ffffff;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(320, 3%, 77%, 0.664)), url(../Components/Assets/moto.jpg);
+    background: -webkit-linear-gradient(to right, hsla(0, 48%, 58%, 0.459), hsla(0, 17%, 52%, 0.486)), url(../Components/Assets/moto.jpg);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../Components/Assets/moto.jpg);
+    background: linear-gradient(to right, hsla(0, 57%, 58%, 0.459), hsla(0, 20%, 56%, 0.664)), url(../Components/Assets/moto.jpg);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
     background-attachment: fixed;
     position: relative;
 }
+
 
 nav{
     text-align: right;
@@ -58,7 +58,7 @@ nav > a:hover{
     text-decoration: underline;
 }
 
-header .textos-header{
+header .textos-header {
     display: flex;
     height: 430px;
     width: 100%;
@@ -66,6 +66,7 @@ header .textos-header{
     justify-content: center;
     flex-direction: column;
     text-align: center;
+
 }
 
 .textos-header h1{
@@ -87,20 +88,25 @@ header .textos-header{
 
 /* About us */
 
-main .sobre-nosotros{
-    padding: 30px 0 60px 0 !important;
+main .sobre-nosotros {
+    padding: 30px 0 40px 0 !important;
 }
-.contenedor-sobre-nosotros{
+
+.contenedor-sobre-nosotros {
     display: flex;
     justify-content: space-evenly;
+    align-items: center; 
 }
 
-.imagen-about-us{
-    width: 48%;
+.imagen-about-us {
+    width: 32%;
 }
 
-.sobre-nosotros .contenido-textos{
-    width: 48%;
+.sobre-nosotros .contenido-textos {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 
 .contenido-textos h3{
@@ -162,7 +168,7 @@ main .sobre-nosotros{
     height: 100%;
     top: 0;
     transform: scale(0);
-    background: hsla(273,91%,27%, 0.7);
+    background: hsla(7, 93%, 43%, 0.7);
     transition: transform .5s;
     display: flex;
     justify-content: center;
@@ -184,45 +190,62 @@ main .sobre-nosotros{
 
 /* Clients */
 
-.cards{
+.cards {
     display: flex;
     justify-content: space-evenly;
+    gap: 20px; /* Espacio entre tarjetas */
+    padding: 20px 0;
 }
 
-.cards .card{
-    background: #b45a5a;
+.cards .card {
+    background: #e74646; /* Rojo más vivo */
     display: flex;
-    width: 46%;
-    height: 200px;
+    flex-direction: row; /* Asegura que la imagen y el texto estén en fila */
+    width: 30%;
+    height: 220px; /* Altura de la tarjeta */
     align-items: center;
-    justify-content: space-evenly;
-    border-radius: 5px;
-    box-shadow: 0 0 6px 0 rgba(118, 80, 80, 0.6);
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px; /* Espaciado interior */
+    overflow: hidden;
 }
 
-.cards .card img{
+.cards .card:hover {
+    transform: translateY(-10px); /* Efecto al pasar el cursor */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al hacer hover */
+}
+
+.cards .card img {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border: 3px solid #fff;
+    border: 3px solid #fff; /* Borde blanco */
     border-radius: 50%;
     display: block;
+    margin-right: 15px; /* Espacio entre la imagen y el texto */
 }
 
-.cards .card > .contenido-texto-card{
-    width: 60%;
-    color: #fff;
+.cards .card > .contenido-texto-card {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    color: #fff; /* Color del texto */
+    text-align: left; /* Alineación a la izquierda */
 }
 
-.cards .card > .contenido-texto-card p{
-    font-weight: 300;
-    padding-top: 5px;
-    color: white;
+.cards .card > .contenido-texto-card h4 {
+    font-size: 26px; /* Tamaño de letra más grande */
+    font-weight: 700; /* Negrita */
+    margin-bottom: 5px; /* Espacio inferior */
+    color: #fff; /* Color del texto */
+    letter-spacing: 1px; /* Espaciado de letras */
 }
 
-.contenido-texto-card h4{
-    font-size: 29px;
-    color: white;
+.cards .card > .contenido-texto-card p {
+    font-size: 16px; /* Tamaño de letra más grande */
+    font-weight: 300; /* Peso de fuente ligero */
+    color: #f9f9f9; /* Color del texto */
+    line-height: 1.5; /* Mejora la legibilidad */
+    opacity: 0.9; /* Suaviza el texto */
 }
 
 
@@ -438,19 +461,102 @@ footer{
     }
 }
 
-.link{
-    width: 15%;
+.link {
     display: flex;
     justify-content: space-between;
-    color: white;
-
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
 }
+
+.register-link, .login-link {
+    padding: 0 10px;
+    color: #eee9e9;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.register-link:hover {
+    color: hsl(0, 71%, 48%);
+    transform: translateY(-3px);
+}
+
+.login-link:hover {
+    color: #bd1c1c;
+    transform: translateY(-3px);
+}
+
+
+
 
 nav{
     display: flex;
     justify-content: flex-end;
 }
 
-.link:hover{
- 
+
+
+
+/*Modal*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Cambiado para alinear el contenido verticalmente */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    color: white; /* Color del botón de cerrar */
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: auto; /* Asegura que el botón de cerrar esté en la parte inferior */
+}
+
+.modal h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.modal p {
+    margin: 8px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.modal p strong {
+    color: #e94949;
 }
