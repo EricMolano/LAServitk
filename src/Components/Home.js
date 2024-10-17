@@ -2,12 +2,10 @@ import React , { useState }from 'react';
 import { Outlet, Link , useNavigate  } from 'react-router-dom';
 
 import imgPort1 from '../Components/Assets/2.jpg';
-// Importación de las imágenes
 import imgPort2 from '../Components/Assets/3.jpg';
 import imgPort3 from '../Components/Assets/alineacion.jpg';
 import imgAlineacion from '../Components/Assets/alineacion.jpg';
 import imgPort4 from '../Components/Assets/bateria.jpg';
-import imgPort5 from '../Components/Assets/cambioaceite.png';
 import imgFace1 from '../Components/Assets/face1.jpg';
 import imgFace2 from '../Components/Assets/face2.jpg';
 import imgIcono1 from '../Components/Assets/icono1.png';
@@ -16,17 +14,22 @@ import imgPort7 from '../Components/Assets/mecanico.jpg';
 import imgPort6 from '../Components/Assets/reparacionmotores.jpg';
 import imgFrenos from '../Components/Assets/revisionfrenos.jpg';
 import imgPort8 from '../Components/Assets/suspencion.jpg';
-import imgPort9 from '../Components/Assets/filtro.jpg';
-import imgPort10 from '../Components/Assets/pastillas.jpg';
-import imgPort11 from '../Components/Assets/automotriz.jpg';
-import imgPort12 from '../Components/Assets/neumaticos.jpg';
-import imgPort13 from '../Components/Assets/led.jpg';
-import imgPort14 from '../Components/Assets/anticongelante.jpg';
-import imgPort15 from '../Components/Assets/kit.jpg';
+
 import miImagen4 from '../Components/Assets/img4.jpeg';
-import carritoLogo from '../Components/Assets/carritoLogo.png';
 
 import imgTransmision from '../Components/Assets/transmision.jpg';
+
+//Produtos imagenes
+import imgPort100 from '../Components/Assets/pastillas.jpg';
+import imgPort101 from '../Components/Assets/automotriz.jpg';
+import imgPort102 from '../Components/Assets/productoneumatico.jpg';
+import imgPort103 from '../Components/Assets/led.jpg';
+import imgPort104 from '../Components/Assets/anticongelante.jpg';
+import imgPort105 from '../Components/Assets/kit.jpg';
+import imgPort106 from '../Components/Assets/cambioaceite.png';
+import imgPort109 from '../Components/Assets/filtro.jpg';
+import carritoLogo from '../Components/Assets/carritoLogo.png';
+
 
 import '../styles/Home2.css'; 
 
@@ -107,7 +110,7 @@ const Portfolio = () => {
   const navigate = useNavigate();
   const images = [
       {
-          src: imgPort12,
+          src: imgPort102,
           alt: "Imagen 12",
           text: "Neumáticos",
           description: "Neumáticos de alta calidad diseñados para brindar un excelente rendimiento y seguridad en la carretera. Disponibles en varios tamaños para adaptarse a diferentes modelos de vehículos.",
@@ -116,7 +119,7 @@ const Portfolio = () => {
           benefits: "Mejoran la seguridad al reducir la distancia de frenado y proporcionar un mejor agarre en condiciones climáticas adversas. También contribuyen a un manejo más suave y a una mayor eficiencia de combustible.",
       },
       {
-          src: imgPort13,
+          src: imgPort103,
           alt: "Imagen 13",
           text: "Luces LED",
           description: "Luces LED brillantes que mejoran significativamente la visibilidad durante la conducción nocturna. Ofrecen una iluminación más clara y eficiente en comparación con las bombillas halógenas.",
@@ -125,7 +128,7 @@ const Portfolio = () => {
           benefits: "Mejoran la seguridad durante la conducción nocturna al aumentar la visibilidad. Además, consumen menos energía, lo que puede ayudar a mejorar la eficiencia del combustible.",
       },
       {
-          src: imgPort14,
+          src: imgPort104,
           alt: "Imagen 14",
           text: "Anticongelante",
           description: "Anticongelante de alta eficiencia que protege tu motor en temperaturas extremas, evitando el sobrecalentamiento y el congelamiento.",
@@ -134,7 +137,7 @@ const Portfolio = () => {
           benefits: "Prolonga la vida útil del motor al evitar daños por temperaturas extremas y corrosión. Mejora la eficiencia del sistema de refrigeración, asegurando un rendimiento óptimo.",
       },
       {
-          src: imgPort15,
+          src: imgPort105,
           alt: "Imagen 15",
           text: "Kit de herramientas",
           description: "Kit completo de herramientas diseñado para el mantenimiento y reparación de vehículos. Incluye una variedad de herramientas esenciales.",
@@ -143,7 +146,7 @@ const Portfolio = () => {
           benefits: "Facilita el mantenimiento del vehículo, permitiendo realizar reparaciones de forma rápida y eficiente. Ahorra tiempo y dinero en servicios mecánicos.",
       },
       {
-          src: imgPort5,
+          src: imgPort106,
           alt: "Imagen 5",
           text: "Aceite de motor",
           description: "Aceite de motor premium que asegura un rendimiento óptimo y prolonga la vida útil del motor.",
@@ -152,7 +155,7 @@ const Portfolio = () => {
           benefits: "Prolonga la vida útil del motor, mejora su eficiencia y reduce el consumo de combustible. Ayuda a mantener el motor limpio y libre de depósitos.",
       },
       {
-          src: imgPort9,
+          src: imgPort109,
           alt: "Imagen 9",
           text: "Filtro de aceite",
           description: "Filtro de aceite de larga duración diseñado para mantener el aceite del motor limpio y libre de impurezas.",
@@ -161,7 +164,7 @@ const Portfolio = () => {
           benefits: "Ayuda a prolongar la vida útil del motor al mantener el aceite limpio, mejorando su eficiencia y rendimiento.",
       },
       {
-          src: imgPort10,
+          src: imgPort100,
           alt: "Imagen 10",
           text: "Pastillas de freno",
           description: "Pastillas de freno de alta performance diseñadas para ofrecer una frenada eficaz y segura.",
@@ -170,7 +173,7 @@ const Portfolio = () => {
           benefits: "Mejoran la seguridad al proporcionar una frenada efectiva y constante, aumentando la confianza durante la conducción.",
       },
       {
-          src: imgPort11,
+          src: imgPort101,
           alt: "Imagen 11",
           text: "Batería de automotriz",
           description: "Batería confiable diseñada para arranques seguros y proporcionar energía a todos los sistemas eléctricos del vehículo.",
@@ -241,30 +244,28 @@ const Services = () => {
         {
             img: imgFrenos,
             title: "Revisión de Frenos",
-            description: "Chequeo y reparación del sistema de frenos para garantizar tu seguridad en la carretera.",
         },
         {
             img: imgAlineacion,
             title: "Alineación y Balanceo",
-            description: "Alineación y balanceo de ruedas para una conducción más suave y segura.",
         },
         {
             img: imgTransmision,
             title: "Reparación de Transmisión",
-            description: "Servicio completo para la transmisión de tu vehículo, incluyendo reparaciones y ajustes.",
         },
     ];
 
     return (
-        <section className="about-services">
-            <div className="contenedor">
-                <h2 className="titulo">Nuestros servicios</h2>
-                <div className="servicio-cont">
+        <section className="servicios">
+            <div className="contenedor-servicios">
+                <h2 className="titulo-servicios">Nuestros servicios</h2>
+                <div className="galeria-serv">
                     {services.map((service, index) => (
-                        <div className="servicio-ind" key={index}>
-                            <img src={service.img} alt="" />
-                            <h3>{service.title}</h3>
-                            <p>{service.description}</p>
+                        <div className="imagen-serv" key={index}>
+                            <img src={service.img} alt={service.title} />
+                            <div className="hover-serv">
+                                <h3>{service.title}</h3>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -272,6 +273,7 @@ const Services = () => {
         </section>
     );
 };
+
 
 const Testimonials = () => {
   const testimonials = [

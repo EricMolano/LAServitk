@@ -560,3 +560,83 @@ nav{
 .modal p strong {
     color: #e94949;
 }
+
+
+.servicios {
+    background: #f2f2f2; /* Fondo similar al portafolio */
+    padding: 60px 0; /* Espaciado superior e inferior */
+}
+
+.titulo-servicios {
+    color: #b45a5a;
+    font-size: 35px; /* Tamaño de fuente consistente */
+    text-align: center;
+    margin-bottom: 60px; /* Espaciado inferior */
+    font-weight: bolder;
+}
+
+.galeria-serv {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.imagen-serv {
+    width: 24%; /* Igual que imagen-port */
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.3s; /* Efecto de transformación */
+}
+
+.imagen-serv > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+}
+
+.hover-serv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: scale(0);
+    background: hsla(7, 93%, 43%, 0.7); /* Fondo con color semi-transparente */
+    transition: transform 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px; /* Bordes redondeados en hover */
+}
+
+.hover-serv h3 {
+    color: #fff; /* Color del texto */
+}
+
+.imagen-serv:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+}
+
+.imagen-serv:hover .hover-serv {
+    transform: scale(1); /* Mostrar en hover */
+}
+
+/* Media Queries para adaptabilidad */
+
+@media screen and (max-width: 900px) {
+    .imagen-serv {
+        width: 44%; /* Adaptación para pantallas más pequeñas */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .imagen-serv {
+        width: 95%; /* Adaptación para dispositivos muy pequeños */
+    }
+}
