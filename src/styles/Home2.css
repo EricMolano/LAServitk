@@ -20,7 +20,7 @@
 }
 
 .titulo {
-    color: #b45a5a;
+    color: #c62828;
     font-size: 35px;
     text-align: center;
     margin-bottom: 60px;
@@ -198,7 +198,7 @@ main .sobre-nosotros {
 }
 
 .cards .card {
-    background: #e74646; /* Rojo más vivo */
+    background: #d33131; /* Rojo más vivo */
     display: flex;
     flex-direction: row; /* Asegura que la imagen y el texto estén en fila */
     width: 30%;
@@ -251,77 +251,95 @@ main .sobre-nosotros {
 
 /*  Our team */
 
-.about-services{
-    background: #f2f2f2;
-    padding-bottom: 30px;
+/* footer */footer {
+    background-color: #333; /* Fondo gris oscuro */
+    padding: 50px 0;
+    color: #fff; /* Texto blanco */
+    font-family: 'Arial', sans-serif;
 }
 
-
-.servicio-cont{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.servicio-ind{
-    width: 28%;
-    text-align: center;
-}
-
-.servicio-ind img{
-    width: 90%;
-}
-
-.servicio-ind h3{
-    margin: 10px 0;
-    font-size: 35px !important;
-    font-weight: 700;
-}
-
-.servicio-ind p{
-    font-weight: 300;
-    text-align: justify;
-}
-
-/* footer */
-
-footer{
-    background: #414141;
-    padding: 60px 0 30px 0;
-    margin: auto;
-    overflow: hidden;
-}
-
-.contenedor-footer{
+.footer-container {
     display: flex;
-    width: 90%;
-    justify-content: space-evenly;
+    justify-content: space-around; /* Alinear los elementos horizontalmente */
+    max-width: 1200px;
     margin: auto;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #ccc;
+    padding-bottom: 30px; /* Espaciado inferior */
 }
 
-.content-foo{
-    text-align: center;
+.footer-section {
+    flex: 1; /* Cada sección toma el mismo ancho */
+    padding: 10px;
+    text-align: center; /* Centrar texto en cada sección */
 }
 
-.content-foo h4{
-    color: #fff;
-    border-bottom: 3px solid #b45a5a;
-    padding-bottom: 5px;
+.footer-section h4 {
     margin-bottom: 10px;
+    font-size: 18px;
+    color: #d33131; /* Color rojo para los títulos */
+    border-bottom: 2px solid #d33131; /* Línea roja debajo del título */
+    padding-bottom: 5px;
 }
 
-.content-foo p{
-    color: #ccc;
+.footer-section p,
+.footer-bottom-left p {
+    margin: 5px 0; /* Espaciado vertical */
 }
 
-.titulo-final{
+.footer-section a {
+    color: #ccc; /* Color gris claro para los enlaces */
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: #d33131; /* Color rojo al pasar el ratón sobre el enlace */
+}
+
+.footer-bottom {
+    display: flex; /* Usar flexbox para alinear las secciones */
+    justify-content: space-between; /* Espaciar las secciones */
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.footer-bottom-left,
+.footer-bottom-right {
+    flex: 1; /* Cada sección toma el mismo ancho */
+    padding: 10px;
+    text-align: center; /* Centrar texto */
+}
+
+.footer-final {
+    background-color: #b63c3c; /* Fondo rojo para la parte inferior */
+    padding: 20px 0;
     text-align: center;
-    font-size: 24px;
-    margin: 20px 0 0 0;
-    color: #9e9797;
+    font-size: 14px;
 }
+
+.social-icons {
+    display: flex; /* Usar flexbox para los iconos de redes sociales */
+    justify-content: center; /* Centrar los iconos */
+}
+
+.social-icon {
+    color: #ccc; /* Color gris claro por defecto */
+    margin: 0 15px; /* Espacio entre iconos */
+    font-size: 30px; /* Tamaño de los iconos */
+    transition: color 0.3s; /* Transición suave de color */
+}
+
+.social-icon:hover {
+    color: #d33131; /* Cambia a rojo al pasar el ratón */
+}
+
+/* Estilo para el iframe del mapa */
+.footer-bottom-left iframe {
+    border: 2px solid #d33131; /* Borde rojo para el mapa */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+
+ /**/
 
 @media screen and (max-width:900px){
     header{
@@ -461,6 +479,56 @@ footer{
     }
 }
 
+
+.footer-bottom-right .social-icons {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Space between items */
+    margin-top: 10px; /* Space above the icons */
+}
+
+.footer-bottom-right .social-icons a {
+    display: flex; /* Center the icons and text */
+    align-items: center; /* Align items vertically */
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    padding: 5px 10px; /* Add padding around the link */
+    border-radius: 5px; /* Round the corners */
+}
+
+/* Hover effects for each icon */
+.footer-bottom-right .social-icons a.facebook:hover {
+    background-color: #3b5998; /* Facebook color */
+    color: white; /* Text color on hover */
+}
+
+.footer-bottom-right .social-icons a.instagram:hover {
+    background-color: #e1306c; /* Instagram color */
+    color: white; /* Text color on hover */
+}
+
+.footer-bottom-right .social-icons a.whatsapp:hover {
+    background-color: #25D366; /* WhatsApp color */
+    color: white; /* Text color on hover */
+}
+
+.footer-bottom-right .social-icons a.tiktok:hover {
+    background-color: #69C9D0; /* TikTok color */
+    color: white; /* Text color on hover */
+}
+
+
+.footer-bottom-right .social-icons img {
+    width: 40px; /* Set a fixed width for icons */
+    height: 40px; /* Set a fixed height for icons */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    margin-right: 10px; /* Space between icon and text */
+}
+
+
+/**/
+
 .link {
     display: flex;
     justify-content: space-between;
@@ -560,18 +628,17 @@ nav{
 .modal p strong {
     color: #e94949;
 }
-
-
+/* Servicios Section Updated to Match Portfolio with Side Spacing */
 .servicios {
-    background: #f2f2f2; /* Fondo similar al portafolio */
-    padding: 60px 0; /* Espaciado superior e inferior */
+    background: #f2f2f2;
+    padding: 60px 5%; /* Top and bottom padding with side spacing */
 }
 
 .titulo-servicios {
-    color: #b45a5a;
-    font-size: 35px; /* Tamaño de fuente consistente */
+    color: #c62828;
+    font-size: 35px;
     text-align: center;
-    margin-bottom: 60px; /* Espaciado inferior */
+    margin-bottom: 60px;
     font-weight: bolder;
 }
 
@@ -582,22 +649,20 @@ nav{
 }
 
 .imagen-serv {
-    width: 24%; /* Igual que imagen-port */
+    width: 24%; /* Width for each service item */
     margin-bottom: 10px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 10px; /* Bordes redondeados */
-    transition: transform 0.3s; /* Efecto de transformación */
+    border-radius: 0px;
+    transition: transform 0.3s;
 }
 
 .imagen-serv > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    border-radius: 10px; /* Bordes redondeados para la imagen */
 }
 
 .hover-serv {
@@ -606,37 +671,115 @@ nav{
     height: 100%;
     top: 0;
     transform: scale(0);
-    background: hsla(7, 93%, 43%, 0.7); /* Fondo con color semi-transparente */
+    background: hsla(7, 93%, 43%, 0.7);
     transition: transform 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-radius: 10px; /* Bordes redondeados en hover */
+    border-radius: 10px;
 }
 
 .hover-serv h3 {
-    color: #fff; /* Color del texto */
+    color: #fff;
 }
 
 .imagen-serv:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+    transform: scale(1.05);
 }
 
 .imagen-serv:hover .hover-serv {
-    transform: scale(1); /* Mostrar en hover */
+    transform: scale(1);
 }
 
-/* Media Queries para adaptabilidad */
-
+/* Media Queries for Responsiveness */
 @media screen and (max-width: 900px) {
     .imagen-serv {
-        width: 44%; /* Adaptación para pantallas más pequeñas */
+        width: 44%; /* Adjust for medium screens */
     }
 }
 
 @media screen and (max-width: 500px) {
     .imagen-serv {
-        width: 95%; /* Adaptación para dispositivos muy pequeños */
+        width: 95%; /* Full width for small screens */
+        margin: 0 auto; /* Center the item */
+    }
+}
+
+
+
+/* Fondo del modal para servicios */
+.custom-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro con transparencia */
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.4s forwards; /* Animación para que aparezca el modal */
+}
+
+/* Contenido del modal */
+.custom-modal-content {
+    background-color: #ffffff; /* Fondo rojo claro */
+    padding: 40px 30px;
+    border-radius: 15px; /* Bordes redondeados */
+    width: 80%;
+    max-width: 600px; /* Ancho máximo */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    text-align: center;
+    position: relative;
+    transform: translateY(-50px);
+    animation: slideDown 0.4s forwards; /* Animación para que el modal se deslice hacia abajo */
+}
+
+/* Botón de cerrar */
+.custom-close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: #b71c1c; /* Rojo oscuro */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en el botón de cerrar */
+.custom-close-modal:hover {
+    color: #e57373; /* Rojo suave al pasar el ratón */
+}
+
+/* Estilos para el título */
+.custom-modal-content h3 {
+    font-size: 26px;
+    color: #c62828; /* Rojo intenso */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Estilos para la descripción */
+.custom-modal-content p {
+    font-size: 16px;
+    color: #1d1c1c; /* Rojo estándar */
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Animación para que el fondo aparezca suavemente */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación para que el modal baje suavemente desde arriba */
+@keyframes slideDown {
+    to {
+        transform: translateY(0);
     }
 }
