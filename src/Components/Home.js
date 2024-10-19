@@ -33,14 +33,14 @@ import imgRefrigeracion from  '../Components/Assets/servicios/enfriamiento.jpg';
 import imgLimpieza from  '../Components/Assets/servicios/limpieza.jpg';
 
 //Produtos imagenes
-import imgPort100 from '../Components/Assets/pastillas.jpg';
-import imgPort101 from '../Components/Assets/automotriz.jpg';
-import imgPort102 from '../Components/Assets/productoneumatico.jpg';
-import imgPort103 from '../Components/Assets/led.jpg';
-import imgPort104 from '../Components/Assets/anticongelante.jpg';
-import imgPort105 from '../Components/Assets/kit.jpg';
-import imgPort106 from '../Components/Assets/cambioaceite.jpg';
-import imgPort109 from '../Components/Assets/filtro.jpg';
+import imgPort100 from '../Components/Assets/productos/Pastillas.png';
+import imgPort101 from '../Components/Assets/productos/bateria.jpg';
+import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
+import imgPort103 from '../Components/Assets/productos/led.jpg';
+import imgPort104 from '../Components/Assets/productos/anticongelante.jpg';
+import imgPort105 from '../Components/Assets/productos/kit.jpg';
+import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
+import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 import carritoLogo from '../Components/Assets/carritoLogo.png';
 
 
@@ -341,6 +341,9 @@ const Services = () => {
                         <span className="custom-close-modal" onClick={closeModal}>&times;</span>
                         <h3>{selectedService.title}</h3>
                         <p>{selectedService.description}</p>
+                        <p style={{ marginTop: '10px', fontWeight: 'bold', color: '#c62828', fontSize: '1px' }}>
+                        ¡Acércate al taller y pide tu servicio!
+                        </p>
                     </div>
                 </div>
             )}
