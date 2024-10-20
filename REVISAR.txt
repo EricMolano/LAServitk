@@ -2,6 +2,7 @@ Cliente
 
 css por encima de colores y letras
 Ajustar los formularios
+Agregar modal a validaciones
 agregar el # y buscar por dato
 css de todo
 link de portafolio
@@ -14,6 +15,7 @@ admin
 
 css por encima de colores y letras
 Ajustar los formularios
+Agregar modal a validaciones
 agregar el # y buscar por dato
 css de todo
 link de portafolio
@@ -31,6 +33,7 @@ empleado
 
 css por encima de colores y letras
 Ajustar los formularios
+Agregar modal a validaciones
 agregar el # y buscar por dato
 css de todo
 ver compras 
@@ -47,7 +50,7 @@ css de register/login
 IMPORTANTE
 RECUPERAR CONTRASEÑA
 DATO DE IMAGENES A TODO
-SEGURIDAD A TODO
+SEGURIDAD A TODO (probar rutas)
 
 PROYECTO
 PRESENTACION INICIAL (hacer)

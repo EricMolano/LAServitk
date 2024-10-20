@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 /* PAGINAS NORMALES */
 import Dashboard from './Components/Dashboard';
@@ -44,9 +44,14 @@ import EditProfile from './Components/cliente/EditProfile';
 
 import './App.css';
 
+// Componente para rutas privadas
+const PrivateRoute = ({ element, userRole, requiredRole }) => {
+    return userRole === requiredRole ? element : <Navigate to="/login" />;
+};
+
 function App() {
     const [userRole, setUserRole] = useState(null);
-    const [userData, setUserData] = useState(null); // Nuevo estado para datos del usuario
+    const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -59,11 +64,11 @@ function App() {
             })
             .then(response => {
                 setUserRole(response.data.rol_id);
-                setUserData(response.data); // Establece los datos del usuario
+                setUserData(response.data);
             })
             .catch(() => {
                 setUserRole(null);
-                setUserData(null); // Limpia los datos del usuario si la sesión no es válida
+                setUserData(null);
             })
             .finally(() => {
                 setLoading(false);
@@ -83,41 +88,45 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login setUserRole={setUserRole} setUserData={setUserData} />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
-                <Route path="/EmployeeDashboard" element={<EmployeeDashboard />} />
-                <Route path="/ClientDashboard" element={<ClientDashboard />} />
-                <Route path="/AdminDashboard" element={<AdminDashboard />} />
                 <Route path="/terminos" element={<Terminos />} />
-                <Route path="/edit-profile" element={<EditProfile />} /> 
-                <Route path="/edit-profileE" element={<EditProfileE />} /> 
-                <Route path="/edit-profileA" element={<EditProfileA />} /> 
-                <Route path="/add-vehicle" element={<AddVehicle />} />
-                <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
-                <Route path="/add-inventory" element={<AddInventory />} />
-                <Route path="/edit-inventory/:id" element={<EditInventory />} />
-                <Route path="/info-usuario/:id" element={<InfoCliente />} />
-                <Route path="/edit-profile-user/:id" element={<EditProfileUser />} />
-                <Route path="/update-vehicle-user/:idvehiculo" element={<UpdateVehicleUser />} /> 
-                <Route path="/agregar-servicio" element={<AgregarServicio />} /> {/* Nueva ruta para agregar servicio */}
-                <Route path="/update-servicio/:id" element={<UpdateServices />} />
 
-                
-                <Route path="/Profile" element={<Profile />} />
-                <Route path="/Vehicles" element={<Vehicles />} />
-                <Route path="/Services" element={<Services />} />
+                {/* Rutas públicas */}
+                <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
 
-                <Route path="/ProfileA" element={<ProfileA />} />
-                <Route path="/Usuarios" element={<Usuarios />} />
-                <Route path="/Inventory" element={<Inventory />} />
-                <Route path="/Vehiculos" element={<Vehiculos />} />
-                <Route path="/Servicios" element={<Servicios />} />
+                {/* Rutas privadas */}
+                <Route path="/AdminDashboard" element={<PrivateRoute element={<AdminDashboard />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/ClientDashboard" element={<PrivateRoute element={<ClientDashboard />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/EmployeeDashboard" element={<PrivateRoute element={<EmployeeDashboard />} userRole={userRole} requiredRole={1} />} />
 
-                <Route path="/ProfileE" element={<ProfileE />} />
-                <Route path="/UsuariosE" element={<UsuariosE />} />
-                <Route path="/VehiculosE" element={<VehiculosE />} />
-                <Route path="/InventoryE" element={<InventoryE />} />
+                {/* Rutas de admin */}
+                <Route path="/update-servicio/:id" element={<PrivateRoute element={<UpdateServices />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/update-vehicle-user/:idvehiculo" element={<PrivateRoute element={<UpdateVehicleUser />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/info-usuario/:id" element={<PrivateRoute element={<InfoCliente />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/edit-profile-user/:id" element={<PrivateRoute element={<EditProfileUser />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/edit-profileA" element={<PrivateRoute element={<EditProfileA />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/add-inventory" element={<PrivateRoute element={<AddInventory />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/edit-inventory/:id" element={<PrivateRoute element={<EditInventory />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/ProfileA" element={<PrivateRoute element={<ProfileA />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/Usuarios" element={<PrivateRoute element={<Usuarios />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/Inventory" element={<PrivateRoute element={<Inventory />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/Vehiculos" element={<PrivateRoute element={<Vehiculos />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/Servicios" element={<PrivateRoute element={<Servicios />} userRole={userRole} requiredRole={3} />} />
 
-                
+                {/* Rutas de cliente */}
+                <Route path="/Profile" element={<PrivateRoute element={<Profile />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/Vehicles" element={<PrivateRoute element={<Vehicles />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/Services" element={<PrivateRoute element={<Services />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/edit-vehicle/:id" element={<PrivateRoute element={<EditVehicle />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/add-vehicle" element={<PrivateRoute element={<AddVehicle />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/edit-profile" element={<PrivateRoute element={<EditProfile />} userRole={userRole} requiredRole={2} />} /> 
+
+                {/* Rutas de empleado */}
+                <Route path="/ProfileE" element={<PrivateRoute element={<ProfileE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/UsuariosE" element={<PrivateRoute element={<UsuariosE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/VehiculosE" element={<PrivateRoute element={<VehiculosE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/InventoryE" element={<PrivateRoute element={<InventoryE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/agregar-servicio" element={<PrivateRoute element={<AgregarServicio />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/edit-profileE" element={<PrivateRoute element={<EditProfileE />} userRole={userRole} requiredRole={1} />} />
             </Routes>
         </Router>
     );
