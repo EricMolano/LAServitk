@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { updateService } from '../services/authService'; // Ajusta la ruta según tu estructura
+import { updateService } from '../../services/authService'; // Ajusta la ruta según tu estructura
 
 function ActualizarServicio() {
     const { id } = useParams();

@@ -9,7 +9,8 @@ const EditProfile = () => {
     const [userData, setUserData] = useState({
         name: '',
         surname: '',
-        address: '',
+        addressType: '', // Para el tipo de dirección
+        addressDetail: '', // Para el resto de la dirección
         phone: '',
     });
     const [error, setError] = useState(null);
@@ -27,7 +28,8 @@ const EditProfile = () => {
                 setUserData({
                     name: response.data.name,
                     surname: response.data.surname,
-                    address: response.data.address,
+                    addressType: response.data.addressType || '', // Asume que el tipo de dirección se almacena en el usuario
+                    addressDetail: response.data.addressDetail || '', // Asume que el resto de la dirección se almacena en el usuario
                     phone: response.data.phone,
                 });
             } catch (error) {
@@ -47,12 +49,42 @@ const EditProfile = () => {
         }));
     };
 
+    const validatePhone = (phone) => {
+        const phonePattern = /^3\d{9}$/; // Comienza con 3 y tiene 9 dígitos
+        return phonePattern.test(phone);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
 
+        // Validaciones
+        if (userData.name.length > 20) {
+            setError('El nombre no puede exceder los 20 caracteres.');
+            return;
+        }
+        if (userData.surname.length > 20) {
+            setError('El apellido no puede exceder los 20 caracteres.');
+            return;
+        }
+        if (!userData.addressType) {
+            setError('Debes seleccionar un tipo de dirección.');
+            return;
+        }
+        if (!userData.addressDetail) {
+            setError('Debes ingresar el detalle de la dirección.');
+            return;
+        }
+        if (!validatePhone(userData.phone)) {
+            setError('El teléfono debe comenzar con 3 y tener 9 dígitos.');
+            return;
+        }
+
         try {
-            const response = await axios.put(`${API_URL}/user/update-profile`, userData, {
+            const response = await axios.put(`${API_URL}/user/update-profile`, {
+                ...userData,
+                address: `${userData.addressType} ${userData.addressDetail}`, // Combina ambos campos para la dirección
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -76,6 +108,7 @@ const EditProfile = () => {
                         name="name"
                         value={userData.name}
                         onChange={handleChange}
+                        maxLength={20} // Limite de caracteres
                     />
                 </label>
                 <label>
@@ -85,15 +118,35 @@ const EditProfile = () => {
                         name="surname"
                         value={userData.surname}
                         onChange={handleChange}
+                        maxLength={20} // Limite de caracteres
                     />
                 </label>
                 <label>
-                    Dirección:
+                    Tipo de Dirección:
+                    <select
+                        name="addressType"
+                        value={userData.addressType}
+                        onChange={handleChange}
+                        required // Obligatorio
+                    >
+                        <option value="">Selecciona un tipo de dirección</option>
+                        <option value="Calle">Calle</option>
+                        <option value="Avenida">Avenida</option>
+                        <option value="Carrera">Carrera</option>
+                        <option value="Diagonal">Diagonal</option>
+                        <option value="Transversal">Transversal</option>
+                        {/* Agrega más opciones según sea necesario */}
+                    </select>
+                </label>
+                <label>
+                    Detalle de Dirección:
                     <input
                         type="text"
-                        name="address"
-                        value={userData.address}
+                        name="addressDetail"
+                        value={userData.addressDetail}
                         onChange={handleChange}
+                        placeholder="Ej. 123, Ciudad"
+                        required // Obligatorio
                     />
                 </label>
                 <label>

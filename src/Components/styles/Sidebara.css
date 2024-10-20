@@ -1,0 +1,67 @@
+.sidebar {
+    width: 250px;
+    background-color: #333; /* Darker grey-blue background */
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border: none; /* Remove border */
+    border-radius: 0; /* Ensure no rounded edges */
+}
+
+.sidebar-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ecf0f1; /* Light text color */
+    margin-top: 40px; /* Adjusts the space above the title */
+    margin-bottom: 20px;
+    text-align: center; /* Optional: center-align the text */
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #bdc3c7; /* Light grey link color */
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    border-radius: 0; /* Ensure no rounded edges */
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active { /* For the active item */
+    background-color: #b81c0b; /* Adjusted for red contrast */
+    color: white; /* White text for active item */
+}
+
+.sidebar-menu li a .sidebar-menu-icon {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #bdc3c7; /* Icon color */
+}
+
+.home-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+    overflow-x: hidden;
+}

@@ -1,0 +1,57 @@
+Cliente 
+
+css por encima de colores y letras
+Ajustar los formularios
+agregar el # y buscar por dato
+css de todo
+link de portafolio
+pedir productos
+ver compras
+arreglar servicios 
+agregar modal a todo
+
+admin
+
+css por encima de colores y letras
+Ajustar los formularios
+agregar el # y buscar por dato
+css de todo
+link de portafolio
+ver compras
+actualizar compras
+arreglar servicios 
+agregar servicios
+actualizar servicios
+arreglar productos
+agregar productos
+actualizar productos
+agregar modal a todo
+
+empleado
+
+css por encima de colores y letras
+Ajustar los formularios
+agregar el # y buscar por dato
+css de todo
+ver compras 
+link de portafolio
+arreglar servicios 
+agregar servicios
+agregar modal a todo
+
+home 
+
+css por encima de colores y letras
+css de register/login
+
+IMPORTANTE
+RECUPERAR CONTRASEÑA
+DATO DE IMAGENES A TODO
+SEGURIDAD A TODO
+
+PROYECTO
+PRESENTACION INICIAL (hacer)
+DOCUMENTACION (arreglar)
+DOCUMENTO EXCEL (actualizar)
+ESTUDIAR (codigo de todo)
+CODIFICACION (terminar todo)

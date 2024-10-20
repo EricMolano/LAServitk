@@ -3,8 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import email_icon from '../Components/Assets/email.png';
 import password_icon from '../Components/Assets/password.png';
 import { login } from '../services/authService';
-import Modal from './Modal'; // Importar el Modal
-import '../styles/Login.css';
+import Modal from './admin/Modal'; // Importar el Modal
+import '../Components/styles/Login.css';
 
 const Login = ({ setUserRole }) => {
     const [email, setEmail] = useState('');

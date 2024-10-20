@@ -32,9 +32,9 @@ header {
     height: 600px !important;
     background: #ffffff;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(0, 48%, 58%, 0.459), hsla(0, 17%, 52%, 0.486)), url(../Components/Assets/moto.jpg);
+    background: -webkit-linear-gradient(to right, hsla(0, 48%, 58%, 0.459), hsla(0, 17%, 52%, 0.486)), url(../../Components/Assets/moto.jpg);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, hsla(0, 57%, 58%, 0.459), hsla(0, 20%, 56%, 0.664)), url(../Components/Assets/moto.jpg);
+    background: linear-gradient(to right, hsla(0, 57%, 58%, 0.459), hsla(0, 20%, 56%, 0.664)), url(../../Components/Assets/moto.jpg);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
     background-attachment: fixed;
@@ -133,8 +133,7 @@ main .sobre-nosotros {
     font-family: "Open Sans", sans-serif !important;
 }
 
-/* Galeria */
-
+/* GALERIA */
 
 .portafolio{
     background: #f2f2f2;
@@ -187,6 +186,9 @@ main .sobre-nosotros {
 .imagen-port:hover .hover-galeria{
     transform: scale(1);
 }
+
+
+
 
 /* Clients */
 
@@ -310,7 +312,7 @@ main .sobre-nosotros {
 }
 
 .footer-final {
-    background-color: #b63c3c; /* Fondo rojo para la parte inferior */
+    background-color: #5e5e5e; /* Fondo rojo para la parte inferior */
     padding: 20px 0;
     text-align: center;
     font-size: 14px;
@@ -360,11 +362,7 @@ main .sobre-nosotros {
         width: 90%;
     }
 
-    /* Galeria */
-
-    .imagen-port{
-        width: 44%;
-    }
+ 
 
     /* Clientes */
 
@@ -432,11 +430,7 @@ main .sobre-nosotros {
         width: 95%;
     }
 
-    /* Galeria */
-
-    .imagen-port{
-        width: 95%;
-    }
+   
 
     /* Clients */
 
@@ -783,3 +777,4 @@ nav{
         transform: translateY(0);
     }
 }
+

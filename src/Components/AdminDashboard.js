@@ -1,636 +1,419 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import {icono} from "../Components/Assets/flecha.png"
+import React , { useState }from 'react';
+import { Outlet, Link , useNavigate  } from 'react-router-dom';
+import Sidebar from './admin/Slidebara';
 
-import { getAdminVehicles, getUsers } from "../services/authService"; // Asegúrate de importar tu función correctamente
+import imgPort1 from '../Components/Assets/2.jpg';
+import imgPort2 from '../Components/Assets/3.jpg';
+import imgPort4 from '../Components/Assets/bateria.jpg';
+import imgFace1 from '../Components/Assets/face1.jpg';
+import imgFace2 from '../Components/Assets/face2.jpg';
+import imgIcono1 from '../Components/Assets/icono1.png';
+import imgPort7 from '../Components/Assets/mecanico.jpg';
+import imgPort8 from '../Components/Assets/suspencion.jpg';
 
-//========= CSS ===================
-import "../styles/dashboard.css";
-import "../styles/InformacionEmpleados.css";
-import "../styles/Perfil.css";
+import miImagen4 from '../Components/Assets/img4.jpeg';
 
-export const API_URL = "http://localhost:2071/api";
+//Redes 
+import FacebookIcon from '../Components/Assets/redes/facebook.png';
+import InstagramIcon from '../Components/Assets/redes/Instagram.png';
+import WhatsappIcon from '../Components/Assets/redes/whatsapp.png';
+import TiktokIcon from '../Components/Assets/redes/tiktok.jpg';
 
-// ===============================================================
-// Componente principal: EmployeeDashboard
-// ===============================================================
-function AdminDashboard() {
-  const [userData, setUserData] = useState(null);
-  const [activeView, setActiveView] = useState("overview");
-  const navigate = useNavigate(); // Inicializa useNavigate
+//Servicios imagenes
+import imgFrenos from '../Components/Assets/servicios/revisionfrenos.jpg';
+import imgAlineacion from '../Components/Assets/servicios/alineacion.jpg';
+import imgTransmision from '../Components/Assets/servicios/transmision.jpg';
+import imgMotor from  '../Components/Assets/servicios/reparacionmotores.jpg';
+import imgCambioAceite from  '../Components/Assets/servicios/cambioaceite.jpg';
+import imgSuspension from  '../Components/Assets/servicios/suspencion.png';
+import imgNeumaticos from  '../Components/Assets/servicios/neumaticos.png';
+import imgEscape from  '../Components/Assets/servicios/escape.jpg';
+import imgAireAcondicionado from  '../Components/Assets/servicios/aireacondicionado.jpg';
+import imgCarroceria from  '../Components/Assets/servicios/pintura.png';
+import imgRefrigeracion from  '../Components/Assets/servicios/enfriamiento.jpg';
+import imgLimpieza from  '../Components/Assets/servicios/limpieza.jpg';
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+//Produtos imagenes
+import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
+import imgPort101 from '../Components/Assets/productos/bateria.jpg';
+import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
+import imgPort103 from '../Components/Assets/productos/led.jpg';
+import imgPort104 from '../Components/Assets/productos/anticongelante.jpg';
+import imgPort105 from '../Components/Assets/productos/kit.png';
+import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
+import imgPort109 from '../Components/Assets/productos/filtro.jpg';
+import carritoLogo from '../Components/Assets/carritoLogo.png';
 
-    axios
-      .get("http://localhost:2071/api/user/data", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setUserData(response.data))
-      .catch((error) => console.error("Error fetching user data:", error));
-  }, []);
 
-  const handleLogout = () => {
-    // Elimina el token de autenticación
-    localStorage.removeItem("token");
+import '../Components/styles/AdminDashboard.css'; 
 
-    // Redirige a la página de inicio
-    navigate("/");
-  };
-
-  const handleEditProfile = () => {
-    navigate("/edit-profileA"); // Redirige al formulario de edición de perfil
-  };
-  const handleCardClick = (view) => {
-    setActiveView(view);
-  };
-
-  const renderContent = () => {
-    switch (activeView) {
-      case "inventario":
-        return <Inventario handleCardClick={handleCardClick} />;
-      case "InformacionUsuarios":
-        return <InformacionUsuarios handleCardClick={handleCardClick} />;
-      case "vehiculos": // Nueva opción para los vehículos
-        return <Vehiculos handleCardClick={handleCardClick} />;
-      case "Servicios": // Nueva opción para los vehículos
-        return <Servicios handleCardClick={handleCardClick} />;
-      case "perfil": // Nueva opción para los vehículos
-        return <Editarperfil handleCardClick={handleCardClick} />;
-
-      default:
-        return (
-          <main className="site-wrapper">
-            <div className="pt-table desktop-768">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                    <div className="page-title home text-center">
-                      <p className="mt20">¡Elige tu próximo movimiento!</p>
-                    </div>
-
-                    <div className="hexagon-menu clear">
-                      {[
-                        {
-                          icon: "fa-universal-access",
-                          title: "Perfil",
-                          view: "perfil",
-                        },
-                        {
-                          icon: "fa-bullseye",
-                          title: "Inventario",
-                          view: "inventario",
-                        },
-                        {
-                          icon: "fa-braille",
-                          title: "Informacion usuarios",
-                          view: "InformacionUsuarios",
-                        },
-                        {
-                          icon: "fa-id-badge",
-                          title: "vehiculos",
-                          view: "vehiculos",
-                        },
-                        {
-                          icon: "fa-life-ring",
-                          title: "Servicios",
-                          view: "Servicios",
-                        },
-                      ].map((item, index) => (
-                        <div
-                          className="hexagon-item"
-                          key={index}
-                          onClick={() => handleCardClick(item.view)} // Llama a la función correspondiente
-                        >
-                          <div className="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                          <div className="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                          <a className="hex-content">
-                            <span className="hex-content-inner">
-                              <span className="icon">
-                                <i className={`fa ${item.icon}`}></i>
-                              </span>
-                              <span className="title">{item.title}</span>
-                            </span>
-                            <svg
-                              viewBox="0 0 173.20508075688772 200"
-                              height="200"
-                              width="174"
-                              version="1.1"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"
-                                fill="#1e2530"
-                              ></path>
-                            </svg>
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
-        );
-    }
-  };
-
-  return (
-    <div className="dashboard-container">
-      <Sidebar setActiveView={setActiveView} />
-      <div className="main-content">
-        <Navbar
-          handleLogout={handleLogout}
-          activeView={activeView} // Pasa el estado activeView aquí
-        />
-        {renderContent()}
-      </div>
-    </div>
-  );
-}
-
-// =======================
-// Componente Sidebar
-// =======================
-
-function Sidebar({ setActiveView }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-  /*
-  return (
-    <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      <div className="toggle-btn" onClick={toggleSidebar}>
-        ☰
-      </div>
-      <h2>{!isCollapsed && "Hola!"}</h2>
-      {!isCollapsed && (
-        <ul>
-          <li onClick={() => setActiveView("overview")}>Inicio</li>
-          <li onClick={() => setActiveView("inventario")}>Inventario</li>
-          <li onClick={() => setActiveView("InformacionUsuarios")}>
-            Información Usuarios
-          </li>
-          <li onClick={() => setActiveView("vehiculos")}>Vehículos</li>{" "}
-        
-          <li onClick={() => setActiveView("Servicios")}>Servicios</li>{" "}
-      
-        </ul>
-      )}
-    </div>
-  );*/
-}
-// =======================
-// Componente Navbar
-// =======================
-function Navbar({ handleLogout, welcomeMessage, activeView }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const getTitle = () => {
-    switch (activeView) {
-      case "inventario":
-        return "Inventario";
-      case "InformacionUsuarios":
-        return "Información de Usuarios";
-      case "vehiculos":
-        return "Vehículos";
-      case "Servicios":
-        return "Servicios";
-      case "perfil":
-        return "Mi Perfil";
-      default:
-        console.log(activeView);
-        return "Bienvenido";
-    }
-  };
-
-  return (
-    <div className="navbar">
-      <h1>{getTitle()}</h1>
-
-      <div className="user-menu">
-        <button className="user-btn" onClick={toggleMenu}>
-          ▼
-        </button>
-        {isMenuOpen && (
-          <div className="user-dropdown">
-            <ul>
-              <li>
-                <button className="logout-button" onClick={handleLogout}>
-                  Cerrar Sesión
-                </button>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ===========================================================================
-// Componente Editar perfil
-//=================================================================
-function Editarperfil({handleCardClick}) {
-  const [userData, setUserData] = useState(null);
-  const [activeView, setActiveView] = useState("overview");
-  const navigate = useNavigate(); // Inicializa useNavigate
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    axios
-      .get("http://localhost:2071/api/user/data", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setUserData(response.data))
-      .catch((error) => console.error("Error fetching user data:", error));
-  }, []);
-  const handleEditProfile = () => {
-    navigate("/edit-profileA"); // Redirige al formulario de edición de perfil
-  };
-  const handleUsser = () => {
-    console.log(activeView);
-    setActiveView("overview");
-    navigate("/AdminDashboard");
-  };
-
-  return (
-    <div className="dashboard-content">
-      <div className="page-wrapper bg-red p-t-180 p-b-100 font-robo">
-        <div className="wrapper wrapper--w960">
-        <button className="botonCe" onClick={() => handleCardClick()}>
-      ←
-        </button>
-          <div className="card card-2">
-            <div className="input-group">
-              <div className="welcome-table-container">
-                <h1>¡Consulta tus datos!</h1>
-                <table className="welcome-table">
-                  <tbody>
-                    <tr>
-                      <th>Nombre</th>
-                      <td>{userData ? userData.name : "Cargando..."}</td>
-                    </tr>
-                    <tr>
-                      <th>Apellido</th>
-                      <td>{userData ? userData.surname : "Cargando..."}</td>
-                    </tr>
-                    <tr>
-                      <th>Correo Electrónico</th>
-                      <td>{userData ? userData.email : "Cargando..."}</td>
-                    </tr>
-                    <tr>
-                      <th>Dirección</th>
-                      <td>{userData ? userData.address : "Cargando..."}</td>
-                    </tr>
-                    <tr>
-                      <th>Teléfono</th>
-                      <td>{userData ? userData.phone : "Cargando..."}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="button-container">
-                  <button
-                    className="profile-button"
-                    onClick={handleEditProfile}
-                  >
-                    Editar Perfil
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// =============================================================
-// Componente InformacionUsuarios
-// ===========================================================
-
-function InformacionUsuarios({handleCardClick}) {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-  
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      const fetchUsers = async () => {
-        try {
-          const data = await getUsers(); // Usa la función getUsers
-          setUsers(data);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error al obtener usuarios:", error);
-          setError("Error al obtener la información de usuarios.");
-          setLoading(false);
-        }
-      };
-  
-      fetchUsers();
-    }, []);
-  
-    const handleEditProfile = (userId) => {
-      navigate(`/edit-profile-user/${userId}`);
-  };
-  
-    if (loading) {
-      return <div>Cargando...</div>;
-    }
-  
-    if (error) {
-      return <div>{error}</div>;
-    }
-  
+const AdminDashboard = () => {
     return (
-      <div className="informacion-usuarios-content">
-        <div className="usuarios-table-container">
-  
-          <div className="tableu">
-          <button className="botonC" onClick={() => handleCardClick()}>
-        ←
-          </button>
-            <table className="usuarios-table">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Dirección</th>
-                  <th>Teléfono</th>
-                  <th>Rol</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.length > 0 ? (
-                  users.map((user) => (
-                    <tr key={user.id}>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.address || "No disponible"}</td>
-                      <td>{user.phone || "No disponible"}</td>
-                      <td>
-                        {user.rol_id === 1
-                          ? "Empleado"
-                          : user.rol_id === 2
-                          ? "Cliente"
-                          : user.rol_id === 3
-                          ? "Administrador"
-                          : "Desconocido"}
-                      </td>
-                      <button 
-                                              className="info-btn" 
-                                              onClick={() => handleEditProfile(user.id)}
-                                          >
-                                              Editar Perfil
-                                          </button>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6">No hay usuarios disponibles.</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+        <div className="home-container">
+            <Sidebar /> {/* Agregar la barra lateral */}
+            <div className="content">
+                <Header />
+                <Main />
+                <Footer />
+            </div>
         </div>
-      </div>
     );
-  }
-// =======================
-// Componente Inventario
-// =======================
-function Inventario({handleCardClick}) {
-  const [inventario, setInventario] = useState([]);
+};
+const Header = () => {
+  const navigate = useNavigate();
 
-  // Obtener datos de inventario desde el backend
-  useEffect(() => {
-    const fetchInventario = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:2071/api/inventory",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setInventario(response.data);
-      } catch (error) {
-        console.error("Error al obtener el inventario:", error);
-      }
+  // Función para manejar el cierre de sesión
+  const handleLogout = () => {
+      localStorage.removeItem('token');
+      navigate('/');
+  };
+  return (
+      <header>
+          <nav>
+          <div className='logout-container-1'>
+            <button1 className='btn-cerrar-sesion-1 btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
+        </div>
+          </nav>
+          <section className="textos-header hidden">
+              <h1>Bienvenido</h1>
+              <h2>Con La Servitk puedes arreglar tu vehiculo</h2>
+          </section>
+          <div className="wave" style={{ height: '150px', overflow: 'hidden' }}>
+              <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
+                  <path
+                      d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                      style={{ stroke: 'none', fill: '#fff' }}
+                  />
+              </svg>
+          </div>
+      </header>
+  );
+};
+
+
+const Main = () => {
+    return (
+        <main>
+            <AboutUs />
+            <Portfolio />
+            <Services />
+            <Testimonials />
+        </main>
+    );
+};
+
+const AboutUs = () => {
+    return (
+        <section className="contenedor sobre-nosotros">
+            <h2 className="titulo">Servicio Rápido y Eficiente para Tu Auto</h2>
+            <div className="contenedor-sobre-nosotros">
+                <img src={imgPort2} alt="imgPort2" className="imagen-about-us" />
+                <div className="contenido-textos">
+                    <p>
+                        En La Servitk, nos especializamos en ofrecer un servicio integral para tu vehículo.
+                        Desde reparaciones rápidas hasta mantenimiento completo, nuestro equipo de expertos está
+                        listo para atender tus necesidades automotrices con la mayor eficiencia y profesionalismo.
+                    </p>
+                    <p>
+                        Además, contamos con una amplia gama de repuestos de alta calidad para asegurar que tu auto
+                        funcione de la mejor manera. Ya sea que necesites un cambio de aceite, revisión de frenos,
+                        o repuestos específicos, en La Servitk tenemos lo que buscas.
+                    </p>
+                    <p>
+                        No pierdas tiempo en largos períodos de espera en otros talleres. Con nosotros, puedes
+                        estar seguro de que recibirás un servicio rápido, confiable y a precios competitivos.
+                        Visítanos y comprueba la calidad de nuestro servicio por ti mismo.
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
+};
+const Portfolio = () => {
+  const navigate = useNavigate();
+  const images = [
+      {
+          src: imgPort102,
+          alt: "Imagen 12",
+          text: "Neumáticos",
+      },
+      {
+          src: imgPort103,
+          alt: "Imagen 13",
+          text: "Luces LED",
+      },
+      {
+          src: imgPort104,
+          alt: "Imagen 14",
+          text: "Anticongelante",
+      },
+      {
+          src: imgPort105,
+          alt: "Imagen 15",
+          text: "Kit de herramientas",
+      },
+      {
+          src: imgPort106,
+          alt: "Imagen 5",
+          text: "Aceite de motor",
+      },
+      {
+          src: imgPort109,
+          alt: "Imagen 9",
+          text: "Filtro de aceite",
+      },
+      {
+          src: imgPort100,
+          alt: "Imagen 10",
+          text: "Pastillas de freno",
+      },
+      {
+          src: imgPort101,
+          alt: "Imagen 11",
+          text: "Batería de automotriz",
+      },
+  ];
+
+  return (
+      <section className="portafolio">
+          <div className="contenedor">
+              <h2 className="titulo">Inventario</h2>
+              <div className="galeria-port">
+                  {images.map((image, index) => (
+                      <div className="imagen-port" key={index}>
+                          <img src={image.src} alt={image.alt} />
+                          <div className="hover-galeria">
+                              <img src={imgIcono1} alt="Icono" />
+                              <p>{image.text}</p>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+          </div>
+      </section>
+  );
+};
+
+
+
+
+const Services = () => {
+    // Estado para manejar el servicio seleccionado y el estado del modal
+    const [selectedService, setSelectedService] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Lista de servicios con imagen, título y descripción
+    const services = [
+        {
+            img: imgFrenos,
+            title: "Revisión de Frenos",
+            description: "Incluye la revisión de pastillas, discos, pinzas y el sistema ABS para asegurar un frenado óptimo y seguro."
+        },
+        {
+            img: imgAlineacion,
+            title: "Alineación y Balanceo",
+            description: "Servicio de alineación de ruedas y balanceo para garantizar una conducción suave y el desgaste uniforme de los neumáticos."
+        },
+        {
+            img: imgTransmision,
+            title: "Reparación de Transmisión",
+            description: "Diagnóstico y reparación de la caja de cambios, tanto manual como automática, para un cambio de marcha eficiente."
+        },
+        {
+            img: imgCambioAceite,
+            title: "Cambio de Aceite",
+            description: "Cambio de aceite y filtro para mantener el motor en óptimas condiciones y prolongar su vida útil."
+        },
+        {
+            img: imgSuspension,
+            title: "Revisión de Suspensión",
+            description: "Inspección y reparación de amortiguadores, struts, rótulas y otros componentes para una conducción estable."
+        },
+        {
+            img: imgMotor,
+            title: "Reparación de Motor",
+            description: "Reparación completa del motor, incluyendo ajustes, cambio de bujías, correas de distribución y sistema de enfriamiento."
+        },
+        {
+            img: imgNeumaticos,
+            title: "Cambio de Neumáticos",
+            description: "Reemplazo de neumáticos, reparación de pinchazos y rotación de neumáticos para asegurar una conducción segura."
+        },
+        {
+            img: imgEscape,
+            title: "Reparación de Escape",
+            description: "Reparación o reemplazo del sistema de escape, catalizadores y silenciadores para reducir emisiones."
+        },
+        {
+            img: imgRefrigeracion,
+            title: "Sistema de Enfriamiento",
+            description: "Revisión y reparación del radiador, mangueras, termostato y sistema de refrigeración del motor."
+        },
+        {
+            img: imgCarroceria,
+            title: "Carrocería y Pintura",
+            description: "Reparación de golpes, abolladuras, pintura automotriz y restauración de la apariencia del vehículo."
+        },
+        {
+            img: imgAireAcondicionado,
+            title: "Revisión de Aire Acondicionado",
+            description: "Revisión y recarga del sistema de aire acondicionado para asegurar su buen funcionamiento."
+        },
+        {
+            img: imgLimpieza,
+            title: "Limpieza Detallada de Vehículos",
+            description: "Limpieza interior y exterior que incluye lavado, aspirado, encerado y detallado de componentes para mantener tu vehículo impecable."
+        },
+        
+        // Agrega más servicios si es necesario
+    ];
+
+    // Función para abrir el modal y asignar el servicio seleccionado
+    const openModal = (service) => {
+        setSelectedService(service);
+        setIsModalOpen(true);
     };
 
-    fetchInventario();
-  }, []);
+    // Función para cerrar el modal
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedService(null);
+    };
 
-  
+    return (
+        <section className="servicios">
+            <div className="contenedor-servicios">
+                <h2 className="titulo-servicios">Nuestros servicios</h2>
+                <div className="galeria-serv">
+                    {services.map((service, index) => (
+                        <div className="imagen-serv" key={index} onClick={() => openModal(service)}>
+                            <img src={service.img} alt={service.title} />
+                            <div className="hover-serv">
+                                <h3>{service.title}</h3>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+                        {isModalOpen && (
+                <div className="custom-modal">
+                    <div className="custom-modal-content">
+                        <span className="custom-close-modal" onClick={closeModal}>&times;</span>
+                        <h3>{selectedService.title}</h3>
+                        <p>{selectedService.description}</p>
+                        <p style={{ marginTop: '10px', fontWeight: 'bold', color: '#c62828', fontSize: '1px' }}>
+                        ¡Acércate al taller y pide tu servicio!
+                        </p>
+                    </div>
+                </div>
+            )}
+
+
+        </section>
+    );
+};
+
+
+
+
+const Testimonials = () => {
+  const testimonials = [
+      {
+          name: "Maria Lopez",
+          text: "Excelente servicio, me atendieron rápidamente y solucionaron el problema de mi auto!",
+      },
+      {
+          name: "Luisa Bernal",
+          text: "Gran calidad en los servicios y precios competitivos. Definitivamente volveré.",
+      },
+      {
+        name: "Nelson Ballen",
+        text: "Fue especial el trato que se me dio al arreglar mi auto, quede satisfecho. Volvere mas seguido.",
+    },
+  ];
   return (
-    <div className="inventario-content">
-      <div className="tableu">
-      <button className="botonC" onClick={() => handleCardClick()}>
-      ←
-        </button>
-        <Link
-          to="/add-inventory"
-          className="Botonprodcutos"
-          style={{ marginBottom: "10px", background: "#0000000" }}
-        >
-          Agregar Nuevo Producto
-        </Link>
-        <table className="inventario-table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Cantidad</th>
-              <th>Precio de Compra</th>
-              <th>MSRP</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {inventario.map((item) => (
-              <tr key={item.id}>
-                <td>{item.nombre}</td>
-                <td>{item.descripcion}</td>
-                <td>{item.cantidad_en_stock}</td>
-                <td>{item.precio_compra}</td>
-                <td>{item.msrp}</td>
-                <td>
-                  <Link
-                    to={`/edit-inventory/${item.id}`}
-                    className="btn btn-warning"
-                  >
-                    Actualizar
-                  </Link>
-                </td>
-              </tr>
+    <section className="clientes contenedor">
+        <h2 className="titulo">Que dicen nuestros clientes</h2>
+        <div className="cards">
+            {testimonials.map((testimonial, index) => (
+                <div className="card" key={index}>
+                    <div className="contenido-texto-card">
+                        <h4>{testimonial.name}</h4>
+                        <p>{`"${testimonial.text}"`}</p>
+                    </div>
+                </div>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-// =======================
-// Componente Vehiculos
-// =======================
-function Vehiculos({handleCardClick}) {
-    const [vehicles, setVehicles] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const navigate = useNavigate(); // Hook de React Router para navegación
-  
-    useEffect(() => {
-      const fetchVehicles = async () => {
-        try {
-          const data = await getAdminVehicles();
-          setVehicles(data);
-        } catch (error) {
-          setError("Error al obtener los vehículos.");
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchVehicles();
-    }, []);
-  
-    const handleUpdateVehicleUser = (idvehiculo) => {
-      navigate(`/update-vehicle-user/${idvehiculo}`);
-  };
-  
-    if (loading) {
-      return <div>Cargando...</div>;
-    }
-  
-    if (error) {
-      return <div>{error}</div>;
-    }
-  
-    return (
-      <div className="dashboard">
-        <button className="botonCer" onClick={() => handleCardClick()}>
-        ←
-          </button>
-        <table>
-  
-          <thead>
-            <tr>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Año</th>
-              <th>Color</th>
-              <th>Placa</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vehicles.map((vehicle) => (
-              <tr key={vehicle.idvehiculo}>
-                <td>{vehicle.marca}</td>
-                <td>{vehicle.modelo}</td>
-                <td>{vehicle.año}</td>
-                <td>{vehicle.color}</td>
-                <td>{vehicle.placa}</td>
-                <td>
-                                  <button onClick={() => handleUpdateVehicleUser(vehicle.idvehiculo)}>Actualizar</button>
-                              </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-// =======================
-// Componente Servicios
-// =======================
+        </div>
+    </section>
+);
+};
 
-function Servicios({handleCardClick}) {
-    const [servicios, setServicios] = useState([]);
-  
-    // Obtener datos de servicios desde el backend
-    useEffect(() => {
-      const fetchServicios = async () => {
-        try {
-          const response = await axios.get(
-            "http://localhost:2071/api/servicios",
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          );
-          setServicios(response.data);
-        } catch (error) {
-          console.error("Error al obtener los servicios:", error);
-        }
-      };
-  
-      fetchServicios();
-    }, []);
-  
+const Footer = () => {
     return (
-      <div className="servicios-content">
-              <button className="botonCer" onClick={() => handleCardClick()}>
-        ←
-          </button>
-        <table className="servicios-table">
-          <thead>
-            <tr>
-              <th>Nombre Empleado</th>
-              <th>Nombre Cliente</th>
-              <th>Placa Vehículo</th>
-              <th>Nombre Servicio</th>
-              <th>Descripción</th>
-              <th>Fecha</th>
-              <th>Costo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {servicios.map((servicio) => (
-              <tr key={servicio.idregistro}>
-                <td>{servicio.nombre_empleado}</td>
-                <td>{servicio.nombre_cliente}</td>
-                <td>{servicio.placa_vehiculo}</td>
-                <td>{servicio.nombre_servicio}</td>
-                <td>{servicio.descripcion}</td>
-                <td>{new Date(servicio.fecha_servicio).toLocaleDateString()}</td>
-                <td>{servicio.costo}</td>
-                <td>
-                                  <Link to={`/update-servicio/${servicio.idregistro}`} className="btn btn-warning">
-                                      Actualizar
-                                  </Link>
-                              </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        <footer>
+            <div className="footer-container">
+                {/* Sección Superior */}
+                <div className="footer-section">
+                    <h4>Horario</h4>
+                    <p>Lunes a Viernes</p>
+                    <p>7AM - 7PM</p>
+                </div>
+                
+                <div className="footer-section">
+                    <h4>Localidad</h4>
+                    <p>Calle 17A # 102 - 56, Fontibón</p>
+                </div>
+
+                <div className="footer-section">
+                    <h4>Términos</h4>
+                    <a href="/terminos">Términos y Condiciones</a>
+                </div>
+            </div>
+
+            {/* Redes Sociales and Mapa Section */}
+            <div className="footer-bottom">
+                <div className="footer-bottom-right footer-section">
+                    <h4>Redes Sociales</h4>
+                    <div className="social-icons">
+                        <a href="https://www.facebook.com/LASERVITK" target="_blank" rel="noopener noreferrer" className="social-icon facebook">
+                            <img src={FacebookIcon} alt="Facebook" />
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/laservitk/" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
+                            <img src={InstagramIcon} alt="Instagram" />
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://wa.me/3012507273" target="_blank" rel="noopener noreferrer" className="social-icon whatsapp">
+                            <img src={WhatsappIcon} alt="Whatsapp" />
+                            <span>Whatsapp</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@laservitklaservit" target="_blank" rel="noopener noreferrer" className="social-icon tiktok">
+                            <img src={TiktokIcon} alt="Tiktok" />
+                            <span>Tiktok</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div className="footer-bottom-left footer-section">
+                    <h4>Mapa</h4>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        width="100%"
+                        height="200"
+                        frameBorder="0"
+                        style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
+                        allowFullScreen
+                        aria-hidden="false"
+                        tabIndex="0"
+                    ></iframe>
+                </div>
+            </div>
+
+            <div className="footer-final">
+                <h2 className="titulo-final">&copy; 2024 LaServitk. Todos los derechos reservados.</h2>
+            </div>
+        </footer> 
     );
-  }
+};
+
 export default AdminDashboard;

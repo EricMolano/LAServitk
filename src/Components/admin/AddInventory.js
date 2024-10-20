@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';  // Asegúrate de importar el componente Modal
-import '../styles/Edit.css';
 
 function AddInventory() {
     const [formData, setFormData] = useState({

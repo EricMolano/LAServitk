@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getUserById } from '../services/authService';
+import { getUserById } from '../../services/authService';
 
 function EditProfileUsers() {
     const { id } = useParams();

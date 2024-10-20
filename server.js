@@ -262,13 +262,14 @@ app.post('/api/vehicles', authenticateToken, (req, res) => {
 // Componente Actualizar vehiculos
 // ===============================================================
 app.put('/api/vehicles/:id', authenticateToken, (req, res) => {
-  const { marca, modelo, año, color, placa } = req.body;
-  const query = 'UPDATE vehiculo SET marca = ?, modelo = ?, año = ?, color = ?, placa = ? WHERE idvehiculo = ? AND id = ?';
-  db.query(query, [marca, modelo, año, color, placa, req.params.id, req.user.id], (err) => {
+  const { marca, modelo, año, color } = req.body; // Quitar `placa` de la destructuración
+  const query = 'UPDATE vehiculo SET marca = ?, modelo = ?, año = ?, color = ? WHERE idvehiculo = ? AND id = ?';
+  db.query(query, [marca, modelo, año, color, req.params.id, req.user.id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(200).json({ message: 'Vehicle updated successfully' });
   });
 });
+
 
 
 // ===============================================================
@@ -343,7 +344,7 @@ app.put('/api/inventory/:id', authenticateToken, (req, res) => {
 // Componente Obtener usuarios
 // ===============================================================
 app.get('/api/users', authenticateToken, (req, res) => {
-  const sql = 'SELECT id, name, email, address, phone, rol_id FROM users';
+  const sql = 'SELECT id, name, surname, email, address, phone, rol_id FROM users';
   db.query(sql, (err, results) => {
     if (err) {
       console.error('Error en la consulta a la base de datos:', err);

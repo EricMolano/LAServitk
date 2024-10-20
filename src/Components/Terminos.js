@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/TerminosCondiciones.css'; // Asegúrate de que este archivo CSS esté importado
+import '../Components/styles/TerminosCondiciones.css'; // Asegúrate de que este archivo CSS esté importado
 
 const TerminosCondiciones = () => {
   return (

@@ -2,26 +2,45 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import AddInventory from './Components/AddInventory'; 
-import AddVehicle from './Components/AddVehicle';
-import AdminDashboard from './Components/AdminDashboard';
-import AgregarServicio from './Components/AgregarServicio'; // Importa el nuevo componente para agregar servicios
-import ClientDashboard from './Components/ClientDashboard';
+/* PAGINAS NORMALES */
 import Dashboard from './Components/Dashboard';
-import EditInventory from './Components/EditInventory'; 
-import EditProfile from './Components/EditProfile';
-import EditProfileA from './Components/EditProfileA';
-import EditProfileE from './Components/EditProfileE';
-import EditProfileUser from './Components/EditProfileUser'; // Importa el nuevo componente
-import EditVehicle from './Components/EditVehicle';
+import AdminDashboard from './Components/AdminDashboard';
+import ClientDashboard from './Components/ClientDashboard';
 import EmployeeDashboard from './Components/EmployeeDashboard';
 import Home from './Components/Home';
-import InfoCliente from './Components/InfoCliente'; // Asegúrate de importar el componente
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Terminos from './Components/Terminos';
-import UpdateServices from './Components/UpdateServices'; // Importa el nuevo componente para agregar servicios
-import UpdateVehicleUser from './Components/UpdateVehicleUser'; // Importa el componente del formulario de actualización
+
+/* PAGINAS ADMIN */
+import UpdateServices from './Components/admin/UpdateServices'; 
+import UpdateVehicleUser from './Components/admin/UpdateVehicleUser'; 
+import InfoCliente from './Components/admin/InfoCliente'; 
+import EditProfileUser from './Components/admin/EditProfileUser'; 
+import EditProfileA from './Components/admin/EditProfileA';
+import AddInventory from './Components/admin/AddInventory'; 
+import EditInventory from './Components/admin/EditInventory'; 
+import ProfileA from './Components/admin/ProfileA'; 
+import Usuarios from './Components/admin/Usuarios'; 
+import Inventory from './Components/admin/Inventory'; 
+import Vehiculos from './Components/admin/Vehiculos'; 
+import Servicios from './Components/admin/Servicios'; 
+
+/* PAGINAS EMPLEADO */
+import AgregarServicio from './Components/empleado/AgregarServicio'; 
+import EditProfileE from './Components/empleado/EditProfileE';
+import ProfileE from './Components/empleado/ProfileE'; 
+import UsuariosE from './Components/empleado/UsuariosE'; 
+import VehiculosE from './Components/empleado/VehiculosE'; 
+import InventoryE from './Components/empleado/InventoryE'; 
+
+/* PAGINAS CLIENTE */
+import Profile from './Components/cliente/Profile';
+import Vehicles from './Components/cliente/Vehicles';
+import Services from './Components/cliente/Services';
+import EditVehicle from './Components/cliente/EditVehicle';
+import AddVehicle from './Components/cliente/AddVehicle';
+import EditProfile from './Components/cliente/EditProfile';
 
 import './App.css';
 
@@ -82,6 +101,23 @@ function App() {
                 <Route path="/agregar-servicio" element={<AgregarServicio />} /> {/* Nueva ruta para agregar servicio */}
                 <Route path="/update-servicio/:id" element={<UpdateServices />} />
 
+                
+                <Route path="/Profile" element={<Profile />} />
+                <Route path="/Vehicles" element={<Vehicles />} />
+                <Route path="/Services" element={<Services />} />
+
+                <Route path="/ProfileA" element={<ProfileA />} />
+                <Route path="/Usuarios" element={<Usuarios />} />
+                <Route path="/Inventory" element={<Inventory />} />
+                <Route path="/Vehiculos" element={<Vehiculos />} />
+                <Route path="/Servicios" element={<Servicios />} />
+
+                <Route path="/ProfileE" element={<ProfileE />} />
+                <Route path="/UsuariosE" element={<UsuariosE />} />
+                <Route path="/VehiculosE" element={<VehiculosE />} />
+                <Route path="/InventoryE" element={<InventoryE />} />
+
+                
             </Routes>
         </Router>
     );

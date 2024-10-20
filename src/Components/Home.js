@@ -33,22 +33,23 @@ import imgRefrigeracion from  '../Components/Assets/servicios/enfriamiento.jpg';
 import imgLimpieza from  '../Components/Assets/servicios/limpieza.jpg';
 
 //Produtos imagenes
-import imgPort100 from '../Components/Assets/productos/Pastillas.png';
+import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
 import imgPort101 from '../Components/Assets/productos/bateria.jpg';
 import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
 import imgPort103 from '../Components/Assets/productos/led.jpg';
 import imgPort104 from '../Components/Assets/productos/anticongelante.jpg';
-import imgPort105 from '../Components/Assets/productos/kit.jpg';
+import imgPort105 from '../Components/Assets/productos/kit.png';
 import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
 import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 import carritoLogo from '../Components/Assets/carritoLogo.png';
 
 
-import '../styles/Home2.css'; 
+import '../Components/styles/Home2.css'; 
 
 
 const Home = () => {
     return (
+        
         <div>
             <Header />
             <Main />
@@ -119,123 +120,75 @@ const AboutUs = () => {
             </div>
         </section>
     );
-};
-const Portfolio = () => {
-  const navigate = useNavigate();
-  const images = [
-      {
-          src: imgPort102,
-          alt: "Imagen 12",
-          text: "Neumáticos",
-          description: "Neumáticos de alta calidad diseñados para brindar un excelente rendimiento y seguridad en la carretera. Disponibles en varios tamaños para adaptarse a diferentes modelos de vehículos.",
-          usage: "Se utilizan para reemplazar neumáticos desgastados o dañados, mejorando la tracción y el control del vehículo. Se recomienda cambiarlos cada 50,000 km o según el desgaste.",
-      },
-      {
-          src: imgPort103,
-          alt: "Imagen 13",
-          text: "Luces LED",
-          description: "Luces LED brillantes que mejoran significativamente la visibilidad durante la conducción nocturna. Ofrecen una iluminación más clara y eficiente en comparación con las bombillas halógenas.",
-          usage: "Se instalan en el sistema de iluminación del vehículo, como faros delanteros o luces traseras. Se recomienda su instalación por un profesional para asegurar el correcto alineamiento.",
-      },
-      {
-          src: imgPort104,
-          alt: "Imagen 14",
-          text: "Anticongelante",
-          description: "Anticongelante de alta eficiencia que protege tu motor en temperaturas extremas, evitando el sobrecalentamiento y el congelamiento.",
-          usage: "Se mezcla con agua en el sistema de refrigeración del vehículo, en una proporción recomendada de 50/50 para asegurar una protección óptima. Cambiar cada 2 años o según el manual del vehículo.",
-      },
-      {
-          src: imgPort105,
-          alt: "Imagen 15",
-          text: "Kit de herramientas",
-          description: "Kit completo de herramientas diseñado para el mantenimiento y reparación de vehículos. Incluye una variedad de herramientas esenciales.",
-          usage: "Se utiliza para realizar reparaciones menores y ajustes en tu vehículo. Ideal para mecánicos aficionados y profesionales.",
-      },
-      {
-          src: imgPort106,
-          alt: "Imagen 5",
-          text: "Aceite de motor",
-          description: "Aceite de motor premium que asegura un rendimiento óptimo y prolonga la vida útil del motor.",
-          usage: "Se utiliza en el motor para lubricar sus componentes internos. Cambiar cada 5,000 km o según las especificaciones del fabricante del vehículo.",
-      },
-      {
-          src: imgPort109,
-          alt: "Imagen 9",
-          text: "Filtro de aceite",
-          description: "Filtro de aceite de larga duración diseñado para mantener el aceite del motor limpio y libre de impurezas.",
-          usage: "Se instala en el motor para filtrar las impurezas del aceite. Se recomienda cambiarlo junto con el aceite del motor cada 5,000 km.",
-      },
-      {
-          src: imgPort100,
-          alt: "Imagen 10",
-          text: "Pastillas de freno",
-          description: "Pastillas de freno de alta performance diseñadas para ofrecer una frenada eficaz y segura.",
-          usage: "Se instalan en el sistema de frenos del vehículo. Recomendadas para reemplazo cada 30,000 km o cuando el indicador de desgaste se active.",
-      },
-      {
-          src: imgPort101,
-          alt: "Imagen 11",
-          text: "Batería de automotriz",
-          description: "Batería confiable diseñada para arranques seguros y proporcionar energía a todos los sistemas eléctricos del vehículo.",
-          usage: "Se instala en el compartimento del motor para proporcionar energía eléctrica. Reemplazar cada 3 a 5 años o según el rendimiento.",
-      },
-      
-  ];
+};const Portfolio = () => {
+    const navigate = useNavigate();
+    const images = [
+        {
+            src: imgPort102,
+            alt: "Imagen 12",
+            text: "Neumáticos",
+        },
+        {
+            src: imgPort103,
+            alt: "Imagen 13",
+            text: "Luces LED",
+        },
+        {
+            src: imgPort104,
+            alt: "Imagen 14",
+            text: "Anticongelante",
+        },
+        {
+            src: imgPort105,
+            alt: "Imagen 15",
+            text: "Kit de herramientas",
+        },
+        {
+            src: imgPort106,
+            alt: "Imagen 5",
+            text: "Aceite de motor",
+        },
+        {
+            src: imgPort109,
+            alt: "Imagen 9",
+            text: "Filtro de aceite",
+        },
+        {
+            src: imgPort100,
+            alt: "Imagen 10",
+            text: "Pastillas de freno",
+        },
+        {
+            src: imgPort101,
+            alt: "Imagen 11",
+            text: "Batería de automotriz",
+        },
+    ];
+  
+    return (
+        <section className="portafolio">
+            <div className="contenedor">
+                <h2 className="titulo">Inventario</h2>
+                <div className="galeria-port">
+                    {images.map((image, index) => (
+                        <div className="imagen-port" key={index}>
+                            <img src={image.src} alt={image.alt} />
+                            <div className="hover-galeria">
+                                <img src={imgIcono1} alt="Icono" />
+                                <p>{image.text}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+  };
+  
+  
+  
   
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const openModal = (product) => {
-      setSelectedProduct(product);
-      setModalOpen(true);
-  };
-
-  const closeModal = () => {
-      setModalOpen(false);
-      setSelectedProduct(null);
-  };
-
-  const redirectToLogin = () => {
-      closeModal(); // Cierra el modal
-      navigate("/login"); 
-  };
-
-  return (
-      <section className="portafolio">
-          <div className="contenedor">
-              <h2 className="titulo">Inventario</h2>
-              <div className="galeria-port">
-                  {images.map((image, index) => (
-                      <div className="imagen-port" key={index} onClick={() => openModal(image)}>
-                          <img src={image.src} alt={image.alt} />
-                          <div className="hover-galeria">
-                              <img src={imgIcono1} alt="Icono" />
-                              <p>{image.text}</p>
-                          </div>
-                      </div>
-                  ))}
-              </div>
-
-              {/* Modal */}
-              {modalOpen && (
-                  <div className="modal-overlay">
-                      <div className="modal">
-                          <div className="modal-header">
-                              <h3>{selectedProduct?.text}</h3>
-                              <img src={carritoLogo} alt="Carrito" className="cart-icon" onClick={redirectToLogin} />
-                          </div>
-                          <p><strong>Descripción:</strong> {selectedProduct?.description}</p>
-                          <p><strong>Uso:</strong> {selectedProduct?.usage}</p>
-                         
-                          <button onClick={closeModal} className="close-modal">✖ Cerrar</button>
-                      </div>
-                  </div>
-              )}
-          </div>
-      </section>
-  );
-};
 
 const Services = () => {
     // Estado para manejar el servicio seleccionado y el estado del modal
@@ -281,7 +234,7 @@ const Services = () => {
         },
         {
             img: imgEscape,
-            title: "Reparación de Sistema de Escape",
+            title: "Reparación de Escape",
             description: "Reparación o reemplazo del sistema de escape, catalizadores y silenciadores para reducir emisiones."
         },
         {

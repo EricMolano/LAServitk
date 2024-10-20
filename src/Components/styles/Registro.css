@@ -1,0 +1,194 @@
+/* Registro.css */
+
+.registro-contenedor {
+    display: flex;
+    height: 100vh;
+    background-color: #f2f2f2; /* Light gray background */
+    font-family: 'Roboto', sans-serif;
+}
+
+.registro-menu {
+    flex: 1;
+    background: linear-gradient(to bottom, #b30000, #ff4d4d); /* Red gradient */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    position: relative; /* For positioning the overlay */
+}
+
+.registro-menu::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1); /* Subtle white overlay */
+    transition: opacity 0.3s ease;
+}
+
+.registro-menu:hover::after {
+    opacity: 0.2; /* Lighten on hover */
+}
+
+.registro-menu h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.registro-menu p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.registro-menu button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.registro-menu button:hover {
+    background-color: #b30000;
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.registro-formulario {
+    flex: 1;
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -5px 0px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.registro-formulario:hover {
+    transform: scale(1.02);
+}
+
+.registro-formulario form {
+    width: 100%;
+    max-width: 450px;
+}
+
+.registro-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registro-titulo {
+    font-size: 28px;
+    color: #333; /* Dark gray */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.registro-entradas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.registro-entrada input,
+.registro-entrada select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registro-entrada input::placeholder {
+    color: #aaa;
+}
+
+.registro-entrada input:focus,
+.registro-entrada select:focus {
+    border: 1px solid #b30000; /* Red border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.registro-entrada select {
+    background-color: #f9f9f9; /* Light background */
+}
+
+.registro-terminos {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #555;
+}
+
+.registro-terminos a {
+    color: #b30000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.registro-terminos a:hover {
+    color: #ff4d4d; /* Lighter red on hover */
+}
+
+.registro-enviar {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.registro-boton {
+    background-color: #b30000;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.registro-boton:hover {
+    background-color: #ff4d4d; /* Lighter red on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.registro-exito,
+.registro-olvide {
+    color: #555;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.registro-olvide a {
+    color: #b30000;
+    text-decoration: none;
+}
+
+.registro-olvide a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos adicionales para el modal */
+.modal {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+}

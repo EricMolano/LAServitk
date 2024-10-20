@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Edit.css';
+
 function AgregarServicio() {
     const [nombre_empleado, setNombreEmpleado] = useState('');
     const [nombre_cliente, setNombreCliente] = useState('');

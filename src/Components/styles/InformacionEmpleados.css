@@ -923,7 +923,7 @@ button {
   outline: none;
   background: none;
   border: none;
-  background: #b45a5a !important;
+  background: #b45a5a ;
 }
 
 /* ==========================================================================
@@ -1310,7 +1310,7 @@ input {
 }
 
 .card-2 .card-heading {
-  background: url("../Components/Assets/img1.jpeg") top left/cover no-repeat;
+  background: url("../../Components/Assets/img1.jpeg") top left/cover no-repeat;
   width: 362px;
   display: table-cell;
 }
