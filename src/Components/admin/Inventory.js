@@ -35,7 +35,6 @@ function Inventario({ handleCardClick }) {
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio de Compra</th>
-            <th>MSRP</th>
             <th>Acciones</th>
           </tr>
         </thead>

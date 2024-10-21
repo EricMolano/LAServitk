@@ -1,278 +1,314 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+/* Login.css */
 
-body {
-  font-family: 'Inter', sans-serif;
+.registro-contenedor {
+  display: flex;
+  height: 100vh;
+  background-color: #f2f2f2; /* Light gray background */
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Header */
-.header-bar {
-  width: 100%;
-  background-color: #D32F2F; /* Rojo */
-  padding: 15px 0;
+.registro-menu {
+  flex: 1;
+  background: linear-gradient(to bottom, #b30000, #ff4d4d); /* Red gradient */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
   text-align: center;
-  position: fixed; /* Fija el header en la parte superior */
-  top: 0;
+  padding: 50px;
+  position: relative; /* For positioning the overlay */
+}
+
+.registro-menu::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
   left: 0;
-  z-index: 1000;
-}
-/* Estilo del encabezado personalizado */
-.Menu {
-    height: 60px;
-    background-color: #b45a5a;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    position: relative;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-   
+  right: 0;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1); /* Subtle white overlay */
 }
 
-.Menu  h1{
-    color: white;
-    font-size: 1.2rem;
+.logo {
+  width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+  margin-bottom: 20px; /* Espacio entre el logo y el título */
 }
 
-.login-wraper{
-    background-color: #eeee;
-    min-height: 100vh;
-    padding: 20px;
-}
-.custom-header h1 {
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
-  color: #ffffff; /* Texto blanco para mayor contraste */
-  font-size: 28px; /* Tamaño de fuente adecuado */
-  font-weight: 600; /* Peso de fuente moderado */
-  margin: 0;
-  letter-spacing: 1px; /* Espaciado entre letras */
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25); /* Sombra en el texto */
-  -webkit-font-smoothing: antialiased; /* Suaviza el renderizado de la fuente */
-  -moz-osx-font-smoothing: grayscale; /* Suaviza el renderizado en Mac */
+.registro-menu h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
-
-/* Estilo del texto en el header */
-.header-bar h1 {
-  color: #000000; /* Negro */
-  font-size: 24px;
-  margin: 0;
-  font-weight: 700;
+.registro-menu p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 100px; /* Ajuste para evitar que el contenido quede debajo del header */
-  width: 90%;
-  max-width: 600px;
-  background: #FFFFFF;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
-
-/* Texto principal */
-.text {
-  color: #000000;
-  font-size: 1.2rem !important;
-  font-weight: 700;
-  text-align: center;
-  margin: 0;
-}
-
-/* Subrayado del texto */
-.underline {
-  width: 61px;
-  height: 6px;
-  background: #FF0000;
-  border-radius: 9px;
-}
-
-/* Contenedor de inputs */
-.inputs {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Estilo de input */
-/* Estilo de input */
-.input {
-  display: flex;
-  align-items: center;
-  margin: auto;
-  width: 100%;
-  max-width: 480px;
-  height: 50px;
-  background: #F8F9FA; /* Color más claro y suave */
-  border-radius: 12px; /* Bordes más redondeados */
-  border: 1px solid #CFD8DC; /* Gris más claro para el borde */
-  padding: 0 15px; /* Ajuste de padding para mejorar el espacio */
-  box-sizing: border-box;
-  transition: all 0.3s ease; /* Transición suave para los cambios de estado */
-}
-
-/* Imagen dentro del input */
-.input img {
-  margin-right: 10px;
-  width: 20px;
-}
-
-/* Estilo del texto en el input */
-.input input {
-  width: 100%;
-  background: transparent;
+.registro-menu button {
+  background-color: #ff4d4d;
   border: none;
-  outline: none;
-  color: #424242; /* Gris oscuro */
-  font-size: 16px;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Efecto de sombreado cuando se selecciona un recuadro (input) */
-.input input:focus {
-  background: #E0E0E0; /* Fondo más oscuro al hacer foco */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Sombra suave */
-  border-color: #B0BEC5; /* Color gris oscuro en el borde */
-  outline: none;
-}
-
-/* Efecto de sombreado para el contenedor completo cuando se selecciona */
-.input:focus-within {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Sombra más prominente y uniforme */
-  border-color: #B0BEC5; /* Color gris oscuro en el borde */
-  outline: none;
-}
-
-
-/* Texto de "Olvidé mi contraseña" */
-.forgot-password {
-  margin-top: 20px;
-  color: #757575;
+  color: white;
+  padding: 15px 30px;
+  text-transform: uppercase;
   font-size: 14px;
-  text-align: center;
-}
-
-/* Estilo del enlace dentro de "Olvidé mi contraseña" */
-.forgot-password span {
-  color: #FF0000;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
-/* Contenedor de botones */
-.submit-container {
+.registro-menu button:hover {
+  background-color: #b30000;
+}
+
+.registro-formulario {
+  flex: 1;
+  background-color: white;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px 0px 20px rgba(0, 0, 0, 0.1);
+  min-height: 600px; /* Añadir altura mínima para evitar desajustes */
+}
+
+.registro-formulario form {
+  width: 100%;
+  max-width: 600px; /* Ajustar el ancho máximo */
+  display: flex;
+  flex-direction: column; /* Cambiar a columna para alinear verticalmente */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+.registro-header {
+  text-align: center;
+  margin-bottom: 10px; /* Reducir el margen inferior */
+  width: 100%; /* Asegurar que el encabezado ocupe todo el ancho */
+}
+
+.registro-titulo {
+  font-size: 28px;
+  color: #333; /* Dark gray */
+  font-weight: bold;
+  margin-bottom: 10px; /* Reducir el margen inferior */
+}
+
+.registro-entradas {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+  gap: 20px; /* Espacio entre los elementos */
+  flex: 1; /* Permitir que las entradas ocupen el espacio disponible */
+}
+
+.registro-entrada {
+  width: calc(50% - 10px); /* Asegurar que cada entrada ocupe la mitad del ancho */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin: 40px auto;
 }
 
-/* Estilo del botón de enviar */
-.submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.registro-entrada label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.registro-entrada input,
+.registro-entrada select {
   width: 100%;
-  max-width: 220px;
-  height: 45px;
-  color: #FFFFFF;
-  background: #D32F2F;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid #066ba5;
-  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estilo para elementos con clase "gray" */
-.gray {
-  background: #F8F9FA;
-  color: #424242;
+.registro-entrada input::placeholder {
+  color: #aaa;
 }
 
-/* Nuevo contenedor para los términos y condiciones */
-/* Nuevo contenedor para los términos y condiciones */
-.terms-container {
-  margin-top: 8px; /* Margen superior */
-  font-size: 10px; /* Tamaño de la fuente pequeño */
-  color: #757575; /* Color gris */
-  background-color: #f0f0f0; /* Fondo gris claro */
-  padding: 2px 4px; /* Padding reducido para hacer el cuadro más pequeño */
-  border-radius: 4px; /* Bordes redondeados */
-  border: 1px solid #ccc; /* Borde gris claro */
-  max-width: 200px; /* Ancho máximo */
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center; /* Centra el texto */
-  box-sizing: content-box; /* Asegura que el padding no aumente el tamaño total del cuadro */
-  height: auto; /* Ajusta la altura al contenido */
-  line-height: 1.2; /* Ajusta la altura de línea para hacer el cuadro más compacto */
+.registro-entrada input:focus,
+.registro-entrada select:focus {
+  border: 1px solid #b30000; /* Red border on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
 }
 
-/* Estilo del label dentro del contenedor de términos y condiciones */
-.terms-container label {
+.registro-entrada select {
+  background-color: #f9f9f9; /* Light background */
+}
+
+.registro-terminos {
+  margin-top: 10px; /* Reducir el margen superior */
+  font-size: 10px; /* Reducir el tamaño de la fuente */
+  color: #555;
+  width: 100%; /* Asegurar que los términos ocupen todo el ancho */
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2px; /* Espacio mínimo entre el checkbox y el texto */
 }
 
-/* Estilo del checkbox dentro del contenedor de términos y condiciones */
-.terms-container input[type="checkbox"] {
-  accent-color: #FF0000; /* Color rojo para el checkbox */
-  transform: scale(0.6); /* Tamaño del checkbox reducido */
-  margin: 0; /* Elimina el margen del checkbox */
+.registro-terminos label {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el checkbox y el texto */
 }
 
-/* Estilo del enlace dentro del contenedor de términos y condiciones */
-.terms-container a {
-  color: #FF0000; /* Color rojo */
-  text-decoration: none; /* Sin subrayado */
-  font-weight: 600; /* Peso ligero */
-  font-size: 10px; /* Tamaño de fuente pequeño */
+.registro-terminos input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
-/* Efecto hover para el enlace */
-.terms-container a:hover {
-  text-decoration: underline; /* Subrayado en hover */
+.registro-terminos a {
+  color: #b30000;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
-/* Media Queries para pantallas más pequeñas */
-@media (max-width: 600px) {
-  .container {
-      padding: 15px;
-      margin-top: 100px; /* Ajuste para evitar que el contenido quede debajo del header */
+
+.registro-terminos a:hover {
+  color: #ff4d4d; /* Lighter red on hover */
+}
+
+.registro-enviar {
+  text-align: center;
+  margin-top: 20px; /* Reducir el margen superior */
+  width: 100%; /* Asegurar que el botón de enviar ocupe todo el ancho */
+}
+
+.registro-boton {
+  background-color: #b30000;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.registro-boton:hover {
+  background-color: #ff4d4d; /* Lighter red on hover */
+}
+
+.registro-exito,
+.registro-olvide {
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%; /* Asegurar que los mensajes ocupen todo el ancho */
+}
+
+.registro-olvide {
+  margin-top: 20px;
+  color: #fff; /* Cambiar color del texto */
+}
+
+.registro-olvide a {
+  color: #ffcccb; /* Cambiar color del enlace */
+}
+
+.registro-olvide a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos adicionales para el modal */
+.modal {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 900px) {
+  .registro-contenedor {
+      flex-direction: column; /* Cambiar a columna para pantallas pequeñas */
   }
 
-  .text {
-      font-size: 1.5rem;
+  .registro-formulario {
+      padding: 30px; /* Ajustar padding para pantallas pequeñas */
   }
 
-  .input {
-      max-width: 100%;
+  .registro-formulario form {
+      max-width: 100%; /* Asegurar que el formulario ocupe todo el ancho */
   }
 
-  .submit {
-      font-size: 14px;
-      height: 45px;
-      max-width: 100%;
+  .registro-entrada {
+      width: 100%; /* Asegurar que cada entrada ocupe todo el ancho */
   }
 
-  .submit-container {
-      gap: 10px;
+  .registro-menu {
+      padding: 20px; /* Ajustar padding para pantallas pequeñas */
   }
 
-  .header-bar h1 {
-      font-size: 20px;
+  .registro-menu h1 {
+      font-size: 24px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+  }
+
+  .registro-menu p {
+      font-size: 14px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+  }
+
+  .registro-boton {
+      padding: 10px 20px; /* Ajustar padding para pantallas pequeñas */
+      font-size: 12px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+  }
+
+  .logo {
+      width: 80px; /* Reducir tamaño del logo para pantallas pequeñas */
+      margin-bottom: 10px; /* Reducir margen inferior del logo */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .registro-menu {
+      padding: 15px; /* Ajustar padding para pantallas muy pequeñas */
+  }
+
+  .registro-menu h1 {
+      font-size: 20px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .registro-menu p {
+      font-size: 12px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .registro-boton {
+      padding: 8px 16px; /* Ajustar padding para pantallas muy pequeñas */
+      font-size: 10px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .logo {
+      width: 60px; /* Reducir tamaño del logo para pantallas muy pequeñas */
+      margin-bottom: 5px; /* Reducir margen inferior del logo */
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .registro-menu {
+      padding: 10px; /* Ajustar padding para pantallas muy pequeñas */
+  }
+
+  .registro-menu h1 {
+      font-size: 18px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .registro-menu p {
+      font-size: 10px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .registro-boton {
+      padding: 6px 12px; /* Ajustar padding para pantallas muy pequeñas */
+      font-size: 8px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .logo {
+      width: 50px; /* Reducir tamaño del logo para pantallas muy pequeñas */
+      margin-bottom: 5px; /* Reducir margen inferior del logo */
   }
 }

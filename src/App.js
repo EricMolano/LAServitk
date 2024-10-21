@@ -11,6 +11,7 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Terminos from './Components/Terminos';
+import Inventarios from './Components/Inventarios';
 
 /* PAGINAS ADMIN */
 import UpdateServices from './Components/admin/UpdateServices'; 
@@ -25,18 +26,21 @@ import Usuarios from './Components/admin/Usuarios';
 import Inventory from './Components/admin/Inventory'; 
 import Vehiculos from './Components/admin/Vehiculos'; 
 import Servicios from './Components/admin/Servicios'; 
+import AgregarServicio from './Components/admin/AgregarServicio'; 
 
 /* PAGINAS EMPLEADO */
-import AgregarServicio from './Components/empleado/AgregarServicio'; 
 import EditProfileE from './Components/empleado/EditProfileE';
 import ProfileE from './Components/empleado/ProfileE'; 
 import UsuariosE from './Components/empleado/UsuariosE'; 
 import VehiculosE from './Components/empleado/VehiculosE'; 
 import InventoryE from './Components/empleado/InventoryE'; 
+import ServiciosE from './Components/empleado/ServiciosE'; 
+import AgregarServicioE from './Components/empleado/AgregarServicioE'; 
 
 /* PAGINAS CLIENTE */
 import Profile from './Components/cliente/Profile';
 import Vehicles from './Components/cliente/Vehicles';
+import Inventario from './Components/cliente/Inventario'; 
 import Services from './Components/cliente/Services';
 import EditVehicle from './Components/cliente/EditVehicle';
 import AddVehicle from './Components/cliente/AddVehicle';
@@ -89,6 +93,8 @@ function App() {
                 <Route path="/login" element={<Login setUserRole={setUserRole} setUserData={setUserData} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/terminos" element={<Terminos />} />
+                <Route path="/Inventarios" element={<Inventarios />} />
+
 
                 {/* Rutas públicas */}
                 <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
@@ -111,6 +117,7 @@ function App() {
                 <Route path="/Inventory" element={<PrivateRoute element={<Inventory />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/Vehiculos" element={<PrivateRoute element={<Vehiculos />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/Servicios" element={<PrivateRoute element={<Servicios />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/agregar-servicio" element={<PrivateRoute element={<AgregarServicio />} userRole={userRole} requiredRole={3} />} />
 
                 {/* Rutas de cliente */}
                 <Route path="/Profile" element={<PrivateRoute element={<Profile />} userRole={userRole} requiredRole={2} />} />
@@ -119,14 +126,16 @@ function App() {
                 <Route path="/edit-vehicle/:id" element={<PrivateRoute element={<EditVehicle />} userRole={userRole} requiredRole={2} />} />
                 <Route path="/add-vehicle" element={<PrivateRoute element={<AddVehicle />} userRole={userRole} requiredRole={2} />} />
                 <Route path="/edit-profile" element={<PrivateRoute element={<EditProfile />} userRole={userRole} requiredRole={2} />} /> 
+                <Route path="/Inventario" element={<PrivateRoute element={<Inventario />} userRole={userRole} requiredRole={2} />} />
 
                 {/* Rutas de empleado */}
                 <Route path="/ProfileE" element={<PrivateRoute element={<ProfileE />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/UsuariosE" element={<PrivateRoute element={<UsuariosE />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/VehiculosE" element={<PrivateRoute element={<VehiculosE />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/InventoryE" element={<PrivateRoute element={<InventoryE />} userRole={userRole} requiredRole={1} />} />
-                <Route path="/agregar-servicio" element={<PrivateRoute element={<AgregarServicio />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/edit-profileE" element={<PrivateRoute element={<EditProfileE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/ServiciosE" element={<PrivateRoute element={<ServiciosE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/agregar-servicioE" element={<PrivateRoute element={<AgregarServicioE />} userRole={userRole} requiredRole={1} />} />
             </Routes>
         </Router>
     );

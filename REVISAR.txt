@@ -1,56 +1,45 @@
 Cliente 
 
-css por encima de colores y letras
-Ajustar los formularios
-Agregar modal a validaciones
-agregar el # y buscar por dato
-css de todo
-link de portafolio
-pedir productos
-ver compras
-arreglar servicios 
-agregar modal a todo
+Ajustar los formularios ----------michel
+Agregar modal a validaciones -------- kevin
+datable  --------eric
+link de portafolio ------------- feo
+pedir productos --------------- feo
+ver compras ------------- feo
+validaciones servicios -------------- feo 
+agregar modal a todo ----------- feo 
 
 admin
 
-css por encima de colores y letras
-Ajustar los formularios
-Agregar modal a validaciones
-agregar el # y buscar por dato
-css de todo
-link de portafolio
-ver compras
-actualizar compras
-arreglar servicios 
-agregar servicios
-actualizar servicios
-arreglar productos
-agregar productos
-actualizar productos
-agregar modal a todo
+Ajustar los formularios --------------michel
+Agregar modal a validaciones --------- feo
+datatable ---------eric
+link de portafolio ------------ Feo
+ver compras ---------- Feo
+actualizar compras --------- Feo
+validaciones servicios --------------- Feo
+actualizar servicios ---------- Feo
+arreglar productos ------------ Kevin 
+agregar productos ------------- Kevin
+actualizar productos -------------- Kevin
+agregar modal a todo ------------ Kevin
 
 empleado
 
-css por encima de colores y letras
-Ajustar los formularios
-Agregar modal a validaciones
-agregar el # y buscar por dato
-css de todo
-ver compras 
-link de portafolio
-arreglar servicios 
-agregar servicios
-agregar modal a todo
+Ajustar los formularios -------michel
+Agregar modal a validaciones -------- Kevin 
+datatable -------eric
+ver compras ------------- Feo
+link de portafolio ------------ Kevin
+validaciones servicios ------------------ Kevin 
+agregar modal a todo ----------- Kevin
+
 
 home 
 
-css por encima de colores y letras
-css de register/login
+css por encima de colores y letras -------eric
+css de register/login -------eric
 
-IMPORTANTE
-RECUPERAR CONTRASEÑA
-DATO DE IMAGENES A TODO
-SEGURIDAD A TODO (probar rutas)
 
 PROYECTO
 PRESENTACION INICIAL (hacer)
@@ -58,3 +47,8 @@ DOCUMENTACION (arreglar)
 DOCUMENTO EXCEL (actualizar)
 ESTUDIAR (codigo de todo)
 CODIFICACION (terminar todo)
+
+IMPORTANTE
+RECUPERAR CONTRASEÑA
+DATO DE IMAGENES A TODO
+SEGURIDAD A TODO (probar rutas)

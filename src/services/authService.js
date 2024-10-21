@@ -282,6 +282,18 @@ export const getServices = () => {
       throw new Error(error.response?.data?.message || 'Error al obtener los servicios');
     });
   };
+  export const getServicesa = () => {
+    return axios.get(`${API_URL}/api/serviciosa`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}` // Token de autenticación
+      }
+    })
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error al obtener los servicios:', error.response?.data || error.message);
+      throw new Error(error.response?.data?.message || 'Error al obtener los servicios');
+    });
+  };
 
   
 // ===============================================================

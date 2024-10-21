@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function ActualizarServicio() {
-    const { id } = useParams(); // Obtener el ID del servicio de la URL
+function AgregarServicio() {
     const [nombre_empleado, setNombreEmpleado] = useState('');
     const [nombre_cliente, setNombreCliente] = useState('');
     const [placa_vehiculo, setPlacaVehiculo] = useState('');
@@ -13,39 +12,11 @@ function ActualizarServicio() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Cargar los datos del servicio existente
-    useEffect(() => {
-        const fetchServicio = async () => {
-            try {
-                const response = await axios.get(`http://localhost:2071/api/servicios/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                
-                // Precargar los campos con los datos existentes del servicio
-                const servicio = response.data;
-                setNombreEmpleado(servicio.nombre_empleado);
-                setNombreCliente(servicio.nombre_cliente);
-                setPlacaVehiculo(servicio.placa_vehiculo);
-                setNombreServicio(servicio.nombre_servicio);
-                setDescripcion(servicio.descripcion);
-                setCosto(servicio.costo);
-            } catch (error) {
-                console.error('Error al obtener los datos del servicio:', error);
-                setError('Error al cargar los datos del servicio.');
-            }
-        };
-
-        fetchServicio();
-    }, [id]);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            // Hacer la solicitud para actualizar el servicio
-            await axios.put(`http://localhost:2071/api/servicios/${id}`, {
+            const response = await axios.post('http://localhost:2071/api/servicios', {
                 nombre_empleado,
                 nombre_cliente,
                 placa_vehiculo,
@@ -58,17 +29,17 @@ function ActualizarServicio() {
                 }
             });
 
-            // Redirigir al usuario después de actualizar el servicio
+            // Redirigir al usuario después de agregar el servicio
             navigate('/AdminDashboard');
         } catch (error) {
-            console.error('Error al actualizar el servicio:', error);
-            setError(error.response?.data?.message || 'Error al actualizar el servicio');
+            console.error('Error al agregar el servicio:', error);
+            setError(error.response?.data?.message || 'Error al agregar el servicio');
         }
     };
 
     return (
         <div className="formulario-servicio">
-            <h2>Actualizar Servicio</h2>
+            <h2>Agregar Nuevo Servicio</h2>
             {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -129,10 +100,10 @@ function ActualizarServicio() {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Actualizar Servicio</button>
+                <button type="submit" className="btn btn-primary">Agregar Servicio</button>
             </form>
         </div>
     );
 }
 
-export default ActualizarServicio;
+export default AgregarServicio;

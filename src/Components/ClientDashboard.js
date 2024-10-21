@@ -149,8 +149,10 @@ const AboutUs = () => {
             </div>
         </section>
     );
-};const Portfolio = () => {
-    const navigate = useNavigate();
+};
+
+const Portfolio = () => {
+    const navigate = useNavigate(); // Hook para manejar la navegación
     const images = [
         {
             src: imgPort102,
@@ -193,14 +195,18 @@ const AboutUs = () => {
             text: "Batería de automotriz",
         },
     ];
-  
+
+    const handleNavigate = () => {
+        navigate('/Inventario'); // Navegar a la ruta de inventario
+    };
+
     return (
         <section className="portafolio">
             <div className="contenedor">
                 <h2 className="titulo">Inventario</h2>
                 <div className="galeria-port">
                     {images.map((image, index) => (
-                        <div className="imagen-port" key={index}>
+                        <div className="imagen-port" key={index} onClick={handleNavigate}>
                             <img src={image.src} alt={image.alt} />
                             <div className="hover-galeria">
                                 <img src={imgIcono1} alt="Icono" />
@@ -212,14 +218,11 @@ const AboutUs = () => {
             </div>
         </section>
     );
-  };
-  
-  
-  
-  
+};
 
 
-
+  
+  
 const Services = () => {
     // Estado para manejar el servicio seleccionado y el estado del modal
     const [selectedService, setSelectedService] = useState(null);

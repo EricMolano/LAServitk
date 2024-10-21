@@ -11,7 +11,6 @@ function EditInventory() {
         descripcion: '',
         cantidad_en_stock: '',
         precio_compra: '',
-        msrp: ''
     });
     const [errorMessage, setErrorMessage] = useState(''); // Para el mensaje de error
     const [successMessage, setSuccessMessage] = useState(''); // Para el mensaje de éxito
@@ -117,17 +116,7 @@ function EditInventory() {
                         required
                     />
                 </div>
-                <div>
-                    <label>MSRP</label>
-                    <input
-                        type="number"
-                        name="msrp"
-                        value={formData.msrp}
-                        onChange={handleChange}
-                        step="0.01"
-                        required
-                    />
-                </div>
+                
                 <button type="submit">Actualizar</button>
             </form>
 

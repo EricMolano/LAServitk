@@ -304,19 +304,19 @@ app.get('/api/inventory/:id', authenticateToken, (req, res) => {
 // Componente Agregar el inventario
 // ===============================================================
 app.post('/api/inventory', authenticateToken, (req, res) => {
-  const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
+  const { nombre, descripcion, cantidad_en_stock, precio_compra } = req.body;
 
-  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra || !msrp) {
+  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
 
-  const query = 'INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra, msrp) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra, msrp], (err, result) => {
+  const query = 'INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra) VALUES (?, ?, ?, ?)';
+  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra], (err, result) => {
     if (err) {
       console.error('Error adding inventory:', err);
       return res.status(500).json({ error: err.message });
     }
-    res.status(201).json({ id: result.insertId, nombre, descripcion, cantidad_en_stock, precio_compra, msrp });
+    res.status(201).json({ id: result.insertId, nombre, descripcion, cantidad_en_stock, precio_compra });
   });
 });
 
@@ -325,14 +325,14 @@ app.post('/api/inventory', authenticateToken, (req, res) => {
 // Componente Actualizar el inventario
 // ===============================================================
 app.put('/api/inventory/:id', authenticateToken, (req, res) => {
-  const { nombre, descripcion, cantidad_en_stock, precio_compra, msrp } = req.body;
+  const { nombre, descripcion, cantidad_en_stock, precio_compra } = req.body;
   
-  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra || !msrp) {
+  if (!nombre || !descripcion || cantidad_en_stock === undefined || !precio_compra) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
 
-  const query = 'UPDATE producto SET nombre = ?, descripcion = ?, cantidad_en_stock = ?, precio_compra = ?, msrp = ? WHERE id = ?';
-  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra, msrp, req.params.id], (err) => {
+  const query = 'UPDATE producto SET nombre = ?, descripcion = ?, cantidad_en_stock = ?, precio_compra = ? WHERE id = ?';
+  db.query(query, [nombre, descripcion, cantidad_en_stock, precio_compra, req.params.id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(200).json({ message: 'Product updated successfully' });
   });
@@ -485,150 +485,183 @@ app.put('/api/update-vehicle-user/:idvehiculo', authenticateToken, (req, res) =>
 
 
 // ===============================================================
-// Componente Obtener servicios
+// Componente Insertar servicios
 // ===============================================================
 app.post('/api/servicios', (req, res) => {
+  console.log('Datos recibidos:', req.body);
+  
   const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
 
-  // Verificar que todos los campos requeridos están presentes
   if (!nombre_empleado || !nombre_cliente || !placa_vehiculo || !nombre_servicio || !costo) {
+    console.log('Campos faltantes:', { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, costo });
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
   }
 
-  // Obtener el ID del empleado
-  db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_empleado])
-    .then(([empleado]) => {
-      if (empleado.length === 0) {
-        return res.status(404).json({ message: 'Empleado no encontrado' });
+  let idempleado, idcliente;
+
+  // Buscar el ID del cliente y verificar la propiedad del vehículo
+  db.promise().query(`
+    SELECT users.id, vehiculo.placa
+    FROM users 
+    JOIN rol ON users.rol_id = rol.id 
+    LEFT JOIN vehiculo ON users.id = vehiculo.id
+    WHERE users.name = ? AND rol.nombre = 'Cliente' AND vehiculo.placa = ?
+  `, [nombre_cliente, placa_vehiculo])
+    .then(([rows]) => {
+      if (rows.length === 0) {
+        throw { status: 404, message: 'El cliente especificado no existe, no tiene el rol correcto o no es propietario del vehículo' };
       }
-      const idempleado = empleado[0].id;
+      idcliente = rows[0].id;
+      console.log("Cliente y vehículo verificados correctamente, ID cliente:", idcliente);
 
-      // Obtener el ID del cliente
-      return db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_cliente])
-        .then(([cliente]) => {
-          if (cliente.length === 0) {
-            return res.status(404).json({ message: 'Cliente no encontrado' });
-          }
-          const idcliente = cliente[0].id;
+      // Buscar el ID del empleado por nombre
+      return db.promise().query(`
+        SELECT users.id 
+        FROM users 
+        JOIN rol ON users.rol_id = rol.id 
+        WHERE users.name = ? AND rol.nombre = 'Empleado'
+      `, [nombre_empleado]);
+    })
+    .then(([rows]) => {
+      if (rows.length === 0) {
+        throw { status: 404, message: 'El empleado especificado no existe o no tiene el rol correcto' };
+      }
+      idempleado = rows[0].id;
+      console.log("Empleado verificado correctamente, ID:", idempleado);
 
-          // Verificar si la placa del vehículo existe en la tabla vehiculo
-          return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo])
-            .then(([vehiculo]) => {
-              if (vehiculo.length === 0) {
-                return res.status(404).json({ message: 'El vehículo con esa placa no está registrado' });
-              }
-
-              // Insertar el servicio en la tabla registro_servicio
-              return db.promise().query(
-                'INSERT INTO registro_servicio (idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo) VALUES (?, ?, ?, ?, ?, ?)',
-                [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo]
-              );
-            });
-        });
+      // Insertar el servicio en la tabla registro_servicio
+      return db.promise().query(
+        'INSERT INTO registro_servicio (idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo) VALUES (?, ?, ?, ?, ?, ?)',
+        [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo]
+      );
     })
     .then(([result]) => {
-      // Responder con éxito
-      res.status(201).json({ message: 'Servicio registrado exitosamente', servicioId: result.insertId });
+      console.log("Servicio registrado exitosamente:", result);
+      return res.status(201).json({ message: 'Servicio registrado exitosamente', servicioId: result.insertId });
     })
     .catch(error => {
       console.error("Error al registrar el servicio:", error);
-      res.status(500).json({ message: 'Error al registrar el servicio', error: error.message });
+      const status = error.status || 500;
+      const message = error.message || 'Error al registrar el servicio';
+      if (!res.headersSent) {
+        return res.status(status).json({ message, error: error.toString() });
+      }
     });
 });
 
+/*
 
 // ===============================================================
-// Componente Actualizar el servicio
+// Componente Actualizar el servicio 
 // ===============================================================
+
 app.put('/api/servicios/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, descripcion, costo } = req.body;
 
+  // Validar que todos los campos obligatorios estén presentes
   if (!nombre_empleado || !nombre_cliente || !placa_vehiculo || !nombre_servicio || !costo) {
+    console.log('Campos faltantes:', { nombre_empleado, nombre_cliente, placa_vehiculo, nombre_servicio, costo });
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
   }
 
-  // Obtener el ID del empleado
-  db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_empleado])
-    .then(([empleado]) => {
-      if (empleado.length === 0) {
-        return res.status(404).json({ message: 'Empleado no encontrado' });
+  let idempleado, idcliente;
+
+  // Verificar cliente y propiedad del vehículo
+  db.promise().query(`
+    SELECT users.id, vehiculo.placa
+    FROM users 
+    JOIN rol ON users.rol_id = rol.id 
+    LEFT JOIN vehiculo ON users.id = vehiculo.id
+    WHERE users.name = ? AND rol.nombre = 'Cliente' AND vehiculo.placa = ?
+  `, [nombre_cliente, placa_vehiculo])
+    .then(([rows]) => {
+      if (rows.length === 0) {
+        throw { status: 404, message: 'El cliente especificado no existe, no tiene el rol correcto o no es propietario del vehículo' };
       }
-      const idempleado = empleado[0].id;
+      idcliente = rows[0].id;
+      console.log("Cliente y vehículo verificados correctamente, ID cliente:", idcliente);
 
-      // Obtener el ID del cliente
-      return db.promise().query('SELECT id FROM users WHERE name = ?', [nombre_cliente])
-        .then(([cliente]) => {
-          if (cliente.length === 0) {
-            return res.status(404).json({ message: 'Cliente no encontrado' });
-          }
-          const idcliente = cliente[0].id;
+      // Verificar empleado
+      return db.promise().query(`
+        SELECT users.id 
+        FROM users 
+        JOIN rol ON users.rol_id = rol.id 
+        WHERE users.name = ? AND rol.nombre = 'Empleado'
+      `, [nombre_empleado]);
+    })
+    .then(([rows]) => {
+      if (rows.length === 0) {
+        throw { status: 404, message: 'El empleado especificado no existe o no tiene el rol correcto' };
+      }
+      idempleado = rows[0].id;
+      console.log("Empleado verificado correctamente, ID:", idempleado);
 
-          // Verificar si la placa del vehículo existe en la tabla vehiculo
-          return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo])
-            .then(([vehiculo]) => {
-              if (vehiculo.length === 0) {
-                return res.status(404).json({ message: 'El vehículo con esa placa no está registrado' });
-              }
+      // Verificar si la placa del vehículo existe
+      return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo]);
+    })
+    .then(([vehiculo]) => {
+      if (vehiculo.length === 0) {
+        throw { status: 404, message: 'El vehículo con esa placa no está registrado' };
+      }
 
-              // Actualizar el servicio en la tabla registro_servicio
-              return db.promise().query(
-                'UPDATE registro_servicio SET idempleado = ?, idcliente = ?, placa_vehiculo = ?, nombre_servicio = ?, descripcion = ?, costo = ? WHERE idregistro = ?',
-                [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo, id]
-              );
-            });
-        });
+      // Actualizar el servicio en la tabla registro_servicio
+      return db.promise().query(
+        'UPDATE registro_servicio SET idempleado = ?, placa_vehiculo = ?, nombre_servicio = ?, descripcion = ?, costo = ? WHERE idregistro = ?',
+        [idempleado, placa_vehiculo, nombre_servicio, descripcion, costo, id]
+      );
     })
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        return res.status(404).json({ message: 'Servicio no encontrado' });
+        throw { status: 404, message: 'Servicio no encontrado' };
       }
 
       // Responder con éxito
-      res.status(200).json({ message: 'Servicio actualizado exitosamente' });
+      console.log("Servicio actualizado exitosamente");
+      return res.status(200).json({ message: 'Servicio actualizado exitosamente' });
     })
     .catch(error => {
       console.error("Error al actualizar el servicio:", error);
-      res.status(500).json({ message: 'Error al actualizar el servicio', error: error.message });
+      const status = error.status || 500;
+      const message = error.message || 'Error al actualizar el servicio';
+      if (!res.headersSent) {
+        return res.status(status).json({ message, error: error.toString() });
+      }
     });
 });
 
+*/
+
+  
+  
 
 // ===============================================================
 // Componente Obtener el servicio por id
 // ===============================================================
+
 app.get('/api/servicios', authenticateToken, (req, res) => {
   const idCliente = req.user.id;
-  console.log("id", idCliente); // Asegúrate de que req.user tiene el ID del cliente
-  console.log("rol id admin " , req.user.role)
-  
-  let rolIdCliente = req.user.role;
+  const rolIdCliente = req.user.role;
+
   let query = `
-      SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
-      FROM registro_servicio rs
-      JOIN users e ON rs.idempleado = e.id
-      JOIN users c ON rs.idcliente = c.id
-    `;
-  
-  // Si el rol es distinto a cliente, eliminamos el filtro por cliente
-  if (rolIdCliente === 2) {
-    query = `
-    SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente
+    SELECT rs.*, e.name AS nombre_empleado, c.name AS nombre_cliente, v.marca, v.modelo, v.placa
     FROM registro_servicio rs
     JOIN users e ON rs.idempleado = e.id
     JOIN users c ON rs.idcliente = c.id
-    WHERE rs.idcliente = ?
+    JOIN vehiculo v ON rs.placa_vehiculo = v.placa
   `;
+
+  // Si el usuario es cliente, limitamos los resultados a los servicios de ese cliente
+  if (rolIdCliente === 2) { // 2 es el rol del cliente
+    query += ` WHERE rs.idcliente = ?`;
   }
 
   // Ejecutar la consulta
-  db.query(query, [idCliente], (err, results) => {
+  db.query(query, rolIdCliente === 2 ? [idCliente] : [], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results); // Devuelve la lista de servicios
   });
 });
-
-
 
 // Inicia el servidor
 app.listen(2071, () => {

@@ -3,14 +3,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    font-size :24px ;
+    font-size: 24px;
 }
 
- p {
+p {
     font-size: 28px !important;
 }
-
-
 
 .contenedor {
     padding: 60px 0;
@@ -26,35 +24,31 @@
     margin-bottom: 60px;
     font-weight: bolder;
 }
+
 /* Header */
 header {
     width: 100% !important;
     height: 600px !important;
     background: #ffffff;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(0, 48%, 58%, 0.459), hsla(0, 17%, 52%, 0.486)), url(../../Components/Assets/moto.jpg);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, hsla(0, 57%, 58%, 0.459), hsla(0, 20%, 56%, 0.664)), url(../../Components/Assets/moto.jpg);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
     background-attachment: fixed;
     position: relative;
 }
 
-
-nav{
+nav {
     text-align: right;
     padding: 30px 50px 0 0;
 }
 
-nav > a{
-    color:#fff;
+nav > a {
+    color: #fff;
     font-weight: 300;
     text-decoration: none;
     margin-right: 10px;
 }
 
-nav > a:hover{
+nav > a:hover {
     text-decoration: underline;
 }
 
@@ -66,28 +60,26 @@ header .textos-header {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-
 }
 
-.textos-header h1{
+.textos-header h1 {
     font-size: 50px;
-    color:#fff;
+    color: #fff;
 }
 
-.textos-header h2{
+.textos-header h2 {
     font-size: 30px;
     font-weight: 300;
-    color:#fff;
+    color: #fff;
 }
 
-.wave{
+.wave {
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
 /* About us */
-
 main .sobre-nosotros {
     padding: 30px 0 40px 0 !important;
 }
@@ -95,25 +87,27 @@ main .sobre-nosotros {
 .contenedor-sobre-nosotros {
     display: flex;
     justify-content: space-evenly;
-    align-items: center; 
+    align-items: center;
 }
 
 .imagen-about-us {
     width: 32%;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .sobre-nosotros .contenido-textos {
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
 }
 
-.contenido-textos h3{
+.contenido-textos h3 {
     margin-bottom: 15px;
 }
 
-.contenido-textos h3 span{
+.contenido-textos h3 span {
     background: #4d0686;
     color: #fff;
     border-radius: 50%;
@@ -126,72 +120,71 @@ main .sobre-nosotros {
     margin-right: 5px;
 }
 
-.contenido-textos p{
+.contenido-textos p {
     padding: 0px 0px 30px 15px;
     font-weight: 300 !important;
     text-align: justify;
     font-family: "Open Sans", sans-serif !important;
 }
 
-/* GALERIA */
-
-.portafolio{
+/* Portfolio */
+.portafolio {
     background: #f2f2f2;
 }
 
-.galeria-port{
+.galeria-port {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-.imagen-port{
+.imagen-port {
     width: 24%;
     margin-bottom: 10px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, .5);
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.3s;
 }
 
-.imagen-port > img{
+.imagen-port > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 10px; /* Bordes redondeados */
 }
 
-.hover-galeria{
+.hover-galeria {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     transform: scale(0);
-    background: hsla(7, 93%, 43%, 0.7);
+    background: #c62828;
     transition: transform .5s;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border-radius: 10px; /* Bordes redondeados */
 }
 
-.hover-galeria img{
+.hover-galeria img {
     width: 50px;
 }
 
-.hover-galeria p{
+.hover-galeria p {
     color: #fff;
 }
 
-.imagen-port:hover .hover-galeria{
+.imagen-port:hover .hover-galeria {
     transform: scale(1);
 }
 
-
-
-
 /* Clients */
-
 .cards {
     display: flex;
     justify-content: space-evenly;
@@ -200,7 +193,7 @@ main .sobre-nosotros {
 }
 
 .cards .card {
-    background: #d33131; /* Rojo más vivo */
+    background: #c62828; /* Rojo más vivo */
     display: flex;
     flex-direction: row; /* Asegura que la imagen y el texto estén en fila */
     width: 30%;
@@ -250,10 +243,8 @@ main .sobre-nosotros {
     opacity: 0.9; /* Suaviza el texto */
 }
 
-
-/*  Our team */
-
-/* footer */footer {
+/* Footer */
+footer {
     background-color: #333; /* Fondo gris oscuro */
     padding: 50px 0;
     color: #fff; /* Texto blanco */
@@ -277,8 +268,8 @@ main .sobre-nosotros {
 .footer-section h4 {
     margin-bottom: 10px;
     font-size: 18px;
-    color: #d33131; /* Color rojo para los títulos */
-    border-bottom: 2px solid #d33131; /* Línea roja debajo del título */
+    color: #c62828; /* Color rojo para los títulos */
+    border-bottom: 2px solid #c62828; /* Línea roja debajo del título */
     padding-bottom: 5px;
 }
 
@@ -293,7 +284,7 @@ main .sobre-nosotros {
 }
 
 .footer-section a:hover {
-    color: #d33131; /* Color rojo al pasar el ratón sobre el enlace */
+    color: #c62828; /* Color rojo al pasar el ratón sobre el enlace */
 }
 
 .footer-bottom {
@@ -331,156 +322,147 @@ main .sobre-nosotros {
 }
 
 .social-icon:hover {
-    color: #d33131; /* Cambia a rojo al pasar el ratón */
+    color: #c62828; /* Cambia a rojo al pasar el ratón */
 }
 
 /* Estilo para el iframe del mapa */
 .footer-bottom-left iframe {
-    border: 2px solid #d33131; /* Borde rojo para el mapa */
+    border: 2px solid #c62828; /* Borde rojo para el mapa */
     border-radius: 8px; /* Bordes redondeados */
 }
 
-
- /**/
-
-@media screen and (max-width:900px){
-    header{
+/* Media Queries */
+@media screen and (max-width: 900px) {
+    header {
         background-position: center;
     }
 
-    .contenedor-sobre-nosotros{
+    .contenedor-sobre-nosotros {
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    .sobre-nosotros .contenido-textos{
+    .sobre-nosotros .contenido-textos {
         width: 90%;
     }
 
-    .imagen-about-us{
+    .imagen-about-us {
         width: 90%;
     }
 
     /* Galeria */
-
-    .imagen-port{
+    .imagen-port {
         width: 44%;
     }
 
     /* Clientes */
-
-    .cards{
+    .cards {
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    .cards .card{
+    .cards .card {
         width: 90%;
     }
 
-    .cards .card:first-child{
+    .cards .card:first-child {
         margin-bottom: 30px;
     }
 
-    /* servicios */
-
-    .servicio-cont{
+    /* Servicios */
+    .servicio-cont {
         justify-content: center;
         flex-direction: column;
     }
 
-    .servicio-ind{
+    .servicio-ind {
         width: 100%;
         text-align: center;
     }
 
-    .servicio-ind:nth-child(1), .servicio-ind:nth-child(2){
+    .servicio-ind:nth-child(1),
+    .servicio-ind:nth-child(2) {
         margin-bottom: 60px;
     }
 
-    .servicio-ind img{
+    .servicio-ind img {
         width: 90%;
     }
 }
 
-@media screen and (max-width:500px){
-    nav{
+@media screen and (max-width: 500px) {
+    nav {
         text-align: center;
         padding: 30px 0 0 0;
     }
 
-    nav > a{
+    nav > a {
         margin-right: 5px;
     }
 
-    .textos-header h1{
+    .textos-header h1 {
         font-size: 35px;
     }
 
-    .textos-header h2{
+    .textos-header h2 {
         font-size: 20px;
     }
 
     /* ABOUT US */
-
-    .imagen-about-us{
+    .imagen-about-us {
         margin-bottom: 60px;
         width: 99%;
     }
 
-    .sobre-nosotros .contenido-textos{
+    .sobre-nosotros .contenido-textos {
         width: 95%;
     }
 
     /* Galeria */
-
-    .imagen-port{
+    .imagen-port {
         width: 95%;
     }
 
     /* Clients */
-
-    .cards .card{
+    .cards .card {
         height: 450px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .cards .card img{
+    .cards .card img {
         width: 90px;
         height: 90px;
     }
 
     /* Footer */
-
-    .contenedor-footer{
+    .contenedor-footer {
         flex-direction: column;
         border: none;
     }
 
-    .content-foo{
+    .content-foo {
         margin-bottom: 20px;
         text-align: center;
     }
 
-    .content-foo h4{
+    .content-foo h4 {
         border: none;
     }
 
-    .content-foo p{
+    .content-foo p {
         color: #ccc;
         border-bottom: 1px solid #f2f2f2;
         padding-bottom: 20px;
     }
 
-    .titulo-final{
+    .titulo-final {
         font-size: 20px;
     }
 }
-
 
 .footer-bottom-right .social-icons {
     display: flex; /* Use flexbox for alignment */
@@ -519,7 +501,6 @@ main .sobre-nosotros {
     color: white; /* Text color on hover */
 }
 
-
 .footer-bottom-right .social-icons img {
     width: 40px; /* Set a fixed width for icons */
     height: 40px; /* Set a fixed height for icons */
@@ -528,9 +509,7 @@ main .sobre-nosotros {
     margin-right: 10px; /* Space between icon and text */
 }
 
-
-/**/
-
+/* Link Styles */
 .link {
     display: flex;
     justify-content: space-between;
@@ -539,7 +518,8 @@ main .sobre-nosotros {
     border-radius: 8px;
 }
 
-.register-link, .login-link {
+.register-link,
+.login-link {
     padding: 0 10px;
     color: #eee9e9;
     text-decoration: none;
@@ -547,27 +527,21 @@ main .sobre-nosotros {
 }
 
 .register-link:hover {
-    color: hsl(0, 71%, 48%);
+    color: #c62828;
     transform: translateY(-3px);
 }
 
 .login-link:hover {
-    color: #bd1c1c;
+    color: #c62828;
     transform: translateY(-3px);
 }
 
-
-
-
-nav{
+nav {
     display: flex;
     justify-content: flex-end;
 }
 
-
-
-
-/*Modal*/
+/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -630,6 +604,7 @@ nav{
 .modal p strong {
     color: #e94949;
 }
+
 /* Servicios Section Updated to Match Portfolio with Side Spacing */
 .servicios {
     background: #f2f2f2;
@@ -657,7 +632,7 @@ nav{
     position: relative;
     cursor: pointer;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 0px;
+    border-radius: 10px; /* Bordes redondeados */
     transition: transform 0.3s;
 }
 
@@ -665,6 +640,7 @@ nav{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px; /* Bordes redondeados */
 }
 
 .hover-serv {
@@ -673,13 +649,13 @@ nav{
     height: 100%;
     top: 0;
     transform: scale(0);
-    background: hsla(7, 93%, 43%, 0.7);
+    background: #c62828;
     transition: transform 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 10px; /* Bordes redondeados */
 }
 
 .hover-serv h3 {
@@ -693,95 +669,65 @@ nav{
 .imagen-serv:hover .hover-serv {
     transform: scale(1);
 }
-
-/* Media Queries for Responsiveness */
+/* Media Queries for Responsive Design */
 @media screen and (max-width: 900px) {
-    .imagen-serv {
-        width: 44%; /* Adjust for medium screens */
+    .modal {
+        width: 95%; /* Adjust width for smaller screens */
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .modal-header {
+        flex-direction: column; /* Stack header elements vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .modal h3 {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
+
+    .modal p {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
+
+    .close-modal {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        margin-top: 10px; /* Add margin to the top */
     }
 }
 
-@media screen and (max-width: 500px) {
-    .imagen-serv {
-        width: 95%; /* Full width for small screens */
-        margin: 0 auto; /* Center the item */
+@media screen and (max-width: 600px) {
+    .modal {
+        width: 100%; /* Further adjust width for very small screens */
+        padding: 15px; /* Further adjust padding for very small screens */
+    }
+
+    .modal h3 {
+        font-size: 1.2em; /* Further adjust font size for very small screens */
+    }
+
+    .modal p {
+        font-size: 0.8em; /* Further adjust font size for very small screens */
+    }
+
+    .close-modal {
+        font-size: 18px; /* Further adjust font size for very small screens */
     }
 }
 
-
-
-/* Fondo del modal para servicios */
-.custom-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro con transparencia */
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeIn 0.4s forwards; /* Animación para que aparezca el modal */
-}
-
-/* Contenido del modal */
-.custom-modal-content {
-    background-color: #ffffff; /* Fondo rojo claro */
-    padding: 40px 30px;
-    border-radius: 15px; /* Bordes redondeados */
-    width: 80%;
-    max-width: 600px; /* Ancho máximo */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Sombra suave */
-    text-align: center;
-    position: relative;
-    transform: translateY(-50px);
-    animation: slideDown 0.4s forwards; /* Animación para que el modal se deslice hacia abajo */
-}
-
-/* Botón de cerrar */
-.custom-close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 24px;
-    color: #b71c1c; /* Rojo oscuro */
-    cursor: pointer;
-    transition: color 0.3s ease; /* Transición suave */
-}
-
-/* Efecto hover en el botón de cerrar */
-.custom-close-modal:hover {
-    color: #e57373; /* Rojo suave al pasar el ratón */
-}
-
-/* Estilos para el título */
-.custom-modal-content h3 {
-    font-size: 26px;
-    color: #c62828; /* Rojo intenso */
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-/* Estilos para la descripción */
-.custom-modal-content p {
-    font-size: 16px;
-    color: #1d1c1c; /* Rojo estándar */
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-/* Animación para que el fondo aparezca suavemente */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
+@media screen and (max-width: 400px) {
+    .modal {
+        padding: 10px; /* Further adjust padding for very small screens */
     }
-}
 
-/* Animación para que el modal baje suavemente desde arriba */
-@keyframes slideDown {
-    to {
-        transform: translateY(0);
+    .modal h3 {
+        font-size: 1em; /* Further adjust font size for very small screens */
+    }
+
+    .modal p {
+        font-size: 0.7em; /* Further adjust font size for very small screens */
+    }
+
+    .close-modal {
+        font-size: 16px; /* Further adjust font size for very small screens */
     }
 }

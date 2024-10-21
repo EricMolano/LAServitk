@@ -2,6 +2,7 @@
 
 .registro-contenedor {
     display: flex;
+    flex-direction: row; /* Cambiar a fila para pantallas grandes */
     height: 100vh;
     background-color: #f2f2f2; /* Light gray background */
     font-family: 'Roboto', sans-serif;
@@ -28,11 +29,11 @@
     right: 0;
     height: 100px;
     background: rgba(255, 255, 255, 0.1); /* Subtle white overlay */
-    transition: opacity 0.3s ease;
 }
 
-.registro-menu:hover::after {
-    opacity: 0.2; /* Lighten on hover */
+.logo {
+    width: 120px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-bottom: 20px; /* Espacio entre el logo y el título */
 }
 
 .registro-menu h1 {
@@ -73,34 +74,47 @@
     justify-content: center;
     align-items: center;
     box-shadow: -5px 0px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.registro-formulario:hover {
-    transform: scale(1.02);
+    min-height: 600px; /* Añadir altura mínima para evitar desajustes */
 }
 
 .registro-formulario form {
     width: 100%;
-    max-width: 450px;
+    max-width: 600px; /* Ajustar el ancho máximo */
+    display: flex;
+    flex-direction: column; /* Cambiar a columna para alinear verticalmente */
+    gap: 20px; /* Espacio entre los elementos */
 }
 
 .registro-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reducir el margen inferior */
+    width: 100%; /* Asegurar que el encabezado ocupe todo el ancho */
 }
 
 .registro-titulo {
     font-size: 28px;
     color: #333; /* Dark gray */
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reducir el margen inferior */
 }
 
 .registro-entradas {
     display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    gap: 20px; /* Espacio entre los elementos */
+    flex: 1; /* Permitir que las entradas ocupen el espacio disponible */
+}
+
+.registro-entrada {
+    width: calc(50% - 10px); /* Asegurar que cada entrada ocupe la mitad del ancho */
+    display: flex;
     flex-direction: column;
-    gap: 15px;
+}
+
+.registro-entrada label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
 }
 
 .registro-entrada input,
@@ -130,9 +144,26 @@
 }
 
 .registro-terminos {
-    margin-top: 20px;
-    font-size: 12px;
+    margin-top: 10px; /* Reducir el margen superior */
+    font-size: 10px; /* Reducir el tamaño de la fuente */
     color: #555;
+    width: 100%; /* Asegurar que los términos ocupen todo el ancho */
+    display: flex;
+    align-items: center;
+}
+
+.registro-terminos label {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el checkbox y el texto */
+}
+
+.registro-terminos input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }
 
 .registro-terminos a {
@@ -147,7 +178,8 @@
 
 .registro-enviar {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px; /* Reducir el margen superior */
+    width: 100%; /* Asegurar que el botón de enviar ocupe todo el ancho */
 }
 
 .registro-boton {
@@ -165,7 +197,6 @@
 
 .registro-boton:hover {
     background-color: #ff4d4d; /* Lighter red on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
 }
 
 .registro-exito,
@@ -173,11 +204,16 @@
     color: #555;
     text-align: center;
     margin-top: 10px;
+    width: 100%; /* Asegurar que los mensajes ocupen todo el ancho */
+}
+
+.registro-olvide {
+    margin-top: 20px;
+    color: #fff; /* Cambiar color del texto */
 }
 
 .registro-olvide a {
-    color: #b30000;
-    text-decoration: none;
+    color: #ffcccb; /* Cambiar color del enlace */
 }
 
 .registro-olvide a:hover {
@@ -191,4 +227,93 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     padding: 20px;
     text-align: center;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 900px) {
+    .registro-contenedor {
+        flex-direction: column; /* Cambiar a columna para pantallas pequeñas */
+    }
+
+    .registro-formulario {
+        padding: 30px; /* Ajustar padding para pantallas pequeñas */
+    }
+
+    .registro-formulario form {
+        max-width: 100%; /* Asegurar que el formulario ocupe todo el ancho */
+    }
+
+    .registro-entrada {
+        width: 100%; /* Asegurar que cada entrada ocupe todo el ancho */
+    }
+
+    .registro-menu {
+        padding: 20px; /* Ajustar padding para pantallas pequeñas */
+    }
+
+    .registro-menu h1 {
+        font-size: 24px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+    }
+
+    .registro-menu p {
+        font-size: 14px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+    }
+
+    .registro-boton {
+        padding: 10px 20px; /* Ajustar padding para pantallas pequeñas */
+        font-size: 12px; /* Ajustar tamaño de fuente para pantallas pequeñas */
+    }
+
+    .logo {
+        width: 80px; /* Reducir tamaño del logo para pantallas pequeñas */
+        margin-bottom: 10px; /* Reducir margen inferior del logo */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .registro-menu {
+        padding: 15px; /* Ajustar padding para pantallas muy pequeñas */
+    }
+
+    .registro-menu h1 {
+        font-size: 20px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .registro-menu p {
+        font-size: 12px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .registro-boton {
+        padding: 8px 16px; /* Ajustar padding para pantallas muy pequeñas */
+        font-size: 10px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .logo {
+        width: 60px; /* Reducir tamaño del logo para pantallas muy pequeñas */
+        margin-bottom: 5px; /* Reducir margen inferior del logo */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .registro-menu {
+        padding: 10px; /* Ajustar padding para pantallas muy pequeñas */
+    }
+
+    .registro-menu h1 {
+        font-size: 18px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .registro-menu p {
+        font-size: 10px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .registro-boton {
+        padding: 6px 12px; /* Ajustar padding para pantallas muy pequeñas */
+        font-size: 8px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
+    }
+
+    .logo {
+        width: 50px; /* Reducir tamaño del logo para pantallas muy pequeñas */
+        margin-bottom: 5px; /* Reducir margen inferior del logo */
+    }
 }

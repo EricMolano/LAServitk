@@ -18,7 +18,7 @@ const Sidebar = () => {
 
     const handleServiciosClick = () => {
         console.log("Servicios clickeado");
-        navigate('/Servicios'); // Cambia la ruta según sea necesario
+        navigate('/ServiciosE'); // Cambia la ruta según sea necesario
     };
 
     const handleProductosClick = () => {

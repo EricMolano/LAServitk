@@ -27,7 +27,7 @@ function Servicios({ handleCardClick }) {
       <button className="botonC" onClick={() => handleCardClick()}>←</button>
 
       {/* Button to add a new service */}
-      <Link to="/agregar-servicio" className="btn btn-primary mb-3">Agregar Servicio</Link>
+      <Link to="/agregar-servicioE" className="btn btn-primary mb-3">Agregar Servicio</Link>
 
       <table className="servicios-table">
         <thead>

@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS vehiculo (
   KEY id (id),
   CONSTRAINT vehiculo_ibfk_1 FOREIGN KEY (id) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Crear la tabla producto
 CREATE TABLE IF NOT EXISTS producto (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -52,9 +51,10 @@ CREATE TABLE IF NOT EXISTS producto (
   descripcion text,
   cantidad_en_stock int(11) NOT NULL,
   precio_compra decimal(10,2) NOT NULL,
-  msrp decimal(10,2) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 
 -- crear la tabla servicios
 CREATE TABLE IF NOT EXISTS registro_servicio (
@@ -72,7 +72,6 @@ CREATE TABLE IF NOT EXISTS registro_servicio (
   FOREIGN KEY (placa_vehiculo) REFERENCES vehiculo(placa) ON DELETE CASCADE -- Relacionar por placa de vehículo
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
 -- Insertar Administrador
 INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUES
 ('CarlosAdmin@gmail.com', '$2a$10$iAc4N9NRQiCFhdLVMNtZIudDGaGen4tRtbInNE9zxwDv2f8gfnoKS', 'Carlos', 'Castañeda', 'Calle 13 sur 42', '3164748034', 3);
@@ -83,19 +82,20 @@ INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUE
 ('MichelEmpleado@gmail.com', '$2a$10$lluJuPsD.ozZfa8x2U3A4e3wgN3c8pD32ROJh88YmviqixjVZkFty', 'Michel', 'Ballen', 'Avenida #45', '3107645089', 1),
 ('EricEmpleado@gmail.com', '$2a$10$IGl7uX9lgKHcQzPz2gKFN.HJhFun6DUVFNev9sxghwF92pbZpFeuS', 'Eric', 'Molano', 'Transversal 12', '3125546488', 1);
 
+select * from vehiculo ; 
 
 -- Insertar productos iniciales
-INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra, msrp)
+INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra)
 VALUES 
-('Neumáticos', 'Neumáticos de alta calidad', 50, 100.00, 120.00),
-('LED', 'Luces LED automotrices', 30, 20.00, 25.00),
-('Anticongelante', 'Líquido anticongelante para motor', 40, 15.00, 18.00),
-('Kit de Herramientas', 'Kit de herramientas para el automóvil', 25, 50.00, 60.00),
-('Aceite', 'Aceite para cambio de motor', 60, 30.00, 35.00),
-('Filtro', 'Filtros de aire para automóviles', 80, 10.00, 12.00),
-('Pastillas', 'Pastillas de freno de alta calidad', 45, 25.00, 30.00),
-('Motor', 'Partes de motor automotriz', 10, 500.00, 600.00),
-('Pinturas', 'Pinturas para carrocerías', 20, 70.00, 85.00);
+('Neumáticos', 'Neumáticos de alta calidad', 50, 100.00),
+('LED', 'Luces LED automotrices', 30, 20.00),
+('Anticongelante', 'Líquido anticongelante para motor', 40, 15.00),
+('Kit de Herramientas', 'Kit de herramientas para el automóvil', 25, 50.00),
+('Aceite', 'Aceite para cambio de motor', 60, 30.00),
+('Filtro', 'Filtros de aire para automóviles', 80, 10.00),
+('Pastillas', 'Pastillas de freno de alta calidad', 45, 25.00),
+('Motor', 'Partes de motor automotriz', 10, 500.00),
+('Pinturas', 'Pinturas para carrocerías', 20, 70.00);
 
 
 
