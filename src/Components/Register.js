@@ -1,195 +1,187 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
-import Modal from './admin/Modal'; 
-import '../Components/styles/Registro.css';
+import Modal from '../Components/admin/Modal'; 
+import './styles/Registro.css';
+import logo1 from '../Components/Assets/servilogo.png'; // Importa la imagen
 
-function Registro() {
-    const [correo, setCorreo] = useState('');
-    const [contraseña, setContraseña] = useState('');
-    const [confirmarContraseña, setConfirmarContraseña] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [tipoDireccion, setTipoDireccion] = useState('');
-    const [detallesDireccion, setDetallesDireccion] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [terminos, setTerminos] = useState(false);
-    const [mensajeError, setMensajeError] = useState(''); 
-    const [mensajeExito, setMensajeExito] = useState('');
-    const [modalAbierto, setModalAbierto] = useState(false); 
-    const [registroExitoso, setRegistroExitoso] = useState(false); 
+function Register() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [terms, setTerms] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(''); 
+    const [successMessage, setSuccessMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false); // Manejo del modal
+    const [isSuccess, setIsSuccess] = useState(false); // Estado de éxito o error
 
-    const validarFormulario = () => {
-        let nuevoError = '';
+    const navigate = useNavigate(); // Hook para redirigir
 
-        if (!nombre) nuevoError = '¡El nombre debe ser obligatorio!';
-        else if (nombre.length > 20) nuevoError = '¡El nombre no puede superar los 20 caracteres!';
-        else if (!apellido) nuevoError = '¡El apellido debe ser obligatorio!';
-        else if (apellido.length > 20) nuevoError = '¡El apellido no puede superar los 20 caracteres!';
-        else if (!tipoDireccion) {
-            nuevoError = '¡Debes seleccionar un tipo de dirección!';
-        } else if (!detallesDireccion) {
-            nuevoError = '¡La dirección debe ser obligatoria!';
-        } else if (!/^3\d{9}$/.test(telefono)) {
-            nuevoError = '¡El número debe tener 9 dígitos y comenzar con 3!';
-        } else if (!correo) {
-            nuevoError = '¡El correo debe ser obligatorio!';
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
-            nuevoError = '¡El correo debe ser válido y contener "@"!';
-        } else if (!contraseña) {
-            nuevoError = '¡La contraseña es obligatoria!';
-        } else if (contraseña.length < 6) {
-            nuevoError = '¡La contraseña debe tener al menos 6 caracteres, incluir una letra mayúscula, una letra minúscula y un número!';
-        } else if (!/[A-Z]/.test(contraseña) || !/[a-z]/.test(contraseña) || !/[0-9]/.test(contraseña)) {
-            nuevoError = '¡La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número!';
-        } else if (contraseña !== confirmarContraseña) {
-            nuevoError = '¡Las contraseñas deben coincidir!';
-        } else if (!terminos) {
-            nuevoError = '¡Debes aceptar los términos y condiciones!';
+    const validateForm = () => {
+        let newError = '';
+
+        if (!name) newError = '¡El nombre debe ser obligatorio!';
+        else if (!surname) newError = '¡El apellido debe ser obligatorio!';
+        else if (!address) newError = '¡La dirección debe ser obligatoria!';
+        else if (!/^((Avenida|Calle|Transversal)\s).*/i.test(address)) {
+            newError = '¡La dirección debe empezar con Avenida, Calle o Transversal!';
+        } else if (!phone) {
+            newError = '¡El número debe ser obligatorio!';
+        } else if (!/^3\d{9}$/.test(phone)) {
+            newError = '¡El número debe tener 9 dígitos y comenzar con 3!';
+        } else if (!email) {
+            newError = '¡El email debe ser obligatorio!';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newError = '¡El correo debe ser válido y contener "@"!';
+        } else if (!password) {
+            newError = '¡La contraseña es obligatoria!';
+        } else if (password.length < 6) {
+            newError = '¡La contraseña debe tener al menos 6 caracteres, incluir una letra mayúscula, una letra minúscula y un número!';
+        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+            newError = '¡La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número!';
+        } else if (password !== confirmPassword) {
+            newError = '¡Las contraseñas deben coincidir!';
+        } else if (!terms) {
+            newError = '¡Debes aceptar los términos y condiciones!';
         }
 
-        return nuevoError;
+        return newError;
     };
 
-    const manejarRegistro = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
-        setMensajeError('');
-        setMensajeExito('');
-        setModalAbierto(false);
+        setErrorMessage(''); // Limpiar errores anteriores
+        setSuccessMessage(''); // Limpiar mensajes anteriores
+        setIsModalOpen(false); // Cerrar modal
 
-        const errorValidacion = validarFormulario();
-        if (errorValidacion) {
-            setMensajeError(errorValidacion);
-            setRegistroExitoso(false);
-            setModalAbierto(true);
-            return;
+        const validationError = validateForm();
+        if (validationError) {
+            setErrorMessage(validationError); // Asignar el mensaje de error
+            setIsSuccess(false); // No es un éxito
+            setIsModalOpen(true); // Mostrar modal
+            return; // Detener si hay error
         }
 
-        const direccionCompleta = `${tipoDireccion} ${detallesDireccion}`;
-
         try {
-            const respuesta = await register({ correo, contraseña, nombre, apellido, direccion: direccionCompleta, telefono });
-            if (respuesta.message === 'Usuario registrado exitosamente') {
-                setMensajeExito('Registro exitoso.');
-                setRegistroExitoso(true);
-                setModalAbierto(true);
+            const response = await register({ email, password, name, surname, address, phone });
+            if (response.message === 'Usuario registrado exitosamente') {
+                setSuccessMessage('Registro exitoso.');
+                setIsSuccess(true); // Es un éxito
+                setIsModalOpen(true); // Mostrar modal de éxito
+                setTimeout(() => {
+                    navigate('/login'); // Redirigir al login después de 2 segundos
+                }, 2000);
             } else {
-                setMensajeError('Error: ' + respuesta.message);
-                setRegistroExitoso(false);
-                setModalAbierto(true);
+                setErrorMessage('Error: ' + response.message); // Mostrar mensaje de error en modal
+                setIsSuccess(false); // No es un éxito
+                setIsModalOpen(true); // Mostrar modal en caso de error
             }
         } catch (error) {
-            setMensajeError('¡Este correo se encuentra en uso!');
-            setRegistroExitoso(false);
-            setModalAbierto(true);
+            setErrorMessage('¡Este correo se encuentra en uso!');
+            setIsSuccess(false); // No es un éxito
+            setIsModalOpen(true); // Mostrar modal en caso de error
             console.log("Error: ", error);
         }
     };
 
-    const cerrarModal = () => {
-        setModalAbierto(false);
-        setMensajeError('');
-        setMensajeExito('');
+    const closeModal = () => {
+        setIsModalOpen(false); // Cerrar modal
+        setErrorMessage(''); // Limpiar mensaje de error
+        setSuccessMessage(''); // Limpiar mensaje de éxito
     };
 
     return (
         <div className='registro-contenedor'>
             <div className='registro-menu'>
-                <h1>Laservitk</h1>
-                <p>Planifica tus actividades y controla tu progreso en línea. Únete a nuestra comunidad hoy mismo.</p>
+                <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
+                <h1>¡Qué gusto verte por aquí!</h1>
+                <p>Regístrate para comenzar a usar nuestros servicios.</p>
                 <div className="registro-olvide">
-                    <span>
-                        ¿Ya tienes una cuenta? 
-                        <Link to="/login"> Inicia sesión aquí</Link>
+                    ¿Ya tienes una cuenta?
+                    <span><br />
+                        <Link to="/login">Click Aquí</Link>
                     </span>
                 </div>
             </div>
             <div className="registro-formulario">
-                <form onSubmit={manejarRegistro}>
+                <form onSubmit={handleRegister}>
                     <div className="registro-header">
-                        <div className="registro-titulo">Registrarse</div>
+                        <div className="registro-titulo">Registro</div>
                     </div>
                     <div className="registro-entradas">
                         <div className="registro-entrada">
+                            <label htmlFor="name">Nombre</label>
                             <input
                                 type="text"
-                                name="nombre"
-                                value={nombre}
-                                onChange={(e) => setNombre(e.target.value)}
-                                placeholder='Nombre Completo'
-                                maxLength={20}
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </div>
                         <div className="registro-entrada">
+                            <label htmlFor="surname">Apellido</label>
                             <input
                                 type="text"
-                                name="apellido"
-                                value={apellido}
-                                onChange={(e) => setApellido(e.target.value)}
-                                placeholder='Apellido'
-                                maxLength={20}
+                                id="surname"
+                                name="surname"
+                                value={surname}
+                                onChange={(e) => setSurname(e.target.value)}
                             />
                         </div>
                         <div className="registro-entrada">
-                            <select
-                                name="tipoDireccion"
-                                value={tipoDireccion}
-                                onChange={(e) => setTipoDireccion(e.target.value)}
-                                required
-                                className="tipo-direccion"
-                            >
-                                <option value="">Tipo de dirección</option>
-                                <option value="Calle">Calle</option>
-                                <option value="Avenida">Avenida</option>
-                                <option value="Carrera">Carrera</option>
-                                <option value="Diagonal">Diagonal</option>
-                                <option value="Transversal">Transversal</option>
-                            </select>
-                        </div>
-                        <div className="registro-entrada">
+                            <label htmlFor="address">Dirección</label>
                             <input
                                 type="text"
-                                name="detallesDireccion"
-                                value={detallesDireccion}
-                                onChange={(e) => setDetallesDireccion(e.target.value)}
-                                placeholder='Detalles de la dirección'
+                                id="address"
+                                name="address"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
                         <div className="registro-entrada">
+                            <label htmlFor="phone">Teléfono</label>
                             <input
                                 type="tel"
-                                name="telefono"
-                                value={telefono}
-                                onChange={(e) => setTelefono(e.target.value)}
-                                placeholder='Número de Teléfono'
-                                pattern="[0-9]*"
+                                id="phone"
+                                name="phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                pattern="[0-9]*" // Solo permite números
                             />
                         </div>
                         <div className="registro-entrada">
+                            <label htmlFor="email">Correo</label>
                             <input
                                 type="email"
-                                name="correo"
-                                value={correo}
-                                onChange={(e) => setCorreo(e.target.value)}
-                                placeholder='Correo Electrónico'
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="registro-entrada">
+                            <label htmlFor="password">Contraseña</label>
                             <input
                                 type="password"
-                                name="contraseña"
-                                value={contraseña}
-                                onChange={(e) => setContraseña(e.target.value)}
-                                placeholder='Contraseña'
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className="registro-entrada">
+                            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
                             <input
                                 type="password"
-                                name="confirmarContraseña"
-                                value={confirmarContraseña}
-                                onChange={(e) => setConfirmarContraseña(e.target.value)}
-                                placeholder='Confirmar Contraseña'
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                         </div>
                     </div>
@@ -197,24 +189,24 @@ function Registro() {
                         <label>
                             <input
                                 type="checkbox"
-                                checked={terminos}
-                                onChange={() => setTerminos(!terminos)}
+                                checked={terms}
+                                onChange={() => setTerms(!terms)}
                                 required
-                                className="terminos-checkbox"
                             />
-                            <span>Acepto los <a href="/terminos" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></span>
+                            Acepto los <a href="/terminos" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>
                         </label>
                     </div>
                     <div className="registro-enviar">
                         <button type="submit" className="registro-boton">Registrarse</button>
                     </div>
-                    {mensajeExito && <p className="registro-exito">{mensajeExito}</p>}
+                    {successMessage && <p className="registro-exito">{successMessage}</p>}
                 </form>
             </div>
 
-            {modalAbierto && <Modal message={mensajeError || mensajeExito} onClose={cerrarModal} isSuccess={registroExitoso} />}
+            {/* Modal para mostrar el error o éxito */}
+            {isModalOpen && <Modal message={errorMessage || successMessage} onClose={closeModal} isSuccess={isSuccess} />}
         </div>
     );
 }
 
-export default Registro;
+export default Register;

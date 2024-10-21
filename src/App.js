@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoadingSpinner from './Components/LoadingSpinner'; // Importa el componente de carga
 
 /* PAGINAS NORMALES */
 import Dashboard from './Components/Dashboard';
@@ -79,7 +80,7 @@ function App() {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingSpinner />; // Usa el componente de carga aquí
     }
 
     return (

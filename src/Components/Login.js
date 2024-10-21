@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import email_icon from '../Components/Assets/email.png';
 import password_icon from '../Components/Assets/password.png';
+import logo from '../Components/Assets/logo.png'; // Importar el logo
 import { login } from '../services/authService';
 import Modal from './admin/Modal'; // Importar el Modal
-import '../Components/styles/Login.css';
+import './styles/Login.css'; 
+import logo1 from '../Components/Assets/servilogo.png'; // Importa la imagen
 
 const Login = ({ setUserRole }) => {
     const [email, setEmail] = useState('');
@@ -72,50 +74,50 @@ const Login = ({ setUserRole }) => {
         setSuccessMessage(''); // Limpiar mensaje de éxito
     };
 
-    
-
     return (
-        <div className='login-wraper'>
-            <div className='Menu'>
+        <div className='registro-contenedor'>
+            <div className='registro-menu'>
+            <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
                 <h1>¡Qué gusto verte por aquí!</h1>
+                <p>Inicia sesión para continuar.</p>
+                <div className="registro-olvide">
+                    ¿No tienes una cuenta?
+                    <span><br />
+                        <Link to="/register">Click Aquí</Link>
+                    </span>
+                </div>
             </div>
-
-            <div className="container">
+            <div className="registro-formulario">
                 <form onSubmit={handleLogin}>
-                    <div className="header">
-                        <div className="text">Ingreso</div>
+                    <div className="registro-header">
+                        <div className="registro-titulo">Ingreso</div>
                     </div>
-                    <div className="inputs">
-                        <div className="input">
-                            <img src={email_icon} alt="Email icon" />
+                    <div className="registro-entradas">
+                        <div className="registro-entrada">
+                            <label htmlFor="email">Correo</label>
                             <input
                                 type="email"
-                                placeholder="Correo"
+                                id="email"
+                                name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                required
                             />
                         </div>
-                        <div className="input">
-                            <img src={password_icon} alt="Password icon" />
+                        <div className="registro-entrada">
+                            <label htmlFor="password">Contraseña</label>
                             <input
                                 type="password"
-                                placeholder="Contraseña"
+                                id="password"
+                                name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                required
                             />
                         </div>
                     </div>
-                    <div className="submit-container">
-                        <button type="submit" className="submit">Iniciar Sesión</button>
+                    <div className="registro-enviar">
+                        <button type="submit" className="registro-boton">Iniciar Sesión</button>
                     </div>
-                    <div className="forgot-password">
-                        ¿No tienes una cuenta?
-                        <span> <br />
-                            <Link to="/register">Click Aquí</Link>
-                        </span>
-                    </div>
+                    {successMessage && <p className="registro-exito">{successMessage}</p>}
                 </form>
             </div>
 

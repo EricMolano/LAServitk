@@ -19,10 +19,12 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.11.3",
     "react": "^18.3.1",
+    "react-data-table-component": "^7.6.2",
     "react-dom": "^18.3.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.26.2",
     "react-scripts": "^5.0.1",
+    "react-spinners": "^0.14.1",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
