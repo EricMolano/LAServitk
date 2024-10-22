@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import Modal from '../cliente/ModalCliente'; // Import the modal
+
 import '../styles/Edit.css';
 
 const vehicleData = {
@@ -170,6 +172,8 @@ const EditVehicle = () => {
     const [error, setError] = useState('');
     const [models, setModels] = useState([]);
     const [years, setYears] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false); // Modal state
+    const [modalMessage, setModalMessage] = useState(''); // Message for the modal
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
@@ -182,13 +186,14 @@ const EditVehicle = () => {
         .then(response => {
             console.log('Vehicle fetched successfully:', response.data);
             setVehicle(response.data);
-            // Establecer modelos y años según el vehículo existente
             const { marca, modelo } = response.data;
             setModels(Object.keys(vehicleData[marca] || {}));
             setYears(vehicleData[marca][modelo] || []);
         })
         .catch(error => {
             console.error('Error fetching vehicle:', error);
+            setModalMessage('Error al cargar el vehículo.');
+            setModalOpen(true);
         });
     }, [id, token]);
 
@@ -196,7 +201,6 @@ const EditVehicle = () => {
         const { name, value } = e.target;
         setVehicle(prevState => ({ ...prevState, [name]: value }));
 
-        // Actualizar modelos y años si cambia la marca o el modelo
         if (name === 'marca') {
             setModels(Object.keys(vehicleData[value] || {}));
             setYears(vehicleData[value][vehicle.modelo] || []);
@@ -215,11 +219,22 @@ const EditVehicle = () => {
         })
         .then(response => {
             console.log('Vehicle updated successfully:', response.data);
-            navigate('/ClientDashboard'); // Redirige al dashboard después de actualizar el vehículo
+            setModalMessage('Vehículo actualizado exitosamente.');
+            setModalOpen(true);
+            // Optionally, you can navigate after a short delay
+            setTimeout(() => {
+                navigate('/ClientDashboard'); // Redirige al dashboard después de actualizar el vehículo
+            }, 2000);
         })
         .catch(error => {
             console.error('Error updating vehicle:', error);
+            setModalMessage('Error al actualizar el vehículo. Intenta nuevamente.');
+            setModalOpen(true);
         });
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
 
     return (
@@ -294,10 +309,9 @@ const EditVehicle = () => {
                         ))}
                     </select>
                 </div>
-               
-            
                 <button type="submit">Actualizar Vehículo</button>
             </form>
+            <Modal isOpen={modalOpen} onClose={handleCloseModal} message={modalMessage} />
         </div>
     );
 };
