@@ -39,6 +39,7 @@ import VehiculosE from './Components/empleado/VehiculosE';
 import InventoryE from './Components/empleado/InventoryE'; 
 import ServiciosE from './Components/empleado/ServiciosE'; 
 import AgregarServicioE from './Components/empleado/AgregarServicioE'; 
+import VerSolicitudesE from './Components/empleado/VerSolicitudesE'; // Importa el componente VerSolicitudes
 
 /* PAGINAS CLIENTE */
 import Profile from './Components/cliente/Profile';
@@ -99,6 +100,9 @@ function App() {
                 <Route path="/terminos" element={<Terminos />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Ruta para restablecimiento de contraseña */}
+                <Route path="/VerSolicitudes" element={<VerSolicitudes />} />
+
+
 
                 {/* Rutas públicas */}
                 <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
@@ -141,6 +145,7 @@ function App() {
                 <Route path="/InventoryE" element={<PrivateRoute element={<InventoryE />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/edit-profileE" element={<PrivateRoute element={<EditProfileE />} userRole={userRole} requiredRole={1} />} />
                 <Route path="/ServiciosE" element={<PrivateRoute element={<ServiciosE />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/VerSolicitudesE" element={<PrivateRoute element={<VerSolicitudesE />} userRole={userRole} requiredRole={1} />} /> {/* Ruta para ver solicitudes */}
                 <Route path="/agregar-servicioE" element={<PrivateRoute element={<AgregarServicioE />} userRole={userRole} requiredRole={1} />} />
             </Routes>
         </Router>

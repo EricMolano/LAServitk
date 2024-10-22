@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import './styles/VerSolicitudes.css'; // Asegúrate de tener un archivo CSS para los estilos
-import Sidebar from './admin/Slidebara';
+import '../styles/VerSolicitudes.css'; // Asegúrate de tener un archivo CSS para los estilos
+import Sidebar from '../empleado/SlidebarE';
 
-function VerSolicitudes() {
+function VerSolicitudesE() {
     const [solicitudes, setSolicitudes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -147,4 +147,4 @@ function VerSolicitudes() {
     );
 }
 
-export default VerSolicitudes;
+export default VerSolicitudesE;

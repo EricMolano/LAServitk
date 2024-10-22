@@ -7,7 +7,7 @@ import '../styles/Usuarios.css'; // Reutilizar los estilos de Usuarios
 
 export const API_URL = "http://localhost:2071/api";
 
-function Vehiculos({ handleCardClick }) {
+function Vehiculos() {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -83,63 +83,68 @@ function Vehiculos({ handleCardClick }) {
 
     return (
         <div className="informacion-usuarios-content">
-            <Sidebar />
-
-            {/* Campo de búsqueda */}
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-            />
-            
-            <DataTable
-                title="Información de Vehículos"
-                columns={columns}
-                data={filteredVehicles}
-                pagination
-                highlightOnHover
-                striped
-                noDataComponent="No hay vehículos disponibles."
-                responsive
-                style={{ marginTop: '10px', fontSize: '0.8rem' }} // Ajusta el tamaño de fuente
-                customStyles={{
-                    table: {
-                        style: {
-                            fontSize: '0.8rem', // Ajusta el tamaño de la fuente para todo el DataTable
-                            maxWidth: '100%', // Asegura que el DataTable no exceda el ancho del contenedor
-                        },
-                    },
-                    head: {
-                        style: {
-                            backgroundColor: '#f2f2f2',
-                            fontWeight: 'bold',
-                            fontSize: '0.9rem', // Ajusta el tamaño de la fuente del encabezado
-                            padding: '10px', // Ajusta el espaciado del encabezado
-                            whiteSpace: 'nowrap', // Evita que el texto se corte
-                            overflow: 'hidden', // Oculta el desbordamiento
-                            textOverflow: 'ellipsis', // Añade puntos suspensivos si el texto es demasiado largo
-                        },
-                    },
-                    cells: {
-                        style: {
-                            padding: '10px', // Ajusta el espaciado interno de las celdas
-                            fontSize: '0.8rem', // Ajusta el tamaño de fuente de las celdas
-                            whiteSpace: 'normal', // Permite el ajuste de línea
-                            wordBreak: 'break-word', // Rompe las palabras largas
-                            fontFamily: 'inherit', // Asegura que la fuente sea la misma que el resto
-                        },
-                    },
-                }}
-                paginationComponentOptions={{
-                    rowsPerPageText: 'Filas por página',
-                    rangeSeparatorText: 'de',
-                    noRowsPerPage: false,
-                    selectAllRowsItem: true,
-                    selectAllRowsItemText: 'Todos',
-                }}
-            />
+            <div className="sidebar-wrapper">
+                <Sidebar />
+            </div>
+            <div className="content-wrapper">
+                {/* Campo de búsqueda */}
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                />
+                
+                <div className="datatable-container">
+                    <DataTable
+                        title="Información de Vehículos"
+                        columns={columns}
+                        data={filteredVehicles}
+                        pagination
+                        highlightOnHover
+                        striped
+                        noDataComponent="No hay vehículos disponibles."
+                        responsive
+                        style={{ marginTop: '10px', fontSize: '0.8rem' }} // Ajusta el tamaño de fuente
+                        customStyles={{
+                            table: {
+                                style: {
+                                    fontSize: '0.8rem', // Ajusta el tamaño de la fuente para todo el DataTable
+                                    maxWidth: '100%', // Asegura que el DataTable no exceda el ancho del contenedor
+                                },
+                            },
+                            head: {
+                                style: {
+                                    backgroundColor: '#f2f2f2',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9rem', // Ajusta el tamaño de la fuente del encabezado
+                                    padding: '10px', // Ajusta el espaciado del encabezado
+                                    whiteSpace: 'nowrap', // Evita que el texto se corte
+                                    overflow: 'hidden', // Oculta el desbordamiento
+                                    textOverflow: 'ellipsis', // Añade puntos suspensivos si el texto es demasiado largo
+                                },
+                            },
+                            cells: {
+                                style: {
+                                    padding: '10px', // Ajusta el espaciado interno de las celdas
+                                    fontSize: '0.8rem', // Ajusta el tamaño de fuente de las celdas
+                                    whiteSpace: 'normal', // Permite el ajuste de línea
+                                    wordBreak: 'break-word', // Rompe las palabras largas
+                                    fontFamily: 'inherit', // Asegura que la fuente sea la misma que el resto
+                                },
+                            },
+                        }}
+                        paginationComponentOptions={{
+                            rowsPerPageText: 'Filas por página',
+                            rangeSeparatorText: 'de',
+                            noRowsPerPage: false,
+                            selectAllRowsItem: true,
+                            selectAllRowsItemText: 'Todos',
+                        }}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

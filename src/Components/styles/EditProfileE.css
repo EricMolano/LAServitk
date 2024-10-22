@@ -1,0 +1,97 @@
+/* Contenedor principal del formulario */
+.edit-profile-container {
+    margin: auto;
+    margin-top: 80px;
+    width: 90%;
+    max-width: 600px;
+    background: #f5f5f5;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Título del formulario */
+.edit-profile-container h1 {
+    text-align: center;
+    color: #e51e1e;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Estilo de las etiquetas y campos de formulario */
+.edit-profile-container label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #424242;
+    font-weight: 500;
+}
+
+/* Estilos para los campos de texto */
+.edit-profile-container input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b0bec5;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #424242;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Efecto en el foco de los campos */
+.edit-profile-container input[type="text"]:focus {
+    border-color: #f66464;
+    outline: none;
+}
+
+/* Estilo del botón de actualización */
+.edit-profile-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e51e1e;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Hover del botón */
+.edit-profile-container button:hover {
+    background-color: #c01515;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #e53935;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 600px) {
+    .edit-profile-container {
+        padding: 20px;
+        margin-top: 100px;
+    }
+
+    .edit-profile-container h1 {
+        font-size: 24px;
+    }
+
+    .edit-profile-container input {
+        font-size: 14px;
+    }
+
+    .edit-profile-container button {
+        font-size: 14px;
+    }
+}

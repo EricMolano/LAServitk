@@ -732,3 +732,37 @@ nav {
         font-size: 16px; /* Further adjust font size for very small screens */
     }
 }
+/* Estilos para los enlaces convertidos en botones */
+.button-link {
+    padding: 10px 20px;
+    color: white;
+    background-color: #ffffff;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s ease;
+    font-weight: 300;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.button-link:hover {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.register-link {
+    background-color: #c62828; /* Color verde para 'Registrarse' */
+}
+
+.register-link:hover {
+    background-color: #ffffff; /* Hover verde más oscuro */
+}
+
+.login-link {
+    background-color: #c62828; /* Color azul para 'Ingresar' */
+}
+
+.login-link:hover {
+    background-color: #ffffff; /* Hover azul más oscuro */
+}

@@ -8,33 +8,34 @@ const Sidebar = () => {
 
     const handlePerfilClick = () => {
         console.log("Perfil clickeado");
-        navigate('/ProfileE'); // Cambia la ruta según sea necesario
+        navigate('/ProfileA'); // Cambia la ruta según sea necesario
     };
 
     const handleVehiculosClick = () => {
         console.log("Vehículos clickeado");
-        navigate('/VehiculosE'); // Cambia la ruta según sea necesario
+        navigate('/Vehiculos'); // Cambia la ruta según sea necesario
     };
 
     const handleServiciosClick = () => {
         console.log("Servicios clickeado");
-        navigate('/ServiciosE'); // Cambia la ruta según sea necesario
+        navigate('/Servicios'); // Cambia la ruta según sea necesario
     };
 
     const handleProductosClick = () => {
         console.log("Inventario clickeado");
-        navigate('/InventoryE'); // Cambia la ruta según sea necesario
+        navigate('/Inventory'); // Cambia la ruta según sea necesario
     };
 
     const handleUsuariosClick = () => {
         console.log("Usuarios clickeado");
-        navigate('/UsuariosE'); // Cambia la ruta según sea necesario
+        navigate('/Usuarios'); // Cambia la ruta según sea necesario
     };
 
     const handleSolicitudesClick = () => {
         console.log("Solicitudes clickeado");
-        navigate('/VerSolicitudesE'); // Cambia la ruta según sea necesario
+        navigate('/VerSolicitudes'); // Cambia la ruta según sea necesario
     };
+
 
     const handleLogout = () => {
         console.log("Cerrando sesión...");
@@ -42,10 +43,14 @@ const Sidebar = () => {
         navigate('/'); // Redirige al menú principal de admin
     };
 
+    const handleBackToMenu = () => {
+        console.log("Volviendo al menú...");
+        navigate('/AdminDashboard'); // Redirige al menú principal de admin
+    };
 
     return (
         <div className="sidebar">
-            <h3 className="sidebar-title">Menú Empleado</h3>
+            <h3 className="sidebar-title">Menú Admin</h3>
             <nav>
                 <div className='nav-container-3'>
                     <div className='nav-buttons-3'>
@@ -55,8 +60,8 @@ const Sidebar = () => {
                         <button className='btn-servicios-3 btn-base' onClick={handleServiciosClick}>Servicios</button>
                         <button className='btn-inventario-3 btn-base' onClick={handleProductosClick}>Inventario</button>
                         <button className='btn-solicitudes-3 btn-base' onClick={handleSolicitudesClick}>Solicitudes</button>
+                        <button className='btn-back-menu-3 btn-base' onClick={handleBackToMenu}>Volver al Menú</button>
                         <button className='btn-logout-3 btn-base' onClick={handleLogout}>Cerrar Sesión</button>
-
                     </div>
                 </div>
             </nav>

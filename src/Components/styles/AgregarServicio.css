@@ -1,53 +1,40 @@
 /* AgregarServicio.css */
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2; /* Fondo gris claro */
-}
-
-.agregar-servicio-page {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-}
-
-.formulario-servicio {
+.agregar-servicio-container {
     padding: 20px;
     max-width: 800px;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
 
-.formulario-servicio h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+.agregar-servicio-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.formulario-servicio .form-row {
+.form-row {
     display: flex;
     gap: 20px;
 }
 
-.formulario-servicio .form-group {
+.form-group {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-.formulario-servicio .form-group label {
+.form-group label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #333;
 }
 
-.formulario-servicio .form-group input,
-.formulario-servicio .form-group textarea {
+.form-group select,
+.form-group input,
+.form-group textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -56,18 +43,15 @@ body {
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-.formulario-servicio .form-group input:focus,
-.formulario-servicio .form-group textarea:focus {
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
     border: 1px solid #b30000; /* Red border on focus */
     outline: none; /* Remove default outline */
     box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
 }
 
-.formulario-servicio .form-group textarea {
-    resize: vertical; /* Allow vertical resize */
-}
-
-.formulario-servicio .btn {
+button[type="submit"] {
     background-color: #b30000;
     color: white;
     border: none;
@@ -77,16 +61,15 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 20px;
 }
 
-.formulario-servicio .btn:hover {
+button[type="submit"]:hover {
     background-color: #ff4d4d; /* Lighter red on hover */
     transform: scale(1.05); /* Slightly increase size on hover */
 }
 
 .error-message {
-    color: #b30000;
-    font-size: 14px;
-    margin-bottom: 20px;
+    color: red;
+    text-align: center;
+    width: 100%;
 }

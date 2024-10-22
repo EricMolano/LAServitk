@@ -192,8 +192,6 @@ const EditVehicle = () => {
         })
         .catch(error => {
             console.error('Error fetching vehicle:', error);
-            setModalMessage('Error al cargar el vehículo.');
-            setModalOpen(true);
         });
     }, [id, token]);
 

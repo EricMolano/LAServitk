@@ -60,12 +60,13 @@ const Home = () => {
 const Header = () => {
   return (
       <header>
-          <nav>
-              <div className='link'>
-                  <Link to="/register" className='register-link'>Registrarse</Link>
-                  <Link to="/login" className='login-link'>Ingresar</Link>
-              </div>
-          </nav>
+<nav>
+    <div className='link'>
+        <Link to="/register" className='button-link register-link'>Registrarse</Link>
+        <Link to="/login" className='button-link login-link'>Ingresar</Link>
+    </div>
+</nav>
+
           <section className="textos-header hidden">
               <h1>Bienvenido</h1>
               <h2>Con La Servitk puedes arreglar tu vehiculo</h2>
@@ -170,7 +171,7 @@ const Portfolio = () => {
     ];
 
     const handleNavigate = () => {
-        navigate('/SolicitarProducto'); // Navegar a la ruta de inventario
+        navigate('/Login'); // NavegSar a la ruta de inventario
     };
 
     return (

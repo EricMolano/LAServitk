@@ -98,17 +98,17 @@ INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUE
 
 
 -- Insertar productos iniciales
-INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra, msrp)
+INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra)
 VALUES 
-('Neumáticos', 'Neumáticos de alta calidad', 50, 100.00, 120.00),
-('LED', 'Luces LED automotrices', 30, 20.00, 25.00),
-('Anticongelante', 'Líquido anticongelante para motor', 40, 15.00, 18.00),
-('Kit de Herramientas', 'Kit de herramientas para el automóvil', 25, 50.00, 60.00),
-('Aceite', 'Aceite para cambio de motor', 60, 30.00, 35.00),
-('Filtro', 'Filtros de aire para automóviles', 80, 10.00, 12.00),
-('Pastillas', 'Pastillas de freno de alta calidad', 45, 25.00, 30.00),
-('Motor', 'Partes de motor automotriz', 10, 500.00, 600.00),
-('Pinturas', 'Pinturas para carrocerías', 20, 70.00, 85.00);
+('Neumáticos', 'Neumáticos de alta calidad', 50, 100.00),
+('LED', 'Luces LED automotrices', 30, 20.00),
+('Anticongelante', 'Líquido anticongelante para motor', 40, 15.00),
+('Kit de Herramientas', 'Kit de herramientas para el automóvil', 25, 50.00),
+('Aceite', 'Aceite para cambio de motor', 60, 30.00),
+('Filtro', 'Filtros de aire para automóviles', 80, 10.00),
+('Pastillas', 'Pastillas de freno de alta calidad', 45, 25.00),
+('Motor', 'Partes de motor automotriz', 10, 500.00),
+('Pinturas', 'Pinturas para carrocerías', 20, 70.00);
 
 ALTER TABLE users ADD COLUMN resetPasswordToken VARCHAR(255);
 ALTER TABLE users ADD COLUMN resetPasswordExpires BIGINT;

@@ -1,5 +1,21 @@
-/* Sidebar.css */
+/* CSS Global */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    background-image: none;/* Imagen global */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
 
+/* Aquí ignoramos el fondo solo para la clase específica */
+.no-background {
+    background-image: none; /* Elimina la imagen de fondo */
+}
+
+/* Restante del código CSS */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -13,7 +29,11 @@
     padding: 20px;
     overflow-y: auto;
     transition: width 0.3s ease;
+    background-image: none; /* Elimina la imagen de fondo */
 }
+
+/* Los demás estilos permanecen igual */
+
 
 .logo-container {
     text-align: center;
@@ -134,7 +154,7 @@
     padding: 10px 20px;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 92%;
     z-index: 1000;
 }
 
@@ -202,4 +222,85 @@
     .sidebar-menu li a .sidebar-menu-icon {
         font-size: 10px;
     }
+}
+/* Estilos para los botones del nav */
+.btn-base {
+    padding: 10px 20px;
+    color: white;
+    background-color: #c62828;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s ease;
+    font-weight: 300;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.btn-base:hover {
+    background-color: #b71c1c;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores personalizados para los botones */
+.btn-perfil-1as {
+    background-color: #f44336; /* Verde para 'Perfil' */
+}
+
+.btn-perfil-1as:hover {
+    background-color: #f44336; /* Hover verde más oscuro */
+}
+
+.btn-vehiculos-1as {
+    background-color: #f44336; /* Azul para 'Vehículos' */
+}
+
+.btn-vehiculos-1as:hover {
+    background-color: #f44336; /* Hover azul más oscuro */
+}
+
+.btn-servicios-1as {
+    background-color: #f44336; /* Amarillo para 'Servicios' */
+}
+
+.btn-servicios-1as:hover {
+    background-color: #f44336; /* Hover amarillo más oscuro */
+}
+
+.btn-cerrar-sesion-1as {
+    background-color: #f44336; /* Rojo para 'Cerrar Sesión' */
+}
+
+.btn-cerrar-sesion-1as:hover {
+    background-color: #f44336; /* Hover rojo más oscuro */
+}
+
+/* Contenedor de botones */
+.nav-container-1as {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.nav-buttons-1as {
+    display: flex;
+}
+
+
+.logout-container-1as {
+    display: flex;
+    justify-content: flex-end;
+}
+/* Aquí ignoramos el fondo solo para la clase específica */
+.no-background {
+    background-image: none; /* Elimina la imagen de fondo */
+}
+.client-dashboard-container {
+    background-image: none; /* Elimina la imagen de fondo */
 }

@@ -48,14 +48,13 @@ import carritoLogo from '../Components/Assets/carritoLogo.png';
 
 const ClientDashboard = () => {
     return (
-        <div>
+        <div className="client-dashboard-container"> {/* Añadir esta clase */}
             <Header />
             <Main />
             <Footer />
         </div>
     );
 };
-
 const Header = () => {
     const navigate = useNavigate();
 
@@ -80,20 +79,22 @@ const Header = () => {
         console.log("Servicios clickeado");
         navigate('/Services'); // Cambia la ruta según sea necesario
     };
+    
     return (
         <header>
 <nav>
     <div className='nav-container-1as'>
         <div className='nav-buttons-1as'>
-            <button1 className='btn-perfil-1as btn-base' onClick={handlePerfilClick}>Perfil</button1>
-            <button1 className='btn-vehiculos-1as btn-base' onClick={handleVehiculosClick}>Vehículos</button1>
-            <button1 className='btn-servicios-1as btn-base' onClick={handleServiciosClick}>Servicios</button1>
+            <button className='btn-perfil-1as btn-base' onClick={handlePerfilClick}>Perfil</button>
+            <button className='btn-vehiculos-1as btn-base' onClick={handleVehiculosClick}>Vehículos</button>
+            <button className='btn-servicios-1as btn-base' onClick={handleServiciosClick}>Servicios</button>
         </div>
         <div className='logout-container-1as'>
-            <button1 className='btn-cerrar-sesion-1as btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
+            <button className='btn-cerrar-sesion-1as btn-base' onClick={handleLogout}>Cerrar Sesión</button>
         </div>
     </div>
 </nav>
+
 
             <section className="textos-header hidden">
                 <h1>Bienvenido</h1>
@@ -197,7 +198,7 @@ const Portfolio = () => {
     ];
 
     const handleNavigate = () => {
-        navigate('/Inventario'); // Navegar a la ruta de inventario
+        navigate('/SolicitarProducto'); // Navegar a la ruta de inventario
     };
 
     return (

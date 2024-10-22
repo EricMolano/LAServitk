@@ -1,7 +1,12 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Fondo suave para contraste */
+    background-color: #f5f5f5; /* Fondo de respaldo si la imagen no carga */
+   /* background-image: url('../Assets/fondo1.jpg'); /* Ruta de la imagen */
+   /* background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+   /* background-position: center; /* Centra la imagen en la pantalla */
+   /* background-repeat: no-repeat; /* Evita que la imagen se repita si es más pequeña que la pantalla */
+    height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
 }
 
 .profile-container {
@@ -10,9 +15,11 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Ocupa toda la altura de la ventana */
-    color: #fff; /* Texto blanco */
+    color: rgb(0, 0, 0); /* Texto en color negro */
     padding: 20px;
+    z-index: 1; /* Asegura que el contenido se muestre encima de la imagen */
 }
+
 
 .back-button {
     align-self: flex-start; /* Alinear a la izquierda */
@@ -54,30 +61,36 @@ body {
 .profile-table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 8px; /* Bordes redondeados para la tabla */
+    overflow: hidden; /* Asegura que las celdas no sobresalgan del borde redondeado */
 }
 
 .profile-table th, .profile-table td {
     padding: 12px;
     border: 1px solid #ddd;
     text-align: left;
+    background-color: #fff; /* Fondo blanco sólido */
+    color: #333; /* Color de texto oscuro */
+    border-radius: 4px; /* Bordes redondeados para las celdas */
 }
 
 .profile-table th {
-    background-color: #f4f4f4;
-    color: #555;
+    background-color: #f4f4f4; /* Fondo gris claro para las cabeceras */
+    color: #555; /* Color del texto de la cabecera */
 }
 
 .profile-table td {
-    color: #333;
+    color: #333; /* Asegura que el texto en las celdas sea oscuro */
 }
 
 .profile-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Fondo blanco con un tono suave en las filas pares */
 }
 
-.profile-table tr:hover {
-    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+.profile-table tr:nth-child(odd) {
+    background-color: #fff; /* Fondo blanco para las filas impares */
 }
+
 
 .profile-button {
     display: block;
@@ -100,4 +113,7 @@ body {
     text-align: center;
     font-size: 1.5rem;
     color: #fff; /* Texto blanco en la carga */
+}
+element.style {
+    color: black;
 }

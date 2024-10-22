@@ -113,56 +113,59 @@ function InformacionUsuarios({ handleCardClick }) {
 
   return (
     <div className="informacion-usuarios-content">
-      <Sidebar />
+      <div className="sidebar-wrapper">
+        <Sidebar />
+      </div>
+      <div className="content-wrapper">
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
 
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-      />
-
-      <DataTable
-        title="Información de Usuarios"
-        columns={columns}
-        data={filteredUsers}
-        pagination
-        highlightOnHover
-        striped
-        noDataComponent="No hay usuarios disponibles."
-        responsive
-        customStyles={{
-          table: {
-            style: {
-              maxWidth: '100%',
-              width: '100%', // Asegura que la tabla use todo el ancho disponible
+        <DataTable
+          title="Información de Usuarios"
+          columns={columns}
+          data={filteredUsers}
+          pagination
+          highlightOnHover
+          striped
+          noDataComponent="No hay usuarios disponibles."
+          responsive
+          customStyles={{
+            table: {
+              style: {
+                maxWidth: '100%',
+                width: '100%', // Asegura que la tabla use todo el ancho disponible
+              },
             },
-          },
-          head: {
-            style: {
-              backgroundColor: '#f2f2f2',
-              fontWeight: 'bold',
-              whiteSpace: 'nowrap',
-              fontSize: '1rem', // Ajusta el tamaño de la fuente del encabezado
+            head: {
+              style: {
+                backgroundColor: '#f2f2f2',
+                fontWeight: 'bold',
+                whiteSpace: 'nowrap',
+                fontSize: '1rem', // Ajusta el tamaño de la fuente del encabezado
+              },
             },
-          },
-          cells: {
-            style: {
-              whiteSpace: 'normal',
-              wordBreak: 'break-word',
-              fontSize: '0.9rem', // Ajusta el tamaño de la fuente de las celdas
+            cells: {
+              style: {
+                whiteSpace: 'normal',
+                wordBreak: 'break-word',
+                fontSize: '0.9rem', // Ajusta el tamaño de la fuente de las celdas
+              },
             },
-          },
-        }}
-        paginationComponentOptions={{
-          rowsPerPageText: 'Filas por página',
-          rangeSeparatorText: 'de',
-          noRowsPerPage: false,
-          selectAllRowsItem: true,
-          selectAllRowsItemText: 'Todos',
-        }}
-      />
+          }}
+          paginationComponentOptions={{
+            rowsPerPageText: 'Filas por página',
+            rangeSeparatorText: 'de',
+            noRowsPerPage: false,
+            selectAllRowsItem: true,
+            selectAllRowsItemText: 'Todos',
+          }}
+        />
+      </div>
     </div>
   );
 }
