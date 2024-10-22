@@ -48,6 +48,28 @@ function EditInventory() {
         setSuccessMessage(''); // Limpiar mensajes anteriores
         setIsModalOpen(false); // Cerrar modal anterior
 
+        // Validaciones
+        if (!formData.nombre || !formData.cantidad_en_stock || !formData.precio_compra) {
+            setErrorMessage('Todos los campos son obligatorios.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
+
+        if (formData.cantidad_en_stock < 0) {
+            setErrorMessage('La cantidad en stock no puede ser negativa.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
+
+        if (formData.precio_compra <= 0) {
+            setErrorMessage('El precio de compra debe ser un número positivo.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
+
         try {
             await axios.put(`http://localhost:2071/api/inventory/${id}`, formData, {
                 headers: {

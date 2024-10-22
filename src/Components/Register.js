@@ -27,8 +27,8 @@ function Register() {
         if (!name) newError = '¡El nombre debe ser obligatorio!';
         else if (!surname) newError = '¡El apellido debe ser obligatorio!';
         else if (!address) newError = '¡La dirección debe ser obligatoria!';
-        else if (!/^((Avenida|Calle|Transversal)\s).*/i.test(address)) {
-            newError = '¡La dirección debe empezar con Avenida, Calle o Transversal!';
+        else if (!/^((Avenida|Calle|Transversal|Diagonal|Carrera)\s).*/i.test(address)) {
+            newError = '¡La dirección debe empezar con Avenida, Calle, Transversal, Diagonal o Carrera!';
         } else if (!phone) {
             newError = '¡El número debe ser obligatorio!';
         } else if (!/^3\d{9}$/.test(phone)) {

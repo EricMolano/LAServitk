@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Edit.css'; // Asegúrate de que la ruta al archivo CSS sea correcta
+import Modal from '../cliente/ModalCliente'; // Import the modal
+import '../styles/Edit.css'; // Ensure this path is correct
 
-const API_URL = 'http://localhost:2071/api'; // Define la URL base de la API
+const API_URL = 'http://localhost:2071/api';
 
 const EditProfile = () => {
     const [userData, setUserData] = useState({
         name: '',
         surname: '',
-        addressType: '', // Para el tipo de dirección
-        addressDetail: '', // Para el resto de la dirección
+        addressType: '',
+        addressDetail: '',
         phone: '',
     });
     const [error, setError] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false); // Modal state
+    const [modalMessage, setModalMessage] = useState(''); // Message for the modal
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,13 +31,14 @@ const EditProfile = () => {
                 setUserData({
                     name: response.data.name,
                     surname: response.data.surname,
-                    addressType: response.data.addressType || '', // Asume que el tipo de dirección se almacena en el usuario
-                    addressDetail: response.data.addressDetail || '', // Asume que el resto de la dirección se almacena en el usuario
+                    addressType: response.data.addressType || '',
+                    addressDetail: response.data.addressDetail || '',
                     phone: response.data.phone,
                 });
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                setError('Error al obtener los datos del usuario');
+                setModalMessage('Error al obtener los datos del usuario');
+                setModalOpen(true);
             }
         };
 
@@ -50,7 +54,7 @@ const EditProfile = () => {
     };
 
     const validatePhone = (phone) => {
-        const phonePattern = /^3\d{9}$/; // Comienza con 3 y tiene 9 dígitos
+        const phonePattern = /^3\d{9}$/;
         return phonePattern.test(phone);
     };
 
@@ -59,42 +63,53 @@ const EditProfile = () => {
         const token = localStorage.getItem('token');
 
         // Validaciones
-        if (userData.name.length > 20) {
-            setError('El nombre no puede exceder los 20 caracteres.');
+        if (!userData.name) {
+            setModalMessage('¡El nombre debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
-        if (userData.surname.length > 20) {
-            setError('El apellido no puede exceder los 20 caracteres.');
-            return;
-        }
-        if (!userData.addressType) {
-            setError('Debes seleccionar un tipo de dirección.');
+        if (!userData.surname) {
+            setModalMessage('¡El apellido debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
         if (!userData.addressDetail) {
-            setError('Debes ingresar el detalle de la dirección.');
+            setModalMessage('¡La dirección debe ser obligatoria!');
+            setModalOpen(true);
+            return;
+        }
+        
+        if (!userData.phone) {
+            setModalMessage('¡El número debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
         if (!validatePhone(userData.phone)) {
-            setError('El teléfono debe comenzar con 3 y tener 9 dígitos.');
+            setModalMessage('¡El número debe tener 9 dígitos y comenzar con 3!');
+            setModalOpen(true);
             return;
         }
 
         try {
             const response = await axios.put(`${API_URL}/user/update-profile`, {
                 ...userData,
-                address: `${userData.addressType} ${userData.addressDetail}`, // Combina ambos campos para la dirección
+                address: `${userData.addressType} ${userData.addressDetail}`,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             console.log('Perfil actualizado exitosamente:', response.data);
-            navigate('/ClientDashboard'); // Redirige al dashboard o a donde desees
+            navigate('/ClientDashboard');
         } catch (error) {
-            setError('Error al actualizar perfil');
+            setModalMessage('Error al actualizar perfil');
             console.error('Error al actualizar perfil:', error.response?.data || error.message);
+            setModalOpen(true);
         }
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
 
     return (
@@ -108,7 +123,7 @@ const EditProfile = () => {
                         name="name"
                         value={userData.name}
                         onChange={handleChange}
-                        maxLength={20} // Limite de caracteres
+                        maxLength={20}
                     />
                 </label>
                 <label>
@@ -118,7 +133,7 @@ const EditProfile = () => {
                         name="surname"
                         value={userData.surname}
                         onChange={handleChange}
-                        maxLength={20} // Limite de caracteres
+                        maxLength={20}
                     />
                 </label>
                 <label>
@@ -127,7 +142,7 @@ const EditProfile = () => {
                         name="addressType"
                         value={userData.addressType}
                         onChange={handleChange}
-                        required // Obligatorio
+                        required
                     >
                         <option value="">Selecciona un tipo de dirección</option>
                         <option value="Calle">Calle</option>
@@ -135,7 +150,6 @@ const EditProfile = () => {
                         <option value="Carrera">Carrera</option>
                         <option value="Diagonal">Diagonal</option>
                         <option value="Transversal">Transversal</option>
-                        {/* Agrega más opciones según sea necesario */}
                     </select>
                 </label>
                 <label>
@@ -146,7 +160,7 @@ const EditProfile = () => {
                         value={userData.addressDetail}
                         onChange={handleChange}
                         placeholder="Ej. 123, Ciudad"
-                        required // Obligatorio
+                        required
                     />
                 </label>
                 <label>
@@ -160,7 +174,7 @@ const EditProfile = () => {
                 </label>
                 <button type="submit">Actualizar Perfil</button>
             </form>
-            {error && <p className="error-message">{error}</p>}
+            <Modal isOpen={modalOpen} onClose={handleCloseModal} message={modalMessage} />
         </div>
     );
 };

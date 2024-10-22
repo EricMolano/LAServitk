@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../cliente/ModalCliente'; // Asegúrate de que esta ruta sea correcta
+import '../styles/Edit.css'; // Asegúrate de que esta ruta sea correcta
 
 const API_URL = 'http://localhost:2071/api'; // Base URL for the API
 
@@ -13,6 +15,8 @@ const EditProfileE = () => {
         phone: '',
     });
     const [error, setError] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false); // Estado del modal
+    const [modalMessage, setModalMessage] = useState(''); // Mensaje para el modal
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,6 +38,8 @@ const EditProfileE = () => {
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 setError('Error al obtener los datos del usuario');
+                setModalMessage('Error al obtener los datos del usuario');
+                setModalOpen(true);
             }
         };
 
@@ -58,24 +64,34 @@ const EditProfileE = () => {
         const token = localStorage.getItem('token');
 
         // Validaciones
-        if (userData.name.length > 20) {
-            setError('El nombre no puede exceder los 20 caracteres.');
+        if (!userData.name) {
+            setModalMessage('¡El nombre debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
-        if (userData.surname.length > 20) {
-            setError('El apellido no puede exceder los 20 caracteres.');
+        if (!userData.surname) {
+            setModalMessage('¡El apellido debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
         if (!userData.addressType) {
-            setError('Debes seleccionar un tipo de dirección.');
+            setModalMessage('¡Debes seleccionar un tipo de dirección!');
+            setModalOpen(true);
             return;
         }
         if (!userData.addressDetail) {
-            setError('Debes ingresar el detalle de la dirección.');
+            setModalMessage('¡La dirección debe ser obligatoria!');
+            setModalOpen(true);
+            return;
+        }
+        if (!userData.phone) {
+            setModalMessage('¡El número debe ser obligatorio!');
+            setModalOpen(true);
             return;
         }
         if (!validatePhone(userData.phone)) {
-            setError('El teléfono debe comenzar con 3 y tener 9 dígitos.');
+            setModalMessage('¡El número debe tener 9 dígitos y comenzar con 3!');
+            setModalOpen(true);
             return;
         }
 
@@ -92,14 +108,18 @@ const EditProfileE = () => {
             navigate('/EmployeeDashboard'); // Redirige al dashboard del empleado
         } catch (error) {
             console.error('Error al actualizar perfil:', error);
-            setError('Error al actualizar perfil');
+            setModalMessage('Error al actualizar perfil');
+            setModalOpen(true);
         }
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
 
     return (
         <div className="edit-profile-container">
             <h1>Editar Perfil</h1>
-            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Nombre</label>
@@ -167,6 +187,7 @@ const EditProfileE = () => {
                 </div>
                 <button type="submit" className="submit-button">Actualizar</button>
             </form>
+            <Modal isOpen={modalOpen} onClose={handleCloseModal} message={modalMessage} />
         </div>
     );
 };

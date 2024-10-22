@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Modal from './Modal';  // Asegúrate de importar el componente Modal
+import Modal from './Modal'; // Importar el componente Modal
 
 function AddInventory() {
     const [formData, setFormData] = useState({
@@ -33,6 +33,28 @@ function AddInventory() {
         setErrorMessage(''); // Limpiar mensajes anteriores
         setSuccessMessage(''); // Limpiar mensajes anteriores
         setIsModalOpen(false); // Cerrar modal anterior
+
+        // Validaciones
+        if (!formData.nombre || !formData.cantidad_en_stock || !formData.precio_compra) {
+            setErrorMessage('Todos los campos son obligatorios.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
+
+        if (formData.cantidad_en_stock < 0) {
+            setErrorMessage('La cantidad en stock no puede ser negativa.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
+
+        if (formData.precio_compra <= 0) {
+            setErrorMessage('El precio de compra debe ser un número positivo.'); // Mensaje de error
+            setIsSuccess(false); // Indicar error
+            setIsModalOpen(true); // Mostrar modal
+            return;
+        }
 
         try {
             await axios.post('http://localhost:2071/api/inventory', formData, {

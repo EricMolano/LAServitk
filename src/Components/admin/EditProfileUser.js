@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserById, updateUser } from '../../services/authService';
+import Modal from '../cliente/ModalCliente'; // Import the modal
 
 function EditProfileUser() {
     const { id } = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false); // Modal state
+    const [modalMessage, setModalMessage] = useState(''); // Message for the modal
     const [formData, setFormData] = useState({
         name: '',
         surname: '',
@@ -30,7 +33,8 @@ function EditProfileUser() {
                     phone: userData.phone || ''
                 });
             } catch (error) {
-                setError(error.message);
+                setModalMessage('Error al obtener los datos del usuario');
+                setModalOpen(true);
             } finally {
                 setLoading(false);
             }
@@ -57,32 +61,49 @@ function EditProfileUser() {
         e.preventDefault();
 
         // Validaciones antes de enviar el formulario
+        if (!formData.name) {
+            setModalMessage('¡El nombre es obligatorio!');
+            setModalOpen(true);
+            return;
+        }
         if (formData.name.length > 20) {
-            setError('El nombre no puede exceder los 20 caracteres.');
+            setModalMessage('El nombre no puede exceder los 20 caracteres.');
+            setModalOpen(true);
             return;
         }
         if (!validateOnlyLetters(formData.name)) {
-            setError('El nombre solo debe contener letras.');
+            setModalMessage('El nombre solo debe contener letras.');
+            setModalOpen(true);
+            return;
+        }
+        if (!formData.surname) {
+            setModalMessage('¡El apellido es obligatorio!');
+            setModalOpen(true);
             return;
         }
         if (formData.surname.length > 20) {
-            setError('El apellido no puede exceder los 20 caracteres.');
+            setModalMessage('El apellido no puede exceder los 20 caracteres.');
+            setModalOpen(true);
             return;
         }
         if (!validateOnlyLetters(formData.surname)) {
-            setError('El apellido solo debe contener letras.');
+            setModalMessage('El apellido solo debe contener letras.');
+            setModalOpen(true);
             return;
         }
         if (!formData.addressType) {
-            setError('Debes seleccionar un tipo de dirección.');
+            setModalMessage('Debes seleccionar un tipo de dirección.');
+            setModalOpen(true);
             return;
         }
         if (!formData.addressDetail) {
-            setError('Debes ingresar el detalle de la dirección.');
+            setModalMessage('¡La dirección debe ser obligatoria!');
+            setModalOpen(true);
             return;
         }
         if (!validatePhone(formData.phone)) {
-            setError('El teléfono debe comenzar con 3 y tener 10 dígitos.');
+            setModalMessage('El teléfono debe comenzar con 3 y tener 10 dígitos.');
+            setModalOpen(true);
             return;
         }
 
@@ -95,13 +116,13 @@ function EditProfileUser() {
                 navigate('/AdminDashboard'); // Redirigir al dashboard después de la actualización
             })
             .catch(error => {
-                setError(error.message);
+                setModalMessage('Error al actualizar el perfil');
+                setModalOpen(true);
             });
     };
 
     if (loading) return <div>Cargando...</div>;
-    if (error) return <div>{error}</div>;
-
+    
     return (
         <div className="edit-profile-user-content">
             <h2>Editar Perfil del Usuario</h2>
@@ -116,6 +137,7 @@ function EditProfileUser() {
                             value={formData.name}
                             onChange={handleChange}
                             maxLength={20} // Limite de caracteres
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -127,6 +149,7 @@ function EditProfileUser() {
                             value={formData.surname}
                             onChange={handleChange}
                             maxLength={20} // Limite de caracteres
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -172,6 +195,7 @@ function EditProfileUser() {
                     <button type="submit">Guardar Cambios</button>
                 </form>
             )}
+            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} message={modalMessage} />
         </div>
     );
 }
