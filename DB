@@ -131,3 +131,6 @@ VALUES (
       
 -- UPDATE users SET rol_id = 3 WHERE email = 'admin@admin.com';
 -- UPDATE users SET rol_id = 1 WHERE email = 'empleado@empleado.com';
+
+ALTER TABLE users ADD COLUMN resetPasswordToken VARCHAR(255);
+ALTER TABLE users ADD COLUMN resetPasswordExpires BIGINT;

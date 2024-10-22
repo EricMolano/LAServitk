@@ -114,6 +114,9 @@ const Login = ({ setUserRole }) => {
                             />
                         </div>
                     </div>
+                    <div className="registro-olvide">
+                        <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+                    </div>
                     <div className="registro-enviar">
                         <button type="submit" className="registro-boton">Iniciar Sesión</button>
                     </div>

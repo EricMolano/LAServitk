@@ -197,7 +197,7 @@
 
 .registro-exito,
 .registro-olvide {
-  color: #555;
+  color: #000000;
   text-align: center;
   margin-top: 10px;
   width: 100%; /* Asegurar que los mensajes ocupen todo el ancho */
@@ -205,13 +205,11 @@
 
 .registro-olvide {
   margin-top: 20px;
-  color: #fff; /* Cambiar color del texto */
+  color: #000000; /* Cambiar color del texto */
 }
-
 .registro-olvide a {
-  color: #ffcccb; /* Cambiar color del enlace */
+  color: #333;
 }
-
 .registro-olvide a:hover {
   text-decoration: underline;
 }

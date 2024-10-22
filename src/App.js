@@ -13,6 +13,8 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Terminos from './Components/Terminos';
 import Inventarios from './Components/Inventarios';
+import ForgotPassword from './Components/ForgotPassword'; // Importa el componente de recuperación de contraseña
+import ResetPassword from './Components/ResetPassword'; // Importa el componente de restablecimiento de contraseña
 
 /* PAGINAS ADMIN */
 import UpdateServices from './Components/admin/UpdateServices'; 
@@ -62,7 +64,7 @@ function App() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            axios.get('http://localhost:5000/api/user/data', {
+            axios.get('http://localhost:2071/api/user/data', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -95,7 +97,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/terminos" element={<Terminos />} />
                 <Route path="/Inventarios" element={<Inventarios />} />
-
+                <Route path="/forgot-password" element={<ForgotPassword />} /> {"."}
+                <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Ruta para restablecimiento de contraseña */}
 
                 {/* Rutas públicas */}
                 <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />

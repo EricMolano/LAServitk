@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from './SlidebarE'; // Importar la Sidebar específica para empleados
+import '../styles/Edit.css'; // Asegúrate de tener un archivo CSS para los estilos
 
 const API_URL = 'http://localhost:2071/api'; // Base URL for the API
 
@@ -97,76 +99,84 @@ const EditProfileE = () => {
     };
 
     return (
-        <div className="edit-profile-container">
-            <h1>Editar Perfil</h1>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Nombre</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={userData.name}
-                        onChange={handleChange}
-                        maxLength={20} // Límite de 20 caracteres
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="surname">Apellido</label>
-                    <input
-                        type="text"
-                        id="surname"
-                        name="surname"
-                        value={userData.surname}
-                        onChange={handleChange}
-                        maxLength={20} // Límite de 20 caracteres
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="addressType">Tipo de Dirección</label>
-                    <select
-                        id="addressType"
-                        name="addressType"
-                        value={userData.addressType}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Selecciona un tipo de dirección</option>
-                        <option value="Calle">Calle</option>
-                        <option value="Avenida">Avenida</option>
-                        <option value="Carrera">Carrera</option>
-                        <option value="Diagonal">Diagonal</option>
-                        <option value="Transversal">Transversal</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="addressDetail">Detalle de Dirección</label>
-                    <input
-                        type="text"
-                        id="addressDetail"
-                        name="addressDetail"
-                        value={userData.addressDetail}
-                        onChange={handleChange}
-                        placeholder="Ej. 123, Ciudad"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="phone">Teléfono</label>
-                    <input
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        value={userData.phone}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit" className="submit-button">Actualizar</button>
-            </form>
+        <div className="profile-page">
+            <div className="edit-profile-container">
+                <h1>Editar Perfil</h1>
+                {error && <p className="error-message">{error}</p>}
+                <form onSubmit={handleSubmit} className="profile-form">
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="name">Nombre</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={userData.name}
+                                onChange={handleChange}
+                                maxLength={20} // Límite de 20 caracteres
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="surname">Apellido</label>
+                            <input
+                                type="text"
+                                id="surname"
+                                name="surname"
+                                value={userData.surname}
+                                onChange={handleChange}
+                                maxLength={20} // Límite de 20 caracteres
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="addressType">Tipo de Dirección</label>
+                            <select
+                                id="addressType"
+                                name="addressType"
+                                value={userData.addressType}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un tipo de dirección</option>
+                                <option value="Calle">Calle</option>
+                                <option value="Avenida">Avenida</option>
+                                <option value="Carrera">Carrera</option>
+                                <option value="Diagonal">Diagonal</option>
+                                <option value="Transversal">Transversal</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="addressDetail">Detalle de Dirección</label>
+                            <input
+                                type="text"
+                                id="addressDetail"
+                                name="addressDetail"
+                                value={userData.addressDetail}
+                                onChange={handleChange}
+                                placeholder="Ej. 123, Ciudad"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="phone">Teléfono</label>
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                value={userData.phone}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <button type="submit" className="submit-button">Actualizar</button>
+                </form>
+            </div>
         </div>
     );
 };

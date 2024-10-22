@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:2071/api';
 
-
 // ===============================================================
 // Componente Registro
 // ===============================================================
@@ -19,7 +18,6 @@ export const register = (userData) => {
             
         });
 };
-
 
 // ===============================================================
 // Componente Login
@@ -39,7 +37,6 @@ export const login = (email, password) => {
             throw new Error(error.response?.data?.message || 'Error en el inicio de sesión');
         });
 };
-
 
 // ===============================================================
 // Componente Actualizar perfil
@@ -153,7 +150,6 @@ export const addInventory = (inventoryData) => {
     });
 };
 
-
 // ===============================================================
 // Componente Actualizar en inventario
 // ===============================================================
@@ -169,7 +165,6 @@ export const updateInventory = (id, inventoryData) => {
         throw new Error(error.response?.data?.message || 'Error al actualizar el inventario');
     });
 };
-
 
 // ===============================================================
 // Componente Obtener Usuarios
@@ -249,12 +244,12 @@ export const updateUser = (id, userData) => {
       console.error('Error al actualizar:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Error al actualizar');
     });
-  };
+};
 
 // ===============================================================
 // Componente Actualizar vehiculo
 // ===============================================================
-  export const updateVehicleUser = (idvehiculo, vehicleData) => {
+export const updateVehicleUser = (idvehiculo, vehicleData) => {
     return axios.put(`${API_URL}/update-vehicle-user/${idvehiculo}`, vehicleData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}` // Token de autenticación
@@ -281,8 +276,8 @@ export const getServices = () => {
       console.error('Error al obtener los servicios:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Error al obtener los servicios');
     });
-  };
-  export const getServicesa = () => {
+};
+export const getServicesa = () => {
     return axios.get(`${API_URL}/api/serviciosa`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}` // Token de autenticación
@@ -293,9 +288,8 @@ export const getServices = () => {
       console.error('Error al obtener los servicios:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Error al obtener los servicios');
     });
-  };
+};
 
-  
 // ===============================================================
 // Componente Agregar servicios
 // ===============================================================
@@ -310,8 +304,7 @@ export const insertService = (serviceData) => {
       console.error('Error al registrar el servicio:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Error al registrar el servicio');
     });
-  };
-  
+};
 
 // ===============================================================
 // Componente Actualizar servicios
@@ -327,13 +320,12 @@ export const updateService = (id, serviceData) => {
       console.error('Error al actualizar el servicio:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Error al actualizar el servicio');
     });
-  };
-  
+};
 
 // ===============================================================
 // Componente Cargo de servicios
 // ===============================================================
-  export const setLoadingServices = () => {
+export const setLoadingServices = () => {
     return axios.get(`${API_URL}/servicios`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -344,4 +336,25 @@ export const updateService = (id, serviceData) => {
         console.error('Error al obtener los vehículos:', error.response?.data || error.message);
         throw new Error(error.response?.data?.message || 'Error al obtener los vehículos');
     });
+};
+
+// ===============================================================
+// Componente Recuperación de contraseña
+// ===============================================================
+export const forgotPassword = async (email) => {
+    try {
+        const response = await axios.post(`${API_URL}/forgot-password`, { email });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error al enviar el enlace de recuperación.');
+    }
+};
+
+export const resetPassword = async (token, password) => {
+    try {
+        const response = await axios.post(`${API_URL}/reset-password`, { token, password });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error al restablecer la contraseña.');
+    }
 };

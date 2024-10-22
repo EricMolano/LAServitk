@@ -1,5 +1,7 @@
 require('dotenv').config(); // Asegúrate de que esto está en la parte superior
 const express = require('express');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -43,9 +45,63 @@ app.use(express.json());
 
 // Verifica la clave secreta
 console.log('JWT_SECRET:', process.env.JWT_SECRET); // Asegúrate de que esta línea muestra la clave secreta
-app.get("/hola",(req, res)=>{
-  console.log("agus me ignora")
-})
+
+// Configuración de nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+// Ruta para la recuperación de contraseña
+app.post('/api/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+
+  if (rows.length === 0) {
+      return res.status(404).json({ message: 'Correo no encontrado' });
+  }
+
+  const token = crypto.randomBytes(20).toString('hex');
+  const resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+  await db.promise().query('UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?', [token, resetPasswordExpires, email]);
+
+  const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: 'Recuperación de Contraseña',
+      text: `Recibiste este correo porque tú (o alguien más) solicitó restablecer la contraseña de tu cuenta.\n\n` +
+            `Por favor, haz clic en el siguiente enlace o pégalo en tu navegador para completar el proceso:\n\n` +
+            `http://localhost:3000/reset-password/${token}\n\n` +
+            `Si no solicitaste esto, por favor ignora este correo y tu contraseña permanecerá sin cambios.\n`,
+  };
+
+  transporter.sendMail(mailOptions, (error, response) => {
+      if (error) {
+          console.error('Error al enviar el correo:', error);
+          return res.status(500).json({ message: 'Error al enviar el correo' });
+      }
+      res.status(200).json({ message: 'Correo de recuperación enviado' });
+  });
+});
+
+// Ruta para el restablecimiento de contraseña
+app.post('/api/reset-password', async (req, res) => {
+  const { token, password } = req.body;
+  const [rows] = await db.promise().query('SELECT * FROM users WHERE resetPasswordToken = ? AND resetPasswordExpires > ?', [token, Date.now()]);
+
+  if (rows.length === 0) {
+      return res.status(400).json({ message: 'Token inválido o expirado' });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await db.promise().query('UPDATE users SET password = ?, resetPasswordToken = NULL, resetPasswordExpires = NULL WHERE resetPasswordToken = ?', [hashedPassword, token]);
+
+  res.status(200).json({ message: 'Contraseña restablecida exitosamente' });
+});
 
 
 // ===============================================================

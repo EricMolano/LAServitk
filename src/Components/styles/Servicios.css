@@ -39,3 +39,48 @@
         margin-left: 100px; /* Adjust margin for very small screens */
     }
 }
+/* Servicios.css */
+
+.servicios-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2; /* Fondo gris claro */
+}
+
+.search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.loading-message,
+.error-message {
+    font-size: 1.5rem;
+    color: #b30000;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.botonC {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.botonC:hover {
+    background-color: #ff4d4d; /* Lighter red on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}

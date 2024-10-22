@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles/AgregarServicio.css'; // Asegúrate de tener un archivo CSS para los estilos
 
-function AgregarServicio() {
+function AgregarServicioE() {
     const [nombre_empleado, setNombreEmpleado] = useState('');
     const [nombre_cliente, setNombreCliente] = useState('');
     const [placa_vehiculo, setPlacaVehiculo] = useState('');
@@ -38,67 +39,73 @@ function AgregarServicio() {
     };
 
     return (
-        <div className="formulario-servicio">
+        <div className="add-inventory">
             <h2>Agregar Nuevo Servicio</h2>
             {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="nombre_empleado">Nombre del Empleado:</label>
-                    <input
-                        type="text"
-                        id="nombre_empleado"
-                        value={nombre_empleado}
-                        onChange={(e) => setNombreEmpleado(e.target.value)}
-                        required
-                    />
+            <form onSubmit={handleSubmit} className="inventory-form">
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor="nombre_empleado">Nombre del Empleado:</label>
+                        <input
+                            type="text"
+                            id="nombre_empleado"
+                            value={nombre_empleado}
+                            onChange={(e) => setNombreEmpleado(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="nombre_cliente">Nombre del Cliente:</label>
+                        <input
+                            type="text"
+                            id="nombre_cliente"
+                            value={nombre_cliente}
+                            onChange={(e) => setNombreCliente(e.target.value)}
+                            required
+                        />
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="nombre_cliente">Nombre del Cliente:</label>
-                    <input
-                        type="text"
-                        id="nombre_cliente"
-                        value={nombre_cliente}
-                        onChange={(e) => setNombreCliente(e.target.value)}
-                        required
-                    />
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor="placa_vehiculo">Placa del Vehículo:</label>
+                        <input
+                            type="text"
+                            id="placa_vehiculo"
+                            value={placa_vehiculo}
+                            onChange={(e) => setPlacaVehiculo(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="nombre_servicio">Nombre del Servicio:</label>
+                        <input
+                            type="text"
+                            id="nombre_servicio"
+                            value={nombre_servicio}
+                            onChange={(e) => setNombreServicio(e.target.value)}
+                            required
+                        />
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="placa_vehiculo">Placa del Vehículo:</label>
-                    <input
-                        type="text"
-                        id="placa_vehiculo"
-                        value={placa_vehiculo}
-                        onChange={(e) => setPlacaVehiculo(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="nombre_servicio">Nombre del Servicio:</label>
-                    <input
-                        type="text"
-                        id="nombre_servicio"
-                        value={nombre_servicio}
-                        onChange={(e) => setNombreServicio(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="descripcion">Descripción:</label>
-                    <textarea
-                        id="descripcion"
-                        value={descripcion}
-                        onChange={(e) => setDescripcion(e.target.value)}
-                    ></textarea>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="costo">Costo:</label>
-                    <input
-                        type="number"
-                        id="costo"
-                        value={costo}
-                        onChange={(e) => setCosto(e.target.value)}
-                        required
-                    />
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor="descripcion">Descripción:</label>
+                        <textarea
+                            id="descripcion"
+                            value={descripcion}
+                            onChange={(e) => setDescripcion(e.target.value)}
+                        ></textarea>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="costo">Costo:</label>
+                        <input
+                            type="number"
+                            id="costo"
+                            value={costo}
+                            onChange={(e) => setCosto(e.target.value)}
+                            required
+                        />
+                    </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Agregar Servicio</button>
             </form>
@@ -106,4 +113,4 @@ function AgregarServicio() {
     );
 }
 
-export default AgregarServicio;
+export default AgregarServicioE;
