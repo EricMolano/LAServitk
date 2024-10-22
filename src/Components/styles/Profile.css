@@ -10,7 +10,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Ocupa toda la altura de la ventana */
-    background: url('../Assets/fondo-perfil.jpg') no-repeat center center/cover; /* Imagen de fondo */
     color: #fff; /* Texto blanco */
     padding: 20px;
 }

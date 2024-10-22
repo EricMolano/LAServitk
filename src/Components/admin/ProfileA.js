@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles/ProfileA.css'; // Asegúrate de tener un archivo CSS para los estilos
+import Sidebar from './Slidebara';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
@@ -29,11 +31,12 @@ const Profile = () => {
     };
 
     if (loadingUser) {
-        return <div>Cargando...</div>;
+        return <div className="loading-message">Cargando...</div>;
     }
 
     return (
         <div className="profile-container">
+            <Sidebar />
             <h1>Bienvenido a tu perfil</h1>
             <table className="profile-table">
                 <tbody>

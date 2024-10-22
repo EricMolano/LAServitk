@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserById, updateUser } from '../../services/authService';
+import '../styles/Edit.css'; // Asegúrate de tener un archivo CSS para los estilos
 
 function EditProfileUser() {
     const { id } = useParams();
@@ -106,68 +107,74 @@ function EditProfileUser() {
         <div className="edit-profile-user-content">
             <h2>Editar Perfil del Usuario</h2>
             {user && (
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Nombre:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            maxLength={20} // Limite de caracteres
-                        />
+                <form onSubmit={handleSubmit} className="profile-form">
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="name">Nombre:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                maxLength={20} // Limite de caracteres
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="surname">Apellido:</label>
+                            <input
+                                type="text"
+                                id="surname"
+                                name="surname"
+                                value={formData.surname}
+                                onChange={handleChange}
+                                maxLength={20} // Limite de caracteres
+                            />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="surname">Apellido:</label>
-                        <input
-                            type="text"
-                            id="surname"
-                            name="surname"
-                            value={formData.surname}
-                            onChange={handleChange}
-                            maxLength={20} // Limite de caracteres
-                        />
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="addressType">Tipo de Dirección:</label>
+                            <select
+                                id="addressType"
+                                name="addressType"
+                                value={formData.addressType}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Selecciona un tipo de dirección</option>
+                                <option value="Calle">Calle</option>
+                                <option value="Avenida">Avenida</option>
+                                <option value="Carrera">Carrera</option>
+                                <option value="Diagonal">Diagonal</option>
+                                <option value="Transversal">Transversal</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="addressDetail">Detalle de Dirección:</label>
+                            <input
+                                type="text"
+                                id="addressDetail"
+                                name="addressDetail"
+                                value={formData.addressDetail}
+                                onChange={handleChange}
+                                placeholder="Ej. 123, Ciudad"
+                                required
+                            />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="addressType">Tipo de Dirección:</label>
-                        <select
-                            id="addressType"
-                            name="addressType"
-                            value={formData.addressType}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="">Selecciona un tipo de dirección</option>
-                            <option value="Calle">Calle</option>
-                            <option value="Avenida">Avenida</option>
-                            <option value="Carrera">Carrera</option>
-                            <option value="Diagonal">Diagonal</option>
-                            <option value="Transversal">Transversal</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="addressDetail">Detalle de Dirección:</label>
-                        <input
-                            type="text"
-                            id="addressDetail"
-                            name="addressDetail"
-                            value={formData.addressDetail}
-                            onChange={handleChange}
-                            placeholder="Ej. 123, Ciudad"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Teléfono:</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                        />
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="phone">Teléfono:</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
                     <button type="submit">Guardar Cambios</button>
                 </form>
