@@ -1,0 +1,61 @@
+/* SolicitarProducto.css */
+
+.solicitar-producto {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.solicitar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group select,
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    border: 1px solid #b30000;
+    outline: none;
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5);
+}
+
+button[type="submit"] {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff4d4d;
+    transform: scale(1.05);
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../admin/ModalAdmin'; // Asegúrate de tener un componente Modal para mostrar errores
 
-function AgregarServicioE() {
+function AgregarServicio() {
     const [nombre_empleado, setNombreEmpleado] = useState('');
     const [nombre_cliente, setNombreCliente] = useState('');
     const [placa_vehiculo, setPlacaVehiculo] = useState('');
@@ -73,9 +74,8 @@ function AgregarServicioE() {
     };
 
     return (
-        <div className="add-inventory">
+        <div className="formulario-servicio">
             <h2>Agregar Nuevo Servicio</h2>
-            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="nombre_empleado">Nombre del Empleado:</label>
@@ -109,13 +109,17 @@ function AgregarServicioE() {
                 </div>
                 <div className="form-group">
                     <label htmlFor="nombre_servicio">Nombre del Servicio:</label>
-                    <input
-                        type="text"
+                    <select
                         id="nombre_servicio"
                         value={nombre_servicio}
                         onChange={(e) => setNombreServicio(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Selecciona un servicio</option>
+                        {servicios.map((servicio, index) => (
+                            <option key={index} value={servicio}>{servicio}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="descripcion">Descripción:</label>

@@ -170,7 +170,7 @@ const Portfolio = () => {
     ];
 
     const handleNavigate = () => {
-        navigate('/Inventarios'); // Navegar a la ruta de inventario
+        navigate('/SolicitarProducto'); // Navegar a la ruta de inventario
     };
 
     return (

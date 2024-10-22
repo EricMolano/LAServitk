@@ -12,7 +12,6 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Terminos from './Components/Terminos';
-import Inventarios from './Components/Inventarios';
 import ForgotPassword from './Components/ForgotPassword'; // Importa el componente de recuperación de contraseña
 import ResetPassword from './Components/ResetPassword'; // Importa el componente de restablecimiento de contraseña
 
@@ -30,6 +29,7 @@ import Inventory from './Components/admin/Inventory';
 import Vehiculos from './Components/admin/Vehiculos'; 
 import Servicios from './Components/admin/Servicios'; 
 import AgregarServicio from './Components/admin/AgregarServicio'; 
+import VerSolicitudes from './Components/VerSolicitudes'; // Importa el componente VerSolicitudes
 
 /* PAGINAS EMPLEADO */
 import EditProfileE from './Components/empleado/EditProfileE';
@@ -48,6 +48,7 @@ import Services from './Components/cliente/Services';
 import EditVehicle from './Components/cliente/EditVehicle';
 import AddVehicle from './Components/cliente/AddVehicle';
 import EditProfile from './Components/cliente/EditProfile';
+import SolicitarProducto from './Components/SolicitarProducto'; // Importa el componente SolicitarProducto
 
 import './App.css';
 
@@ -96,8 +97,7 @@ function App() {
                 <Route path="/login" element={<Login setUserRole={setUserRole} setUserData={setUserData} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/terminos" element={<Terminos />} />
-                <Route path="/Inventarios" element={<Inventarios />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} /> {"."}
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Ruta para restablecimiento de contraseña */}
 
                 {/* Rutas públicas */}
@@ -122,6 +122,7 @@ function App() {
                 <Route path="/Vehiculos" element={<PrivateRoute element={<Vehiculos />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/Servicios" element={<PrivateRoute element={<Servicios />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/agregar-servicio" element={<PrivateRoute element={<AgregarServicio />} userRole={userRole} requiredRole={3} />} />
+                <Route path="/VerSolicitudes" element={<PrivateRoute element={<VerSolicitudes />} userRole={userRole} requiredRole={3} />} /> {/* Ruta para ver solicitudes */}
 
                 {/* Rutas de cliente */}
                 <Route path="/Profile" element={<PrivateRoute element={<Profile />} userRole={userRole} requiredRole={2} />} />
@@ -131,6 +132,7 @@ function App() {
                 <Route path="/add-vehicle" element={<PrivateRoute element={<AddVehicle />} userRole={userRole} requiredRole={2} />} />
                 <Route path="/edit-profile" element={<PrivateRoute element={<EditProfile />} userRole={userRole} requiredRole={2} />} /> 
                 <Route path="/Inventario" element={<PrivateRoute element={<Inventario />} userRole={userRole} requiredRole={2} />} />
+                <Route path="/SolicitarProducto" element={<PrivateRoute element={<SolicitarProducto />} userRole={userRole} requiredRole={2} />} /> {/* Ruta para solicitar producto */}
 
                 {/* Rutas de empleado */}
                 <Route path="/ProfileE" element={<PrivateRoute element={<ProfileE />} userRole={userRole} requiredRole={1} />} />

@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import Modal from './Modal'; // Importar el componente Modal
-=======
-import Modal from './Modal';  // Asegúrate de importar el componente Modal
 import '../styles/AddInventory.css'; // Asegúrate de tener un archivo CSS para los estilos
->>>>>>> ac193e589a63740468e43d280a8d123f90545286
 
 function AddInventory() {
     const [formData, setFormData] = useState({
         nombre: '',
         descripcion: '',
         cantidad_en_stock: '',
-        precio_compra: '',
+        precio_compra: ''
     });
     const [errorMessage, setErrorMessage] = useState(''); // Para el mensaje de error
     const [successMessage, setSuccessMessage] = useState(''); // Para el mensaje de éxito
@@ -89,6 +85,8 @@ function AddInventory() {
         <div>
             <Navbar handleLogout={handleLogout} />
             <div className="add-inventory">
+                <h2>Agregar Nuevo Producto</h2>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <form onSubmit={handleSubmit} className="inventory-form">
                     <div className="form-row">
                         <div className="form-group">
@@ -135,7 +133,7 @@ function AddInventory() {
                             />
                         </div>
                     </div>
-                    <button type="submit">Agregar</button>
+                    <button type="submit" className="btn btn-primary">Agregar</button>
                 </form>
             </div>
 

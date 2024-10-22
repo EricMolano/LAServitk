@@ -31,6 +31,11 @@ const Sidebar = () => {
         navigate('/Usuarios'); // Cambia la ruta según sea necesario
     };
 
+    const handleSolicitudesClick = () => {
+        console.log("Solicitudes clickeado");
+        navigate('/VerSolicitudes'); // Cambia la ruta según sea necesario
+    };
+
     return (
         <div className="sidebar">
             <h3 className="sidebar-title">Menú Admin</h3>
@@ -42,6 +47,7 @@ const Sidebar = () => {
                         <button className='btn-vehiculos-3 btn-base' onClick={handleVehiculosClick}>Vehículos</button>
                         <button className='btn-servicios-3 btn-base' onClick={handleServiciosClick}>Servicios</button>
                         <button className='btn-inventario-3 btn-base' onClick={handleProductosClick}>Inventario</button>
+                        <button className='btn-solicitudes-3 btn-base' onClick={handleSolicitudesClick}>Solicitudes</button>
                     </div>
                 </div>
             </nav>

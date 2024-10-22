@@ -723,3 +723,95 @@ app.get('/api/servicios', authenticateToken, (req, res) => {
 app.listen(2071, () => {
   console.log(`Server running on port 2071`);
 });
+
+// Ruta para obtener las solicitudes de productos
+app.get('/api/solicitudes', authenticateToken, (req, res) => {
+  const query = `
+    SELECT s.id, u.name AS usuario, p.nombre AS producto, s.cantidad, s.fecha_solicitud, s.estado
+    FROM solicitudes s
+    JOIN users u ON s.id_usuario = u.id
+    JOIN producto p ON s.id_producto = p.id
+  `;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener las solicitudes:', err);
+      return res.status(500).json({ message: 'Error al obtener las solicitudes' });
+    }
+    res.status(200).json(results);
+  });
+});
+// Ruta para solicitar un producto
+app.post('/api/solicitar-producto', authenticateToken, (req, res) => {
+  const { id_producto, cantidad } = req.body;
+  const id_usuario = req.user.id; // Obtener el ID del usuario desde el token JWT
+
+  // Validar que los datos estén completos
+  if (!id_producto || !cantidad) {
+    return res.status(400).json({ message: 'Faltan datos para solicitar el producto' });
+  }
+
+  // Consulta SQL para insertar la solicitud
+  const sql = 'INSERT INTO solicitudes (id_usuario, id_producto, cantidad, estado) VALUES (?, ?, ?, ?)';
+  db.query(sql, [id_usuario, id_producto, cantidad, 'Pendiente'], (err, result) => {
+    if (err) {
+      console.error('Error al solicitar el producto:', err);
+      return res.status(500).json({ message: 'Error al solicitar el producto' });
+    }
+
+    // Responder con éxito
+    res.status(201).json({ message: 'Producto solicitado exitosamente', solicitudId: result.insertId });
+  });
+});
+// Ruta para obtener los productos
+app.get('/api/productos', authenticateToken, (req, res) => {
+  const query = 'SELECT id, nombre FROM producto';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener los productos:', err);
+      return res.status(500).json({ message: 'Error al obtener los productos' });
+    }
+    res.status(200).json(results);
+  });
+});
+
+// Ruta para agregar un producto al inventario
+app.post('/api/inventory', authenticateToken, (req, res) => {
+  const { nombre, descripcion, cantidad_en_stock, precio_compra } = req.body;
+
+  // Validar que los datos estén completos
+  if (!nombre || !cantidad_en_stock || !precio_compra) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+  }
+
+  // Consulta SQL para insertar el producto
+  const sql = 'INSERT INTO producto (nombre, descripcion, cantidad_en_stock, precio_compra) VALUES (?, ?, ?, ?)';
+  db.query(sql, [nombre, descripcion, cantidad_en_stock, precio_compra], (err, result) => {
+    if (err) {
+      console.error('Error al agregar el producto:', err);
+      return res.status(500).json({ message: 'Error al agregar el producto' });
+    }
+
+    // Responder con éxito
+    res.status(201).json({ message: 'Producto agregado exitosamente', productoId: result.insertId });
+  });
+});
+// Ruta para obtener el stock de un producto específico
+app.get('/api/productos/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+
+  const query = 'SELECT cantidad_en_stock FROM producto WHERE id = ?';
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Error al obtener el stock del producto:', err);
+      return res.status(500).json({ message: 'Error al obtener el stock del producto' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    res.status(200).json(results[0]);
+  });
+});

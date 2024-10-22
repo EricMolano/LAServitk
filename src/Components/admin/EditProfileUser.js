@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserById, updateUser } from '../../services/authService';
-<<<<<<< HEAD
 import Modal from '../cliente/ModalCliente'; // Import the modal
-=======
-import '../styles/Edit.css'; // Asegúrate de tener un archivo CSS para los estilos
->>>>>>> ac193e589a63740468e43d280a8d123f90545286
 
 function EditProfileUser() {
     const { id } = useParams();
@@ -131,32 +127,6 @@ function EditProfileUser() {
         <div className="edit-profile-user-content">
             <h2>Editar Perfil del Usuario</h2>
             {user && (
-<<<<<<< HEAD
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Nombre:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            maxLength={20} // Limite de caracteres
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="surname">Apellido:</label>
-                        <input
-                            type="text"
-                            id="surname"
-                            name="surname"
-                            value={formData.surname}
-                            onChange={handleChange}
-                            maxLength={20} // Limite de caracteres
-                            required
-                        />
-=======
                 <form onSubmit={handleSubmit} className="profile-form">
                     <div className="form-row">
                         <div className="form-group">
@@ -212,7 +182,6 @@ function EditProfileUser() {
                                 required
                             />
                         </div>
->>>>>>> ac193e589a63740468e43d280a8d123f90545286
                     </div>
                     <div className="form-row">
                         <div className="form-group">
