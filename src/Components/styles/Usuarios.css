@@ -1,0 +1,53 @@
+.datatable th,
+.datatable td {
+    padding: 10px; /* Ajusta el espaciado interno */
+    font-size: 12px; /* Tamaño de fuente */
+    white-space: normal; /* Permite el ajuste de línea */
+    word-break: break-word; /* Rompe las palabras largas */
+    font-family: inherit; /* Asegura que la fuente sea la misma que el resto */
+}
+
+.search-input {
+    padding: 10px; /* Ajusta el espaciado interno */
+    font-size: 14px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-bottom: 20px; /* Espaciado inferior */
+    width: 100%; /* Ancho completo */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.datatable-container {
+    margin: 20px 0; /* Espaciado vertical */
+}
+
+.datatable {
+    width: 100%; /* Ajustar el ancho a 100% del contenedor */
+    border: none; /* Elimina el borde de la tabla */
+    border-collapse: collapse; /* Colapsa los bordes */
+}
+
+.datatable th {
+    background-color: #f2f2f2; /* Color de fondo */
+    font-weight: bold; /* Texto en negrita */
+    border-bottom: 2px solid #ddd; /* Borde inferior */
+    white-space: nowrap; /* Evita que el texto se corte */
+    overflow: hidden; /* Oculta el desbordamiento */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es demasiado largo */
+    font-family: inherit; /* Asegura que la fuente sea la misma que el resto */
+}
+
+.datatable td {
+    border-bottom: 1px solid #ddd; /* Borde inferior */
+    font-family: inherit; /* Asegura que la fuente sea la misma que el resto */
+}
+
+.informacion-usuarios-content {
+    margin-left: 250px; /* Ajusta el margen izquierdo para que no se superponga con la barra lateral */
+    padding: 20px;
+    overflow-x: hidden;
+    background-color: #f9f9f9; /* Color de fondo */
+    min-height: 100vh; /* Altura mínima */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    border-radius: 8px; /* Bordes redondeados */
+}

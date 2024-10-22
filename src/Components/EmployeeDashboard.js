@@ -45,7 +45,7 @@ import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 import carritoLogo from '../Components/Assets/carritoLogo.png';
 
 
-import '../Components/styles/AdminDashboard.css'; 
+
 
 const AdminDashboard = () => {
     return (
@@ -414,6 +414,7 @@ const Footer = () => {
             </div>
         </footer> 
     );
+    
 };
 
 export default AdminDashboard;
