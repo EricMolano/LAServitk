@@ -310,3 +310,18 @@
       margin-bottom: 5px; /* Reducir margen inferior del logo */
   }
 }
+.volver-login {
+  color: #333 ;
+  border-radius: 6px !important;
+  padding: 5px 20px !important; /* Ajusta el padding para hacerlo más pequeño */
+  font-size: 12px !important; /* Tamaño de fuente más pequeño */
+  cursor: pointer;
+  position: absolute; /* Posición absoluta */
+  top: -300px; /* Espacio desde la parte superior */
+  left: -465px; /* Espacio desde la izquierda */
+}
+
+.registro-volver {
+  position: relative; /* Esto es necesario para que el botón se posicione correctamente */
+  margin-top: 20px; /* Espacio superior si es necesario */
+}

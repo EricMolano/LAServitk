@@ -97,6 +97,9 @@ function Register() {
     return (
         <div className='registro-contenedor'>
             <div className='registro-menu'>
+            <div className="registro-volver">
+            <button onClick={() => navigate('/')} className="volver-login">⬅</button>
+            </div>
                 <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
                 <h1>¡Qué gusto verte por aquí!</h1>
                 <p>Regístrate para comenzar a usar nuestros servicios.</p>

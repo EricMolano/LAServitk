@@ -84,3 +84,31 @@
     background-color: #ff4d4d; /* Lighter red on hover */
     transform: scale(1.05); /* Slightly increase size on hover */
 }
+
+/* Servicios.css */
+
+/* Servicios.css */
+
+.agregar-ser {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno más pequeño */
+    font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    display: inline-block; /* Asegura que el botón respete el tamaño */
+    position: absolute; /* Permite la colocación en la esquina */
+    top: 5px; /* Distancia desde la parte superior */
+    right: 5px; /* Distancia desde el lado derecho */
+}
+
+.agregar-ser:hover {
+    background-color: #c82333; /* Color de fondo al pasar el mouse (más oscuro) */
+}
+
+.agregar-ser:active {
+    background-color: #bd2130; /* Color de fondo al hacer clic (más oscuro) */
+}

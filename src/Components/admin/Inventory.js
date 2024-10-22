@@ -43,8 +43,7 @@ function Inventario() {
     item.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.cantidad_en_stock.toString().includes(searchTerm.toLowerCase()) ||
-    item.precio_compra.toString().includes(searchTerm.toLowerCase()) ||
-    item.msrp.toString().includes(searchTerm.toLowerCase())
+    item.precio_compra.toString().includes(searchTerm.toLowerCase())
   );
 
   const columns = [
@@ -53,35 +52,28 @@ function Inventario() {
       selector: row => row.nombre,
       sortable: true,
       wrap: true,
-      width: '150px',
+      width: '200px', // Aumenta el ancho de la columna
     },
     {
       name: 'Descripción',
       selector: row => row.descripcion,
       sortable: true,
       wrap: true,
-      width: '250px',
+      width: '400px', // Aumenta el ancho de la columna
     },
     {
       name: 'Cantidad',
       selector: row => row.cantidad_en_stock,
       sortable: true,
       wrap: true,
-      width: '100px',
+      width: '200px', // Aumenta el ancho de la columna
     },
     {
-      name: 'Precio de Compra',
+      name: 'Precio',
       selector: row => row.precio_compra,
       sortable: true,
       wrap: true,
-      width: '150px',
-    },
-    {
-      name: 'MSRP',
-      selector: row => row.msrp,
-      sortable: true,
-      wrap: true,
-      width: '150px',
+      width: '200px', // Aumenta el ancho de la columna
     },
     {
       name: 'Acciones',
@@ -95,16 +87,16 @@ function Inventario() {
   return (
     <div className="inventario-content">
       <Sidebar />
-      <Link to="/add-inventory" className="Botonprodcutos" style={{ marginBottom: "10px", background: "#0000000" }}>
-        Agregar Nuevo Producto
-      </Link>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-      />
+      <div className="header-content">
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+        <Link to="/add-inventory" className="agregar-ser">Agregar Nuevo Producto</Link>
+      </div>
       <DataTable
         title="Información de Inventario"
         columns={columns}

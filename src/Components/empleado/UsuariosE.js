@@ -66,19 +66,19 @@ function InformacionUsuarios() {
       selector: row => row.email,
       sortable: true,
       wrap: true, // Ajusta el contenido para que se vea completo
-      width: '250px', // Ajusta el ancho de la columna
+      width: '400px', // Ajusta el ancho de la columna
     },
     {
       name: 'Dirección',
       selector: row => row.address || "No disponible",
       wrap: true, // Ajusta el contenido para que se vea completo
-      width: '250px', // Ajusta el ancho de la columna
+      width: '200px', // Ajusta el ancho de la columna
     },
     {
       name: 'Teléfono',
       selector: row => row.phone || "No disponible",
       wrap: true, // Ajusta el contenido para que se vea completo
-      width: '150px', // Ajusta el ancho de la columna
+      width: '200px', // Ajusta el ancho de la columna
     },
     {
       name: 'Rol',

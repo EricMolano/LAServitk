@@ -1,27 +1,76 @@
-/* Sidebara.css */
+/* Sidebar.css */
 
 .sidebar {
     width: 250px;
-    background-color: #333; /* Darker grey-blue background */
     height: 100vh;
-    padding: 20px;
+    background-color: #555; /* Fondo gris más moderno */
     position: fixed;
     left: 0;
     top: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
     overflow-y: auto;
-    border: none; /* Remove border */
-    border-radius: 0; /* Ensure no rounded edges */
-    transition: width 0.3s ease; /* Smooth transition for width */
+    transition: width 0.3s ease;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+.logo-container img {
+    width: 80px; /* Tamaño del logo */
+    height: auto;
 }
 
 .sidebar-title {
-    font-size: 20px;
+    font-size: 1.1rem;
     font-weight: bold;
-    color: #ecf0f1; /* Light text color */
-    margin-top: 40px; /* Adjusts the space above the title */
+    color: #ffffff;
+    text-align: center;
     margin-bottom: 20px;
-    text-align: center; /* Optional: center-align the text */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.nav-container-3 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente los botones */
+}
+
+.nav-buttons-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea botones al centro */
+    gap: 25px; /* Espacio extra entre botones */
+}
+
+.btn-base {
+    background-color: #b30000; /* Rojo preferido */
+    color: white;
+    border: none;
+    border-radius: 10px; /* Bordes más redondeados para un look moderno */
+    padding: 15px 50px; /* Botones más grandes con más padding */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Sombra suave para los botones */
+}
+
+.btn-base:hover {
+    background-color: #8b0000; /* Rojo más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Ligera elevación al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más profunda en hover */
+}
+
+.btn-logout-3 {
+    background-color: #b30000;
+    padding: 15px 50px;
+    margin-top: auto;
 }
 
 .sidebar-menu {
@@ -30,99 +79,54 @@
     margin: 0;
 }
 
-.sidebar-menu li {
-    margin-bottom: 15px;
-}
-
 .sidebar-menu li a {
     text-decoration: none;
-    color: #bdc3c7; /* Light grey link color */
-    font-size: 16px;
+    color: #ffffff;
+    font-size: 12px;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     transition: all 0.3s ease;
-    border-radius: 0; /* Ensure no rounded edges */
+    border-radius: 5px;
 }
 
 .sidebar-menu li a:hover,
-.sidebar-menu li a.active { /* For the active item */
-    background-color: #b81c0b; /* Adjusted for red contrast */
-    color: white; /* White text for active item */
+.sidebar-menu li a.active {
+    background-color: #8b0000; /* Rojo de contraste */
+    color: white;
 }
 
-.sidebar-menu li a .sidebar-menu-icon {
-    margin-right: 10px;
-    font-size: 18px;
-    color: #bdc3c7; /* Icon color */
-}
-
-.home-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.content {
-    flex: 1;
-    margin-left: 250px;
-    padding: 20px;
-    overflow-x: hidden;
-    transition: margin-left 0.3s ease; /* Smooth transition for margin */
-}
-
-/* Media Queries for Responsive Design */
+/* Responsividad */
 @media screen and (max-width: 900px) {
     .sidebar {
-        width: 200px; /* Adjust width for smaller screens */
+        width: 200px;
     }
-
     .content {
-        margin-left: 200px; /* Adjust margin for smaller screens */
+        margin-left: 200px;
     }
 }
 
 @media screen and (max-width: 600px) {
     .sidebar {
-        width: 150px; /* Adjust width for very small screens */
+        width: 150px;
     }
-
     .content {
-        margin-left: 150px; /* Adjust margin for very small screens */
+        margin-left: 150px;
     }
-
     .sidebar-title {
-        font-size: 18px; /* Adjust font size for very small screens */
-    }
-
-    .sidebar-menu li a {
-        font-size: 14px; /* Adjust font size for very small screens */
-        padding: 8px; /* Adjust padding for very small screens */
-    }
-
-    .sidebar-menu li a .sidebar-menu-icon {
-        font-size: 16px; /* Adjust icon size for very small screens */
+        font-size: 0.8rem;
     }
 }
 
 @media screen and (max-width: 400px) {
     .sidebar {
-        width: 100px; /* Adjust width for very small screens */
+        width: 100px;
     }
-
     .content {
-        margin-left: 100px; /* Adjust margin for very small screens */
+        margin-left: 100px;
     }
-
     .sidebar-title {
-        font-size: 16px; /* Adjust font size for very small screens */
-    }
-
-    .sidebar-menu li a {
-        font-size: 12px; /* Adjust font size for very small screens */
-        padding: 6px; /* Adjust padding for very small screens */
-    }
-
-    .sidebar-menu li a .sidebar-menu-icon {
-        font-size: 14px; /* Adjust icon size for very small screens */
+        font-size: 0.7rem;
     }
 }

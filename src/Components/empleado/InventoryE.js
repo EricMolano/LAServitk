@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import Sidebar from './SlidebarE';
-import '../styles/Inventory.css'; // Asegúrate de tener un archivo CSS para los estilos
+import '../styles/Inventory.css';
 
 function InventarioE() {
   const [inventario, setInventario] = useState([]);
@@ -43,8 +43,7 @@ function InventarioE() {
     item.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.cantidad_en_stock.toString().includes(searchTerm.toLowerCase()) ||
-    item.precio_compra.toString().includes(searchTerm.toLowerCase()) ||
-    item.msrp.toString().includes(searchTerm.toLowerCase())
+    item.precio_compra.toString().includes(searchTerm.toLowerCase())
   );
 
   const columns = [
@@ -53,58 +52,45 @@ function InventarioE() {
       selector: row => row.nombre,
       sortable: true,
       wrap: true,
-      width: '150px',
+      width: '200px', // Anchura ajustada
     },
     {
       name: 'Descripción',
       selector: row => row.descripcion,
       sortable: true,
       wrap: true,
-      width: '250px',
+      width: '300px', // Anchura ajustada
     },
     {
       name: 'Cantidad',
       selector: row => row.cantidad_en_stock,
       sortable: true,
       wrap: true,
-      width: '100px',
+      width: '220px', // Anchura ajustada
     },
     {
       name: 'Precio de Compra',
       selector: row => row.precio_compra,
       sortable: true,
       wrap: true,
-      width: '150px',
+      width: '350px', // Anchura ajustada
     },
-    {
-      name: 'MSRP',
-      selector: row => row.msrp,
-      sortable: true,
-      wrap: true,
-      width: '150px',
-    },
-    {
-      name: 'Acciones',
-      cell: row => (
-        <Link to={`/edit-inventory/${row.id}`} className="btn btn-warning">Actualizar</Link>
-      ),
-      width: '150px',
-    },
+ 
   ];
 
   return (
     <div className="inventario-content">
       <Sidebar />
-      <Link to="/add-inventory" className="Botonprodcutos" style={{ marginBottom: "10px", background: "#0000000" }}>
-        Agregar Nuevo Producto
-      </Link>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-      />
+      <div className="top-actions">
+        
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
       <DataTable
         title="Información de Inventario"
         columns={columns}

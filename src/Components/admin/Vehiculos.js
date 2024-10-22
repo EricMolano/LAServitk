@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAdminVehicles } from "../../services/authService"; // Ensure this function is properly implemented
+import { getAdminVehicles } from "../../services/authService"; // Asegúrate de que esta función esté correctamente implementada
 import Sidebar from './Slidebara';
 import DataTable from 'react-data-table-component';
 import '../styles/Vehiculos.css'; // Asegúrate de tener un archivo CSS para los estilos
@@ -12,7 +12,7 @@ function Vehiculos() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate(); // Importing useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -55,42 +55,36 @@ function Vehiculos() {
             selector: row => row.marca,
             sortable: true,
             wrap: true,
-            width: '150px',
         },
         {
             name: 'Modelo',
             selector: row => row.modelo,
             sortable: true,
             wrap: true,
-            width: '150px',
         },
         {
             name: 'Año',
             selector: row => row.año,
             sortable: true,
             wrap: true,
-            width: '100px',
         },
         {
             name: 'Color',
-            selector: row => row.color,
+            selector: row => row.color || 'N/A',
             sortable: true,
             wrap: true,
-            width: '100px',
         },
         {
             name: 'Placa',
             selector: row => row.placa,
             sortable: true,
             wrap: true,
-            width: '150px',
         },
         {
             name: 'Acciones',
             cell: row => (
                 <button onClick={() => handleUpdateVehicleUser(row.idvehiculo)}>Actualizar</button>
             ),
-            width: '150px',
         },
     ];
 
@@ -113,29 +107,26 @@ function Vehiculos() {
                 striped
                 noDataComponent="No hay vehículos disponibles."
                 responsive
-                style={{ marginTop: '10px', fontSize: '0.8rem' }}
                 customStyles={{
                     table: {
                         style: {
-                            fontSize: '0.8rem',
                             maxWidth: '100%',
+                            fontSize: '0.9rem', // Tamaño de fuente general
                         },
                     },
                     head: {
                         style: {
                             backgroundColor: '#f2f2f2',
                             fontWeight: 'bold',
-                            fontSize: '0.9rem',
+                            fontSize: '1rem',
                             padding: '10px',
                             whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
                         },
                     },
                     cells: {
                         style: {
                             padding: '10px',
-                            fontSize: '0.8rem',
+                            fontSize: '0.9rem',
                             whiteSpace: 'normal',
                             wordBreak: 'break-word',
                             fontFamily: 'inherit',

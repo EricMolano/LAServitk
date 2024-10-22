@@ -83,14 +83,14 @@ const Header = () => {
     return (
         <header>
 <nav>
-    <div className='nav-container-1'>
-        <div className='nav-buttons-1'>
-            <button1 className='btn-perfil-1 btn-base' onClick={handlePerfilClick}>Perfil</button1>
-            <button1 className='btn-vehiculos-1 btn-base' onClick={handleVehiculosClick}>Vehículos</button1>
-            <button1 className='btn-servicios-1 btn-base' onClick={handleServiciosClick}>Servicios</button1>
+    <div className='nav-container-1as'>
+        <div className='nav-buttons-1as'>
+            <button1 className='btn-perfil-1as btn-base' onClick={handlePerfilClick}>Perfil</button1>
+            <button1 className='btn-vehiculos-1as btn-base' onClick={handleVehiculosClick}>Vehículos</button1>
+            <button1 className='btn-servicios-1as btn-base' onClick={handleServiciosClick}>Servicios</button1>
         </div>
-        <div className='logout-container-1'>
-            <button1 className='btn-cerrar-sesion-1 btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
+        <div className='logout-container-1as'>
+            <button1 className='btn-cerrar-sesion-1as btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
         </div>
     </div>
 </nav>

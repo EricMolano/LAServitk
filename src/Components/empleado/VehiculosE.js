@@ -65,13 +65,13 @@ function Vehiculos({ handleCardClick }) {
             selector: row => row.año,
             sortable: true,
             wrap: true, // Ajusta el contenido para que se vea completo
-            width: '100px', // Ajusta el ancho de la columna
+            width: '150px', // Ajusta el ancho de la columna
         },
         {
             name: 'Color',
             selector: row => row.color,
             wrap: true, // Ajusta el contenido para que se vea completo
-            width: '100px', // Ajusta el ancho de la columna
+            width: '150px', // Ajusta el ancho de la columna
         },
         {
             name: 'Placa',

@@ -50,59 +50,68 @@ function Servicios() {
 
   const columns = [
     {
-      name: 'Nombre Empleado',
+      name: 'Encargado',
       selector: row => row.nombre_empleado,
       sortable: true,
       wrap: true,
       width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_empleado}</div>,
     },
     {
-      name: 'Nombre Cliente',
+      name: 'Nombre',
       selector: row => row.nombre_cliente,
       sortable: true,
       wrap: true,
       width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_cliente}</div>,
     },
     {
-      name: 'Placa Vehículo',
+      name: 'Placa',
       selector: row => row.placa_vehiculo,
       sortable: true,
       wrap: true,
       width: '150px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.placa_vehiculo}</div>,
     },
     {
-      name: 'Nombre Servicio',
+      name: 'Servicio',
       selector: row => row.nombre_servicio,
       sortable: true,
       wrap: true,
-      width: '200px',
+      width: '300px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_servicio}</div>,
     },
     {
       name: 'Descripción',
       selector: row => row.descripcion,
       wrap: true,
-      width: '250px',
+      width: '500px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.descripcion}</div>,
     },
     {
       name: 'Precio',
       selector: row => row.costo,
       sortable: true,
       wrap: true,
-      width: '100px',
+      width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'right' }}>{row.costo}</div>,
     },
   ];
 
   return (
     <div className="servicios-content">
       <Sidebar />
-      <Link to="/agregar-servicio" className="btn btn-primary mb-3">Agregar Servicio</Link>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-      />
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+          style={{ marginRight: '10px', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', flexGrow: 1 }}
+        />
+        <Link to="/agregar-servicio" className="agregar-ser">Agregar</Link>
+      </div>
       <DataTable
         title="Información de Servicios"
         columns={columns}
@@ -112,12 +121,14 @@ function Servicios() {
         striped
         noDataComponent="No hay servicios disponibles."
         responsive
-        style={{ marginTop: '10px', fontSize: '0.8rem' }}
+        style={{ marginTop: '10px', fontSize: '0.9rem' }}
         customStyles={{
           table: {
             style: {
-              fontSize: '0.8rem',
               maxWidth: '100%',
+              marginTop: '10px',
+              fontSize: '0.9rem',
+              borderSpacing: '0 10px', // Espaciado vertical entre filas
             },
           },
           head: {
@@ -126,18 +137,16 @@ function Servicios() {
               fontWeight: 'bold',
               fontSize: '0.9rem',
               padding: '10px',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
+              textAlign: 'left',
             },
           },
           cells: {
             style: {
               padding: '10px',
-              fontSize: '0.8rem',
+              fontSize: '0.9rem',
               whiteSpace: 'normal',
               wordBreak: 'break-word',
-              fontFamily: 'inherit',
+              borderSpacing: '10px', // Espaciado horizontal entre columnas
             },
           },
         }}

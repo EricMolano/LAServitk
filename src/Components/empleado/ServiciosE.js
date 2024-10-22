@@ -50,45 +50,51 @@ function ServiciosE() {
 
   const columns = [
     {
-      name: 'Nombre Empleado',
+      name: 'Encargado',
       selector: row => row.nombre_empleado,
       sortable: true,
       wrap: true,
       width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_empleado}</div>,
     },
     {
-      name: 'Nombre Cliente',
+      name: 'Nombre',
       selector: row => row.nombre_cliente,
       sortable: true,
       wrap: true,
       width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_cliente}</div>,
     },
     {
-      name: 'Placa Vehículo',
+      name: 'Placa',
       selector: row => row.placa_vehiculo,
       sortable: true,
       wrap: true,
       width: '150px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.placa_vehiculo}</div>,
     },
     {
-      name: 'Nombre Servicio',
+      name: 'Servicio',
       selector: row => row.nombre_servicio,
       sortable: true,
       wrap: true,
-      width: '200px',
+      width: '300px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.nombre_servicio}</div>,
     },
     {
       name: 'Descripción',
       selector: row => row.descripcion,
       wrap: true,
-      width: '250px',
+      width: '500px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'left' }}>{row.descripcion}</div>,
     },
     {
       name: 'Precio',
       selector: row => row.costo,
       sortable: true,
       wrap: true,
-      width: '100px',
+      width: '200px',
+      cell: row => <div style={{ padding: '10px', textAlign: 'right' }}>{row.costo}</div>,
     },
   ];
 

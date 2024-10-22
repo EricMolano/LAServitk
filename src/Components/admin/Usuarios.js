@@ -53,55 +53,61 @@ function InformacionUsuarios({ handleCardClick }) {
       name: 'Nombre',
       selector: row => row.name,
       sortable: true,
-      wrap: true, // Ajusta el contenido para que se vea completo
-      width: '200px', // Ajusta el ancho de la columna
+      wrap: true,
+      width: '170PX', // Ajusta el ancho según sea necesario
     },
     {
       name: 'Apellido',
       selector: row => row.surname || "No disponible",
       sortable: true,
-      wrap: true, // Ajusta el contenido para que se vea completo
-      width: '200px', // Ajusta el ancho de la columna
+      wrap: true,
+      width: '170px', // Ajusta el ancho según sea necesario
     },
     {
       name: 'Email',
       selector: row => row.email,
       sortable: true,
-      wrap: true, // Ajusta el contenido para que se vea completo
-      width: '250px', // Ajusta el ancho de la columna
+      wrap: true,
+      width: '360px', // Aumenta el ancho para mayor legibilidad
+      cell: row => (
+        <div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
+          {row.email}
+        </div>
+      ),
     },
+    
     {
       name: 'Dirección',
       selector: row => row.address || "No disponible",
-      wrap: true, // Ajusta el contenido para que se vea completo
-      width: '250px', // Ajusta el ancho de la columna
+      wrap: true,
+      width: '280px', // Ajusta el ancho según sea necesario
     },
     {
       name: 'Teléfono',
       selector: row => row.phone || "No disponible",
-      wrap: true, // Ajusta el contenido para que se vea completo
-      width: '150px', // Ajusta el ancho de la columna
+      wrap: true,
+      width: '170px', // Ajusta el ancho según sea necesario
     },
     {
       name: 'Rol',
       cell: row => (
-        <span style={{ fontFamily: 'inherit' }}>
+        <span>
           {row.rol_id === 1 ? "Empleado" : row.rol_id === 2 ? "Cliente" : row.rol_id === 3 ? "Administrador" : "Desconocido"}
         </span>
-      ), // Asegura que la fuente sea la misma que el resto
-      width: '150px', // Ajusta el ancho de la columna
+      ),
+      width: '170', // Ajusta el ancho según sea necesario
     },
     {
-      name: 'Acciones',
+      name: 'Acción',
       cell: row => (
-        <button onClick={() => handleEditProfile(row.id)} style={{ fontFamily: 'inherit' }}>
+        <button onClick={() => handleEditProfile(row.id)}>
           Editar Perfil
         </button>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-      width: '150px', // Ajusta el ancho de la columna
+      width: '150px', // Ajusta el ancho según sea necesario
     },
   ];
 
@@ -109,7 +115,6 @@ function InformacionUsuarios({ handleCardClick }) {
     <div className="informacion-usuarios-content">
       <Sidebar />
 
-      {/* Campo de búsqueda */}
       <input
         type="text"
         placeholder="Buscar..."
@@ -117,7 +122,7 @@ function InformacionUsuarios({ handleCardClick }) {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="search-input"
       />
-      
+
       <DataTable
         title="Información de Usuarios"
         columns={columns}
@@ -127,32 +132,26 @@ function InformacionUsuarios({ handleCardClick }) {
         striped
         noDataComponent="No hay usuarios disponibles."
         responsive
-        style={{ marginTop: '10px', fontSize: '0.8rem' }} // Ajusta el tamaño de fuente
         customStyles={{
           table: {
             style: {
-              fontSize: '0.8rem', // Ajusta el tamaño de la fuente para todo el DataTable
-              maxWidth: '100%', // Asegura que el DataTable no exceda el ancho del contenedor
+              maxWidth: '100%',
+              width: '100%', // Asegura que la tabla use todo el ancho disponible
             },
           },
           head: {
             style: {
               backgroundColor: '#f2f2f2',
               fontWeight: 'bold',
-              fontSize: '0.9rem', // Ajusta el tamaño de la fuente del encabezado
-              padding: '10px', // Ajusta el espaciado del encabezado
-              whiteSpace: 'nowrap', // Evita que el texto se corte
-              overflow: 'hidden', // Oculta el desbordamiento
-              textOverflow: 'ellipsis', // Añade puntos suspensivos si el texto es demasiado largo
+              whiteSpace: 'nowrap',
+              fontSize: '1rem', // Ajusta el tamaño de la fuente del encabezado
             },
           },
           cells: {
             style: {
-              padding: '10px', // Ajusta el espaciado interno de las celdas
-              fontSize: '0.8rem', // Ajusta el tamaño de fuente de las celdas
-              whiteSpace: 'normal', // Permite el ajuste de línea
-              wordBreak: 'break-word', // Rompe las palabras largas
-              fontFamily: 'inherit', // Asegura que la fuente sea la misma que el resto
+              whiteSpace: 'normal',
+              wordBreak: 'break-word',
+              fontSize: '0.9rem', // Ajusta el tamaño de la fuente de las celdas
             },
           },
         }}
