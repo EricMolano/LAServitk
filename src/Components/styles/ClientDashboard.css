@@ -124,6 +124,29 @@
     transition: margin-left 0.3s ease;
 }
 
+/* Estilos para la barra de navegación */
+.nav-container-1as {
+    margin-left: 10%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-buttons-1as {
+    display: flex;
+    gap: 15px;
+}
+
+.logout-container-1as {
+    margin-left: auto;
+}
+
 /* Media Queries para Responsividad */
 @media screen and (max-width: 900px) {
     .sidebar {

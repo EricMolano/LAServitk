@@ -105,52 +105,54 @@ const Vehicles = () => {
                 className="search-input"
             />
 
-            <DataTable
-                title="Información de Vehículos"
-                columns={columns}
-                data={filteredVehicles}
-                pagination
-                highlightOnHover
-                striped
-                noDataComponent="No hay vehículos disponibles."
-                responsive
-                style={{ marginTop: '10px', fontSize: '0.8rem' }}
-                customStyles={{
-                    table: {
-                        style: {
-                            fontSize: '0.8rem',
-                            maxWidth: '100%',
+            <div className="data-table-wrapper">
+                <DataTable
+                    title="Información de Vehículos"
+                    columns={columns}
+                    data={filteredVehicles}
+                    pagination
+                    highlightOnHover
+                    striped
+                    noDataComponent="No hay vehículos disponibles."
+                    responsive
+                    style={{ marginTop: '10px', fontSize: '0.8rem' }}
+                    customStyles={{
+                        table: {
+                            style: {
+                                fontSize: '0.8rem',
+                                width: '100%',
+                            },
                         },
-                    },
-                    head: {
-                        style: {
-                            backgroundColor: '#f2f2f2',
-                            fontWeight: 'bold',
-                            fontSize: '0.9rem',
-                            padding: '10px',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
+                        head: {
+                            style: {
+                                backgroundColor: '#f2f2f2',
+                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                padding: '10px',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                            },
                         },
-                    },
-                    cells: {
-                        style: {
-                            padding: '10px',
-                            fontSize: '0.8rem',
-                            whiteSpace: 'normal',
-                            wordBreak: 'break-word',
-                            fontFamily: 'inherit',
+                        cells: {
+                            style: {
+                                padding: '10px',
+                                fontSize: '0.8rem',
+                                whiteSpace: 'normal',
+                                wordBreak: 'break-word',
+                                fontFamily: 'inherit',
+                            },
                         },
-                    },
-                }}
-                paginationComponentOptions={{
-                    rowsPerPageText: 'Filas por página',
-                    rangeSeparatorText: 'de',
-                    noRowsPerPage: false,
-                    selectAllRowsItem: true,
-                    selectAllRowsItemText: 'Todos',
-                }}
-            />
+                    }}
+                    paginationComponentOptions={{
+                        rowsPerPageText: 'Filas por página',
+                        rangeSeparatorText: 'de',
+                        noRowsPerPage: false,
+                        selectAllRowsItem: true,
+                        selectAllRowsItemText: 'Todos',
+                    }}
+                />
+            </div>
         </div>
     );
 };

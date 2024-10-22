@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUsers } from '../../services/authService';
-import Sidebar from '../empleado/SlidebarE';
+import Sidebar from '../admin/Slidebara';
 import DataTable from 'react-data-table-component';
 import '../styles/Usuarios.css';
 
