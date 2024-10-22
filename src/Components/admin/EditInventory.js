@@ -98,47 +98,52 @@ function EditInventory() {
     return (
         <div className="edit-inventory">
             <h2>Editar Inventario</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre</label>
-                    <input
-                        type="text"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        required
-                    />
+            <form onSubmit={handleSubmit} className="inventory-form">
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Nombre</label>
+                        <input
+                            type="text"
+                            name="nombre"
+                            value={formData.nombre}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Descripción</label>
+                        <textarea
+                            name="descripcion"
+                            value={formData.descripcion}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Descripción</label>
-                    <textarea
-                        name="descripcion"
-                        value={formData.descripcion}
-                        onChange={handleChange}
-                    />
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Cantidad en Stock</label>
+                        <input
+                            type="number"
+                            name="cantidad_en_stock"
+                            value={formData.cantidad_en_stock}
+                            onChange={handleChange}
+                            min="0" // Limitar a valores no negativos
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Precio de Compra</label>
+                        <input
+                            type="number"
+                            name="precio_compra"
+                            value={formData.precio_compra}
+                            onChange={handleChange}
+                            step="0.01"
+                            min="0" // Limitar a valores no negativos
+                            required
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Cantidad en Stock</label>
-                    <input
-                        type="number"
-                        name="cantidad_en_stock"
-                        value={formData.cantidad_en_stock}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Precio de Compra</label>
-                    <input
-                        type="number"
-                        name="precio_compra"
-                        value={formData.precio_compra}
-                        onChange={handleChange}
-                        step="0.01"
-                        required
-                    />
-                </div>
-                
                 <button type="submit">Actualizar</button>
             </form>
 

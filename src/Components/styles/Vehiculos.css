@@ -1,0 +1,55 @@
+/* Vehiculos.css */
+
+.vehiculos-content {
+    padding: 20px;
+    margin-left: 250px; /* Ensure content is pushed to the right of the sidebar */
+    transition: margin-left 0.3s ease; /* Smooth transition for margin */
+}
+
+.botonCer {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.botonCer:hover {
+    background-color: #ff4d4d;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.loading-message,
+.error-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #b30000;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 900px) {
+    .vehiculos-content {
+        margin-left: 200px; /* Adjust margin for smaller screens */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .vehiculos-content {
+        margin-left: 150px; /* Adjust margin for very small screens */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .vehiculos-content {
+        margin-left: 100px; /* Adjust margin for very small screens */
+    }
+}

@@ -1,3 +1,5 @@
+/* Sidebara.css */
+
 .sidebar {
     width: 250px;
     background-color: #333; /* Darker grey-blue background */
@@ -10,6 +12,7 @@
     overflow-y: auto;
     border: none; /* Remove border */
     border-radius: 0; /* Ensure no rounded edges */
+    transition: width 0.3s ease; /* Smooth transition for width */
 }
 
 .sidebar-title {
@@ -64,4 +67,62 @@
     margin-left: 250px;
     padding: 20px;
     overflow-x: hidden;
+    transition: margin-left 0.3s ease; /* Smooth transition for margin */
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 900px) {
+    .sidebar {
+        width: 200px; /* Adjust width for smaller screens */
+    }
+
+    .content {
+        margin-left: 200px; /* Adjust margin for smaller screens */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+        width: 150px; /* Adjust width for very small screens */
+    }
+
+    .content {
+        margin-left: 150px; /* Adjust margin for very small screens */
+    }
+
+    .sidebar-title {
+        font-size: 18px; /* Adjust font size for very small screens */
+    }
+
+    .sidebar-menu li a {
+        font-size: 14px; /* Adjust font size for very small screens */
+        padding: 8px; /* Adjust padding for very small screens */
+    }
+
+    .sidebar-menu li a .sidebar-menu-icon {
+        font-size: 16px; /* Adjust icon size for very small screens */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sidebar {
+        width: 100px; /* Adjust width for very small screens */
+    }
+
+    .content {
+        margin-left: 100px; /* Adjust margin for very small screens */
+    }
+
+    .sidebar-title {
+        font-size: 16px; /* Adjust font size for very small screens */
+    }
+
+    .sidebar-menu li a {
+        font-size: 12px; /* Adjust font size for very small screens */
+        padding: 6px; /* Adjust padding for very small screens */
+    }
+
+    .sidebar-menu li a .sidebar-menu-icon {
+        font-size: 14px; /* Adjust icon size for very small screens */
+    }
 }

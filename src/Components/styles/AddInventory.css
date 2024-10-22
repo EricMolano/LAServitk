@@ -1,0 +1,132 @@
+/* AddInventory.css */
+
+.add-inventory {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border: 1px solid #b30000; /* Red border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
+}
+
+button[type="submit"] {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff4d4d; /* Lighter red on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.user-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+}
+
+.user-dropdown li {
+    margin: 0;
+    padding: 0;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.logout-button:hover {
+    background-color: #f2f2f2;
+}

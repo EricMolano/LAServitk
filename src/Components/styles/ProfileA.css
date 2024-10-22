@@ -1,0 +1,72 @@
+/* ProfileA.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Fondo gris claro */
+    background-image: none; /* Asegúrate de que no haya imagen de fondo */
+}
+
+.profile-page {
+    display: flex;
+}
+
+.profile-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 50px auto; /* Centrar verticalmente con margen superior e inferior */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-left: 250px; /* Asegurar que el contenido se empuje a la derecha de la sidebar */
+}
+
+.profile-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.profile-table th,
+.profile-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.profile-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.profile-button {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #ff4d4d; /* Lighter red on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #b30000;
+    margin-top: 50px;
+}
