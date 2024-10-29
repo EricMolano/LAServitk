@@ -1,67 +1,71 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import '../styles/Sidebara.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Sidebar = () => {
+const Dashboard = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const handlePerfilClick = () => {
-        console.log("Perfil clickeado");
-        navigate('/ProfileE'); // Cambia la ruta según sea necesario
-    };
-
-    const handleVehiculosClick = () => {
-        console.log("Vehículos clickeado");
-        navigate('/VehiculosE'); // Cambia la ruta según sea necesario
-    };
-
-    const handleServiciosClick = () => {
-        console.log("Servicios clickeado");
-        navigate('/ServiciosE'); // Cambia la ruta según sea necesario
-    };
-
-    const handleProductosClick = () => {
-        console.log("Inventario clickeado");
-        navigate('/InventoryE'); // Cambia la ruta según sea necesario
-    };
-
-    const handleUsuariosClick = () => {
-        console.log("Usuarios clickeado");
-        navigate('/UsuariosE'); // Cambia la ruta según sea necesario
-    };
-
-    const handleSolicitudesClick = () => {
-        console.log("Solicitudes clickeado");
-        navigate('/VerSolicitudesE'); // Cambia la ruta según sea necesario
-    };
+    const menuItems = [
+        { name: 'Perfil', path: '/ProfileE' },
+        { name: 'Usuarios', path: '/UsuariosE' },
+        { name: 'Vehículos', path: '/VehiculosE' },
+        { name: 'Servicios', path: '/ServiciosE' },
+        { name: 'Inventario', path: '/InventoryE' },
+        { name: 'Solicitudes', path: '/VerSolicitudesE' }
+    ];
 
     const handleLogout = () => {
-        console.log("Cerrando sesión...");
-        localStorage.removeItem("token"); // Elimina el token del almacenamiento local
-        navigate('/'); // Redirige al menú principal de admin
+        localStorage.removeItem("token");
+        navigate('/');
     };
 
-
     return (
-        <div className="sidebar">
-            <h3 className="sidebar-title">Menú Empleado</h3>
-            <nav>
-                <div className='nav-container-3'>
-                    <div className='nav-buttons-3'>
-                        <button className='btn-perfil-3 btn-base' onClick={handlePerfilClick}>Perfil</button>
-                        <button className='btn-Usuarios-3 btn-base' onClick={handleUsuariosClick}>Usuarios</button>
-                        <button className='btn-vehiculos-3 btn-base' onClick={handleVehiculosClick}>Vehículos</button>
-                        <button className='btn-servicios-3 btn-base' onClick={handleServiciosClick}>Servicios</button>
-                        <button className='btn-inventario-3 btn-base' onClick={handleProductosClick}>Inventario</button>
-                        <button className='btn-solicitudes-3 btn-base' onClick={handleSolicitudesClick}>Solicitudes</button>
-                        <button className='btn-logout-3 btn-base' onClick={handleLogout}>Cerrar Sesión</button>
+        <div className="flex">
+            {/* Sidebar */}
+            <div className={`h-screen bg-white shadow-xl ${isCollapsed ? 'w-20' : 'w-64'} transition-all duration-300`}>
+                <button
+                    className="absolute top-4 right-[-20px] bg-blue-500 text-white rounded-full p-2 shadow-md focus:outline-none"
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                    {isCollapsed ? '>' : '<'}
+                </button>
+                <h3 className="text-2xl font-bold text-center my-6 text-gray-800">Menú</h3>
+                <nav className="px-4">
+                    <ul className="space-y-6">
+                        {menuItems.map((item) => (
+                            <li key={item.name}>
+                                <button
+                                    className="flex items-center p-3 text-lg font-medium text-blue-600 hover:text-blue-800 w-full focus:outline-none transform hover:scale-105 transition duration-200 ease-in-out"
+                                    onClick={() => navigate(item.path)}
+                                >
+                                    {item.name}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                    <button
+                        className="w-full mt-10 p-3 text-lg font-medium text-red-600 hover:text-red-800 focus:outline-none transform hover:scale-105 transition duration-200 ease-in-out"
+                        onClick={handleLogout}
+                    >
+                        Cerrar Sesión
+                    </button>
+                </nav>
+            </div>
 
+            {/* Main Content */}
+            <div className={`flex-1 p-8 bg-gray-50 min-h-screen transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-64'}`}>
+                <h1 className="text-3xl font-bold text-gray-700 mb-6">Dashboard</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Example of content cards */}
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-bold text-gray-800">Título</h2>
+                        <p className="text-gray-600">Descripción del contenido.</p>
                     </div>
+                    {/* Repeat for more cards as needed */}
                 </div>
-            </nav>
+            </div>
         </div>
     );
 };
 
-export default Sidebar;
+export default Dashboard;

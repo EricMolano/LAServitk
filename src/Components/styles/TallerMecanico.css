@@ -1,0 +1,1027 @@
+/* TallerMecanico.css */
+:root {
+    --primary-red: #ff3333;
+    --secondary-red: #cc0000;
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --gray: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Navbar Styles */
+.taller-navbar {
+    height: 70px;
+    padding: 0 80px 0 2rem; /* Aumentamos el padding derecho para dejar espacio al botón de usuario */
+    position: fixed;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.taller-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.taller-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-right: 60px;
+    list-style: none; /* Elimina los bullets */
+    padding: 0; /* Elimina el padding por defecto */
+}
+
+
+.taller-nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.taller-nav-links a:hover {
+    color: var(--primary-red);
+}
+
+/* Hero Section */
+.taller-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../Assets/2.jpg') center/cover fixed;
+    padding: 6rem 2rem 2rem 2rem;
+    color: var(--white);
+}
+
+.taller-hero-content {
+    text-align: center;
+    max-width: 800px;
+    animation: fadeIn 1s ease-out;
+}
+
+.taller-hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.taller-hero-content p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.taller-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.taller-cta-primary,
+.taller-cta-secondary {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.taller-cta-primary {
+    background-color: var(--primary-red);
+    color: var(--white);
+    border: none;
+}
+
+.taller-cta-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.taller-cta-primary:hover,
+.taller-cta-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Services Section */
+.taller-services {
+    padding: 6rem 4rem;
+    background-color: var(--gray);
+}
+
+.taller-services h2 {
+    text-align: center;
+    color: var(--black);
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.service-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.1);
+}
+
+.service-content {
+    padding: 1.5rem;
+}
+
+.service-content h3 {
+    color: var(--black);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.service-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary-red);
+    transition: width 0.3s ease;
+}
+
+.service-card:hover h3::after {
+    width: 100px;
+}
+
+.service-description {
+    height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.service-card.expanded .service-description {
+    height: auto;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.service-description p {
+    color: var(--black);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.service-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary-red);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.service-btn:hover {
+    background-color: var(--secondary-red);
+    transform: translateY(-2px);
+}
+
+/* Footer Styles */
+.taller-footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 0.8rem 1rem; /* Reducido aún más */
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Reducido a 140px */
+    gap: 0.3rem; /* Reducido significativamente */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h3 {
+    color: var(--white);
+    font-size: 0.9rem; /* Más pequeño */
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.15rem; /* Muy compacto */
+    opacity: 0.8;
+    font-size: 0.75rem; /* Más pequeño */
+    line-height: 1.2; /* Ajuste de interlineado */
+}
+
+.footer-icon {
+    color: var(--primary-red);
+    margin-right: 0.2rem;
+    font-size: 0.8rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+.social-button {
+    background: var(--primary-red);
+    border: none;
+    color: var(--white);
+    font-size: 0.9rem;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.social-button:hover {
+    background: var(--secondary-red);
+    transform: translateY(-2px);
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.newsletter-form input {
+    padding: 0.3rem 0.5rem;
+    border: none;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 0.75rem;
+}
+
+.newsletter-form button {
+    padding: 0.3rem;
+    background-color: var(--primary-red);
+    color: var(--white);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.newsletter-form button:hover {
+    background-color: var(--secondary-red);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+    .taller-footer {
+        padding: 0.6rem;
+    }
+    
+    .footer-content {
+        gap: 0.2rem;
+    }
+    
+    .footer-section {
+        padding: 0.2rem;
+    }
+}
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Menu */
+.taller-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--black);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .taller-nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem 0;
+        gap: 0;
+        display: none;
+    }
+
+    .taller-nav-links.active {
+        display: flex;
+    }
+
+    .taller-nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .taller-nav-links a {
+        padding: 1rem 0;
+        display: block;
+    }
+}
+
+    .taller-nav-links.active {
+        display: flex;
+    }
+
+    .taller-nav-links li {
+        padding: 0.5rem 0;
+    }
+
+    .taller-hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .taller-hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .taller-cta-buttons {
+        flex-direction: column;
+    }
+
+    .taller-services,
+    .taller-footer {
+        padding: 4rem 2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-image {
+        height: 180px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+
+/* Utility Classes */
+.button-icon {
+    font-size: 1.2rem;
+}
+
+.list-icon {
+    color: var(--primary-red);
+    margin-right: 0.5rem;
+}
+
+.footer-title-icon {
+    color: var(--primary-red);
+    margin-right: 0.5rem;
+}
+/* Estilos para la galería de servicios */
+.services-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+    opacity: 1;
+}
+
+.gallery-item-overlay span {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Estilos para el modal */
+.service-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.service-modal-content {
+    background: var(--white);
+    border-radius: 15px;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary-red);
+    border: none;
+    color: var(--white);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.modal-close:hover {
+    background: var(--secondary-red);
+}
+
+.modal-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-text {
+    padding: 2rem;
+}
+
+.modal-text h3 {
+    color: var(--black);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-text p {
+    color: var(--black);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .services-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        padding: 1rem;
+    }
+
+    .service-modal-content {
+        width: 95%;
+    }
+
+    .modal-image {
+        height: 200px;
+    }
+
+    .modal-text {
+        padding: 1.5rem;
+    }
+}
+/* Estilos para la descripción del taller */
+.taller-description {
+    padding: 6rem 4rem;
+    background: var(--white);
+}
+
+.description-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.description-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--black);
+}
+
+.description-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Estilos para productos */
+.taller-products {
+    padding: 6rem 4rem;
+    background: var(--gray);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para testimonios */
+.taller-testimonials {
+    padding: 6rem 4rem;
+    background: var(--white);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: var(--gray);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-content {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.quote-icon {
+    color: var(--primary-red);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Estilos para el botón de login en el modal */
+.login-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-red);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.login-link:hover {
+    background-color: var(--secondary-red);
+    transform: translateY(-2px);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .description-container,
+    .description-features {
+        grid-template-columns: 1fr;
+    }
+
+    .taller-description,
+    .taller-products,
+    .taller-testimonials {
+        padding: 4rem 2rem;
+    }
+}
+/* Estilos para el menú de usuario */
+.user-menu-container {
+    position: fixed;
+    right: 20px;
+    top: 15px;
+    z-index: 1001;
+}
+
+.user-menu-button {
+    background: none;
+    border: none;
+    color: var(--primary-red);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.user-menu-button:hover {
+    color: var(--secondary-red);
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+    min-width: 150px;
+}
+
+.user-menu-dropdown.active {
+    display: block;
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    color: var(--black);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.user-menu-item:hover {
+    background-color: var(--gray);
+}
+
+/* Actualizar el logo */
+.taller-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+}
+
+/* Actualizar la galería de productos */
+.products-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .products-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .products-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-menu-container {
+        margin-right: 1rem;
+    }
+}
+/* Ajustes para el navbar */
+.taller-navbar {
+    height: 70px; /* Altura fija para el navbar */
+    padding: 0 2rem;
+}
+
+.taller-logo {
+    font-size: 1.2rem; /* Reducir tamaño del texto */
+    font-weight: 600;
+}
+
+.user-menu-container {
+    position: fixed;
+    right: 20px;
+    top: 15px; /* Ajustado para que esté en línea con el navbar */
+    transform: none; /* Eliminamos el transform */
+    z-index: 1001;
+}
+
+.user-menu-button {
+    background: var(--primary-red);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-menu-button:hover {
+    background: var(--secondary-red);
+    transform: scale(1.1);
+}
+.user-menu-dropdown {
+    position: absolute;
+    right: 0; /* Ajustado para que caiga debajo del botón */
+    top: 45px; /* Espacio para que no se superponga */
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+    min-width: 150px;
+}
+
+.user-menu-dropdown.active {
+    display: block;
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    color: var(--black);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.user-menu-item:hover {
+    background-color: var(--gray);
+    color: var(--primary-red);
+}
+/* Hacer el logo clickeable */
+.taller-logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-red);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.taller-logo:hover {
+    color: var(--secondary-red);
+}
+
+@media (max-width: 768px) {
+    .taller-navbar {
+        padding: 0 1rem;
+        height: 60px;
+    }
+
+    .taller-logo {
+        font-size: 1.1rem;
+    }
+
+    .taller-menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1002;
+        margin-left: auto;
+    }
+
+    .user-menu-container {
+        right: 70px;
+        top: 10px;
+    }
+
+    .user-menu-button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .user-menu-dropdown {
+        top: 40px;
+        right: 0;
+    }
+
+    .taller-nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 1rem 0;
+        margin: 0;
+        gap: 0;
+        display: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .taller-nav-links.active {
+        display: flex;
+    }
+
+    .taller-nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .taller-nav-links a {
+        display: block;
+        padding: 1rem 0;
+        color: var(--black);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .taller-nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    .taller-nav-links a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+@media (max-width: 480px) {
+    .taller-navbar {
+        padding: 0 0.5rem;
+    }
+
+    .user-menu-container {
+        right: 60px;
+    }
+
+    .taller-logo {
+        font-size: 1rem;
+    }
+}
+
+.taller-hero,
+.taller-description,
+.taller-products,
+.taller-services,
+.taller-testimonials {
+    background-attachment: fixed;
+    position: relative;
+}
+
