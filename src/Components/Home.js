@@ -1,16 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-    faWrench, 
-    faOilCan, 
-    faBolt, 
-    faGears,
     faClock,
-    faCheckCircle,
     faCertificate,
-    faMapMarkerAlt,
-    faPhone,
-    faEnvelope,
     faUser,
     faSignInAlt,
     faUserPlus,
@@ -41,10 +34,27 @@ import imgRefrigeracion from './Assets/servicios/enfriamiento.jpg';
 import imgCarroceria from './Assets/servicios/pintura.png';
 import imgAireAcondicionado from './Assets/servicios/aireacondicionado.jpg';
 import imgLimpieza from './Assets/servicios/limpieza.jpg';
+// Productos Import
+
+import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
+import imgPort101 from '../Components/Assets/productos/bateria.jpg';
+import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
+import imgPort103 from '../Components/Assets/productos/led.jpg';
+import imgPort104 from '../Components/Assets/productos/anticongelante.jpg';
+import imgPort105 from '../Components/Assets/productos/kit.png';
+import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
+import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-
+const centerModal = () => {
+    const modal = document.querySelector('.service-modal-content');
+    if (modal) {
+        modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+};
 
 // Lista de servicios
 const services = [
@@ -114,28 +124,60 @@ const services = [
 // Lista de productos destacados
 const products = [
     {
-        img: imgCambioAceite,
-        title: "Aceite Sintético Premium",
-        description: "Aceite de alto rendimiento para motores modernos",
-        price: "$299.99"
-    },
-    {
-        img: imgFrenos,
-        title: "Pastillas de Freno Premium",
-        description: "Mayor durabilidad y rendimiento",
-        price: "$199.99"
-    },
-    {
-        img: imgNeumaticos,
-        title: "Neumáticos Todo Terreno",
-        description: "Máxima tracción y durabilidad",
+        id: 1,
+        img: imgPort102,
+        title: "Neumáticos",
+        description: "Neumáticos de alta calidad para todo tipo de vehículos",
         price: "$799.99"
     },
     {
-        img: imgRefrigeracion,
-        title: "Refrigerante de Alto Rendimiento",
-        description: "Protección superior para tu motor",
+        id: 2,
+        img: imgPort103,
+        title: "Luces LED",
+        description: "Iluminación LED de última generación",
+        price: "$149.99"
+    },
+    {
+        id: 3,
+        img: imgPort104,
+        title: "Anticongelante",
+        description: "Protección superior para el sistema de refrigeración",
+        price: "$29.99"
+    },
+    {
+        id: 4,
+        img: imgPort105,
+        title: "Kit de herramientas",
+        description: "Set completo de herramientas profesionales",
+        price: "$299.99"
+    },
+    {
+        id: 5,
+        img: imgPort106,
+        title: "Aceite de motor",
+        description: "Aceite sintético de alto rendimiento",
         price: "$49.99"
+    },
+    {
+        id: 6,
+        img: imgPort109,
+        title: "Filtro de aceite",
+        description: "Filtros de aceite de primera calidad",
+        price: "$19.99"
+    },
+    {
+        id: 7,
+        img: imgPort100,
+        title: "Pastillas de freno",
+        description: "Pastillas de freno de alto rendimiento",
+        price: "$89.99"
+    },
+    {
+        id: 8,
+        img: imgPort101,
+        title: "Batería de automotriz",
+        description: "Baterías de larga duración y alto rendimiento",
+        price: "$199.99"
     }
 ];
 
@@ -182,6 +224,21 @@ const ServiceModal = ({ service, onClose }) => {
 };
 
 const ProductModal = ({ product, onClose }) => {
+    const [productDetails, setProductDetails] = useState(null);
+
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:2071/api/productos/${product.id}`);
+                setProductDetails(response.data);
+            } catch (error) {
+                console.error('Error al obtener los detalles del producto:', error);
+            }
+        };
+
+        fetchProductDetails();
+    }, [product.id]);
+
     return (
         <div className="service-modal-overlay" onClick={onClose}>
             <div className="service-modal-content" onClick={e => e.stopPropagation()}>
@@ -193,8 +250,15 @@ const ProductModal = ({ product, onClose }) => {
                 </div>
                 <div className="modal-text">
                     <h3>{product.title}</h3>
-                    <p>{product.description}</p>
-                    <span className="product-price">{product.price}</span>
+                    {productDetails ? (
+                        <>
+                            <p>{productDetails.descripcion}</p>
+                            <p>Cantidad en stock: {productDetails.cantidad_en_stock}</p>
+                            <p>Precio: ${productDetails.precio_compra}</p>
+                        </>
+                    ) : (
+                        <p>Cargando detalles del producto...</p>
+                    )}
                     <a href="/login" className="login-link">
                         Ingresa Ahora
                     </a>
@@ -209,7 +273,15 @@ const TallerMecanico = () => {
     const [selectedService, setSelectedService] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-
+    // Añade esto justo después de la declaración de estados
+    useEffect(() => {
+        AOS.init({
+            duration: 1000, // Duración de la animación en milisegundos
+            once: false, // Permitir que la animación ocurra más de una vez
+            mirror: true, // Permitir que la animación ocurra al hacer scroll hacia arriba
+        });
+    }, []);
+    
     return (
         <div className="taller-container">
             {/* Navbar */}
@@ -217,6 +289,7 @@ const TallerMecanico = () => {
             <nav className="taller-navbar">
     {/* Logo clickeable */}
     <a href="#" className="taller-logo">
+    <img src={require('./Assets/servilogo.png')} alt="La Servitk Logo" className="logo-image" />
         La Servitk
     </a>
     
@@ -257,56 +330,55 @@ const TallerMecanico = () => {
         <li><a href="#contacto">Contacto</a></li>
     </ul>
 </nav>
-            {/* Hero Section */}
-            <main className="taller-hero" id="inicio">
-                <div className="taller-hero-content">
-                    <h1>Servicio Mecánico Profesional</h1>
-                    <p>Reparación y mantenimiento experto para tu vehículo</p>
-                    <div className="taller-cta-buttons">
-                        <button className="taller-cta-primary">
-                            <FontAwesomeIcon icon={faClock} className="button-icon" />
-                            Agendar Cita
-                        </button>
-                        <button className="taller-cta-secondary">
-                            <FontAwesomeIcon icon={faTools} className="button-icon" />
-                            Ver Servicios
-                        </button>
-                    </div>
-                </div>
-            </main>
-
+{/* Hero Section */}
+<main className="taller-hero" id="inicio">
+    <div className="taller-hero-content">
+        <h1>Servicio Mecánico Profesional</h1>
+        <p>Reparación y mantenimiento experto para tu vehículo</p>
+        <div className="taller-cta-buttons">
+            <button className="taller-cta-primary" onClick={() => window.location.href = '/SolicitarProducto'}>
+                <FontAwesomeIcon icon={faClock} className="button-icon" />
+                Solicitar Producto
+            </button>
+            <button className="taller-cta-secondary" onClick={() => document.getElementById('servicios').scrollIntoView({ behavior: 'smooth' })}>
+                <FontAwesomeIcon icon={faTools} className="button-icon" />
+                Ver Servicios
+            </button>
+        </div>
+    </div>
+</main>
             {/* Descripción del Taller */}
-            <section className="taller-description" id="nosotros">
-                <div className="description-container">
-                    <div className="description-content">
-                        <h2>Bienvenidos a La Servitk</h2>
-                        <p>Con más de 15 años de experiencia, somos el taller de confianza para el mantenimiento y reparación de tu vehículo. Nuestro equipo de técnicos certificados utiliza tecnología de última generación para garantizar un servicio de calidad.</p>
-                        <div className="description-features">
-                            <div className="feature">
-                                <FontAwesomeIcon icon={faTools} className="feature-icon" />
-                                <h3>Experiencia</h3>
-                                <p>15+ años en el mercado</p>
-                            </div>
-                            <div className="feature">
-                                <FontAwesomeIcon icon={faCertificate} className="feature-icon" />
-                                <h3>Certificados</h3>
-                                <p>Personal calificado</p>
-                            </div>
-                            <div className="feature">
-                                <FontAwesomeIcon icon={faAward} className="feature-icon" />
-                                <h3>Garantía</h3>
-                                <p>Satisfacción garantizada</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="description-image">
-                        <img src="/taller-imagen.jpg" alt="La Servitk Taller" />
-                    </div>
+            <section className="taller-description" id="nosotros" data-aos="fade-up">
+    <div className="description-container">
+        <div className="description-content">
+            <h2>Bienvenidos a La Servitk</h2>
+            <p>Con más de 15 años de experiencia, somos el taller de confianza para el mantenimiento y reparación de tu vehículo. Nuestro equipo de técnicos certificados utiliza tecnología de última generación para garantizar un servicio de calidad.</p>
+            <div className="description-features">
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faTools} className="feature-icon" />
+                    <h3>Experiencia</h3>
+                    <p>15+ años en el mercado</p>
                 </div>
-            </section>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faCertificate} className="feature-icon" />
+                    <h3>Certificados</h3>
+                    <p>Personal calificado</p>
+                </div>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faAward} className="feature-icon" />
+                    <h3>Garantía</h3>
+                    <p>Satisfacción garantizada</p>
+                </div>
+            </div>
+        </div>
+        <div className="description-image" data-aos="fade-left">
+            <img src={require('./Assets/2.jpg')} alt="La Servitk Taller" />
+        </div>
+    </div>
+</section>
 
 {/* Productos Section */}
-<section className="taller-products" id="productos">
+<section className="taller-products" id="productos" data-aos="fade-up">
     <h2>Productos Destacados</h2>
     <div className="products-gallery">
         {products.map((product, index) => (
@@ -314,6 +386,7 @@ const TallerMecanico = () => {
                 key={index} 
                 className="gallery-item"
                 onClick={() => setSelectedProduct(product)}
+                data-aos="fade-up"
             >
                 <img src={product.img} alt={product.title} />
                 <div className="gallery-item-overlay">
@@ -331,50 +404,47 @@ const TallerMecanico = () => {
 </section>
 
             {/* Servicios Section */}
-            <section className="taller-services" id="servicios">
-                <h2>Nuestros Servicios</h2>
-                <div className="services-gallery">
-                    {services.map((service, index) => (
-                        <div 
-                            key={index} 
-                            className="gallery-item"
-                            onClick={() => setSelectedService(service)}
-                        >
-                            <img src={service.img} alt={service.title} />
-                            <div className="gallery-item-overlay">
-                                <span>{service.title}</span>
-                            </div>
-                        </div>
-                    ))}
+            <section className="taller-services" id="servicios" data-aos="fade-up">
+    <h2>Nuestros Servicios</h2>
+    <div className="services-gallery">
+        {services.map((service, index) => (
+            <div 
+                key={index} 
+                className="gallery-item"
+                onClick={() => setSelectedService(service)}
+                data-aos="fade-up"
+            >
+                <img src={service.img} alt={service.title} />
+                <div className="gallery-item-overlay">
+                    <span>{service.title}</span>
                 </div>
-                {selectedService && (
-                    <ServiceModal 
-                        service={selectedService} 
-                        onClose={() => setSelectedService(null)} 
-                    />
-                )}
-            </section>
+            </div>
+        ))}
+    </div>
+    {selectedService && (
+        <ServiceModal 
+            service={selectedService} 
+            onClose={() => setSelectedService(null)} 
+        />
+    )}
+</section>
 
-            {/* Testimonios Section */}
-            <section className="taller-testimonials" id="testimonios">
-                <h2>Lo que dicen nuestros clientes</h2>
-                <div className="testimonials-grid">
-                    {testimonials.map((testimonial, index) => (
-                        <div key={index} className="testimonial-card">
-                            <div className="testimonial-content">
-                                <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
-                                <p>{testimonial.text}</p>
-                            </div>
-                            <div className="testimonial-author">
-                                <div className="author-info">
-                                    <h4>{testimonial.author}</h4>
-                                    <p>{testimonial.position}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+{/* Testimonios Section */}
+<section className="taller-testimonials" id="testimonios" data-aos="fade-up">
+    <h2>Testimonios</h2>
+    <div className="testimonials-container">
+        {testimonials.map((testimonial, index) => (
+            <div key={index} className="testimonial" data-aos="fade-up">
+                <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
+                <div className="testimonial-content">
+                    <p>{testimonial.text}</p>
+                    <h4>{testimonial.author}</h4>
+                    <span>{testimonial.position}</span>
                 </div>
-            </section>
+            </div>
+        ))}
+    </div>
+</section>
 
             {/* Footer */}
             <footer className="taller-footer" id="contacto">
@@ -411,15 +481,17 @@ const TallerMecanico = () => {
                     </div>
                     <div className="footer-section">
                         <h3>Contacto</h3>
-                        
-                        <h3>Newsletter</h3>
-                        <div className="newsletter-form">
-                            <input type="email" placeholder="Tu correo electrónico" />
-                            <button>
-                                <FontAwesomeIcon icon={faEnvelope} className="button-icon" />
-                                Suscribirse
-                            </button>
-                        </div>
+                        <h4>Mapa</h4>
+                        <iframe
+                src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="200"
+                frameBorder="0"
+                style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
+                allowFullScreen
+                aria-hidden="false"
+                tabIndex="0"
+            ></iframe>
                     </div>
                 </div>
                 <div className="footer-bottom">

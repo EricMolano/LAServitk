@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from './cliente/ModalCliente'; // Importar el componente Modal
 import './styles/SolicitarProducto.css'; // Asegúrate de tener un archivo CSS para los estilos
 
 function SolicitarProducto() {
+    const location = useLocation();
     const [productos, setProductos] = useState([]);
-    const [productoSeleccionado, setProductoSeleccionado] = useState('');
+    const [productoSeleccionado, setProductoSeleccionado] = useState(location.state?.selectedProduct || '');
     const [cantidad, setCantidad] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');

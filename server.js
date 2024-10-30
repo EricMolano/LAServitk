@@ -139,27 +139,28 @@ app.post('/api/register', async (req, res) => {
 // ===============================================================
 // Componente Login
 // ===============================================================
+// Componente Login
 app.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+      const { email, password } = req.body;
+      const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
 
-    if (results.length === 0) {
-      return res.status(401).json({ message: 'Credenciales inválidas' });
-    }
+      if (results.length === 0) {
+          return res.status(401).json({ message: 'Credenciales inválidas' });
+      }
 
-    const user = results[0];
-    const isMatch = await bcrypt.compare(password, user.password);
+      const user = results[0];
+      const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Credenciales inválidas' });
-    }
+      if (!isMatch) {
+          return res.status(401).json({ message: 'Credenciales inválidas' });
+      }
 
-    const token = jwt.sign({ id: user.id, role: user.rol_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    return res.status(200).json({ success: true, token, user });
+      const token = jwt.sign({ id: user.id, role: user.rol_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      return res.status(200).json({ success: true, token, user });
   } catch (error) {
-    console.error('Error en el inicio de sesión:', error);
-    return res.status(500).json({ message: 'Error en el inicio de sesión', error: error.message });
+      console.error('Error en el inicio de sesión:', error);
+      return res.status(500).json({ message: 'Error en el inicio de sesión', error: error.message });
   }
 });
 
@@ -170,12 +171,11 @@ const authenticateToken = (req, res, next) => {
   if (token == null) return res.status(401).json({ message: 'Token no proporcionado' });
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: 'Token inválido' });
-    req.user = user;
-    next();
+      if (err) return res.status(403).json({ message: 'Token inválido' });
+      req.user = user;
+      next();
   });
 };
-
 
 // ===============================================================
 // Componente Octener usuarios
@@ -797,21 +797,19 @@ app.post('/api/inventory', authenticateToken, (req, res) => {
     res.status(201).json({ message: 'Producto agregado exitosamente', productoId: result.insertId });
   });
 });
-// Ruta para obtener el stock de un producto específico
-app.get('/api/productos/:id', authenticateToken, (req, res) => {
-  const { id } = req.params;
 
-  const query = 'SELECT cantidad_en_stock FROM producto WHERE id = ?';
-  db.query(query, [id], (err, results) => {
-    if (err) {
-      console.error('Error al obtener el stock del producto:', err);
-      return res.status(500).json({ message: 'Error al obtener el stock del producto' });
-    }
 
-    if (results.length === 0) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
-    }
-
-    res.status(200).json(results[0]);
+// Ruta para obtener los detalles de un producto específico
+app.get('/api/productos/:id', (req, res) => {
+  const query = 'SELECT nombre, descripcion, cantidad_en_stock, precio_compra FROM producto WHERE id = ?';
+  db.query(query, [req.params.id], (err, results) => {
+      if (err) {
+          console.error('Error al obtener el producto:', err);
+          return res.status(500).json({ message: 'Error al obtener el producto' });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+      res.status(200).json(results[0]);
   });
 });

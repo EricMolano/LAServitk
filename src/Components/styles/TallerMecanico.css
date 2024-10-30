@@ -1,3 +1,6 @@
+/* Importar la fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 /* TallerMecanico.css */
 :root {
     --primary-red: #ff3333;
@@ -11,7 +14,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Cambiado a Poppins */
+
 }
 
 /* Navbar Styles */
@@ -27,7 +31,9 @@
     align-items: center;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    border-radius: 10px; /* Añadir bordes redondeados */
 }
+
 .taller-logo {
     font-size: 1.8rem;
     font-weight: 700;
@@ -137,11 +143,25 @@
     background-color: var(--gray);
 }
 
+.taller-products h2{
+    font-size: 2.0rem;
+    margin-bottom: 2rem;
+    color: var(--primary-red); /* Cambiar el color a rojo */
+    text-align: center; /* Centrar el texto */
+}
+
+.taller-testimonials h2{
+    font-size: 2.0rem;
+    margin-bottom: 2rem;
+    color: var(--primary-red); /* Cambiar el color a rojo */
+    text-align: center; /* Centrar el texto */
+}
+/* Ajustar el estilo del encabezado h2 en la sección de servicios */
 .taller-services h2 {
-    text-align: center;
-    color: var(--black);
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 2.0rem;
+    margin-bottom: 2rem;
+    color: var(--primary-red); /* Cambiar el color a rojo */
+    text-align: center; /* Centrar el texto */
 }
 
 .services-grid {
@@ -314,39 +334,6 @@
     transform: translateY(-2px);
 }
 
-.newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.newsletter-form input {
-    padding: 0.3rem 0.5rem;
-    border: none;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-    font-size: 0.75rem;
-}
-
-.newsletter-form button {
-    padding: 0.3rem;
-    background-color: var(--primary-red);
-    color: var(--white);
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-}
-
-.newsletter-form button:hover {
-    background-color: var(--secondary-red);
-}
-
 .footer-bottom {
     text-align: center;
     margin-top: 0.4rem;
@@ -503,13 +490,14 @@
     transform: scale(1.1);
 }
 
+/* Cambiar el color de la superposición de las imágenes al pasar el cursor */
 .gallery-item-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 51, 51, 0.7); /* Cambiar a un rojo claro */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1025,3 +1013,345 @@
     position: relative;
 }
 
+.description-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: center;
+}
+
+.description-content {
+    flex: 1;
+}
+
+.description-image {
+    flex: 1;
+    max-width: 500px; /* Controla el ancho máximo */
+}
+
+.description-image img {
+    width: 100%;
+    height: 400px; /* Altura fija */
+    object-fit: cover; /* Mantiene la proporción */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .description-container {
+        flex-direction: column;
+    }
+
+    .description-image {
+        max-width: 100%;
+    }
+
+    .description-image img {
+        height: 300px; /* Altura más pequeña en móviles */
+    }
+}
+
+/* Estilo para todas las secciones */
+section {
+    position: relative;
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(200, 200, 200, 0.3);
+}
+
+/* Fondo distintivo para secciones alternas */
+section:nth-child(odd) {
+    background: rgba(248, 249, 250, 0.9);
+}
+
+section:nth-child(even) {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Bordes y sombras */
+section {
+    border: 1px solid #e0e0e0;
+}
+
+/* Mantener el contenido sobre el fondo */
+section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ajustes específicos para mantener el layout actual */
+.taller-description,
+.taller-services,
+.taller-products,
+.taller-testimonials {
+    width: 95%;
+    margin: 2rem auto;
+}
+
+
+/* Animación para el botón de usuario */
+.user-menu-button {
+    transition: transform 0.3s ease;
+}
+
+.user-menu-button:hover {
+    transform: scale(1.1);
+}
+
+/* Animación para el menú desplegable */
+.user-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.user-menu-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Animación para los items del menú */
+.user-menu-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.user-menu-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+}
+
+/* Animación para los iconos dentro de los items */
+.user-menu-item .fa-icon {
+    transition: transform 0.2s ease;
+}
+
+.user-menu-item:hover .fa-icon {
+    transform: scale(1.1);
+}
+
+/* Animaciones para todos los botones */
+button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de onda al hacer click */
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* Animación específica para botones sociales */
+.social-button {
+    transition: all 0.3s ease;
+}
+
+.social-button:hover {
+    transform: translateY(-3px) rotate(8deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación para el botón de menú hamburguesa */
+.taller-menu-toggle {
+    transition: transform 0.3s ease;
+}
+
+.taller-menu-toggle:hover {
+    transform: rotate(180deg);
+}
+
+/* Animación para los botones CTA */
+.taller-cta-primary,
+.taller-cta-secondary {
+    transition: all 0.3s ease;
+}
+
+.taller-cta-primary:hover,
+.taller-cta-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo-image {
+    width: 40px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+/* Estilos para testimonios */
+.taller-testimonials {
+    padding: 6rem 4rem;
+    background: var(--white);
+}
+
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial {
+    background: var(--gray);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.testimonial:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial .quote-icon {
+    color: var(--primary-red);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.testimonial h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+}
+
+.testimonial span {
+    font-size: 0.9rem;
+    color: var(--black);
+    opacity: 0.7;
+}
+/* Footer Styles */
+.taller-footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 2rem 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajustar el tamaño mínimo de las columnas */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-section h3 {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.footer-icon {
+    color: var(--primary-red);
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-button {
+    background: var(--primary-red);
+    border: none;
+    color: var(--white);
+    font-size: 1rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-button:hover {
+    background: var(--secondary-red);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
