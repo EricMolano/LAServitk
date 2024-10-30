@@ -1,6 +1,6 @@
-import React , { useState }from 'react';
-import { Outlet, Link , useNavigate  } from 'react-router-dom';
-import Sidebar from './empleado/SlidebarE';
+import React, { useState } from 'react';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import Sidebar from './SlideBarPrueba'; // Asegúrate de que esta importación sea correcta
 
 import imgPort1 from '../Components/Assets/2.jpg';
 import imgPort2 from '../Components/Assets/3.jpg';
@@ -13,27 +13,27 @@ import imgPort8 from '../Components/Assets/suspencion.jpg';
 
 import miImagen4 from '../Components/Assets/img4.jpeg';
 
-//Redes 
+// Redes 
 import FacebookIcon from '../Components/Assets/redes/facebook.png';
 import InstagramIcon from '../Components/Assets/redes/Instagram.png';
 import WhatsappIcon from '../Components/Assets/redes/whatsapp.png';
 import TiktokIcon from '../Components/Assets/redes/tiktok.jpg';
 
-//Servicios imagenes
+// Servicios imagenes
 import imgFrenos from '../Components/Assets/servicios/revisionfrenos.jpg';
 import imgAlineacion from '../Components/Assets/servicios/alineacion.jpg';
 import imgTransmision from '../Components/Assets/servicios/transmision.jpg';
-import imgMotor from  '../Components/Assets/servicios/reparacionmotores.jpg';
-import imgCambioAceite from  '../Components/Assets/servicios/cambioaceite.jpg';
-import imgSuspension from  '../Components/Assets/servicios/suspencion.png';
-import imgNeumaticos from  '../Components/Assets/servicios/neumaticos.png';
-import imgEscape from  '../Components/Assets/servicios/escape.jpg';
-import imgAireAcondicionado from  '../Components/Assets/servicios/aireacondicionado.jpg';
-import imgCarroceria from  '../Components/Assets/servicios/pintura.png';
-import imgRefrigeracion from  '../Components/Assets/servicios/enfriamiento.jpg';
-import imgLimpieza from  '../Components/Assets/servicios/limpieza.jpg';
+import imgMotor from '../Components/Assets/servicios/reparacionmotores.jpg';
+import imgCambioAceite from '../Components/Assets/servicios/cambioaceite.jpg';
+import imgSuspension from '../Components/Assets/servicios/suspencion.png';
+import imgNeumaticos from '../Components/Assets/servicios/neumaticos.png';
+import imgEscape from '../Components/Assets/servicios/escape.jpg';
+import imgAireAcondicionado from '../Components/Assets/servicios/aireacondicionado.jpg';
+import imgCarroceria from '../Components/Assets/servicios/pintura.png';
+import imgRefrigeracion from '../Components/Assets/servicios/enfriamiento.jpg';
+import imgLimpieza from '../Components/Assets/servicios/limpieza.jpg';
 
-//Produtos imagenes
+// Produtos imagenes
 import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
 import imgPort101 from '../Components/Assets/productos/bateria.jpg';
 import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
@@ -44,13 +44,10 @@ import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
 import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 import carritoLogo from '../Components/Assets/carritoLogo.png';
 
-
-
-
-const AdminDashboard = () => {
+const EmployeeDashboard = () => {
     return (
         <div className="home-container">
-            <Sidebar /> {/* Agregar la barra lateral */}
+            <Sidebar /> {/* Asegúrate de que esta línea esté correcta */}
             <div className="content">
                 <Header />
                 <Main />
@@ -59,35 +56,37 @@ const AdminDashboard = () => {
         </div>
     );
 };
-const Header = () => {
-  const navigate = useNavigate();
 
-  // Función para manejar el cierre de sesión
-  const handleLogout = () => {
-      localStorage.removeItem('token');
-      navigate('/');
-  };
-  return (
-      <header>
-          <nav>
-          <div className='logout-container-1'>
-            <button1 className='btn-cerrar-sesion-1 btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
-        </div>
-          </nav>
-          <section className="textos-header hidden">
-              <h1>Bienvenido</h1>
-              <h2>Con La Servitk puedes arreglar tu vehiculo</h2>
-          </section>
-          <div className="wave" style={{ height: '150px', overflow: 'hidden' }}>
-              <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
-                  <path
-                      d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-                      style={{ stroke: 'none', fill: '#fff' }}
-                  />
-              </svg>
-          </div>
-      </header>
-  );
+const Header = () => {
+    const navigate = useNavigate();
+
+    // Función para manejar el cierre de sesión
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
+    return (
+        <header>
+            <nav>
+                <div className='logout-container-1'>
+                    <button1 className='btn-cerrar-sesion-1 btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
+                </div>
+            </nav>
+            <section className="textos-header hidden">
+                <h1>Bienvenido</h1>
+                <h2>Con La Servitk puedes arreglar tu vehiculo</h2>
+            </section>
+            <div className="wave" style={{ height: '150px', overflow: 'hidden' }}>
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
+                    <path
+                        d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                        style={{ stroke: 'none', fill: '#fff' }}
+                    />
+                </svg>
+            </div>
+        </header>
+    );
 };
 
 
@@ -417,4 +416,4 @@ const Footer = () => {
     
 };
 
-export default AdminDashboard;
+export default EmployeeDashboard;

@@ -50,6 +50,7 @@ import EditVehicle from './Components/cliente/EditVehicle';
 import AddVehicle from './Components/cliente/AddVehicle';
 import EditProfile from './Components/cliente/EditProfile';
 import SolicitarProducto from './Components/SolicitarProducto'; // Importa el componente SolicitarProducto
+import SlideBarPrueba from './Components/SlideBarPrueba'; // Importa el componente SlideBarPrueba
 
 import './App.css';
 
@@ -106,7 +107,7 @@ function App() {
 
                 {/* Rutas públicas */}
                 <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
-
+                <Route path="/SlideBarPrueba" element={<SlideBarPrueba />} />
                 {/* Rutas privadas */}
                 <Route path="/AdminDashboard" element={<PrivateRoute element={<AdminDashboard />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/ClientDashboard" element={<PrivateRoute element={<ClientDashboard />} userRole={userRole} requiredRole={2} />} />
