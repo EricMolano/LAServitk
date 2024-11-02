@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -20,8 +21,9 @@ import {
     faInstagram 
 } from '@fortawesome/free-brands-svg-icons';
 
-import './styles/TallerMecanico.css';
-// Importar imágenes de servicios
+import './styles/ClientDashboard.css';
+
+// Importar imágenes de servicios y productos
 import imgFrenos from './Assets/servicios/revisionfrenos.jpg';
 import imgAlineacion from './Assets/servicios/alineacion.jpg';
 import imgTransmision from './Assets/servicios/transmision.jpg';
@@ -34,7 +36,6 @@ import imgRefrigeracion from './Assets/servicios/enfriamiento.jpg';
 import imgCarroceria from './Assets/servicios/pintura.png';
 import imgAireAcondicionado from './Assets/servicios/aireacondicionado.jpg';
 import imgLimpieza from './Assets/servicios/limpieza.jpg';
-// Productos Import
 
 import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
 import imgPort101 from '../Components/Assets/productos/bateria.jpg';
@@ -45,9 +46,10 @@ import imgPort105 from '../Components/Assets/productos/kit.png';
 import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
 import imgPort109 from '../Components/Assets/productos/filtro.jpg';
 
-
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+import './styles/TallerMecanico.css';
 
 const centerModal = () => {
     const modal = document.querySelector('.service-modal-content');
@@ -56,7 +58,6 @@ const centerModal = () => {
     }
 };
 
-// Lista de servicios
 const services = [
     {
         img: imgFrenos,
@@ -200,7 +201,8 @@ const testimonials = [
     }
 ];
 
-// Componente Modal
+
+// Componente Modal para Servicios
 const ServiceModal = ({ service, onClose }) => {
     return (
         <div className="service-modal-overlay" onClick={onClose}>
@@ -223,8 +225,10 @@ const ServiceModal = ({ service, onClose }) => {
     );
 };
 
+// Componente Modal para Productos
 const ProductModal = ({ product, onClose }) => {
     const [productDetails, setProductDetails] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -238,6 +242,10 @@ const ProductModal = ({ product, onClose }) => {
 
         fetchProductDetails();
     }, [product.id]);
+
+    const handleSolicitarClick = () => {
+        navigate('/login', { state: { selectedProduct: product.id } });
+    };
 
     return (
         <div className="service-modal-overlay" onClick={onClose}>
@@ -259,96 +267,107 @@ const ProductModal = ({ product, onClose }) => {
                     ) : (
                         <p>Cargando detalles del producto...</p>
                     )}
-                    <a href="/login" className="login-link">
-                        Ingresa Ahora
-                    </a>
+                    <button onClick={handleSolicitarClick} className="solicitar-button">
+                        Solicítalo!
+                    </button>
                 </div>
             </div>
         </div>
     );
+};// Header component con opciones de ingreso y registro
+const Header = () => {
+    const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+
+    return (
+        <nav className="taller-navbar">
+            <a href="#" className="taller-logo">
+                <img src={require('./Assets/servilogo.png')} alt="La Servitk Logo" className="logo-image" />
+                La Servitk
+            </a>
+
+            <div className="user-menu-container">
+                <button 
+                    className="user-menu-button"
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                >
+                    <FontAwesomeIcon icon={faUser} />
+                </button>
+                <div className={`user-menu-dropdown ${isUserMenuOpen ? 'active' : ''}`}>
+                    <a href="/login" className="user-menu-item">
+                        <FontAwesomeIcon icon={faSignInAlt} />
+                        Ingreso
+                    </a>
+                    <a href="/register" className="user-menu-item">
+                        <FontAwesomeIcon icon={faUserPlus} />
+                        Registro
+                    </a>
+                </div>
+            </div>
+
+            <div 
+                className={`taller-menu-toggle ${isMenuOpen ? 'active' : ''}`}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+                <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+            </div>
+
+            <ul className={`taller-nav-links ${isMenuOpen ? 'active' : ''}`}>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    );
 };
 
 const TallerMecanico = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [selectedService, setSelectedService] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    // Añade esto justo después de la declaración de estados
+
     useEffect(() => {
         AOS.init({
-            duration: 1000, // Duración de la animación en milisegundos
-            once: false, // Permitir que la animación ocurra más de una vez
-            mirror: true, // Permitir que la animación ocurra al hacer scroll hacia arriba
+            duration: 1000,
+            once: false,
+            mirror: true,
         });
     }, []);
-    
+
+    useEffect(() => {
+        if (selectedService || selectedProduct) {
+            document.body.classList.add('modal-open');
+            centerModal();
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+    }, [selectedService, selectedProduct]);
+
     return (
-        <div className="taller-container">
-            {/* Navbar */}
+        <>
+                 
+                {/* Hero Section */}
+                <main className="taller-hero" id="inicio">
+                    <div className="taller-hero-content">
+                        <h1>Servicio Mecánico Profesional</h1>
+                        <p>Reparación y mantenimiento experto para tu vehículo</p>
+                        <div className="taller-cta-buttons">
+                            <button className="taller-cta-primary" onClick={() => window.location.href = '/SolicitarProducto'}>
+                                <FontAwesomeIcon icon={faClock} className="button-icon" />
+                                Solicitar Producto
+                            </button>
+                            <button className="taller-cta-secondary" onClick={() => document.getElementById('servicios').scrollIntoView({ behavior: 'smooth' })}>
+                                <FontAwesomeIcon icon={faTools} className="button-icon" />
+                                Ver Servicios
+                            </button>
+                        </div>
+                    </div>
+                </main>
 
-            <nav className="taller-navbar">
-    {/* Logo clickeable */}
-    <a href="#" className="taller-logo">
-    <img src={require('./Assets/servilogo.png')} alt="La Servitk Logo" className="logo-image" />
-        La Servitk
-    </a>
-    
-    {/* Menú de Usuario */}
-    <div className="user-menu-container">
-        <button 
-            className="user-menu-button"
-            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-        >
-            <FontAwesomeIcon icon={faUser} />
-        </button>
-        <div className={`user-menu-dropdown ${isUserMenuOpen ? 'active' : ''}`}>
-            <a href="/login" className="user-menu-item">
-                <FontAwesomeIcon icon={faSignInAlt} />
-                Ingreso
-            </a>
-            <a href="/register" className="user-menu-item">
-                <FontAwesomeIcon icon={faUserPlus} />
-                Registro
-            </a>
-        </div>
-    </div>
-
-    {/* Menú hamburguesa */}
-    <div 
-        className={`taller-menu-toggle ${isMenuOpen ? 'active' : ''}`}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-    >
-        <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
-    </div>
-
-    {/* Links de navegación (sin el enlace de inicio) */}
-    <ul className={`taller-nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-    </ul>
-</nav>
-{/* Hero Section */}
-<main className="taller-hero" id="inicio">
-    <div className="taller-hero-content">
-        <h1>Servicio Mecánico Profesional</h1>
-        <p>Reparación y mantenimiento experto para tu vehículo</p>
-        <div className="taller-cta-buttons">
-            <button className="taller-cta-primary" onClick={() => window.location.href = '/SolicitarProducto'}>
-                <FontAwesomeIcon icon={faClock} className="button-icon" />
-                Solicitar Producto
-            </button>
-            <button className="taller-cta-secondary" onClick={() => document.getElementById('servicios').scrollIntoView({ behavior: 'smooth' })}>
-                <FontAwesomeIcon icon={faTools} className="button-icon" />
-                Ver Servicios
-            </button>
-        </div>
-    </div>
-</main>
-            {/* Descripción del Taller */}
-            <section className="taller-description" id="nosotros" data-aos="fade-up">
+                <section className="taller-description" id="nosotros" data-aos="fade-up">
     <div className="description-container">
         <div className="description-content">
             <h2>Bienvenidos a La Servitk</h2>
@@ -376,129 +395,131 @@ const TallerMecanico = () => {
         </div>
     </div>
 </section>
+                <Header />
 
-{/* Productos Section */}
-<section className="taller-products" id="productos" data-aos="fade-up">
-    <h2>Productos Destacados</h2>
-    <div className="products-gallery">
-        {products.map((product, index) => (
-            <div 
-                key={index} 
-                className="gallery-item"
-                onClick={() => setSelectedProduct(product)}
-                data-aos="fade-up"
-            >
-                <img src={product.img} alt={product.title} />
-                <div className="gallery-item-overlay">
-                    <span>{product.title}</span>
-                </div>
-            </div>
-        ))}
-    </div>
-    {selectedProduct && (
-        <ProductModal 
-            product={selectedProduct} 
-            onClose={() => setSelectedProduct(null)} 
-        />
-    )}
-</section>
-
-            {/* Servicios Section */}
-            <section className="taller-services" id="servicios" data-aos="fade-up">
-    <h2>Nuestros Servicios</h2>
-    <div className="services-gallery">
-        {services.map((service, index) => (
-            <div 
-                key={index} 
-                className="gallery-item"
-                onClick={() => setSelectedService(service)}
-                data-aos="fade-up"
-            >
-                <img src={service.img} alt={service.title} />
-                <div className="gallery-item-overlay">
-                    <span>{service.title}</span>
-                </div>
-            </div>
-        ))}
-    </div>
-    {selectedService && (
-        <ServiceModal 
-            service={selectedService} 
-            onClose={() => setSelectedService(null)} 
-        />
-    )}
-</section>
-
-{/* Testimonios Section */}
-<section className="taller-testimonials" id="testimonios" data-aos="fade-up">
-    <h2>Testimonios</h2>
-    <div className="testimonials-container">
-        {testimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial" data-aos="fade-up">
-                <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
-                <div className="testimonial-content">
-                    <p>{testimonial.text}</p>
-                    <h4>{testimonial.author}</h4>
-                    <span>{testimonial.position}</span>
-                </div>
-            </div>
-        ))}
-    </div>
-</section>
-
-            {/* Footer */}
-            <footer className="taller-footer" id="contacto">
-                <div className="footer-content">
-                    <div className="footer-section">
-                        <h3>
-                            <FontAwesomeIcon icon={faCar} className="footer-title-icon" />
-                            La Servitk
-                        </h3>
-                        <p>Tu taller de confianza para el mantenimiento y reparación de tu vehículo.</p>
-                        <div className="social-links">
-                            <button 
-                                className="social-button"
-                                onClick={() => window.open('https://wa.me/1234567890', '_blank')}
-                                aria-label="WhatsApp"
+                {/* Productos Section */}
+                <section className="taller-products" id="productos" data-aos="fade-up">
+                    <h2>Productos Destacados</h2>
+                    <div className="products-gallery">
+                        {products.map((product, index) => (
+                            <div 
+                                key={index} 
+                                className="gallery-item"
+                                onClick={() => setSelectedProduct(product)}
+                                data-aos="fade-up"
                             >
-                                <FontAwesomeIcon icon={faWhatsapp} />
-                            </button>
-                            <button 
-                                className="social-button"
-                                onClick={() => window.open('https://facebook.com/laservitk', '_blank')}
-                                aria-label="Facebook"
+                                <img src={product.img} alt={product.title} />
+                                <div className="gallery-item-overlay">
+                                    <span>{product.title}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {selectedProduct && (
+                        <ProductModal 
+                            product={selectedProduct} 
+                            onClose={() => setSelectedProduct(null)} 
+                        />
+                    )}
+                </section>
+
+                {/* Servicios Section */}
+                <section className="taller-services" id="servicios" data-aos="fade-up">
+                    <h2>Nuestros Servicios</h2>
+                    <div className="services-gallery">
+                        {services.map((service, index) => (
+                            <div 
+                                key={index} 
+                                className="gallery-item"
+                                onClick={() => setSelectedService(service)}
+                                data-aos="fade-up"
                             >
-                                <FontAwesomeIcon icon={faFacebookF} />
-                            </button>
-                            <button 
-                                className="social-button"
-                                onClick={() => window.open('https://instagram.com/laservitk', '_blank')}
-                                aria-label="Instagram"
-                            >
-                                <FontAwesomeIcon icon={faInstagram} />
-                            </button>
+                                <img src={service.img} alt={service.title} />
+                                <div className="gallery-item-overlay">
+                                    <span>{service.title}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {selectedService && (
+                        <ServiceModal 
+                            service={selectedService} 
+                            onClose={() => setSelectedService(null)} 
+                        />
+                    )}
+                </section>
+
+                {/* Testimonios Section */}
+                <section className="taller-testimonials" id="testimonios" data-aos="fade-up">
+                    <h2>Testimonios</h2>
+                    <div className="testimonials-container">
+                        {testimonials.map((testimonial, index) => (
+                            <div key={index} className="testimonial" data-aos="fade-up">
+                                <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
+                                <div className="testimonial-content">
+                                    <p>{testimonial.text}</p>
+                                    <h4>{testimonial.author}</h4>
+                                    <span>{testimonial.position}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Footer */}
+                <footer className="taller-footer" id="contacto">
+                    <div className="footer-content">
+                        <div className="footer-section">
+                            <h3>
+                                <FontAwesomeIcon icon={faCar} className="footer-title-icon" />
+                                La Servitk
+                            </h3>
+                            <p>Tu taller de confianza para el mantenimiento y reparación de tu vehículo.</p>
+                            <div className="social-links">
+                                <button 
+                                    className="social-button"
+                                    onClick={() => window.open('https://wa.me/1234567890', '_blank')}
+                                    aria-label="WhatsApp"
+                                >
+                                    <FontAwesomeIcon icon={faWhatsapp} />
+                                </button>
+                                <button 
+                                    className="social-button"
+                                    onClick={() => window.open('https://facebook.com/laservitk', '_blank')}
+                                    aria-label="Facebook"
+                                >
+                                    <FontAwesomeIcon icon={faFacebookF} />
+                                </button>
+                                <button 
+                                    className="social-button"
+                                    onClick={() => window.open('https://instagram.com/laservitk', '_blank')}
+                                    aria-label="Instagram"
+                                >
+                                    <FontAwesomeIcon icon={faInstagram} />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="footer-section">
+                            <h3>Contacto</h3>
+                            <h4>Mapa</h4>
+                            <iframe
+                                src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                width="100%"
+                                height="200"
+                                frameBorder="0"
+                                style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
+                                allowFullScreen
+                                aria-hidden="false"
+                                tabIndex="0"
+                            ></iframe>
                         </div>
                     </div>
-                    <div className="footer-section">
-                        <h3>Contacto</h3>
-                        <h4>Mapa</h4>
-                        <iframe
-                src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="200"
-                frameBorder="0"
-                style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
-                allowFullScreen
-                aria-hidden="false"
-                tabIndex="0"
-            ></iframe>
+                    <div className="footer-bottom">
+                        <p>&copy; 2024 LaServitk. Todos los derechos reservados.</p>
                     </div>
-                </div>
-                <div className="footer-bottom">
-                    <p>&copy; 2024 LaServitk. Todos los derechos reservados.</p>
-                </div>
-            </footer>
-        </div>
+                </footer>
+                </>
+
     );
 };
 

@@ -1,39 +1,41 @@
-import React , { useState }from 'react';
-import { Outlet, Link , useNavigate  } from 'react-router-dom';
-import Sidebar from './admin/Slidebara';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faClock,
+    faCertificate,
+    faUser,
+    faSignOutAlt,
+    faBars,
+    faTimes,
+    faCar,
+    faTools,
+    faAward,
+    faQuoteLeft
+} from '@fortawesome/free-solid-svg-icons';
+import { 
+    faWhatsapp, 
+    faFacebookF, 
+    faInstagram 
+} from '@fortawesome/free-brands-svg-icons';
 
-import imgPort1 from '../Components/Assets/2.jpg';
-import imgPort2 from '../Components/Assets/3.jpg';
-import imgPort4 from '../Components/Assets/bateria.jpg';
-import imgFace1 from '../Components/Assets/face1.jpg';
-import imgFace2 from '../Components/Assets/face2.jpg';
-import imgIcono1 from '../Components/Assets/icono1.png';
-import imgPort7 from '../Components/Assets/mecanico.jpg';
-import imgPort8 from '../Components/Assets/suspencion.jpg';
+import './styles/ClientDashboard.css';
 
-import miImagen4 from '../Components/Assets/img4.jpeg';
+// Importar imágenes de servicios y productos
+import imgFrenos from './Assets/servicios/revisionfrenos.jpg';
+import imgAlineacion from './Assets/servicios/alineacion.jpg';
+import imgTransmision from './Assets/servicios/transmision.jpg';
+import imgCambioAceite from './Assets/servicios/cambioaceite.jpg';
+import imgSuspension from './Assets/servicios/suspencion.png';
+import imgMotor from './Assets/servicios/reparacionmotores.jpg';
+import imgNeumaticos from './Assets/servicios/neumaticos.png';
+import imgEscape from './Assets/servicios/escape.jpg';
+import imgRefrigeracion from './Assets/servicios/enfriamiento.jpg';
+import imgCarroceria from './Assets/servicios/pintura.png';
+import imgAireAcondicionado from './Assets/servicios/aireacondicionado.jpg';
+import imgLimpieza from './Assets/servicios/limpieza.jpg';
 
-//Redes 
-import FacebookIcon from '../Components/Assets/redes/facebook.png';
-import InstagramIcon from '../Components/Assets/redes/Instagram.png';
-import WhatsappIcon from '../Components/Assets/redes/whatsapp.png';
-import TiktokIcon from '../Components/Assets/redes/tiktok.jpg';
-
-//Servicios imagenes
-import imgFrenos from '../Components/Assets/servicios/revisionfrenos.jpg';
-import imgAlineacion from '../Components/Assets/servicios/alineacion.jpg';
-import imgTransmision from '../Components/Assets/servicios/transmision.jpg';
-import imgMotor from  '../Components/Assets/servicios/reparacionmotores.jpg';
-import imgCambioAceite from  '../Components/Assets/servicios/cambioaceite.jpg';
-import imgSuspension from  '../Components/Assets/servicios/suspencion.png';
-import imgNeumaticos from  '../Components/Assets/servicios/neumaticos.png';
-import imgEscape from  '../Components/Assets/servicios/escape.jpg';
-import imgAireAcondicionado from  '../Components/Assets/servicios/aireacondicionado.jpg';
-import imgCarroceria from  '../Components/Assets/servicios/pintura.png';
-import imgRefrigeracion from  '../Components/Assets/servicios/enfriamiento.jpg';
-import imgLimpieza from  '../Components/Assets/servicios/limpieza.jpg';
-
-//Produtos imagenes
 import imgPort100 from '../Components/Assets/productos/Pastillas.jpg';
 import imgPort101 from '../Components/Assets/productos/bateria.jpg';
 import imgPort102 from '../Components/Assets/productos/productoneumatico.jpg';
@@ -42,377 +44,452 @@ import imgPort104 from '../Components/Assets/productos/anticongelante.jpg';
 import imgPort105 from '../Components/Assets/productos/kit.png';
 import imgPort106 from '../Components/Assets/productos/cambioaceite.jpg';
 import imgPort109 from '../Components/Assets/productos/filtro.jpg';
-import carritoLogo from '../Components/Assets/carritoLogo.png';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-import '../Components/styles/AdminDashboard.css'; 
+import './styles/TallerMecanico.css';
+import Slidebara from '../Components/admin/Slidebara'
 
-const AdminDashboard = () => {
-    return (
-        <div className="home-container">
-            <Sidebar /> {/* Agregar la barra lateral */}
-            <div className="content">
-                <Header />
-                <Main />
-                <Footer />
-            </div>
-        </div>
-    );
-};
-const Header = () => {
-  const navigate = useNavigate();
-
-  // Función para manejar el cierre de sesión
-  const handleLogout = () => {
-      localStorage.removeItem('token');
-      navigate('/');
-  };
-  return (
-      <header>
-          <nav>
-          <div className='logout-container-1'>
-            <button1 className='btn-cerrar-sesion-1 btn-base' onClick={handleLogout}>Cerrar Sesión</button1>
-        </div>
-          </nav>
-          <section className="textos-header hidden">
-              <h1>Bienvenido</h1>
-              <h2>Con La Servitk puedes arreglar tu vehiculo</h2>
-          </section>
-          <div className="wave" style={{ height: '150px', overflow: 'hidden' }}>
-              <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
-                  <path
-                      d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-                      style={{ stroke: 'none', fill: '#fff' }}
-                  />
-              </svg>
-          </div>
-      </header>
-  );
+const centerModal = () => {
+    const modal = document.querySelector('.service-modal-content');
+    if (modal) {
+        modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 };
 
+const services = [
+    {
+        img: imgFrenos,
+        title: "Revisión de Frenos",
+        description: "Incluye la revisión de pastillas, discos, pinzas y el sistema ABS para asegurar un frenado óptimo y seguro."
+    },
+    {
+        img: imgAlineacion,
+        title: "Alineación y Balanceo",
+        description: "Servicio de alineación de ruedas y balanceo para garantizar una conducción suave y el desgaste uniforme de los neumáticos."
+    },
+    {
+        img: imgTransmision,
+        title: "Reparación de Transmisión",
+        description: "Diagnóstico y reparación de la caja de cambios, tanto manual como automática, para un cambio de marcha eficiente."
+    },
+    {
+        img: imgCambioAceite,
+        title: "Cambio de Aceite",
+        description: "Cambio de aceite y filtro para mantener el motor en óptimas condiciones y prolongar su vida útil."
+    },
+    {
+        img: imgSuspension,
+        title: "Revisión de Suspensión",
+        description: "Inspección y reparación de amortiguadores, struts, rótulas y otros componentes para una conducción estable."
+    },
+    {
+        img: imgMotor,
+        title: "Reparación de Motor",
+        description: "Reparación completa del motor, incluyendo ajustes, cambio de bujías, correas de distribución y sistema de enfriamiento."
+    },
+    {
+        img: imgNeumaticos,
+        title: "Cambio de Neumáticos",
+        description: "Reemplazo de neumáticos, reparación de pinchazos y rotación de neumáticos para asegurar una conducción segura."
+    },
+    {
+        img: imgEscape,
+        title: "Reparación de Escape",
+        description: "Reparación o reemplazo del sistema de escape, catalizadores y silenciadores para reducir emisiones."
+    },
+    {
+        img: imgRefrigeracion,
+        title: "Sistema de Enfriamiento",
+        description: "Revisión y reparación del radiador, mangueras, termostato y sistema de refrigeración del motor."
+    },
+    {
+        img: imgCarroceria,
+        title: "Carrocería y Pintura",
+        description: "Reparación de golpes, abolladuras, pintura automotriz y restauración de la apariencia del vehículo."
+    },
+    {
+        img: imgAireAcondicionado,
+        title: "Revisión de Aire Acondicionado",
+        description: "Revisión y recarga del sistema de aire acondicionado para asegurar su buen funcionamiento."
+    },
+    {
+        img: imgLimpieza,
+        title: "Limpieza Detallada de Vehículos",
+        description: "Limpieza interior y exterior que incluye lavado, aspirado, encerado y detallado de componentes para mantener tu vehículo impecable."
+    }
+];
 
-const Main = () => {
-    return (
-        <main>
-            <AboutUs />
-            <Portfolio />
-            <Services />
-            <Testimonials />
-        </main>
-    );
-};
 
-const AboutUs = () => {
+// Lista de productos destacados
+const products = [
+    {
+        id: 1,
+        img: imgPort102,
+        title: "Neumáticos",
+        description: "Neumáticos de alta calidad para todo tipo de vehículos",
+        price: "$799.99"
+    },
+    {
+        id: 2,
+        img: imgPort103,
+        title: "Luces LED",
+        description: "Iluminación LED de última generación",
+        price: "$149.99"
+    },
+    {
+        id: 3,
+        img: imgPort104,
+        title: "Anticongelante",
+        description: "Protección superior para el sistema de refrigeración",
+        price: "$29.99"
+    },
+    {
+        id: 4,
+        img: imgPort105,
+        title: "Kit de herramientas",
+        description: "Set completo de herramientas profesionales",
+        price: "$299.99"
+    },
+    {
+        id: 5,
+        img: imgPort106,
+        title: "Aceite de motor",
+        description: "Aceite sintético de alto rendimiento",
+        price: "$49.99"
+    },
+    {
+        id: 6,
+        img: imgPort109,
+        title: "Filtro de aceite",
+        description: "Filtros de aceite de primera calidad",
+        price: "$19.99"
+    },
+    {
+        id: 7,
+        img: imgPort100,
+        title: "Pastillas de freno",
+        description: "Pastillas de freno de alto rendimiento",
+        price: "$89.99"
+    },
+    {
+        id: 8,
+        img: imgPort101,
+        title: "Batería de automotriz",
+        description: "Baterías de larga duración y alto rendimiento",
+        price: "$199.99"
+    }
+];
+
+// Lista de testimonios
+const testimonials = [
+    {
+        text: "Excelente servicio, muy profesionales y precios justos. Totalmente recomendado.",
+        author: "Juan Pérez",
+        position: "Cliente desde 2020"
+    },
+    {
+        text: "El mejor taller de la ciudad. Trabajo de calidad y atención personalizada.",
+        author: "María González",
+        position: "Cliente desde 2021"
+    },
+    {
+        text: "Servicio rápido y eficiente. Los recomiendo ampliamente.",
+        author: "Carlos Rodríguez",
+        position: "Cliente desde 2019"
+    }
+];
+
+
+// Componente Modal para Servicios
+const ServiceModal = ({ service, onClose }) => {
     return (
-        <section className="contenedor sobre-nosotros">
-            <h2 className="titulo">Servicio Rápido y Eficiente para Tu Auto</h2>
-            <div className="contenedor-sobre-nosotros">
-                <img src={imgPort2} alt="imgPort2" className="imagen-about-us" />
-                <div className="contenido-textos">
-                    <p>
-                        En La Servitk, nos especializamos en ofrecer un servicio integral para tu vehículo.
-                        Desde reparaciones rápidas hasta mantenimiento completo, nuestro equipo de expertos está
-                        listo para atender tus necesidades automotrices con la mayor eficiencia y profesionalismo.
-                    </p>
-                    <p>
-                        Además, contamos con una amplia gama de repuestos de alta calidad para asegurar que tu auto
-                        funcione de la mejor manera. Ya sea que necesites un cambio de aceite, revisión de frenos,
-                        o repuestos específicos, en La Servitk tenemos lo que buscas.
-                    </p>
-                    <p>
-                        No pierdas tiempo en largos períodos de espera en otros talleres. Con nosotros, puedes
-                        estar seguro de que recibirás un servicio rápido, confiable y a precios competitivos.
-                        Visítanos y comprueba la calidad de nuestro servicio por ti mismo.
-                    </p>
+        <div className="service-modal-overlay" onClick={onClose}>
+            <div className="service-modal-content" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={onClose}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </button>
+                <div className="modal-image">
+                    <img src={service.img} alt={service.title} />
+                </div>
+                <div className="modal-text">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
-const Portfolio = () => {
-  const navigate = useNavigate();
-  const images = [
-      {
-          src: imgPort102,
-          alt: "Imagen 12",
-          text: "Neumáticos",
-      },
-      {
-          src: imgPort103,
-          alt: "Imagen 13",
-          text: "Luces LED",
-      },
-      {
-          src: imgPort104,
-          alt: "Imagen 14",
-          text: "Anticongelante",
-      },
-      {
-          src: imgPort105,
-          alt: "Imagen 15",
-          text: "Kit de herramientas",
-      },
-      {
-          src: imgPort106,
-          alt: "Imagen 5",
-          text: "Aceite de motor",
-      },
-      {
-          src: imgPort109,
-          alt: "Imagen 9",
-          text: "Filtro de aceite",
-      },
-      {
-          src: imgPort100,
-          alt: "Imagen 10",
-          text: "Pastillas de freno",
-      },
-      {
-          src: imgPort101,
-          alt: "Imagen 11",
-          text: "Batería de automotriz",
-      },
-  ];
 
-  return (
-      <section className="portafolio">
-          <div className="contenedor">
-              <h2 className="titulo">Inventario</h2>
-              <div className="galeria-port">
-                  {images.map((image, index) => (
-                      <div className="imagen-port" key={index}>
-                          <img src={image.src} alt={image.alt} />
-                          <div className="hover-galeria">
-                              <img src={imgIcono1} alt="Icono" />
-                              <p>{image.text}</p>
-                          </div>
-                      </div>
-                  ))}
-              </div>
-          </div>
-      </section>
-  );
+// Componente Modal para Productos
+const ProductModal = ({ product, onClose }) => {
+    const [productDetails, setProductDetails] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:2071/api/productos/${product.id}`);
+                setProductDetails(response.data);
+            } catch (error) {
+                console.error('Error al obtener los detalles del producto:', error);
+            }
+        };
+
+        fetchProductDetails();
+    }, [product.id]);
+
+
+    return (
+        <div className="service-modal-overlay" onClick={onClose}>
+            <div className="service-modal-content" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={onClose}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </button>
+                <div className="modal-image">
+                    <img src={product.img} alt={product.title} />
+                </div>
+                <div className="modal-text">
+                    <h3>{product.title}</h3>
+                    {productDetails ? (
+                        <>
+                            <p>{productDetails.descripcion}</p>
+                            <p>Cantidad en stock: {productDetails.cantidad_en_stock}</p>
+                            <p>Precio: ${productDetails.precio_compra}</p>
+                        </>
+                    ) : (
+                        <p>Cargando detalles del producto...</p>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
 };
+// Header component con logout y opciones de menú
+const Header = () => {
+    const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-
-
-
-const Services = () => {
-    // Estado para manejar el servicio seleccionado y el estado del modal
-    const [selectedService, setSelectedService] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Lista de servicios con imagen, título y descripción
-    const services = [
-        {
-            img: imgFrenos,
-            title: "Revisión de Frenos",
-            description: "Incluye la revisión de pastillas, discos, pinzas y el sistema ABS para asegurar un frenado óptimo y seguro."
-        },
-        {
-            img: imgAlineacion,
-            title: "Alineación y Balanceo",
-            description: "Servicio de alineación de ruedas y balanceo para garantizar una conducción suave y el desgaste uniforme de los neumáticos."
-        },
-        {
-            img: imgTransmision,
-            title: "Reparación de Transmisión",
-            description: "Diagnóstico y reparación de la caja de cambios, tanto manual como automática, para un cambio de marcha eficiente."
-        },
-        {
-            img: imgCambioAceite,
-            title: "Cambio de Aceite",
-            description: "Cambio de aceite y filtro para mantener el motor en óptimas condiciones y prolongar su vida útil."
-        },
-        {
-            img: imgSuspension,
-            title: "Revisión de Suspensión",
-            description: "Inspección y reparación de amortiguadores, struts, rótulas y otros componentes para una conducción estable."
-        },
-        {
-            img: imgMotor,
-            title: "Reparación de Motor",
-            description: "Reparación completa del motor, incluyendo ajustes, cambio de bujías, correas de distribución y sistema de enfriamiento."
-        },
-        {
-            img: imgNeumaticos,
-            title: "Cambio de Neumáticos",
-            description: "Reemplazo de neumáticos, reparación de pinchazos y rotación de neumáticos para asegurar una conducción segura."
-        },
-        {
-            img: imgEscape,
-            title: "Reparación de Escape",
-            description: "Reparación o reemplazo del sistema de escape, catalizadores y silenciadores para reducir emisiones."
-        },
-        {
-            img: imgRefrigeracion,
-            title: "Sistema de Enfriamiento",
-            description: "Revisión y reparación del radiador, mangueras, termostato y sistema de refrigeración del motor."
-        },
-        {
-            img: imgCarroceria,
-            title: "Carrocería y Pintura",
-            description: "Reparación de golpes, abolladuras, pintura automotriz y restauración de la apariencia del vehículo."
-        },
-        {
-            img: imgAireAcondicionado,
-            title: "Revisión de Aire Acondicionado",
-            description: "Revisión y recarga del sistema de aire acondicionado para asegurar su buen funcionamiento."
-        },
-        {
-            img: imgLimpieza,
-            title: "Limpieza Detallada de Vehículos",
-            description: "Limpieza interior y exterior que incluye lavado, aspirado, encerado y detallado de componentes para mantener tu vehículo impecable."
-        },
-        
-        // Agrega más servicios si es necesario
-    ];
-
-    // Función para abrir el modal y asignar el servicio seleccionado
-    const openModal = (service) => {
-        setSelectedService(service);
-        setIsModalOpen(true);
-    };
-
-    // Función para cerrar el modal
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedService(null);
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
     };
 
     return (
-        <section className="servicios">
-            <div className="contenedor-servicios">
-                <h2 className="titulo-servicios">Nuestros servicios</h2>
-                <div className="galeria-serv">
-                    {services.map((service, index) => (
-                        <div className="imagen-serv" key={index} onClick={() => openModal(service)}>
-                            <img src={service.img} alt={service.title} />
-                            <div className="hover-serv">
-                                <h3>{service.title}</h3>
+        <nav className="taller-navbar">
+                        <Slidebara />
+
+            <a href="#" className="taller-logo">
+                <img src={require('./Assets/servilogo.png')} alt="La Servitk Logo" className="logo-image" />
+                La Servitk
+            </a>
+            <div 
+                className={`taller-menu-toggle ${isMenuOpen ? 'active' : ''}`}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+                <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+            </div>
+
+            <ul className={`taller-nav-links ${isMenuOpen ? 'active' : ''}`}>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    );
+};
+
+const AdminDashboard = () => {
+    const [selectedService, setSelectedService] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+        });
+    }, []);
+
+    useEffect(() => {
+        if (selectedService || selectedProduct) {
+            document.body.classList.add('modal-open');
+            centerModal();
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+    }, [selectedService, selectedProduct]);
+
+    return (
+        <div className="taller-container">
+            {/* Imagen de fondo */}
+            <div className="taller-background">
+                <div className="taller-background-overlay">
+                    ¡Bienvenido al panel de administrador!
+                </div>
+            </div>
+
+            {/* Usar Header en vez de Navbar */}
+            <Header />
+
+
+            <section className="taller-description" id="nosotros" data-aos="fade-up">
+    <div className="description-container">
+        <div className="description-content">
+            <h2>Bienvenidos a La Servitk</h2>
+            <p>Con más de 15 años de experiencia, somos el taller de confianza para el mantenimiento y reparación de tu vehículo. Nuestro equipo de técnicos certificados utiliza tecnología de última generación para garantizar un servicio de calidad.</p>
+            <div className="description-features">
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faTools} className="feature-icon" />
+                    <h3>Experiencia</h3>
+                    <p>15+ años en el mercado</p>
+                </div>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faCertificate} className="feature-icon" />
+                    <h3>Certificados</h3>
+                    <p>Personal calificado</p>
+                </div>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faAward} className="feature-icon" />
+                    <h3>Garantía</h3>
+                    <p>Satisfacción garantizada</p>
+                </div>
+            </div>
+        </div>
+        <div className="description-image" data-aos="fade-left">
+            <img src={require('./Assets/2.jpg')} alt="La Servitk Taller" />
+        </div>
+    </div>
+</section>
+
+
+
+            {/* Productos Section */}
+            <section className="taller-products" id="productos" data-aos="fade-up">
+                <h2>Productos Destacados</h2>
+                <div className="products-gallery">
+                    {products.map((product, index) => (
+                        <div 
+                            key={index} 
+                            className="gallery-item"
+                            onClick={() => setSelectedProduct(product)}
+                            data-aos="fade-up"
+                        >
+                            <img src={product.img} alt={product.title} />
+                            <div className="gallery-item-overlay">
+                                <span>{product.title}</span>
                             </div>
                         </div>
                     ))}
                 </div>
-            </div>
-                        {isModalOpen && (
-                <div className="custom-modal">
-                    <div className="custom-modal-content">
-                        <span className="custom-close-modal" onClick={closeModal}>&times;</span>
-                        <h3>{selectedService.title}</h3>
-                        <p>{selectedService.description}</p>
-                        <p style={{ marginTop: '10px', fontWeight: 'bold', color: '#c62828', fontSize: '1px' }}>
-                        ¡Acércate al taller y pide tu servicio!
-                        </p>
+                {selectedProduct && (
+                    <ProductModal 
+                        product={selectedProduct} 
+                        onClose={() => setSelectedProduct(null)} 
+                    />
+                )}
+            </section>
+
+            {/* Servicios Section */}
+            <section className="taller-services" id="servicios" data-aos="fade-up">
+                <h2>Nuestros Servicios</h2>
+                <div className="services-gallery">
+                    {services.map((service, index) => (
+                        <div 
+                            key={index} 
+                            className="gallery-item"
+                            onClick={() => setSelectedService(service)}
+                            data-aos="fade-up"
+                        >
+                            <img src={service.img} alt={service.title} />
+                            <div className="gallery-item-overlay">
+                                <span>{service.title}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                {selectedService && (
+                    <ServiceModal 
+                        service={selectedService} 
+                        onClose={() => setSelectedService(null)} 
+                    />
+                )}
+            </section>
+
+            {/* Testimonios Section */}
+            <section className="taller-testimonials" id="testimonios" data-aos="fade-up">
+                <h2>Testimonios</h2>
+                <div className="testimonials-container">
+                    {testimonials.map((testimonial, index) => (
+                        <div key={index} className="testimonial" data-aos="fade-up">
+                            <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
+                            <div className="testimonial-content">
+                                <p>{testimonial.text}</p>
+                                <h4>{testimonial.author}</h4>
+                                <span>{testimonial.position}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Footer */}
+           <footer className="taller-footer" id="contacto">
+                <div className="footer-content">
+                    <div className="footer-section">
+                        <h3>
+                            <FontAwesomeIcon icon={faCar} className="footer-title-icon" />
+                            La Servitk
+                        </h3>
+                        <p>Tu taller de confianza para el mantenimiento y reparación de tu vehículo.</p>
+                        <div className="social-links">
+                            <button 
+                                className="social-button"
+                                onClick={() => window.open('https://wa.me/1234567890', '_blank')}
+                                aria-label="WhatsApp"
+                            >
+                                <FontAwesomeIcon icon={faWhatsapp} />
+                            </button>
+                            <button 
+                                className="social-button"
+                                onClick={() => window.open('https://facebook.com/laservitk', '_blank')}
+                                aria-label="Facebook"
+                            >
+                                <FontAwesomeIcon icon={faFacebookF} />
+                            </button>
+                            <button 
+                                className="social-button"
+                                onClick={() => window.open('https://instagram.com/laservitk', '_blank')}
+                                aria-label="Instagram"
+                            >
+                                <FontAwesomeIcon icon={faInstagram} />
+                            </button>
+                        </div>
+                    </div>
+                    <div className="footer-section">
+                        <h3>Contacto</h3>
+                        <h4>Mapa</h4>
+                        <iframe
+                            src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
+                            height="200"
+                            frameBorder="0"
+                            style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
+                            allowFullScreen
+                            aria-hidden="false"
+                            tabIndex="0"
+                        ></iframe>
                     </div>
                 </div>
-            )}
-
-
-        </section>
-    );
-};
-
-
-
-
-const Testimonials = () => {
-  const testimonials = [
-      {
-          name: "Maria Lopez",
-          text: "Excelente servicio, me atendieron rápidamente y solucionaron el problema de mi auto!",
-      },
-      {
-          name: "Luisa Bernal",
-          text: "Gran calidad en los servicios y precios competitivos. Definitivamente volveré.",
-      },
-      {
-        name: "Nelson Ballen",
-        text: "Fue especial el trato que se me dio al arreglar mi auto, quede satisfecho. Volvere mas seguido.",
-    },
-  ];
-  return (
-    <section className="clientes contenedor">
-        <h2 className="titulo">Que dicen nuestros clientes</h2>
-        <div className="cards">
-            {testimonials.map((testimonial, index) => (
-                <div className="card" key={index}>
-                    <div className="contenido-texto-card">
-                        <h4>{testimonial.name}</h4>
-                        <p>{`"${testimonial.text}"`}</p>
-                    </div>
+                <div className="footer-bottom">
+                    <p>&copy; 2024 LaServitk. Todos los derechos reservados.</p>
                 </div>
-            ))}
+            </footer>
         </div>
-    </section>
-);
-};
-
-const Footer = () => {
-    return (
-        <footer>
-            <div className="footer-container">
-                {/* Sección Superior */}
-                <div className="footer-section">
-                    <h4>Horario</h4>
-                    <p>Lunes a Viernes</p>
-                    <p>7AM - 7PM</p>
-                </div>
-                
-                <div className="footer-section">
-                    <h4>Localidad</h4>
-                    <p>Calle 17A # 102 - 56, Fontibón</p>
-                </div>
-
-                <div className="footer-section">
-                    <h4>Términos</h4>
-                    <a href="/terminos">Términos y Condiciones</a>
-                </div>
-            </div>
-
-            {/* Redes Sociales and Mapa Section */}
-            <div className="footer-bottom">
-                <div className="footer-bottom-right footer-section">
-                    <h4>Redes Sociales</h4>
-                    <div className="social-icons">
-                        <a href="https://www.facebook.com/LASERVITK" target="_blank" rel="noopener noreferrer" className="social-icon facebook">
-                            <img src={FacebookIcon} alt="Facebook" />
-                            <span>Facebook</span>
-                        </a>
-                        <a href="https://www.instagram.com/laservitk/" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
-                            <img src={InstagramIcon} alt="Instagram" />
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://wa.me/3012507273" target="_blank" rel="noopener noreferrer" className="social-icon whatsapp">
-                            <img src={WhatsappIcon} alt="Whatsapp" />
-                            <span>Whatsapp</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@laservitklaservit" target="_blank" rel="noopener noreferrer" className="social-icon tiktok">
-                            <img src={TiktokIcon} alt="Tiktok" />
-                            <span>Tiktok</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div className="footer-bottom-left footer-section">
-                    <h4>Mapa</h4>
-                    <iframe
-                        src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                        width="100%"
-                        height="200"
-                        frameBorder="0"
-                        style={{ border: 0, borderRadius: '8px' }} // Bordes redondeados
-                        allowFullScreen
-                        aria-hidden="false"
-                        tabIndex="0"
-                    ></iframe>
-                </div>
-            </div>
-
-            <div className="footer-final">
-                <h2 className="titulo-final">&copy; 2024 LaServitk. Todos los derechos reservados.</h2>
-            </div>
-        </footer> 
     );
 };
 

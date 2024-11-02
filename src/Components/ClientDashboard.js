@@ -49,6 +49,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import './styles/TallerMecanico.css';
+import Profile from './cliente/Profile';
+
 
 const centerModal = () => {
     const modal = document.querySelector('.service-modal-content');
@@ -274,11 +276,12 @@ const ProductModal = ({ product, onClose }) => {
         </div>
     );
 };
-// Header component con logout y opciones de menú
+
 const Header = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -286,10 +289,9 @@ const Header = () => {
     };
 
     const handlePerfilClick = () => {
-        console.log("Perfil clickeado");
-        navigate('/Profile');
+        setIsProfileModalOpen(true); // Open the modal
     };
-    
+
     const handleVehiculosClick = () => {
         console.log("Vehículos clickeado");
         navigate('/Vehicles');
@@ -328,7 +330,19 @@ const Header = () => {
                         <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión
                     </button>
                 </div>
-            </div>
+            </div>  
+
+            {/* Profile Modal */}
+            {isProfileModalOpen && (
+               <div className="client-modal-overlay" onClick={() => setIsProfileModalOpen(false)}>
+               <div className="client-modal-content" onClick={(e) => e.stopPropagation()}>
+                   <button className="client-modal-close" onClick={() => setIsProfileModalOpen(false)}>
+                       &times;
+                   </button>
+                   <Profile onClose={() => setIsProfileModalOpen(false)} />
+               </div>
+           </div>
+            )}
 
             <div 
                 className={`taller-menu-toggle ${isMenuOpen ? 'active' : ''}`}
@@ -381,12 +395,34 @@ const ClientDashboard = () => {
             {/* Usar Header en vez de Navbar */}
             <Header />
 
-            {/* Hero Section */}
-{/* Hero Section */}
-<section className="hero">
-    <h1 className="hero-title">Esto es La Servitk</h1>
-    <p>Desde el panel de usuario podras hacer todos nuestros servicios para ti, 
-        Ingresa a todas nuestras opciones dandole click al icono de la parte superior izquierda</p>
+
+            <section className="taller-description" id="nosotros" data-aos="fade-up">
+    <div className="description-container">
+        <div className="description-content">
+            <h2>Bienvenidos a La Servitk</h2>
+            <p>Con más de 15 años de experiencia, somos el taller de confianza para el mantenimiento y reparación de tu vehículo. Nuestro equipo de técnicos certificados utiliza tecnología de última generación para garantizar un servicio de calidad.</p>
+            <div className="description-features">
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faTools} className="feature-icon" />
+                    <h3>Experiencia</h3>
+                    <p>15+ años en el mercado</p>
+                </div>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faCertificate} className="feature-icon" />
+                    <h3>Certificados</h3>
+                    <p>Personal calificado</p>
+                </div>
+                <div className="feature" data-aos="fade-right">
+                    <FontAwesomeIcon icon={faAward} className="feature-icon" />
+                    <h3>Garantía</h3>
+                    <p>Satisfacción garantizada</p>
+                </div>
+            </div>
+        </div>
+        <div className="description-image" data-aos="fade-left">
+            <img src={require('./Assets/2.jpg')} alt="La Servitk Taller" />
+        </div>
+    </div>
 </section>
 
 

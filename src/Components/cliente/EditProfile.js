@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../cliente/ModalCliente'; // Import the modal
-import '../styles/EditProfile.css'; // Ensure this path is correct
+import '../styles/EditProfile.css';
 
 const API_URL = 'http://localhost:2071/api';
 
-const EditProfile = () => {
+const EditCliente = ({ onClose }) => {
     const [userData, setUserData] = useState({
         name: '',
         surname: '',
@@ -14,9 +13,8 @@ const EditProfile = () => {
         addressDetail: '',
         phone: '',
     });
-    const [error, setError] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false); // Modal state
-    const [modalMessage, setModalMessage] = useState(''); // Message for the modal
+    const [modalValidationMessage, setModalValidationMessage] = useState('');
+    const [modalConfirmationMessage, setModalConfirmationMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,8 +35,7 @@ const EditProfile = () => {
                 });
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                setModalMessage('Error al obtener los datos del usuario');
-                setModalOpen(true);
+                setModalValidationMessage('Error al obtener los datos del usuario');
             }
         };
 
@@ -62,36 +59,19 @@ const EditProfile = () => {
         e.preventDefault();
         const token = localStorage.getItem('token');
 
-        // Validaciones
-        if (!userData.name) {
-            setModalMessage('¡El nombre debe ser obligatorio!');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.surname) {
-            setModalMessage('¡El apellido debe ser obligatorio!');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.addressDetail) {
-            setModalMessage('¡La dirección debe ser obligatoria!');
-            setModalOpen(true);
+        // Validations
+        if (!userData.name || !userData.surname || !userData.addressDetail || !userData.phone) {
+            setModalValidationMessage('Todos los campos son obligatorios');
             return;
         }
         
-        if (!userData.phone) {
-            setModalMessage('¡El número debe ser obligatorio!');
-            setModalOpen(true);
-            return;
-        }
         if (!validatePhone(userData.phone)) {
-            setModalMessage('¡El número debe tener 9 dígitos y comenzar con 3!');
-            setModalOpen(true);
+            setModalValidationMessage('¡El número debe tener 10 dígitos y comenzar con 3!');
             return;
         }
 
         try {
-            const response = await axios.put(`${API_URL}/user/update-profile`, {
+            await axios.put(`${API_URL}/user/update-profile`, {
                 ...userData,
                 address: `${userData.addressType} ${userData.addressDetail}`,
             }, {
@@ -99,25 +79,31 @@ const EditProfile = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Perfil actualizado exitosamente:', response.data);
-            navigate('/ClientDashboard');
+            setModalConfirmationMessage('Perfil actualizado exitosamente');
+            setTimeout(() => {
+                onClose();
+                navigate('/ClientDashboard');
+            }, 2000);
         } catch (error) {
-            setModalMessage('Error al actualizar perfil');
+            setModalConfirmationMessage('Error al actualizar perfil');
             console.error('Error al actualizar perfil:', error.response?.data || error.message);
-            setModalOpen(true);
         }
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
+    const handleCloseModalValidation = () => {
+        setModalValidationMessage('');
+    };
+
+    const handleCloseModalConfirmation = () => {
+        setModalConfirmationMessage('');
+        navigate('/ClientDashboard');
     };
 
     return (
-        <div className="edit-profile-container">
-            <h2>Editar Perfil</h2>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit} className="edit-profile-form">
-                <div className="form-row">
+        <div className="cliente-modal-overlay">
+            <div className="cliente-modal-content">
+                <h2>Editar Perfil</h2>
+                <form onSubmit={handleSubmit} className="edit-cliente-form">
                     <div className="form-group">
                         <label htmlFor="name">Nombre:</label>
                         <input
@@ -142,8 +128,6 @@ const EditProfile = () => {
                             required
                         />
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-group">
                         <label htmlFor="addressType">Tipo de Dirección:</label>
                         <select
@@ -173,8 +157,6 @@ const EditProfile = () => {
                             required
                         />
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-group">
                         <label htmlFor="phone">Teléfono:</label>
                         <input
@@ -186,12 +168,27 @@ const EditProfile = () => {
                             required
                         />
                     </div>
-                </div>
-                <button type="submit">Actualizar Perfil</button>
-            </form>
-            <Modal isOpen={modalOpen} onClose={handleCloseModal} message={modalMessage} />
+                    <button type="submit">Actualizar</button>
+                </form>
+                
+                {/* Modal for validation messages */}
+                {modalValidationMessage && (
+                    <div className="modalValidacion">
+                        <p>{modalValidationMessage}</p>
+                        <button onClick={handleCloseModalValidation}>Cerrar</button>
+                    </div>
+                )}
+
+                {/* Modal for confirmation or error messages */}
+                {modalConfirmationMessage && (
+                    <div className="modalConfirmacion">
+                        <p>{modalConfirmationMessage}</p>
+                        <button onClick={handleCloseModalConfirmation}>Cerrar</button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
-export default EditProfile;
+export default EditCliente;

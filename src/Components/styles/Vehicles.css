@@ -1,21 +1,144 @@
-.informacion-usuarios-content {
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styles */
+.vehicle-app-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #c0392b; /* Dark red */
+    padding: 1rem 2rem;
+    color: white;
+    position: relative;
+}
+
+.vehicle-app-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.vehicle-app-logo-image {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.vehicle-app-user-menu {
+    position: relative;
+}
+
+.vehicle-app-user-menu-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.vehicle-app-user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #a93226; /* Lighter red */
+    border-radius: 5px;
+    margin-top: 5px;
+    z-index: 1000;
+}
+
+.vehicle-app-user-dropdown.active {
+    display: block;
+}
+
+.vehicle-app-user-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    text-align: left;
+    border: none;
+    background: none;
     width: 100%;
-    margin-left: -0%;
-    padding: 20px;
-    box-sizing: border-box;
+    cursor: pointer;
 }
 
-.add-vehicle-button {
-    margin-bottom: 20px;
+.vehicle-app-user-item:hover {
+    background-color: #c0392b; /* Dark red on hover */
 }
 
-.search-input {
-    margin-bottom: 20px;
+/* Menu Toggle */
+.vehicle-app-menu-toggle {
+    display: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* Search Input */
+.vehicle-app-search-input {
+    margin: 20px 2rem;
     padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 4rem);
+    max-width: 600px;
+    font-size: 1rem;
 }
 
-.data-table-wrapper {
+/* Table Wrapper */
+.vehicle-app-table-wrapper {
+    padding: 0 2rem;
+}
+
+/* Table Styles */
+.DataTable {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.DataTable .rdt_Table {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.DataTable .rdt_TableHead {
+    background-color: #a93226; /* Lighter red */
+    color: white;
+}
+
+.DataTable .rdt_TableBody {
+    background-color: white;
+}
+
+/* Footer Styles */
+.vehicle-app-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #c0392b; /* Dark red */
+    color: white;
+    position: relative;
+    bottom: 0;
     width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .vehicle-app-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vehicle-app-search-input {
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .vehicle-app-menu-toggle {
+        display: block;
+    }
 }

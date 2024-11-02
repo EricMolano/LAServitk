@@ -1,73 +1,111 @@
-/* EditProfile.css */
+/* Dark overlay for modal background */
+.cliente-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
 
-.edit-profile-container {
+/* Modal content box */
+.cliente-modal-content {
+    background-color: white;
     padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.edit-profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
-.form-row {
-    display: flex;
-    gap: 20px;
-}
-
-.form-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 5px;
+/* Error message styling */
+.cliente-error-message {
+    color: #cc0000;
     font-weight: bold;
-    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-.form-group select,
-.form-group input {
+/* Edit profile form styling */
+.cliente-edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group styling */
+.cliente-form-group {
+    margin-bottom: 15px;
+}
+
+/* Input fields styling */
+.cliente-form-group input,
+.cliente-form-group select {
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
 }
 
-.form-group select:focus,
-.form-group input:focus {
-    border: 1px solid #b30000; /* Red border on focus */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
+/* Submit button styling */
+.cliente-submit-button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-button[type="submit"] {
+.cliente-submit-button:hover {
+    background-color: #c92828;
+}
+
+/* Modal for displaying messages */
+.cliente-modal-message {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Validation and Confirmation modals */
+.modalValidacion, .modalConfirmacion {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: fixed;
+    top: 600%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1100; /* Higher than overlay */
+}
+
+.modalValidacion p, .modalConfirmacion p {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.modalValidacion button, .modalConfirmacion button {
+    padding: 8px 16px;
     background-color: #b30000;
     color: white;
     border: none;
-    padding: 15px 30px;
-    text-transform: uppercase;
-    font-size: 14px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button[type="submit"]:hover {
-    background-color: #ff4d4d; /* Lighter red on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
-}
-
-.error-message {
-    color: red;
-    text-align: center;
-    width: 100%;
+.modalValidacion button:hover, .modalConfirmacion button:hover {
+    background-color: #990000;
 }

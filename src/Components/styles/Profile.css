@@ -1,119 +1,100 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Fondo de respaldo si la imagen no carga */
-   /* background-image: url('../Assets/fondo1.jpg'); /* Ruta de la imagen */
-   /* background-size: cover; /* Hace que la imagen cubra toda la pantalla */
-   /* background-position: center; /* Centra la imagen en la pantalla */
-   /* background-repeat: no-repeat; /* Evita que la imagen se repita si es más pequeña que la pantalla */
-    height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
-}
 
-.profile-container {
+
+
+/* Dark overlay for modal background */
+.client-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    color: rgb(0, 0, 0); /* Texto en color negro */
+    z-index: 1000;
+}
+
+/* Modal content box */
+.client-modal-content {
+    background-color: white;
     padding: 20px;
-    z-index: 1; /* Asegura que el contenido se muestre encima de la imagen */
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
-.back-button {
-    align-self: flex-start; /* Alinear a la izquierda */
-    background-color: #e74c3c; /* Rojo brillante */
-    color: #fff;
+/* Close button icon ("X") */
+.client-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
     border: none;
-    border-radius: 5px;
+    font-size: 2rem;
     cursor: pointer;
-    padding: 10px 15px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    color: #cc0000;
+    padding: 0; /* Remove any padding */
+
 }
 
-.back-button:hover {
-    background-color: #c0392b; /* Rojo oscuro */
+.client-modal-close:hover {
+    color: #990000; /* Darker red color on hover */
+    background: none; /* Ensures no background color on hover */
 }
 
-.profile-header {
+.client-profile-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.client-profile-container h1 {
+    font-size: 24px;
+    color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.profile-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333; /* Cambiar a color oscuro */
-}
-
-.profile-content {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
-    color: #333; /* Texto oscuro para contraste */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 800px; /* Máximo ancho para la tabla */
-}
-
-.profile-table {
+.client-profile-table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 8px; /* Bordes redondeados para la tabla */
-    overflow: hidden; /* Asegura que las celdas no sobresalgan del borde redondeado */
+    margin-bottom: 20px;
 }
 
-.profile-table th, .profile-table td {
-    padding: 12px;
+.client-profile-table th,
+.client-profile-table td {
+    padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
-    background-color: #fff; /* Fondo blanco sólido */
-    color: #333; /* Color de texto oscuro */
-    border-radius: 4px; /* Bordes redondeados para las celdas */
+    color: #555;
 }
 
-.profile-table th {
-    background-color: #f4f4f4; /* Fondo gris claro para las cabeceras */
-    color: #555; /* Color del texto de la cabecera */
+.client-profile-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
-.profile-table td {
-    color: #333; /* Asegura que el texto en las celdas sea oscuro */
-}
-
-.profile-table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Fondo blanco con un tono suave en las filas pares */
-}
-
-.profile-table tr:nth-child(odd) {
-    background-color: #fff; /* Fondo blanco para las filas impares */
-}
-
-
-.profile-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background-color: #c0392b; /* Rojo oscuro */
-    color: #fff;
+/* Edit profile button styling */
+.client-profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background-color: #cc0000;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s ease;
 }
 
-.profile-button:hover {
-    background-color: #e74c3c; /* Rojo brillante */
-}
-
-.loading {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #fff; /* Texto blanco en la carga */
-}
-element.style {
-    color: black;
+.client-profile-button:hover {
+    background-color: #c92828;
 }
