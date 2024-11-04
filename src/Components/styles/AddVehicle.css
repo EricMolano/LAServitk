@@ -1,73 +1,134 @@
-/* AddVehicle.css */
-
 .add-vehicle {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .vehicle-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
+    gap: 25px;
 }
 
 .form-group {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .form-group label {
-    margin-bottom: 5px;
     font-weight: bold;
     color: #333;
+    font-size: 15px;
 }
 
 .form-group select,
 .form-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
+    background-color: #f9f9f9;
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group select:focus,
 .form-group input:focus {
-    border: 1px solid #b30000; /* Red border on focus */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Subtle shadow */
+    border-color: #d32f2f; /* Slightly darker red */
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.3); /* Subtle red shadow */
+    outline: none;
 }
 
 button[type="submit"] {
-    background-color: #b30000;
+    background-color: #d32f2f;
     color: white;
     border: none;
-    padding: 15px 30px;
+    padding: 15px 0;
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #ff4d4d; /* Lighter red on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
+    background-color: #ff6659;
+    transform: scale(1.05);
+}
+
+button[type="submit"]:active {
+    transform: scale(1); /* Normal scale on click */
 }
 
 .error-message {
-    color: red;
+    color: #d32f2f;
     text-align: center;
-    width: 100%;
+    font-weight: bold;
+    font-size: 14px;
+}.modal-vehicle {
+    position: fixed; /* Fijo para que cubra toda la ventana */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex; /* Centrar contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    z-index: 1000; /* Z-index alto para estar por encima de otros elementos */
+}
+
+.modal-content-vehicle {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%; /* Ajuste para ser responsivo */
+    max-width: 400px; /* Ancho máximo */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+}
+
+.modal-content-vehicle h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem; /* Tamaño de fuente ajustado */
+}
+
+.modal-content-vehicle p {
+    margin: 15px 0;
+    font-size: 1rem; /* Tamaño de fuente para el mensaje */
+    color: #555; /* Color gris para el texto */
+}
+
+.modal-content-vehicle button {
+    margin: 5px;
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.modal-content-vehicle button:hover {
+    background-color: #0056b3; /* Color de fondo en hover */
+}
+
+/* Additional styling for alignment and mobile responsiveness */
+@media (max-width: 600px) {
+    .add-vehicle {
+        padding: 20px;
+        max-width: 100%;
+    }
+    
+    button[type="submit"] {
+        padding: 12px;
+        font-size: 14px;
+    }
 }
