@@ -1,80 +1,100 @@
 
 
 
-.profileA-overlay {
+/* Dark overlay for modal background */
+.client-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    justify-content: center;
+    z-index: 1000;
 }
 
-.profileA-content {
-    background: white;
+/* Modal content box */
+.client-modal-content {
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
+    width: 80%;
+    max-width: 500px;
     position: relative;
-    top: 800%;
-    left: 15%;
-    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.loading-message {
-    font-size: 18px;
-    color: #333;
+
+/* Close button icon ("X") */
+.client-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #cc0000;
+    padding: 0; /* Remove any padding */
+
 }
 
-.profileA-modal h1 {
-    color: #b30000;
+.client-modal-close:hover {
+    color: #990000; /* Darker red color on hover */
+    background: none; /* Ensures no background color on hover */
+}
+
+.client-profile-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.client-profile-container h1 {
     font-size: 24px;
+    color: #333;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.profileA-table {
+.client-profile-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
-.profileA-table th, .profileA-table td {
-    padding: 12px;
+.client-profile-table th,
+.client-profile-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
     text-align: left;
-    border-bottom: 1px solid #f0f0f0;
+    color: #555;
 }
 
-.profileA-table th {
-    background-color: #b30000;
+.client-profile-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Edit profile button styling */
+.client-profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background-color: #cc0000;
     color: white;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.profileA-table td {
-    color: #555;
-}
-
-.profileA-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent;
     border: none;
-    color: #555;
-    font-size: 24px;
+    border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-    transition: color 0.2s;
 }
 
-.profileA-close:hover {
-    color: #b30000;
+.client-profile-button:hover {
+    background-color: #c92828;
 }
-

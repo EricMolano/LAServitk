@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../cliente/ModalCliente'; // Import the modal
-import '../styles/Edit.css';
+import '../styles/EditProfile.css';
 
-const API_URL = 'http://localhost:2071/api'; // Base URL for the API
+const API_URL = 'http://localhost:2071/api';
 
-const EditProfileA = () => {
+const EditProfile = ({ onClose }) => {
     const [userData, setUserData] = useState({
         name: '',
         surname: '',
-        addressType: '', // For address type
-        addressDetail: '', // For address details
+        addressType: '',
+        addressDetail: '',
         phone: '',
     });
-    const [error, setError] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false); // Modal state
-    const [modalMessage, setModalMessage] = useState(''); // Message for the modal
+    const [modalValidationMessage, setModalValidationMessage] = useState('');
+    const [modalConfirmationMessage, setModalConfirmationMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,14 +29,13 @@ const EditProfileA = () => {
                 setUserData({
                     name: response.data.name,
                     surname: response.data.surname,
-                    addressType: response.data.addressType || '', // Assuming address type
-                    addressDetail: response.data.addressDetail || '', // Assuming address detail
+                    addressType: response.data.addressType || '',
+                    addressDetail: response.data.addressDetail || '',
                     phone: response.data.phone,
                 });
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                setModalMessage('Error al obtener los datos del usuario');
-                setModalOpen(true);
+                setModalValidationMessage('Error al obtener los datos del usuario');
             }
         };
 
@@ -54,7 +51,7 @@ const EditProfileA = () => {
     };
 
     const validatePhone = (phone) => {
-        const phonePattern = /^3\d{9}$/; // Phone must start with 3 and have 9 digits
+        const phonePattern = /^3\d{9}$/;
         return phonePattern.test(phone);
     };
 
@@ -63,77 +60,52 @@ const EditProfileA = () => {
         const token = localStorage.getItem('token');
 
         // Validations
-        if (!userData.name) {
-            setModalMessage('¡El nombre debe ser obligatorio!');
-            setModalOpen(true);
+        if (!userData.name || !userData.surname || !userData.addressDetail || !userData.phone) {
+            setModalValidationMessage('Todos los campos son obligatorios');
             return;
         }
-        if (userData.name.length > 20) {
-            setModalMessage('El nombre no puede exceder los 20 caracteres.');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.surname) {
-            setModalMessage('¡El apellido debe ser obligatorio!');
-            setModalOpen(true);
-            return;
-        }
-        if (userData.surname.length > 20) {
-            setModalMessage('El apellido no puede exceder los 20 caracteres.');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.addressType) {
-            setModalMessage('Debes seleccionar un tipo de dirección.');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.addressDetail) {
-            setModalMessage('¡La dirección debe ser obligatoria!');
-            setModalOpen(true);
-            return;
-        }
-        if (!userData.phone) {
-            setModalMessage('¡El número debe ser obligatorio!');
-            setModalOpen(true);
-            return;
-        }
+        
         if (!validatePhone(userData.phone)) {
-            setModalMessage('¡El número debe tener 9 dígitos y comenzar con 3!');
-            setModalOpen(true);
+            setModalValidationMessage('¡El número debe tener 10 dígitos y comenzar con 3!');
             return;
         }
 
         try {
-            const response = await axios.put(`${API_URL}/user/update-profile`, {
+            await axios.put(`${API_URL}/user/update-profile`, {
                 ...userData,
-                address: `${userData.addressType} ${userData.addressDetail}`, // Combine address type and details
+                address: `${userData.addressType} ${userData.addressDetail}`,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('Perfil actualizado exitosamente:', response.data);
-            navigate('/AdminDashboard'); // Redirect to admin dashboard or desired page
+            setModalConfirmationMessage('Perfil actualizado exitosamente');
+            setTimeout(() => {
+                onClose();
+                navigate('/AdminDashboard');
+            }, 2000);
         } catch (error) {
-            console.error('Error al actualizar perfil:', error);
-            setModalMessage('Error al actualizar perfil');
-            setModalOpen(true);
+            setModalConfirmationMessage('Error al actualizar perfil');
+            console.error('Error al actualizar perfil:', error.response?.data || error.message);
         }
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
+    const handleCloseModalValidation = () => {
+        setModalValidationMessage('');
+    };
+
+    const handleCloseModalConfirmation = () => {
+        setModalConfirmationMessage('');
+        navigate('/ClientDashboard');
     };
 
     return (
-        <div className="edit-profile-container">
-            <h1>Editar Perfil</h1>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit} className="profile-form">
-                <div className="form-row">
+        <div className="cliente-modal-overlay">
+            <div className="cliente-modal-content">
+                <h2>Editar Perfil</h2>
+                <form onSubmit={handleSubmit} className="edit-cliente-form">
                     <div className="form-group">
-                        <label htmlFor="name">Nombre</label>
+                        <label htmlFor="name">Nombre:</label>
                         <input
                             type="text"
                             id="name"
@@ -145,7 +117,7 @@ const EditProfileA = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="surname">Apellido</label>
+                        <label htmlFor="surname">Apellido:</label>
                         <input
                             type="text"
                             id="surname"
@@ -156,10 +128,8 @@ const EditProfileA = () => {
                             required
                         />
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-group">
-                        <label htmlFor="addressType">Tipo de Dirección</label>
+                        <label htmlFor="addressType">Tipo de Dirección:</label>
                         <select
                             id="addressType"
                             name="addressType"
@@ -176,7 +146,7 @@ const EditProfileA = () => {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="addressDetail">Detalle de Dirección</label>
+                        <label htmlFor="addressDetail">Detalle de Dirección:</label>
                         <input
                             type="text"
                             id="addressDetail"
@@ -187,10 +157,8 @@ const EditProfileA = () => {
                             required
                         />
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-group">
-                        <label htmlFor="phone">Teléfono</label>
+                        <label htmlFor="phone">Teléfono:</label>
                         <input
                             type="text"
                             id="phone"
@@ -200,12 +168,27 @@ const EditProfileA = () => {
                             required
                         />
                     </div>
-                </div>
-                <button type="submit" className="submit-button">Actualizar</button>
-            </form>
-            <Modal isOpen={modalOpen} onClose={handleCloseModal} message={modalMessage} />
+                    <button type="submit">Actualizar</button>
+                </form>
+                
+                {/* Modal for validation messages */}
+                {modalValidationMessage && (
+                    <div className="modalValidacion">
+                        <p>{modalValidationMessage}</p>
+                        <button onClick={handleCloseModalValidation}>Cerrar</button>
+                    </div>
+                )}
+
+                {/* Modal for confirmation or error messages */}
+                {modalConfirmationMessage && (
+                    <div className="modalConfirmacion">
+                        <p>{modalConfirmationMessage}</p>
+                        <button onClick={handleCloseModalConfirmation}>Cerrar</button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
-export default EditProfileA;
+export default EditProfile;

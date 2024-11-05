@@ -100,7 +100,7 @@
 .modalValidacion button, .modalConfirmacion button {
     padding: 8px 16px;
     background-color: #b30000;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 4px;
     cursor: pointer;

@@ -1,54 +1,45 @@
-Cliente 
+HOME 
 
-Ajustar los formularios ----------michel
-Agregar modal a validaciones -------- kevin
-datable  --------eric
-link de portafolio ------------- feo
-pedir productos --------------- feo
-ver compras ------------- feo
-validaciones servicios -------------- feo 
-agregar modal a todo ----------- feo 
-
-admin
-
-Ajustar los formularios --------------michel
-Agregar modal a validaciones --------- feo
-datatable ---------eric
-link de portafolio ------------ Feo
-ver compras ---------- Feo
-actualizar compras --------- Feo
-validaciones servicios --------------- Feo
-actualizar servicios ---------- Feo
-arreglar productos ------------ Kevin 
-agregar productos ------------- Kevin
-actualizar productos -------------- Kevin
-agregar modal a todo ------------ Kevin
-
-empleado
-
-Ajustar los formularios -------michel
-Agregar modal a validaciones -------- Kevin 
-datatable -------eric
-ver compras ------------- Feo
-link de portafolio ------------ Kevin
-validaciones servicios ------------------ Kevin 
-agregar modal a todo ----------- Kevin
+al selecionar la casilla de perfil el logo se quita y se ve rojo 
+el footer esta simple 
 
 
-home 
+CLIENTE
+al selecionar la casilla de perfil el logo se quita y se ve rojo 
+el footer esta simple 
+mostrar mis compras
 
-css por encima de colores y letras -------eric
-css de register/login -------eric
+botones y trasicion de perfil y actualizar perfil 
+el estilo de modal de comfirmacion y validacion en actualizar perfil 
+utilizar color rojo predeterminado a todo 
+que se actualize de una o que se cierre el modal 
+
+estilo completo de vehiculos y botones de este ) 
+estilos completos de los modal de agregar vehiculos 
+ponerle los modal de confirmacion 
+
+arreglar estilos de servicios 
+agregarle a los servicios footer y inicio
+
+arreglar las compras 
+agregarle a las compras footer y inicio
+
+ADMIN
+
+al selecionar la casilla de perfil el logo se quita y se ve rojo 
+el footer esta simple 
+
+que en vez de redireccion sea cerrar el modal de perfil
+arreglar estilo del modal colores
+
+arreglar el estilo y botones de usuarios, vehiculos y servicios
+arreglar el estilo y botones de inventario y solicitudes
+actualizar servicios y solicitudes (estado)
+agregar modal a todo 
+
+EMPLEADO 
+
+aplicar lo de admin a empleado 
 
 
-PROYECTO
-PRESENTACION INICIAL (hacer)
-DOCUMENTACION (arreglar)
-DOCUMENTO EXCEL (actualizar)
-ESTUDIAR (codigo de todo)
-CODIFICACION (terminar todo)
 
-IMPORTANTE
-RECUPERAR CONTRASEÑA
-DATO DE IMAGENES A TODO
-SEGURIDAD A TODO (probar rutas)
