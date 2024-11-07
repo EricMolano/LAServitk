@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import Sidebar from './SlidebarE';
+import Slidebaraem from './Slidebaraem';
 import '../styles/Inventory.css';
 
 function InventarioE() {
@@ -80,7 +80,7 @@ function InventarioE() {
 
   return (
     <div className="inventario-content">
-      <Sidebar />
+      <Slidebaraem />
       <div className="top-actions">
         
         <input

@@ -1,43 +1,77 @@
-.informacion-usuarios-content {
-    margin-left: 250px; /* Ajusta el margen izquierdo para que no se superponga con la barra lateral */
-    padding: 20px;
-    overflow-x: hidden;
-    background-color: #f9f9f9; /* Color de fondo */
-    min-height: 100vh; /* Altura mínima */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
-    border-radius: 8px; /* Bordes redondeados */
+/* .info-usuarios-content maneja el layout principal */
+.info-usuarios-content {
     display: flex;
-    flex-direction: column;
-}
-
-.sidebar-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    min-height: 100vh;
     background-color: #fff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.content-wrapper {
-    margin-left: 250px;
+  }
+  
+  /* Contenedor del sidebar */
+  .sidebar-contenedor {
+    transition: width 0.3s ease;
+  }
+  
+  /* Contenido principal */
+  .contenido-contenedor {
     padding: 20px;
-    width: calc(100% - 250px);
-}
-
-.datatable-container {
+    width: 100%; /* Comienza con el contenido a tamaño completo */
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    background-color: #fff;
+  }
+  
+  /* Cuando el sidebar está abierto */
+  .contenido-contenedor.sidebar-open {
+    margin-left: 250px; /* Deja un espacio para el sidebar abierto */
+    width: calc(100% - 250px); /* Ajusta el ancho del contenido */
+  }
+  
+  /* Cuando el sidebar está cerrado */
+  .contenido-contenedor.sidebar-closed {
+    margin-left: 70px; /* Ajusta el margen cuando el sidebar está cerrado */
+    width: 100%; /* El contenido ocupa todo el espacio disponible */
+  }
+  
+  .tabla-contenedor {
     margin-top: 20px;
-    width: 100%; /* Asegura que la tabla use todo el ancho disponible */
-    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
-}
-
-.search-input {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .input-busqueda {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
     width: 100%;
-    max-width: 400px; /* Limita el ancho máximo del campo de búsqueda */
-}
+    max-width: 400px;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .info-usuarios-content {
+      margin-left: 0;
+      padding: 10px;
+    }
+  
+    .sidebar-contenedor {
+      width: 100%; /* Sidebar a tamaño completo en pantallas pequeñas */
+      height: auto;
+      position: relative;
+    }
+  
+    .contenido-contenedor {
+      margin-left: 0;
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .tabla-contenedor {
+      margin-top: 10px;
+    }
+  
+    .input-busqueda {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  

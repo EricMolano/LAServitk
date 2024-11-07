@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import '../styles/VerSolicitudes.css'; // Asegúrate de tener un archivo CSS para los estilos
-import Sidebar from '../empleado/SlidebarE';
+import Slidebaraem from '../empleado/Slidebaraem';
 
 function VerSolicitudesE() {
     const [solicitudes, setSolicitudes] = useState([]);
@@ -82,7 +82,7 @@ function VerSolicitudesE() {
     return (
         <div className="informacion-usuarios-content">
             <div className="sidebar-wrapper">
-                <Sidebar />
+                <Slidebaraem />
             </div>
             <div className="content-wrapper">
                 <h2>Solicitudes de Productos</h2>

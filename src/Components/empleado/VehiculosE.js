@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAdminVehicles } from "../../services/authService"; // Ensure this function is properly implemented
-import Sidebar from './SlidebarE';
+import Slidebaraem from './Slidebaraem';
 import DataTable from 'react-data-table-component';
 import '../styles/Usuarios.css'; // Reutilizar los estilos de Usuarios
 
@@ -84,7 +84,7 @@ function Vehiculos() {
     return (
         <div className="informacion-usuarios-content">
             <div className="sidebar-wrapper">
-                <Sidebar />
+                <Slidebaraem />
             </div>
             <div className="content-wrapper">
                 {/* Campo de búsqueda */}

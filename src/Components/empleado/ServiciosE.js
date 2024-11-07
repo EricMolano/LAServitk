@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Sidebar from './SlidebarE';
+import Slidebaraem from './Slidebaraem';
 import DataTable from 'react-data-table-component';
 import '../styles/Servicios.css';
 
@@ -100,7 +100,7 @@ function ServiciosE() {
 
   return (
     <div className="servicios-content">
-      <Sidebar />
+      <Slidebaraem />
       <Link to="/agregar-servicioE" className="btn btn-primary mb-3">Agregar Servicio</Link>
       <input
         type="text"
