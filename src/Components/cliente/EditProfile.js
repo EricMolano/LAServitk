@@ -79,9 +79,9 @@ const EditCliente = ({ onClose }) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            onClose(); // Cerrar el primer modal antes de abrir el segundo
             setModalConfirmationMessage('Perfil actualizado exitosamente');
             setTimeout(() => {
-                onClose();
                 navigate('/ClientDashboard');
             }, 2000);
         } catch (error) {
@@ -168,7 +168,7 @@ const EditCliente = ({ onClose }) => {
                             required
                         />
                     </div>
-                    <button type="submit">Actualizar</button>
+                    <button type="submit" className="cliente-submit-button">Actualizar</button>
                 </form>
                 
                 {/* Modal for validation messages */}

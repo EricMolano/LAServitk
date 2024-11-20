@@ -229,6 +229,28 @@
     text-align: center;
 }
 
+.volver-boton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: white; /* Cambiar el color de las letras a blanco */
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 10; /* Asegúrate de que el botón esté por encima de otros elementos */
+    padding: 0; /* Eliminar el padding para que el espacio del botón sea hasta donde termina la letra */
+    text-decoration: none; /* Eliminar subrayado */
+    width: auto; /* Ajustar el ancho automáticamente */
+  }
+  
+  .volver-boton:hover {
+    color: white; /* Mantener el color blanco en el hover */
+    text-decoration: none; /* Asegurarse de que no haya subrayado en el hover */
+  }
 /* Media Queries for Responsive Design */
 @media screen and (max-width: 900px) {
     .registro-contenedor {

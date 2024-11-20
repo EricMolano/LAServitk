@@ -1,10 +1,32 @@
-/* Login.css */
-
 .registro-contenedor {
   display: flex;
   height: 100vh;
   background-color: #f2f2f2; /* Light gray background */
   font-family: 'Roboto', sans-serif;
+  position: relative; /* Asegúrate de que el contenedor tenga posición relativa */
+}
+
+.volver-boton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: white; /* Cambiar el color de las letras a blanco */
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10; /* Asegúrate de que el botón esté por encima de otros elementos */
+  padding: 0; /* Eliminar el padding para que el espacio del botón sea hasta donde termina la letra */
+  text-decoration: none; /* Eliminar subrayado */
+  width: 10%;
+}
+
+.volver-boton:hover {
+  color: white; /* Mantener el color blanco en el hover */
+  text-decoration: none; /* Asegurarse de que no haya subrayado en el hover */
 }
 
 .registro-menu {
@@ -56,10 +78,6 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
-}
-
-.registro-menu button:hover {
-  background-color: #b30000;
 }
 
 .registro-formulario {
@@ -158,18 +176,11 @@
   margin: 0;
   padding: 0;
   width: 16px;
-  height: 16px;
-  cursor: pointer;
 }
 
 .registro-terminos a {
   color: #b30000;
   text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.registro-terminos a:hover {
-  color: #ff4d4d; /* Lighter red on hover */
 }
 
 .registro-enviar {
@@ -188,28 +199,23 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.registro-boton:hover {
-  background-color: #ff4d4d; /* Lighter red on hover */
-}
-
-.registro-exito,
-.registro-olvide {
-  color: #000000;
-  text-align: center;
+.registro-exito {
   margin-top: 10px;
   width: 100%; /* Asegurar que los mensajes ocupen todo el ancho */
 }
 
 .registro-olvide {
   margin-top: 20px;
-  color: #000000; /* Cambiar color del texto */
-}
-.registro-olvide a {
   color: #333;
 }
+
+.registro-olvide a {
+  color: #b30000;
+  text-decoration: none;
+}
+
 .registro-olvide a:hover {
   text-decoration: underline;
 }
@@ -219,10 +225,8 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
 }
-/* Media Queries for Responsive Design */
+
 @media screen and (max-width: 900px) {
   .registro-contenedor {
       flex-direction: column; /* Cambiar a columna para pantallas pequeñas */
@@ -230,22 +234,6 @@
 
   .registro-formulario {
       padding: 30px; /* Ajustar padding para pantallas pequeñas */
-  }
-
-  .registro-formulario form {
-      max-width: 100%; /* Asegurar que el formulario ocupe todo el ancho */
-  }
-
-  .registro-entrada {
-      width: 100%; /* Asegurar que cada entrada ocupe todo el ancho */
-  }
-
-  .registro-menu {
-      padding: 20px; /* Ajustar padding para pantallas pequeñas */
-  }
-
-  .registro-menu h1 {
-      font-size: 24px; /* Ajustar tamaño de fuente para pantallas pequeñas */
   }
 
   .registro-menu p {
@@ -264,10 +252,6 @@
 }
 
 @media screen and (max-width: 600px) {
-  .registro-menu {
-      padding: 15px; /* Ajustar padding para pantallas muy pequeñas */
-  }
-
   .registro-menu h1 {
       font-size: 20px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
   }
@@ -282,46 +266,7 @@
   }
 
   .logo {
-      width: 60px; /* Reducir tamaño del logo para pantallas muy pequeñas */
-      margin-bottom: 5px; /* Reducir margen inferior del logo */
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .registro-menu {
-      padding: 10px; /* Ajustar padding para pantallas muy pequeñas */
-  }
-
-  .registro-menu h1 {
-      font-size: 18px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
-  }
-
-  .registro-menu p {
-      font-size: 10px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
-  }
-
-  .registro-boton {
-      padding: 6px 12px; /* Ajustar padding para pantallas muy pequeñas */
-      font-size: 8px; /* Ajustar tamaño de fuente para pantallas muy pequeñas */
-  }
-
-  .logo {
       width: 50px; /* Reducir tamaño del logo para pantallas muy pequeñas */
       margin-bottom: 5px; /* Reducir margen inferior del logo */
   }
-}
-.volver-login {
-  color: #333 ;
-  border-radius: 6px !important;
-  padding: 5px 20px !important; /* Ajusta el padding para hacerlo más pequeño */
-  font-size: 12px !important; /* Tamaño de fuente más pequeño */
-  cursor: pointer;
-  position: absolute; /* Posición absoluta */
-  top: -300px; /* Espacio desde la parte superior */
-  left: -465px; /* Espacio desde la izquierda */
-}
-
-.registro-volver {
-  position: relative; /* Esto es necesario para que el botón se posicione correctamente */
-  margin-top: 20px; /* Espacio superior si es necesario */
 }

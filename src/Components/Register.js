@@ -4,6 +4,8 @@ import { register } from '../services/authService';
 import Modal from '../Components/admin/Modal'; 
 import './styles/Registro.css';
 import logo1 from '../Components/Assets/servilogo.png'; // Importa la imagen
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; // Importar el icono de volver
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -96,10 +98,10 @@ function Register() {
 
     return (
         <div className='registro-contenedor'>
+            <button onClick={() => navigate('/')} className="volver-boton">
+                <FontAwesomeIcon icon={faArrowLeft} /> Volver
+            </button>
             <div className='registro-menu'>
-            <div className="registro-volver">
-            <button onClick={() => navigate('/')} className="volver-login">⬅</button>
-            </div>
                 <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
                 <h1>¡Qué gusto verte por aquí!</h1>
                 <p>Regístrate para comenzar a usar nuestros servicios.</p>

@@ -15,14 +15,15 @@
 /* Modal content box */
 .cliente-modal-content {
     background-color: white;
-    padding: px;
+    padding: 20px;
     border-radius: 8px;
-    width: 80%;
+    width: 90%;
     max-width: 500px;
+    max-height: 90vh; /* Limitar la altura máxima del modal */
+    overflow-y: auto; /* Permitir el desplazamiento vertical si el contenido es demasiado largo */
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 /* Error message styling */
 .cliente-error-message {
@@ -33,19 +34,19 @@
 }
 
 /* Edit profile form styling */
-.cliente-edit-form {
+.edit-cliente-form {
     display: flex;
     flex-direction: column;
 }
 
 /* Form group styling */
-.cliente-form-group {
+.form-group {
     margin-bottom: 15px;
 }
 
 /* Input fields styling */
-.cliente-form-group input,
-.cliente-form-group select {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -86,7 +87,7 @@
     width: 90%;
     text-align: center;
     position: fixed;
-    top: 600%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1100; /* Higher than overlay */

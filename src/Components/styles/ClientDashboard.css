@@ -783,6 +783,7 @@
 .user-menu-button:hover {
     background: var(--secondary-red);
     transform: scale(1.1);
+    color: var(--white); /* Asegúrate de que el color del icono no cambie */
 }
 
 .user-menu-dropdown {

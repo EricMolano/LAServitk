@@ -1,20 +1,34 @@
 HOME 
 
-al selecionar la casilla de perfil el logo se quita y se ve rojo 
-el footer esta simple 
+al selecionar la casilla de perfil el logo se quita y se ve rojo - ARREGLADO ERIC
+el footer esta simple  
 
+REGISTER Y LOGIN 
+
+poner botones para volver al menu ARREGLADO ERIC
+arreglar la trasiccion del color
+
+TERMINOS Y CONDICIONES
+
+ponerle el footer
+ponerle boton hacia atras 
+
+RECUPERAR CONNTRASEÑA
+
+ponerle css a las paginas
+estilisar el correo para enviarlo
+poner boton hacia atras en la pagina recuperar
 
 CLIENTE
-al selecionar la casilla de perfil el logo se quita y se ve rojo 
-el footer esta simple 
-mostrar mis compras
+al selecionar la casilla de perfil el logo se quita y se ve rojo ARREGLADO BY ERIC
+mostrar mis compras 
 
 botones y trasicion de perfil y actualizar perfil 
 el estilo de modal de comfirmacion y validacion en actualizar perfil 
 utilizar color rojo predeterminado a todo 
 que se actualize de una o que se cierre el modal 
 
-estilo completo de vehiculos y botones de este ) 
+estilo completo de vehiculos y botones de este 
 estilos completos de los modal de agregar vehiculos 
 ponerle los modal de confirmacion 
 
@@ -24,10 +38,7 @@ agregarle a los servicios footer y inicio
 arreglar las compras 
 agregarle a las compras footer y inicio
 
-ADMIN
-
-al selecionar la casilla de perfil el logo se quita y se ve rojo 
-el footer esta simple 
+ADM
 
 que en vez de redireccion sea cerrar el modal de perfil
 arreglar estilo del modal colores
@@ -36,6 +47,8 @@ arreglar el estilo y botones de usuarios, vehiculos y servicios
 arreglar el estilo y botones de inventario y solicitudes
 actualizar servicios y solicitudes (estado)
 agregar modal a todo 
+arreglar los dashboard para que en donde se muestre la info al abrirse o cerrarse se acomode 
+aplicarle trasiccion a la sesion de el dashboard al cerrar 
 
 EMPLEADO 
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { 
     faClock,
     faCertificate,
@@ -365,6 +366,7 @@ const Header = () => {
 const ClientDashboard = () => {
     const [selectedService, setSelectedService] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    
 
     useEffect(() => {
         AOS.init({

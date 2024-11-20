@@ -7,6 +7,8 @@ import { login } from '../services/authService';
 import Modal from './admin/Modal'; // Importar el Modal
 import './styles/Login.css'; 
 import logo1 from '../Components/Assets/servilogo.png'; // Importa la imagen
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; // Importar el icono de volver
 
 const Login = ({ setUserRole }) => {
     const [email, setEmail] = useState('');
@@ -76,12 +78,11 @@ const Login = ({ setUserRole }) => {
 
     return (
         <div className='registro-contenedor'>
-        
+            <button onClick={() => navigate('/')} className="volver-boton">
+                <FontAwesomeIcon icon={faArrowLeft} /> Volver
+            </button>
             <div className='registro-menu'>
-            <div className="registro-volver">
-            <button onClick={() => navigate('/')} className="volver-login">⬅</button>
-            </div>
-            <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
+                <img src={logo1} alt="Logo" className="logo" /> {/* Añadir el logo */}
                 <h1>¡Qué gusto verte por aquí!</h1>
                 <p>Inicia sesión para continuar.</p>
                 <div className="registro-olvide">
