@@ -1,0 +1,15 @@
+{
+    "name": "React + Node.js",
+    "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16",
+    "features": {
+      "node": "16"
+    },
+    "postCreateCommand": "npm install",
+    "forwardPorts": [
+      3000,
+      5000
+    ],
+    "remoteEnv": {
+      "CODESPACE_NAME": "${localEnv:CODESPACE_NAME}"
+    }
+  }

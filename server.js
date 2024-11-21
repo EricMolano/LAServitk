@@ -720,8 +720,8 @@ app.get('/api/servicios', authenticateToken, (req, res) => {
 });
 
 // Inicia el servidor
-app.listen(2071, () => {
-  console.log(`Server running on port 2071`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
 
 // Ruta para obtener las solicitudes de productos
