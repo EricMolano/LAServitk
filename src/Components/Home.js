@@ -500,7 +500,6 @@ const TallerMecanico = () => {
                             </div>
                         </div>
                         <div className="footer-section">
-                            <h3>Contacto</h3>
                             <h4>Mapa</h4>
                             <iframe
                                 src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"

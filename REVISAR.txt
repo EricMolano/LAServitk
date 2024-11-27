@@ -1,17 +1,17 @@
 HOME 
 
-al selecionar la casilla de perfil el logo se quita y se ve rojo - ARREGLADO ERIC
-el footer esta simple  
+al selecionar la casilla de perfil el logo se quita y se ve rojo - ARREGLADO ERIC --
+el footer esta simple  --a
 
 REGISTER Y LOGIN 
 
-poner botones para volver al menu ARREGLADO ERIC
-arreglar la trasiccion del color
+poner botones para volver al menu ARREGLADO ERIC --
+arreglar la trasiccion del color --a
 
 TERMINOS Y CONDICIONES
 
-ponerle el footer
-ponerle boton hacia atras 
+ponerle el footer -- a
+ponerle boton hacia atras --
 
 RECUPERAR CONNTRASEÑA
 

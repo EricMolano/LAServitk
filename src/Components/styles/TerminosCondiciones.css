@@ -1,56 +1,99 @@
-/* Estilos para la página de Términos y Condiciones */
+/* Estilos para el header */
+.header {
+  background-color: #b30000; /* Rojo oscuro */
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-body {
-    font-family: 'Inter', sans-serif;
-  }
-  
+.header h1 {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 img {
+  margin-right: 10px;
+  width: 40px; /* Ajusta el tamaño del logo */
+  height: auto;
+}
+
+.header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header nav ul li {
+  margin-left: 20px;
+}
+
+.header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.header nav ul li a:hover {
+  color: #ffcccc;
+}
+
+/* Estilos para el footer */
+.footer {
+  background-color: #b30000; /* Rojo oscuro */
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos para el contenedor de términos */
 .terms-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f4f4f4; /* Gris claro */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar la caja */
-  }
-  
-  .terms-container h1 {
-    font-size: 28px;
-    color: #333; /* Gris oscuro para el texto principal */
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .terms-container h2 {
-    font-size: 22px;
-    color: #c8102e; /* Rojo para subtítulos */
-    margin-top: 20px;
-  }
-  
-  .terms-container p {
-    font-size: 16px;
-    color: #333; /* Gris oscuro para el texto */
-    line-height: 1.6;
-    margin-bottom: 15px;
-  }
-  
-  .terms-container address {
-    font-style: normal;
-    color: #333; /* Gris oscuro */
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .terms-container a {
-    color: #007bff; /* Azul celeste para enlaces */
-    text-decoration: none;
-  }
-  
-  .terms-container a:hover {
-    text-decoration: underline; /* Subrayado al pasar el ratón */
-  }
-  
-  /* Estilo para el nombre del taller en negrita */
-  .terms-container .taller-name {
-    font-weight: bold;
-  }
-  
+  margin-top: 80px; /* Espacio para el header fijo */
+  padding-bottom: 120px; /* Espacio para el footer fijo */
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.terms-container h1, .terms-container h2 {
+  color: #b30000;
+}
+
+.terms-container p, .terms-container address {
+  margin-bottom: 20px;
+}
+
+.terms-container .taller-name {
+  font-weight: bold;
+}
+
+.terms-container address {
+  font-style: normal;
+  line-height: 1.6;
+}
+
+/* Estilos para el contenedor principal */
+.main-container {
+  margin: 0 auto;
+  max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+  padding: 20px;
+}
