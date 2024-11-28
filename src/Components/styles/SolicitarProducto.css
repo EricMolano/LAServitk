@@ -3,7 +3,7 @@
 .solicitar-producto {
     padding: 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 120px auto 0; /* Aumentar el margen superior para separar más del header */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -58,4 +58,26 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #ff4d4d;
     transform: scale(1.05);
+}
+
+.volver-boton {
+    position: fixed; /* Cambiar a fixed para que esté siempre visible */
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: #b30000; /* Cambiar el color de las letras a rojo */
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 10; /* Asegúrate de que el botón esté por encima de otros elementos */
+    padding: 0; /* Eliminar el padding para que el espacio del botón sea hasta donde termina la letra */
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+.volver-boton:hover {
+    color: #ff4d4d; /* Cambiar el color en el hover */
+    text-decoration: none; /* Asegurarse de que no haya subrayado en el hover */
 }

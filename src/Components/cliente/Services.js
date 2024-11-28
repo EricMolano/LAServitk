@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import '../styles/Vehicles.css'; // Reutilizar los estilos de Vehicles
+import { Header, Footer } from '../Terminos'; // Importar los componentes Header y Footer
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -53,64 +54,68 @@ const Services = () => {
     ];
 
     return (
-        <div className="informacion-usuarios-content">
-            {/* Campo de búsqueda */}
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-            />
-
-            <div className="data-table-wrapper">
-                <DataTable
-                    title="Información de Servicios"
-                    columns={columns}
-                    data={filteredServices}
-                    pagination
-                    highlightOnHover
-                    striped
-                    noDataComponent="No hay servicios disponibles."
-                    responsive
-                    style={{ marginTop: '10px', fontSize: '0.8rem' }}
-                    customStyles={{
-                        table: {
-                            style: {
-                                fontSize: '0.8rem',
-                                width: '100%',
-                            },
-                        },
-                        head: {
-                            style: {
-                                backgroundColor: '#f2f2f2',
-                                fontWeight: 'bold',
-                                fontSize: '0.9rem',
-                                padding: '10px',
-                                whiteSpace: 'nowrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                            },
-                        },
-                        cells: {
-                            style: {
-                                padding: '10px',
-                                fontSize: '0.8rem',
-                                whiteSpace: 'normal',
-                                wordBreak: 'break-word',
-                                fontFamily: 'inherit',
-                            },
-                        },
-                    }}
-                    paginationComponentOptions={{
-                        rowsPerPageText: 'Filas por página',
-                        rangeSeparatorText: 'de',
-                        noRowsPerPage: false,
-                        selectAllRowsItem: true,
-                        selectAllRowsItemText: 'Todos',
-                    }}
+        <div className="services-page">
+            <Header showButtons={false} />
+            <div className="informacion-usuarios-content">
+                {/* Campo de búsqueda */}
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
                 />
+
+                <div className="data-table-wrapper">
+                    <DataTable
+                        title="Información de Servicios"
+                        columns={columns}
+                        data={filteredServices}
+                        pagination
+                        highlightOnHover
+                        striped
+                        noDataComponent="No hay servicios disponibles."
+                        responsive
+                        style={{ marginTop: '10px', fontSize: '0.8rem' }}
+                        customStyles={{
+                            table: {
+                                style: {
+                                    fontSize: '0.8rem',
+                                    width: '100%',
+                                },
+                            },
+                            head: {
+                                style: {
+                                    backgroundColor: '#f2f2f2',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9rem',
+                                    padding: '10px',
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                },
+                            },
+                            cells: {
+                                style: {
+                                    padding: '10px',
+                                    fontSize: '0.8rem',
+                                    whiteSpace: 'normal',
+                                    wordBreak: 'break-word',
+                                    fontFamily: 'inherit',
+                                },
+                            },
+                        }}
+                        paginationComponentOptions={{
+                            rowsPerPageText: 'Filas por página',
+                            rangeSeparatorText: 'de',
+                            noRowsPerPage: false,
+                            selectAllRowsItem: true,
+                            selectAllRowsItemText: 'Todos',
+                        }}
+                    />
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };

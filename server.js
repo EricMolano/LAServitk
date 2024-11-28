@@ -16,7 +16,7 @@ const port = process.env.PORT || 2071;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: '1234',
   database: 'laservitk',
   port: 3306
 });
@@ -811,5 +811,40 @@ app.get('/api/productos/:id', (req, res) => {
           return res.status(404).json({ message: 'Producto no encontrado' });
       }
       res.status(200).json(results[0]);
+  });
+});
+
+// Ruta para obtener las compras del cliente
+app.get('/api/compras', authenticateToken, (req, res) => {
+  const userId = req.user.id;
+  const query = `
+    SELECT s.id, p.nombre AS producto, s.cantidad, s.fecha_solicitud
+    FROM solicitudes s
+    JOIN producto p ON s.id_producto = p.id
+    WHERE s.id_usuario = ?
+  `;
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener las compras:', err);
+      return res.status(500).json({ message: 'Error al obtener las compras' });
+    }
+    res.status(200).json(results);
+  });
+});
+
+// Ruta para borrar una solicitud
+app.delete('/api/solicitudes/:id', authenticateToken, (req, res) => {
+  const solicitudId = req.params.id;
+  const userId = req.user.id;
+  const query = 'DELETE FROM solicitudes WHERE id = ? AND id_usuario = ?';
+  db.query(query, [solicitudId, userId], (err, result) => {
+    if (err) {
+      console.error('Error al borrar la solicitud:', err);
+      return res.status(500).json({ message: 'Error al borrar la solicitud' });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Solicitud no encontrada' });
+    }
+    res.status(200).json({ message: 'Solicitud borrada exitosamente' });
   });
 });

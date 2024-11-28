@@ -2,18 +2,20 @@ import React from 'react';
 import '../Components/styles/TerminosCondiciones.css'; // Asegúrate de que este archivo CSS esté importado
 import logo from './Assets/servilogo.png'; // Asegúrate de que la ruta al logo sea correcta
 
-const Header = () => (
+const Header = ({ showButtons = true }) => (
   <header className="header">
     <h1>
       <img src={logo} alt="Logo" />
       LA ServitK
     </h1>
-    <nav>
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/register">Registro</a></li> {/* Enlace a la página de registro */}
-      </ul>
-    </nav>
+    {showButtons && (
+      <nav>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/register">Registro</a></li> {/* Enlace a la página de registro */}
+        </ul>
+      </nav>
+    )}
   </header>
 );
 
@@ -69,4 +71,5 @@ const TerminosCondiciones = () => {
   );
 };
 
+export { Header, Footer };
 export default TerminosCondiciones;

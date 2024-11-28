@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import EditProfile from './cliente/EditProfile'; // Adjust the import based on your folder structure
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { 
@@ -13,7 +15,9 @@ import {
     faCar,
     faTools,
     faAward,
-    faQuoteLeft
+    faQuoteLeft,
+    faUserEdit,
+    faShoppingCart
 } from '@fortawesome/free-solid-svg-icons';
 import { 
     faWhatsapp, 
@@ -277,12 +281,12 @@ const ProductModal = ({ product, onClose }) => {
         </div>
     );
 };
-
 const Header = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+    const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -293,6 +297,10 @@ const Header = () => {
         setIsProfileModalOpen(true); // Open the modal
     };
 
+    const handleEditProfile = () => {
+        setIsEditProfileModalOpen(true); // Open the edit profile modal
+    };
+
     const handleVehiculosClick = () => {
         console.log("Vehículos clickeado");
         navigate('/Vehicles');
@@ -301,6 +309,9 @@ const Header = () => {
     const handleServiciosClick = () => {
         console.log("Servicios clickeado");
         navigate('/Services');
+    };
+    const handleComprasClick = () => {
+        navigate('/VerCompras');
     };
 
     return (
@@ -321,11 +332,17 @@ const Header = () => {
                     <button onClick={handlePerfilClick} className="user-menu-item">
                         <FontAwesomeIcon icon={faUser} /> Perfil
                     </button>
+                    <button onClick={handleEditProfile} className="user-menu-item">
+                        <FontAwesomeIcon icon={faUserEdit} /> Actualizar 
+                    </button>
                     <button onClick={handleVehiculosClick} className="user-menu-item">
                         <FontAwesomeIcon icon={faCar} /> Vehículos
                     </button>
                     <button onClick={handleServiciosClick} className="user-menu-item">
                         <FontAwesomeIcon icon={faTools} /> Servicios
+                    </button>
+                    <button onClick={handleComprasClick} className="user-menu-item">
+                    <FontAwesomeIcon icon={faShoppingCart} /> Ver Mis Compras
                     </button>
                     <button onClick={handleLogout} className="user-menu-item">
                         <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión
@@ -341,6 +358,18 @@ const Header = () => {
                        &times;
                    </button>
                    <Profile onClose={() => setIsProfileModalOpen(false)} />
+               </div>
+           </div>
+            )}
+
+            {/* Edit Profile Modal */}
+            {isEditProfileModalOpen && (
+               <div className="client-modal-overlay" onClick={() => setIsEditProfileModalOpen(false)}>
+               <div className="client-modal-content" onClick={(e) => e.stopPropagation()}>
+                   <button className="client-modal-close" onClick={() => setIsEditProfileModalOpen(false)}>
+                       &times;
+                   </button>
+                   <EditProfile onClose={() => setIsEditProfileModalOpen(false)} />
                </div>
            </div>
             )}
@@ -532,7 +561,6 @@ const ClientDashboard = () => {
                         </div>
                     </div>
                     <div className="footer-section">
-                        <h3>Contacto</h3>
                         <h4>Mapa</h4>
                         <iframe
                             src="https://maps.google.com/maps?q=Calle%2017A%20%23102%20-%2056,%20Fontib%C3%B3n&t=&z=13&ie=UTF8&iwloc=&output=embed"

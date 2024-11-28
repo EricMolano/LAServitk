@@ -5,7 +5,7 @@ import ModalVerificacionVehiculo from '../cliente/ModalVerificacionVehiculo';
 import ModalConfirmacionVehiculo from '../cliente/ModalConfirmacionVehiculo';
 
 import '../styles/AddVehicle.css';
-import Modal from '../cliente/Modal';
+import ModalVehicle from '../cliente/ModalVehicle';
 
 
 const vehicleData = {
@@ -169,6 +169,7 @@ const colors = [
     'Marfil', 'Coral', 'Terracota', 'Mostaza', 'Fucsia'
 ];
 
+;
 
 const AddVehicle = () => {
     const [marca, setMarca] = useState('');
@@ -240,7 +241,7 @@ const AddVehicle = () => {
             }, 2000);
         } catch (error) {
             console.error('Error al agregar el vehículo:', error.response?.data || error.message);
-            setConfirmMessage('Esta placa ya esta en uso.');
+            setConfirmMessage('Esta placa ya está en uso.');
             setIsConfirmacionOpen(true);
         }
     };
@@ -248,98 +249,96 @@ const AddVehicle = () => {
     return (
         <div className="add-vehicle">
             <h2>Agregar Nuevo Vehículo</h2>
-            <Modal>
-            <form onSubmit={handleVerificacion} className="vehicle-form">
-                <div className="form-group">
-                    <label htmlFor="marca">Marca:</label>
-                    <select
-                        id="marca"
-                        value={marca}
-                        onChange={(e) => setMarca(e.target.value)}
-                        required
-                    >
-                        <option value="">Selecciona una marca</option>
-                        {Object.keys(vehicleData).map((marca) => (
-                            <option key={marca} value={marca}>{marca}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="modelo">Modelo:</label>
-                    <select
-                        id="modelo"
-                        value={modelo}
-                        onChange={(e) => setModelo(e.target.value)}
-                        required
-                        disabled={!modelosDisponibles.length}
-                    >
-                        <option value="">Selecciona un modelo</option>
-                        {modelosDisponibles.map((modelo) => (
-                            <option key={modelo} value={modelo}>{modelo}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="año">Año:</label>
-                    <select
-                        id="año"
-                        value={año}
-                        onChange={(e) => setAño(e.target.value)}
-                        required
-                        disabled={!añosDisponibles.length}
-                    >
-                        <option value="">Selecciona un año</option>
-                        {añosDisponibles.map((year) => (
-                            <option key={year} value={year}>{year}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="color">Color:</label>
-                    <select
-                        id="color"
-                        value={color}
-                        onChange={(e) => setColor(e.target.value)}
-                        required
-                    >
-                        <option value="">Selecciona un color</option>
-                        {colors.map((color) => (
-                            <option key={color} value={color}>{color}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="placa">Placa:</label>
-                    <input
-                        type="text"
-                        id="placa"
-                        value={placa}
-                        onChange={(e) => setPlaca(e.target.value)}
-                        required
-                        placeholder="Ej: ABC123"
-                    />
-                </div>
-                <button type="submit">Verificar Datos</button>
-            </form>
-            <ModalVerificacionVehiculo
-                isOpen={isVerificacionOpen}
-                onClose={() => setIsVerificacionOpen(false)}
-                onConfirm={handleConfirmacion}
-                marca={marca}
-                modelo={modelo}
-                año={año}
-                color={color}
-                placa={placa}
-            />
+            <ModalVehicle onClose={() => setIsVerificacionOpen(false)}>
+                <form onSubmit={handleVerificacion} className="vehicle-form">
+                    <div className="form-group">
+                        <label htmlFor="marca">Marca:</label>
+                        <select
+                            id="marca"
+                            value={marca}
+                            onChange={(e) => setMarca(e.target.value)}
+                            required
+                        >
+                            <option value="">Selecciona una marca</option>
+                            {Object.keys(vehicleData).map((marca, index) => (
+                                <option key={`${marca}-${index}`} value={marca}>{marca}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="modelo">Modelo:</label>
+                        <select
+                            id="modelo"
+                            value={modelo}
+                            onChange={(e) => setModelo(e.target.value)}
+                            required
+                            disabled={!modelosDisponibles.length}
+                        >
+                            <option value="">Selecciona un modelo</option>
+                            {modelosDisponibles.map((modelo, index) => (
+                                <option key={`${modelo}-${index}`} value={modelo}>{modelo}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="año">Año:</label>
+                        <select
+                            id="año"
+                            value={año}
+                            onChange={(e) => setAño(e.target.value)}
+                            required
+                            disabled={!añosDisponibles.length}
+                        >
+                            <option value="">Selecciona un año</option>
+                            {añosDisponibles.map((year, index) => (
+                                <option key={`${year}-${index}`} value={year}>{year}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="color">Color:</label>
+                        <select
+                            id="color"
+                            value={color}
+                            onChange={(e) => setColor(e.target.value)}
+                            required
+                        >
+                            <option value="">Selecciona un color</option>
+                            {colors.map((color, index) => (
+                                <option key={`${color}-${index}`} value={color}>{color}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="placa">Placa:</label>
+                        <input
+                            type="text"
+                            id="placa"
+                            value={placa}
+                            onChange={(e) => setPlaca(e.target.value)}
+                            required
+                            placeholder="Ej: ABC123"
+                        />
+                    </div>
+                    <button type="submit">Verificar Datos</button>
+                </form>
+                <ModalVerificacionVehiculo
+                    isOpen={isVerificacionOpen}
+                    onClose={() => setIsVerificacionOpen(false)}
+                    onConfirm={handleConfirmacion}
+                    marca={marca}
+                    modelo={modelo}
+                    año={año}
+                    color={color}
+                    placa={placa}
+                />
 
-            <ModalConfirmacionVehiculo
-                isOpen={isConfirmacionOpen}
-                onClose={() => setIsConfirmacionOpen(false)}
-                message={confirmMessage}
-            />
-            </Modal>
-
-            
+                <ModalConfirmacionVehiculo
+                    isOpen={isConfirmacionOpen}
+                    onClose={() => setIsConfirmacionOpen(false)}
+                    message={confirmMessage}
+                />
+            </ModalVehicle>
         </div>
     );
 };

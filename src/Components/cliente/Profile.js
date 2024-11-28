@@ -59,11 +59,8 @@ const Profile = ({ onClose }) => {
                             <tr><th>Teléfono</th><td>{userData.phone}</td></tr>
                         </tbody>
                     </table>
-                    <button onClick={handleEditProfile} className="client-profile-button">Editar Perfil</button>
                 </div>
 
-                {/* Render the EditProfile modal */}
-                {isEditModalOpen && <EditProfile onClose={closeEditModal} />}
             </div>
         </div>
     );

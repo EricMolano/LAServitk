@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from './cliente/ModalCliente'; // Importar el componente Modal
 import './styles/SolicitarProducto.css'; // Asegúrate de tener un archivo CSS para los estilos
+import { Header, Footer } from './Terminos'; // Importar los componentes Header y Footer
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; // Importar el icono de volver
 
 function SolicitarProducto() {
     const location = useLocation();
@@ -67,41 +70,53 @@ function SolicitarProducto() {
     };
 
     return (
-        <div className="solicitar-producto">
-            <h2>Solicitar Producto</h2>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <form onSubmit={handleSubmit} className="solicitar-form">
-                <div className="form-group">
-                    <label htmlFor="producto">Producto:</label>
-                    <select
-                        id="producto"
-                        value={productoSeleccionado}
-                        onChange={(e) => setProductoSeleccionado(e.target.value)}
-                        required
-                    >
-                        <option value="" disabled>Seleccione un producto</option> {/* Opción no elegible */}
-                        {productos.map(producto => (
-                            <option key={producto.id} value={producto.id}>
-                                {producto.nombre}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="cantidad">Cantidad:</label>
-                    <input
-                        type="number"
-                        id="cantidad"
-                        value={cantidad}
-                        onChange={(e) => setCantidad(e.target.value)}
-                        min="0" // Prevenir valores negativos
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Solicitar</button>
-            </form>
+        <div>
+            <Header showButtons={false} />
+            <button onClick={() => navigate('/ClientDashboard')} className="volver-boton">
+                <FontAwesomeIcon icon={faArrowLeft} /> Volver
+            </button>
+            <div className="solicitar-producto">
+                <h2>Solicitar Producto</h2>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <form onSubmit={handleSubmit} className="solicitar-form">
+                    <div className="form-group">
+                        <label htmlFor="producto">Producto:</label>
+                        <select
+                            id="producto"
+                            value={productoSeleccionado}
+                            onChange={(e) => setProductoSeleccionado(e.target.value)}
+                            required
+                        >
+                            <option value="" disabled>Seleccione un producto</option> {/* Opción no elegible */}
+                            {productos.map(producto => (
+                                <option key={producto.id} value={producto.id}>
+                                    {producto.nombre}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="cantidad">Cantidad:</label>
+                        <select
+                            id="cantidad"
+                            value={cantidad}
+                            onChange={(e) => setCantidad(e.target.value)}
+                            required
+                        >
+                            <option value="" disabled>Seleccione una cantidad</option> {/* Opción no elegible */}
+                            {[...Array(10).keys()].map(i => (
+                                <option key={i + 1} value={i + 1}>
+                                    {i + 1}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <button type="submit" className="btn btn-primary">Solicitar</button>
+                </form>
 
-            {isModalOpen && <Modal message={errorMessage || successMessage} onClose={closeModal} isSuccess={isSuccess} />}
+                {isModalOpen && <Modal message={errorMessage || successMessage} onClose={closeModal} isSuccess={isSuccess} />}
+            </div>
+            <Footer />
         </div>
     );
 }

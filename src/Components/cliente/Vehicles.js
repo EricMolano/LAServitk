@@ -1,4 +1,3 @@
-// Vehicles.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -84,33 +83,33 @@ const Vehicles = () => {
 
     return (
         <div className="vehicle-app-content">
-        <nav className="vehicle-app-navbar">
-            <a href="#" className="vehicle-app-logo">
-                <img src={require('../Assets/servilogo.png')} alt="La Servitk Logo" className="vehicle-app-logo-image" />
-                La Servitk
-            </a>
+            <nav className="vehicle-app-navbar">
+                <a href="#" className="vehicle-app-logo">
+                    <img src={require('../Assets/servilogo.png')} alt="La Servitk Logo" className="vehicle-app-logo-image" />
+                    La Servitk
+                </a>
 
-            <div className="vehicle-app-user-menu">
-                <button className="vehicle-app-user-menu-button" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
-                    <FontAwesomeIcon icon={faHome} />
-                </button>
-                <div className={`vehicle-app-user-dropdown ${isUserMenuOpen ? 'active' : ''}`}>
-                    <button onClick={handleHomeClick} className="vehicle-app-user-item">
-                        <FontAwesomeIcon icon={faHome} /> Home
+                <div className="vehicle-app-user-menu">
+                    <button className="vehicle-app-user-menu-button" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+                        <FontAwesomeIcon icon={faBars} />
                     </button>
-                    <button onClick={handleAddVehicle} className="vehicle-app-user-item">
-                        <FontAwesomeIcon icon={faCar} /> Agregar Vehículo
-                    </button>
-                    <button onClick={handleLogout} className="vehicle-app-user-item">
-                        <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión
-                    </button>
+                    <div className={`vehicle-app-user-dropdown ${isUserMenuOpen ? 'active' : ''}`}>
+                        <button onClick={handleHomeClick} className="vehicle-app-user-item">
+                            <FontAwesomeIcon icon={faHome} /> Home
+                        </button>
+                        <button onClick={handleAddVehicle} className="vehicle-app-user-item">
+                            <FontAwesomeIcon icon={faCar} /> Agregar 
+                        </button>
+                        <button onClick={handleLogout} className="vehicle-app-user-item">
+                            <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión
+                        </button>
+                    </div>
+                </div>  
+
+                <div className={`vehicle-app-menu-toggle ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
                 </div>
-            </div>  
-
-            <div className={`vehicle-app-menu-toggle ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
-            </div>
-        </nav>
+            </nav>
 
             <input
                 type="text"
@@ -127,7 +126,7 @@ const Vehicles = () => {
                 pagination
             />
 
-<footer className="vehicle-app-footer">
+            <footer className="vehicle-app-footer">
                 <p>&copy; 2024 LaServitk. Todos los derechos reservados.</p>
             </footer>
 
@@ -135,8 +134,6 @@ const Vehicles = () => {
             {addModalOpen && <AddVehicle onClose={closeModal} />}
             {editModalOpen && <EditVehicle id={editVehicleId} onClose={closeModal} />}
         </div>
-
-        
     );
 };
 

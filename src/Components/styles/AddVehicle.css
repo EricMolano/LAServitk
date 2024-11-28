@@ -70,7 +70,9 @@ button[type="submit"]:active {
     text-align: center;
     font-weight: bold;
     font-size: 14px;
-}.modal-vehicle {
+}
+
+.modal-vehicle {
     position: fixed; /* Fijo para que cubra toda la ventana */
     top: 0;
     left: 0;
@@ -107,7 +109,7 @@ button[type="submit"]:active {
 
 .modal-content-vehicle button {
     margin: 5px;
-    background-color: #007bff; /* Color de fondo del botón */
+    background-color: #cc0000; /* Color de fondo del botón */
     color: white; /* Color del texto del botón */
     border: none; /* Sin borde */
     border-radius: 4px; /* Bordes redondeados */
@@ -117,7 +119,52 @@ button[type="submit"]:active {
 }
 
 .modal-content-vehicle button:hover {
-    background-color: #0056b3; /* Color de fondo en hover */
+    background-color: #cc0000; /* Color de fondo en hover */
+}
+
+.modal-overlay123 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content123 {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.button2 {
+    background-color: #cc0000; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 50%; /* Botón redondo */
+    width: 30px; /* Ancho del botón */
+    height: 30px; /* Altura del botón */
+    display: flex; /* Flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    cursor: pointer; /* Cursor de puntero */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Texto en negrita */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.button2:hover {
+    background-color: #ff6659; /* Color de fondo al pasar el ratón */
 }
 
 /* Additional styling for alignment and mobile responsiveness */

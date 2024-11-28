@@ -14,6 +14,7 @@ import Register from './Components/Register';
 import Terminos from './Components/Terminos';
 import ForgotPassword from './Components/ForgotPassword'; // Importa el componente de recuperación de contraseña
 import ResetPassword from './Components/ResetPassword'; // Importa el componente de restablecimiento de contraseña
+import VerCompras from './Components/VerCompras'; // Asegúrate de que la ruta sea correcta
 
 /* PAGINAS ADMIN */
 import UpdateServices from './Components/admin/UpdateServices'; 
@@ -103,15 +104,15 @@ function App() {
                 <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Ruta para restablecimiento de contraseña */}
                 <Route path="/VerSolicitudes" element={<VerSolicitudes />} />
 
-
-
                 {/* Rutas públicas */}
                 <Route path="/dashboard" element={<Dashboard userRole={userRole} userData={userData} />} />
                 <Route path="/SlideBarPrueba" element={<SlideBarPrueba />} />
+                
                 {/* Rutas privadas */}
                 <Route path="/AdminDashboard" element={<PrivateRoute element={<AdminDashboard />} userRole={userRole} requiredRole={3} />} />
                 <Route path="/ClientDashboard" element={<PrivateRoute element={<ClientDashboard />} userRole={userRole} requiredRole={2} />} />
                 <Route path="/EmployeeDashboard" element={<PrivateRoute element={<EmployeeDashboard />} userRole={userRole} requiredRole={1} />} />
+                <Route path="/VerCompras" element={<PrivateRoute element={<VerCompras />} userRole={userRole} requiredRole={2} />} />
 
                 {/* Rutas de admin */}
                 <Route path="/update-servicio/:id" element={<PrivateRoute element={<UpdateServices />} userRole={userRole} requiredRole={3} />} />

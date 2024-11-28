@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c0392b; /* Dark red */
+    background-color: #b30000; /* Rojo oscuro */
     padding: 1rem 2rem;
     color: white;
     position: relative;
@@ -40,35 +40,44 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
 .vehicle-app-user-dropdown {
-    display: none;
     position: absolute;
+    top: 50px;
     right: 0;
-    background-color: #a93226; /* Lighter red */
-    border-radius: 5px;
-    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    width: 200px;
     z-index: 1000;
 }
 
 .vehicle-app-user-dropdown.active {
-    display: block;
+    display: flex;
 }
 
 .vehicle-app-user-item {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
+    padding: 10px 20px;
     text-align: left;
-    border: none;
     background: none;
+    border: none;
     width: 100%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    color: #333;
 }
 
 .vehicle-app-user-item:hover {
-    background-color: #c0392b; /* Dark red on hover */
+    background: #f0f0f0;
+}
+
+.vehicle-app-user-item svg {
+    margin-right: 10px;
 }
 
 /* Menu Toggle */
@@ -107,7 +116,7 @@ body {
 }
 
 .DataTable .rdt_TableHead {
-    background-color: #a93226; /* Lighter red */
+    background-color: #b30000; /* Rojo oscuro */
     color: white;
 }
 
@@ -119,7 +128,7 @@ body {
 .vehicle-app-footer {
     text-align: center;
     padding: 20px;
-    background-color: #c0392b; /* Dark red */
+    background-color: #b30000; /* Rojo oscuro */
     color: white;
     position: relative;
     bottom: 0;
@@ -141,4 +150,44 @@ body {
     .vehicle-app-menu-toggle {
         display: block;
     }
+}
+
+.services-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #b30000; /* Rojo oscuro */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer {
+    background-color: #b30000; /* Rojo oscuro */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.informacion-usuarios-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.data-table-wrapper {
+    margin-top: 20px;
 }

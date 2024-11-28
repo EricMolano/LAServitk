@@ -83,12 +83,12 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 90%;
+    max-width: 500px;
+    width: 100%;
     text-align: center;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 650%;
+    left:50%;
     transform: translate(-50%, -50%);
     z-index: 1100; /* Higher than overlay */
 }
