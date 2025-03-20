@@ -1,31 +1,22 @@
-require('dotenv').config(); // Asegúrate de que esto está en la parte superior
-const express = require('express');
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
-const mysql = require('mysql2');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import dotenv from 'dotenv';
+import express from 'express';
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+import mysql from 'mysql2/promise'; // Usar la versión de promesas
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 2071;
 
 // Configuración de la base de datos
-const db = await mysql.createConnection(process.env.DATABASE_URL);
+const db = mysql.createConnection(process.env.DATABASE_URL);
 console.log('✅ Conectado a la base de datos de Railway');
 
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to database',hola("sena@example.com").then((e)=>{
-    console.log(e)
-  }));
-
-
-
-});
 
 async function hola(email) {
   const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
