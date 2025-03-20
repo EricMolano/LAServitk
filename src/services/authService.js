@@ -16,10 +16,10 @@ export const register = (userData) => {
 };
 
 export const login = (email, password) => {
-    return axios.post(`${API_URL}/login`, { email, password })
+    return axios.post(`${API_URL}/api/login`, { email, password })
         .then(response => {
             if (response.data.token) {
-                localStorage.setItem('token', response.data.token); // Almacena el token en localStorage
+                localStorage.setItem('token', response.data.token);
             } else {
                 throw new Error('Token no recibido en la respuesta');
             }
@@ -30,6 +30,7 @@ export const login = (email, password) => {
             throw new Error(error.response?.data?.message || 'Error en el inicio de sesión');
         });
 };
+
 
 // ===============================================================
 // Componente Actualizar perfil
