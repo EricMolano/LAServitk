@@ -13,13 +13,9 @@ const app = express();
 const port = process.env.PORT || 2071;
 
 // Configuración de la base de datos
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1234',
-  database: 'laservitk',
-  port: 3306
-});
+const db = await mysql.createConnection(process.env.DATABASE_URL);
+console.log('✅ Conectado a la base de datos de Railway');
+
 
 db.connect((err) => {
   if (err) throw err;
@@ -37,9 +33,10 @@ async function hola(email) {
 }
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // Cambia esto al origen de tu frontend si es diferente
+  origin: process.env.CORS_ORIGIN || 'https://la-servitk.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
 app.use(bodyParser.json());
 app.use(express.json());
 
