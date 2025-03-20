@@ -15,9 +15,6 @@ export const register = (userData) => {
         });
 };
 
-// ===============================================================
-// Componente Login
-// ===============================================================
 export const login = (email, password) => {
     return axios.post(`${API_URL}/login`, { email, password })
         .then(response => {

@@ -19,7 +19,7 @@ console.log('✅ Conectado a la base de datos de Railway');
 
 
 async function hola(email) {
-  const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+  const [results] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   return(results)
 }
 // Middleware
@@ -46,7 +46,7 @@ const transporter = nodemailer.createTransport({
 // Ruta para la recuperación de contraseña
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
-  const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+  const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
 
   if (rows.length === 0) {
       return res.status(404).json({ message: 'Correo no encontrado' });
@@ -55,7 +55,7 @@ app.post('/api/forgot-password', async (req, res) => {
   const token = crypto.randomBytes(20).toString('hex');
   const resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-  await db.promise().query('UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?', [token, resetPasswordExpires, email]);
+  await db.query('UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?', [token, resetPasswordExpires, email]);
 
   const mailOptions = {
       from: process.env.EMAIL,
@@ -79,14 +79,14 @@ app.post('/api/forgot-password', async (req, res) => {
 // Ruta para el restablecimiento de contraseña
 app.post('/api/reset-password', async (req, res) => {
   const { token, password } = req.body;
-  const [rows] = await db.promise().query('SELECT * FROM users WHERE resetPasswordToken = ? AND resetPasswordExpires > ?', [token, Date.now()]);
+  const [rows] = await db.query('SELECT * FROM users WHERE resetPasswordToken = ? AND resetPasswordExpires > ?', [token, Date.now()]);
 
   if (rows.length === 0) {
       return res.status(400).json({ message: 'Token inválido o expirado' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  await db.promise().query('UPDATE users SET password = ?, resetPasswordToken = NULL, resetPasswordExpires = NULL WHERE resetPasswordToken = ?', [hashedPassword, token]);
+  await db.query('UPDATE users SET password = ?, resetPasswordToken = NULL, resetPasswordExpires = NULL WHERE resetPasswordToken = ?', [hashedPassword, token]);
 
   res.status(200).json({ message: 'Contraseña restablecida exitosamente' });
 });
@@ -104,14 +104,14 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
 
-    const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
     if (rows.length > 0) {
       return res.status(400).json({ message: 'El correo ya está registrado' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const [result] = await db.promise().query(
+    const [result] = await db.query(
       'INSERT INTO users (email, password, name, surname, address, phone, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [email, hashedPassword, name, surname, address, phone, 2] // Suponiendo que rol_id = 2 es para cliente
     );
@@ -131,7 +131,7 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
       const { email, password } = req.body;
-      const [results] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+      const [results] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
 
       if (results.length === 0) {
           return res.status(401).json({ message: 'Credenciales inválidas' });
@@ -544,7 +544,7 @@ app.post('/api/servicios', (req, res) => {
   let idempleado, idcliente;
 
   // Buscar el ID del cliente y verificar la propiedad del vehículo
-  db.promise().query(`
+  db.query(`
     SELECT users.id, vehiculo.placa
     FROM users 
     JOIN rol ON users.rol_id = rol.id 
@@ -559,7 +559,7 @@ app.post('/api/servicios', (req, res) => {
       console.log("Cliente y vehículo verificados correctamente, ID cliente:", idcliente);
 
       // Buscar el ID del empleado por nombre
-      return db.promise().query(`
+      return db.query(`
         SELECT users.id 
         FROM users 
         JOIN rol ON users.rol_id = rol.id 
@@ -574,7 +574,7 @@ app.post('/api/servicios', (req, res) => {
       console.log("Empleado verificado correctamente, ID:", idempleado);
 
       // Insertar el servicio en la tabla registro_servicio
-      return db.promise().query(
+      return db.query(
         'INSERT INTO registro_servicio (idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo) VALUES (?, ?, ?, ?, ?, ?)',
         [idempleado, idcliente, placa_vehiculo, nombre_servicio, descripcion, costo]
       );
@@ -612,7 +612,7 @@ app.put('/api/servicios/:id', authenticateToken, (req, res) => {
   let idempleado, idcliente;
 
   // Verificar cliente y propiedad del vehículo
-  db.promise().query(`
+  db.query(`
     SELECT users.id, vehiculo.placa
     FROM users 
     JOIN rol ON users.rol_id = rol.id 
@@ -627,7 +627,7 @@ app.put('/api/servicios/:id', authenticateToken, (req, res) => {
       console.log("Cliente y vehículo verificados correctamente, ID cliente:", idcliente);
 
       // Verificar empleado
-      return db.promise().query(`
+      return db.query(`
         SELECT users.id 
         FROM users 
         JOIN rol ON users.rol_id = rol.id 
@@ -642,7 +642,7 @@ app.put('/api/servicios/:id', authenticateToken, (req, res) => {
       console.log("Empleado verificado correctamente, ID:", idempleado);
 
       // Verificar si la placa del vehículo existe
-      return db.promise().query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo]);
+      return db.query('SELECT * FROM vehiculo WHERE placa = ?', [placa_vehiculo]);
     })
     .then(([vehiculo]) => {
       if (vehiculo.length === 0) {
@@ -650,7 +650,7 @@ app.put('/api/servicios/:id', authenticateToken, (req, res) => {
       }
 
       // Actualizar el servicio en la tabla registro_servicio
-      return db.promise().query(
+      return db.query(
         'UPDATE registro_servicio SET idempleado = ?, placa_vehiculo = ?, nombre_servicio = ?, descripcion = ?, costo = ? WHERE idregistro = ?',
         [idempleado, placa_vehiculo, nombre_servicio, descripcion, costo, id]
       );
