@@ -1,21 +1,17 @@
 import axios from 'axios';
 
-const API_URL = 'https://laservitk-production.up.railway.app/api';
+// Definir la URL base del API correctamente, sin duplicar "/api"
+const API_URL = 'https://laservitk-production.up.railway.app';
 
-// ===============================================================
 // Componente Registro
-// ===============================================================
 export const register = (userData) => {
     console.log("Ingreso a el metodo de registro", userData);
     
-    return axios.post(`${API_URL}/register`, userData)
+    return axios.post(`${API_URL}/api/register`, userData)
         .then(response => response.data)
         .catch(error => {
-            
-            console.log('Error al registrar usuario:', error);
-            const errorMsg = error.response?.data?.message || error;
-            throw new Error(errorMsg);
-            
+            console.error('Error al registrar usuario:', error);
+            throw new Error(error);
         });
 };
 
