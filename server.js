@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 2071;
 
 // Configuración de la base de datos
-const db = await mysql.createConnection(process.env.DATABASE_URL);
+const db = mysql.createConnection(process.env.DATABASE_URL);
 console.log('✅ Conectado a la base de datos de Railway');
 
 
