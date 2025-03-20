@@ -14,7 +14,7 @@ function ServiciosE() {
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const response = await axios.get("http://localhost:2071/api/servicios", {
+        const response = await axios.get("https://laservitk-production.up.railway.app/api/servicios", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

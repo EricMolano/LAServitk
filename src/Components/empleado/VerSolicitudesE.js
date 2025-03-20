@@ -13,7 +13,7 @@ function VerSolicitudesE() {
     useEffect(() => {
         const fetchSolicitudes = async () => {
             try {
-                const response = await axios.get('http://localhost:2071/api/solicitudes', {
+                const response = await axios.get('https://laservitk-production.up.railway.app/api/solicitudes', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }

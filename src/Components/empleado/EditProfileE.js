@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EditProfile.css';
 
-const API_URL = 'http://localhost:2071/api';
+const API_URL = 'https://laservitk-production.up.railway.app/api';
 
 const EditProfileE = ({ onClose }) => {
     const [userData, setUserData] = useState({

@@ -11,7 +11,7 @@ function VerCompras() {
   useEffect(() => {
     const fetchCompras = async () => {
       try {
-        const response = await axios.get('http://localhost:2071/api/compras', {
+        const response = await axios.get('https://laservitk-production.up.railway.app/api/compras', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -30,7 +30,7 @@ function VerCompras() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:2071/api/solicitudes/${id}`, {
+      await axios.delete(`https://laservitk-production.up.railway.app/api/solicitudes/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

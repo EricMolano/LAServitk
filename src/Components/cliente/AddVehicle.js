@@ -222,7 +222,7 @@ const AddVehicle = () => {
         }
 
         try {
-            await axios.post('http://localhost:2071/api/vehicles', {
+            await axios.post('https://laservitk-production.up.railway.app/api/vehicles', {
                 marca,
                 modelo,
                 año,

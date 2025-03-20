@@ -58,7 +58,7 @@ function AddInventory() {
         }
 
         try {
-            await axios.post('http://localhost:2071/api/inventory', formData, {
+            await axios.post('https://laservitk-production.up.railway.app/api/inventory', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

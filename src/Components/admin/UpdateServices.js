@@ -17,7 +17,7 @@ function ActualizarServicio() {
     useEffect(() => {
         const fetchServicio = async () => {
             try {
-                const response = await axios.get(`http://localhost:2071/api/servicios/${id}`, {
+                const response = await axios.get(`https://laservitk-production.up.railway.app/api/servicios/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -45,7 +45,7 @@ function ActualizarServicio() {
 
         try {
             // Hacer la solicitud para actualizar el servicio
-            await axios.put(`http://localhost:2071/api/servicios/${id}`, {
+            await axios.put(`https://laservitk-production.up.railway.app/api/servicios/${id}`, {
                 nombre_empleado,
                 nombre_cliente,
                 placa_vehiculo,

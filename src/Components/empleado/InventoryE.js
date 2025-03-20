@@ -14,7 +14,7 @@ function InventarioE() {
   useEffect(() => {
     const fetchInventario = async () => {
       try {
-        const response = await axios.get("http://localhost:2071/api/inventory", {
+        const response = await axios.get("https://laservitk-production.up.railway.app/api/inventory", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

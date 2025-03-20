@@ -14,7 +14,7 @@ const ProfileE = ({ onClose }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('http://localhost:2071/api/user/data', {
+        axios.get('https://laservitk-production.up.railway.app/api/user/data', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

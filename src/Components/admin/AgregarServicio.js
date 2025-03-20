@@ -47,7 +47,7 @@ function AgregarServicio() {
         }
 
         try {
-            const response = await axios.post('http://localhost:2071/api/servicios', {
+            const response = await axios.post('https://laservitk-production.up.railway.app/api/servicios', {
                 nombre_empleado,
                 nombre_cliente,
                 placa_vehiculo,

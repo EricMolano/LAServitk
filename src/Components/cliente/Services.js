@@ -12,7 +12,7 @@ const Services = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('http://localhost:2071/api/servicios', {
+        axios.get('https://laservitk-production.up.railway.app/api/servicios', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

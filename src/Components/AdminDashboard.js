@@ -230,7 +230,7 @@ const ProductModal = ({ product, onClose }) => {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:2071/api/productos/${product.id}`);
+                const response = await axios.get(`https://laservitk-production.up.railway.app/api/productos/${product.id}`);
                 setProductDetails(response.data);
             } catch (error) {
                 console.error('Error al obtener los detalles del producto:', error);

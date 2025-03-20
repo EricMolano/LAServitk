@@ -21,7 +21,7 @@ function SolicitarProducto() {
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                const response = await axios.get('http://localhost:2071/api/productos', {
+                const response = await axios.get('https://laservitk-production.up.railway.app/api/productos', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -42,7 +42,7 @@ function SolicitarProducto() {
         setIsModalOpen(false);
 
         try {
-            const response = await axios.post('http://localhost:2071/api/solicitar-producto', {
+            const response = await axios.post('https://laservitk-production.up.railway.app/api/solicitar-producto', {
                 id_producto: productoSeleccionado,
                 cantidad
             }, {

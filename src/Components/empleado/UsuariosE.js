@@ -5,7 +5,7 @@ import Sidebar from '../empleado/Slidebaraem';
 import DataTable from 'react-data-table-component';
 import '../styles/Usuarios.css';
 
-export const API_URL = "http://localhost:2071/api";
+export const API_URL = "https://laservitk-production.up.railway.app/api";
 
 function InformacionUsuarios() {
   const [users, setUsers] = useState([]);

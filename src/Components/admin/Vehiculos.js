@@ -5,7 +5,7 @@ import Sidebar from './Slidebara';
 import DataTable from 'react-data-table-component';
 import '../styles/Vehiculos.css'; // Asegúrate de tener un archivo CSS para los estilos
 
-export const API_URL = "http://localhost:2071/api";
+export const API_URL = "https://laservitk-production.up.railway.app/api";
 
 function Vehiculos() {
     const [vehicles, setVehicles] = useState([]);

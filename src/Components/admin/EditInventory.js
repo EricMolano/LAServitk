@@ -21,7 +21,7 @@ function EditInventory() {
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const response = await axios.get(`http://localhost:2071/api/inventory/${id}`, {
+                const response = await axios.get(`https://laservitk-production.up.railway.app/api/inventory/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -71,7 +71,7 @@ function EditInventory() {
         }
 
         try {
-            await axios.put(`http://localhost:2071/api/inventory/${id}`, formData, {
+            await axios.put(`https://laservitk-production.up.railway.app/api/inventory/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

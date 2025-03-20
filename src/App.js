@@ -68,7 +68,7 @@ function App() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            axios.get('http://localhost:2071/api/user/data', {
+            axios.get('https://laservitk-production.up.railway.app/api/user/data', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

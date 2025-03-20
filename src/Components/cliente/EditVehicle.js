@@ -181,7 +181,7 @@ const EditVehicle = ({ id, onClose }) => {
     useEffect(() => {
         const fetchVehicle = async () => {
             try {
-                const response = await axios.get(`http://localhost:2071/api/vehicles/${id}`);
+                const response = await axios.get(`https://laservitk-production.up.railway.app/api/vehicles/${id}`);
                 setVehicle(response.data);
                 setModelosDisponibles(vehicleData[response.data.marca] ? Object.keys(vehicleData[response.data.marca]) : []);
                 setAñosDisponibles(vehicleData[response.data.marca]?.[response.data.modelo] || []);
@@ -213,7 +213,7 @@ const EditVehicle = ({ id, onClose }) => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token'); // O de donde obtengas tu token
-            await axios.put(`http://localhost:2071/api/vehicles/${id}`, vehicle, {
+            await axios.put(`https://laservitk-production.up.railway.app/api/vehicles/${id}`, vehicle, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

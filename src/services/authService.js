@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:2071/api';
+const API_URL = 'https://laservitk-production.up.railway.app/api';
 
 // ===============================================================
 // Componente Registro
